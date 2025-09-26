@@ -1,14 +1,14 @@
-package basicmod;
+package friskmod;
 
 import basemod.BaseMod;
 import basemod.interfaces.AddAudioSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
-import basicmod.util.GeneralUtils;
-import basicmod.util.KeywordInfo;
-import basicmod.util.Sounds;
-import basicmod.util.TextureLoader;
+import friskmod.util.GeneralUtils;
+import friskmod.util.KeywordInfo;
+import friskmod.util.Sounds;
+import friskmod.util.TextureLoader;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
@@ -214,7 +214,7 @@ public class BasicMod implements
         return resourcesFolder + "/images/" + file;
     }
     public static String characterPath(String file) {
-        return resourcesFolder + "/images/character/" + file;
+        return resourcesFolder + "/images/friskmod.friskmod.friskmod.character/" + file;
     }
     public static String powerPath(String file) {
         return resourcesFolder + "/images/powers/" + file;
