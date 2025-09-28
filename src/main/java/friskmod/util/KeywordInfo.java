@@ -1,4 +1,4 @@
-package basicmod.util;
+package friskmod.util;
 
 import basemod.helpers.KeywordColorInfo;
 

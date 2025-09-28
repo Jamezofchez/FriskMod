@@ -1,22 +1,22 @@
-package basicmod.relics;
+package friskmod.relics;
 
 import basemod.abstracts.CustomRelic;
 import basemod.helpers.RelicType;
-import basicmod.util.GeneralUtils;
-import basicmod.util.TextureLoader;
+import friskmod.util.GeneralUtils;
+import friskmod.util.TextureLoader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 
-import static basicmod.BasicMod.relicPath;
+import static friskmod.FriskMod.relicPath;
 
 public abstract class BaseRelic extends CustomRelic {
     public AbstractCard.CardColor pool = null;
     public RelicType relicType = RelicType.SHARED;
     protected String imageName;
 
-    //for character specific relics
+    //for friskmod.friskmod.friskmod.character specific relics
     public BaseRelic(String id, String imageName, AbstractCard.CardColor pool, RelicTier tier, LandingSound sfx) {
         this(id, imageName, tier, sfx);
 

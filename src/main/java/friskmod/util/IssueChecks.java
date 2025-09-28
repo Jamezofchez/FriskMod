@@ -1,6 +1,6 @@
-package basicmod.util;
+package friskmod.util;
 
-import basicmod.BasicMod;
+import friskmod.FriskMod;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
 import com.badlogic.gdx.files.FileHandle;
@@ -20,7 +20,7 @@ public class IssueChecks {
     private static void characterAssetsCheck() {
         boolean validCharAssets = false;
 
-        FileHandle charResources = new LwjglFileHandle(BasicMod.characterPath(""), Files.FileType.Internal);
+        FileHandle charResources = new LwjglFileHandle(FriskMod.characterPath(""), Files.FileType.Internal);
         if (charResources.exists() && charResources.isDirectory()) {
             validCharAssets = true;
         }

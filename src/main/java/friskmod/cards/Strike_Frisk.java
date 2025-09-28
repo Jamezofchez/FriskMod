@@ -8,8 +8,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 
-public class Strike extends BaseCard {
-    public static final String ID = makeID(Defend.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class Strike_Frisk extends BaseCard {
+    public static final String ID = makeID(Strike_Frisk.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final int DAMAGE = 6;
@@ -22,7 +22,7 @@ public class Strike extends BaseCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    public Strike() {
+    public Strike_Frisk() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         setDamage(DAMAGE, UPG_DAMAGE); //Sets the card's damage and how much it changes when upgraded.
         tags.add(CardTags.STARTER_STRIKE);
