@@ -10,8 +10,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
-import com.megacrit.cardcrawl.cards.green.Neutralize;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -22,6 +20,7 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import friskmod.cards.*;
 
 import java.util.ArrayList;
 
@@ -45,12 +44,16 @@ public class Frisk extends CustomPlayer {
     public static class Meta {
         //These are used to identify your character, as well as your character's card color.
         //Library color is basically the same as card color, but you need both because that's how the game was made.
-        @SpireEnum
-        public static PlayerClass THE_FALLEN_HUMAN;
-        @SpireEnum(name = "CHARACTER_FRISK_COLOR") // These two MUST match. Change it to something unique for your character.
-        public static AbstractCard.CardColor CARD_COLOR;
-        @SpireEnum(name = "CHARACTER_FRISK_COLOR") @SuppressWarnings("unused")
-        public static CardLibrary.LibraryType LIBRARY_COLOR;
+        public static class Enums {
+            @SpireEnum
+            public static PlayerClass THE_FALLEN_HUMAN;
+            @SpireEnum(name = "CHARACTER_FRISK_COLOR")
+            // These two MUST match. Change it to something unique for your character.
+            public static AbstractCard.CardColor CARD_COLOR;
+            @SpireEnum(name = "CHARACTER_FRISK_COLOR")
+            @SuppressWarnings("unused")
+            public static CardLibrary.LibraryType LIBRARY_COLOR;
+        }
 
         //Character select images
         private static final String CHAR_SELECT_BUTTON = characterPath("select/button.png");
@@ -72,7 +75,7 @@ public class Frisk extends CustomPlayer {
 
         //Methods that will be used in the main mod file
         public static void registerColor() {
-            BaseMod.addColor(CARD_COLOR, cardColor,
+            BaseMod.addColor(Enums.CARD_COLOR, cardColor,
                     BG_ATTACK, BG_SKILL, BG_POWER, ENERGY_ORB,
                     BG_ATTACK_P, BG_SKILL_P, BG_POWER_P, ENERGY_ORB_P,
                     SMALL_ORB);
@@ -117,7 +120,7 @@ public class Frisk extends CustomPlayer {
     //Actual character class code below this point
 
     public Frisk() {
-        super(getNames()[0], Meta.THE_FALLEN_HUMAN,
+        super(getNames()[0], Meta.Enums.THE_FALLEN_HUMAN,
                 new CustomEnergyOrb(orbTextures, characterPath("energyorb/vfx.png"), layerSpeeds), //Energy Orb
                 new SpriterAnimation(characterPath("animation/default.scml"))); //Animation
 
@@ -139,11 +142,16 @@ public class Frisk extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
         //List of IDs of cards for your starting deck.
         //If you want multiple of the same card, you have to add it multiple times.
-        retVal.add(Strike_Red.ID);
-        retVal.add(Strike_Red.ID);
-        retVal.add(Defend_Blue.ID);
-        retVal.add(Defend_Blue.ID);
-        retVal.add(Neutralize.ID);
+        retVal.add(Strike_Frisk.ID);
+        retVal.add(Strike_Frisk.ID);
+        retVal.add(Strike_Frisk.ID);
+        retVal.add(Strike_Frisk.ID);
+        retVal.add(Defend_Frisk.ID);
+        retVal.add(Defend_Frisk.ID);
+        retVal.add(Defend_Frisk.ID);
+        retVal.add(Defend_Frisk.ID);
+        retVal.add(BadMemory.ID);
+        retVal.add(Steal.ID);
 
         return retVal;
     }
@@ -250,7 +258,7 @@ public class Frisk extends CustomPlayer {
 
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return Meta.CARD_COLOR;
+        return Meta.Enums.CARD_COLOR;
     }
 
     @Override
@@ -258,4 +266,5 @@ public class Frisk extends CustomPlayer {
         //Makes a new instance of your character class.
         return new Frisk();
     }
+
 }

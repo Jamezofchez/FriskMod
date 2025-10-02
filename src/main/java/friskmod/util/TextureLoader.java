@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import java.util.HashMap;
 import java.util.Locale;
 
+import static basemod.BaseMod.logger;
 import static friskmod.FriskMod.*;
 
 public class TextureLoader {

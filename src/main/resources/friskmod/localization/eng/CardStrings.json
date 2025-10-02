@@ -9,12 +9,72 @@
       "Blizzard is a good example for this."
     ]
   },
-  "${modID}:Strike": {
-    "NAME": "Strike",
-    "DESCRIPTION": "Deal !D! damage."
+  "${modID}:AbsolutePower": {
+    "NAME": "Absolute Power",
+    "DESCRIPTION": "Gain [E]  every time an attack's damage ends in a 9."
   },
-  "${modID}:Defend": {
+  "${modID}:BadMemory": {
+    "NAME": "Bad Memory",
+    "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand."
+  },
+  "${modID}:BurntPan": {
+    "NAME": "Burnt Pan",
+    "DESCRIPTION": "Deal !D! damage. NL Gain Temp HP equal to the unblocked damage dealt."
+  },
+  "${modID}:Cleave": {
+    "NAME": "Cleave",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Convert this card's friskmod:XP to friskmod:LV."
+  },
+  "${modID}:Defend_Frisk": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
+  },
+  "${modID}:DogShrine": {
+    "NAME": "Dog Shrine",
+    "DESCRIPTION": "Exhaust !M! card. NL Draw cards equal to its friskmod:XP.",
+    "UPGRADE_DESCRIPTION": "Exhaust !M! cards. NL Draw cards equal to its friskmod:XP."
+  },
+  "${modID}:Flex": {
+    "NAME": "Flex",
+    "DESCRIPTION": "Give EVERYONE !M! friskmod:LV."
+  },
+  "${modID}:FlurryOfKnives": {
+    "NAME": "Flurry Of Knives",
+    "DESCRIPTION": "Deal !D! damage !M! times. NL Can be Upgraded any number of times."
+  },
+  "${modID}:FreakBullet": {
+    "NAME": "Freak Bullet",
+    "DESCRIPTION": "Deal !D! damage. NL This card always has at least !M! friskmod:XP."
+  },
+  "${modID}:LevelUp": {
+    "NAME": "Level Up",
+    "DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your hand with friskmod:XP for the rest of combat.",
+    "UPGRADED_DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your deck with friskmod:XP for the rest of combat."
+
+  },
+  "${modID}:LoveSaver": {
+    "NAME": "Love Saver",
+    "DESCRIPTION": "Prevent the next time you would lose friskmod:LV. NL Deal !D! damage.",
+    "UPGRADE_DESCRIPTION": "Prevent the next !M! times you would lose friskmod:LV. NL Deal !D! damage."
+  },
+  "${modID}:Plead": {
+    "NAME": "Plead",
+    "DESCRIPTION": "If you have Block, give your Block to the enemy. NL That enemy deals less damage for their friskmod:LV this turn.",
+    "UPGRADE_DESCRIPTION": "If you have Block, give your Block to ALL enemies. NL ALL enemies deal less damage for their friskmod:LV this turn."
+  },
+  "${modID}:ScalesOfJustice": {
+    "NAME": "Scales Of Justice",
+    "DESCRIPTION": "Ethereal. NL Deal damage equal to your missing HP. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:Steal": {
+    "NAME": "Steal",
+    "DESCRIPTION": "Steal ALL enemies' Block and buffs.",
+    "UPGRADE_DESCRIPTION": "Steal ALL enemies' Block and buffs. Trustworthy"
+  },
+  "${modID}:Strike_Frisk": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! damage."
   }
 }

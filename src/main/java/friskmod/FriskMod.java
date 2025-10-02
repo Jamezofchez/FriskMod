@@ -3,8 +3,9 @@ package friskmod;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.interfaces.*;
-import friskmod.cards.BaseCard;
+import friskmod.cards.*;
 import friskmod.character.Frisk;
+import friskmod.helper.StealableWhitelist;
 import friskmod.util.GeneralUtils;
 import friskmod.util.KeywordInfo;
 import friskmod.util.Sounds;
@@ -22,9 +23,9 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.*;
+import org.scannotation.AnnotationDB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.scannotation.AnnotationDB;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -33,6 +34,7 @@ import java.util.*;
 
 @SpireInitializer
 public class FriskMod implements
+        StartGameSubscriber,
         EditCharactersSubscriber,
         EditCardsSubscriber,
         EditStringsSubscriber,
@@ -59,7 +61,7 @@ public class FriskMod implements
 
     public FriskMod() {
         BaseMod.subscribe(this); //This will make BaseMod trigger all the subscribers at their appropriate times.
-        logger.info(modID + " subscribed to BaseMod.");
+        logger.info("{} subscribed to BaseMod.", modID);
     }
 
     @Override
@@ -148,7 +150,7 @@ public class FriskMod implements
             }
             catch (Exception e)
             {
-                logger.warn(modID + " does not support " + getLangString() + " keywords.");
+                logger.warn("{} does not support {} keywords.", modID, getLangString());
             }
         }
     }
@@ -280,11 +282,17 @@ public class FriskMod implements
         Frisk.Meta.registerCharacter();
     }
 
+
     @Override
     public void receiveEditCards() {
         new AutoAdd(modID) //Loads files from this mod
-                .packageFilter(BaseCard.class) //In the same package as this class
+                .packageFilter(AbstractEasyCard.class) //In the same package as this class
                 .setDefaultSeen(true) //And marks them as seen in the compendium
                 .cards(); //Adds the cards
+    }
+
+    @Override
+    public void receiveStartGame() {
+        StealableWhitelist.initialize();
     }
 }

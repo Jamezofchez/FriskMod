@@ -1,8 +1,26 @@
 {
-  "${modID}:PowerID": {
-    "NAME": "Ultimate Power",
+  "${modID}:AbsolutePowerPower": {
+    "NAME": "Absolute Power",
     "DESCRIPTIONS": [
-      "You are Very Cool and Strong."
+      "Gain #b%s [E] every time an attack's damage ends in a 9."
+    ]
+  },
+  "${modID}:LV_Enemy": {
+    "NAME": "LV",
+    "DESCRIPTIONS": [
+      "#yAttacks deal #b%s additional damage."
+    ]
+  },
+  "${modID}:LV_Hero": {
+    "NAME": "LV",
+    "DESCRIPTIONS": [
+      "Your next #yAttack will gain #b%s ${modID}:XP."
+    ]
+  },
+  "${modID}:PreventLVLoss": {
+    "NAME": "Prevent LV Loss",
+    "DESCRIPTIONS": [
+      "Prevent the next #b%s times you would lose ${modID}:LV_Hero."
     ]
   }
 }

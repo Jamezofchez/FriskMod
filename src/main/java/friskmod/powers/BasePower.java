@@ -1,5 +1,6 @@
 package friskmod.powers;
 
+import basemod.interfaces.CloneablePowerInterface;
 import friskmod.util.GeneralUtils;
 import friskmod.util.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
@@ -13,7 +14,8 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public abstract class BasePower extends AbstractPower {
+public abstract class BasePower extends AbstractPower
+    implements CloneablePowerInterface {
     private static PowerStrings getPowerStrings(String ID)
     {
         return CardCrawlGame.languagePack.getPowerStrings(ID);

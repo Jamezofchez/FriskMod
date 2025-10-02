@@ -1,4 +1,4 @@
-package yourmod.cards;
+package friskmod.cards;
 
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
@@ -15,13 +15,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import java.util.function.Consumer;
-import yourmod.CharacterFile;
-import yourmod.util.CardArtRoller;
 
-import static yourmod.ModFile.makeImagePath;
-import static yourmod.ModFile.modID;
-import static yourmod.util.Wiz.*;
+import java.util.function.Consumer;
+
+import friskmod.character.Frisk;
+import friskmod.util.CardArtRoller;
+import friskmod.util.CardStats;
+
+import static friskmod.FriskMod.*;
+import static friskmod.util.Wiz.*;
 
 public abstract class AbstractEasyCard extends CustomCard {
 
@@ -38,9 +40,11 @@ public abstract class AbstractEasyCard extends CustomCard {
     public boolean isSecondDamageModified;
 
     private boolean needsArtRefresh = false;
-
+    public AbstractEasyCard(String ID, CardStats info) {
+        this(ID, info.baseCost, info.cardType, info.cardRarity, info.cardTarget, info.cardColor);
+    }
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
-        this(cardID, cost, type, rarity, target, CharacterFile.Enums.TODO_COLOR);
+        this(cardID, cost, type, rarity, target, Frisk.Meta.Enums.CARD_COLOR);
     }
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
@@ -76,16 +80,16 @@ public abstract class AbstractEasyCard extends CustomCard {
             case ATTACK:
             case POWER:
             case SKILL:
-                textureString = makeImagePath("cards/" + cardName + ".png");
+                textureString = imagePath("cards/" + cardName + ".png");
                 break;
             default:
-                textureString = makeImagePath("ui/missing.png");
+                textureString = imagePath("ui/missing.png");
                 break;
         }
 
         FileHandle h = Gdx.files.internal(textureString);
         if (!h.exists()) {
-            textureString = makeImagePath("ui/missing.png");
+            textureString = imagePath("ui/missing.png");
         }
         return textureString;
     }
@@ -263,4 +267,13 @@ public abstract class AbstractEasyCard extends CustomCard {
     public CardArtRoller.ReskinInfo reskinInfo(String ID) {
         return null;
     }
+
+    public void refreshCard(){
+        applyPowers();
+        initializeDescription();
+    }
+//    public List<TooltipInfo> getCustomTooltips() {
+//        List<TooltipInfo> tips = new ArrayList<>();
+//        return tips;
+//    }
 }

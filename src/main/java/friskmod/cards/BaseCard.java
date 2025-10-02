@@ -457,7 +457,7 @@ public abstract class BaseCard extends CustomCard {
             {
                 if (cardStrings.UPGRADE_DESCRIPTION == null)
                 {
-                    FriskMod.logger.error("Card " + cardID + " upgrades description and has null upgrade description.");
+                    FriskMod.logger.error("Card {} upgrades description and has null upgrade description.", cardID);
                 }
                 else
                 {

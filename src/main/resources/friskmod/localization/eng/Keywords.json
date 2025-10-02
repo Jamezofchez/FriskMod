@@ -27,5 +27,26 @@
     ],
     "DESCRIPTION": "Using the COLOR field, this keyword is colored pink instead of the normal keyword color.",
     "COLOR": "fc83da"
+  },
+  {
+    "PROPER_NAME": "XP",
+    "NAMES": [
+      "XP"
+    ],
+    "DESCRIPTION": "Increases attack damage of this card. NL Whenever unblocked damage is dealt, transfer one less #y${modID}:LV to the target and set this card's XP to one less the target's #y${modID}:XP."
+  },
+  {
+    "PROPER_NAME": "LV",
+    "NAMES": [
+      "LV"
+    ],
+    "DESCRIPTION": "Your next #yAttack will gain equivalent #y${modID}:XP. Enemies deal equivalent extra damage."
+  },
+  {
+    "PROPER_NAME": "TempHPSteal",
+    "NAMES": [
+      "TempHPSteal"
+    ],
+    "DESCRIPTION": "Gain Temp HP equal to this #yAttack's damage."
   }
 ]
