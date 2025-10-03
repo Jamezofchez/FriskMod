@@ -9,7 +9,7 @@ import friskmod.util.Wiz;
 
 
 public class TempHpSteal extends AbstractDamageModifier {
-    TooltipInfo leechTooltip = null;
+//    TooltipInfo leechTooltip = null;
 
     public TempHpSteal() {}
 

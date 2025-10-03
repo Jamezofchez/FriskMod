@@ -15,12 +15,18 @@ public class SwapXPAction extends AbstractGameAction {
     AbstractCreature target;
     int LV_transfer_to;
     int LV_transfer_from;
+    boolean resetCardXP;
     public SwapXPAction(AbstractCard card, AbstractCreature source, AbstractCreature target, int LV_transfer_to, int LV_transfer_from){
+        this(card, source, target, LV_transfer_to, LV_transfer_from, true);
+    }
+    public SwapXPAction(AbstractCard card, AbstractCreature source, AbstractCreature target, int LV_transfer_to, int LV_transfer_from, boolean resetCardXP){
         this.card = card;
         this.source = source;
         this.target = target;
         this.LV_transfer_to = LV_transfer_to;
         this.LV_transfer_from = LV_transfer_from;
+        this.resetCardXP = resetCardXP;
+
     }
     @Override
     public void update() {
@@ -28,17 +34,20 @@ public class SwapXPAction extends AbstractGameAction {
         //remove lv from enemy
         //add lv to enemy
         //add xp to card
-
-        CardXPFields.setAddedXP(card, 0);
-
-
-        Wiz.att(new RemoveSpecificPowerAction(target, source, LV_Enemy.POWER_ID));
-
-        if (LV_transfer_to >= 1) {
-            Wiz.att(new ApplyPowerAction(target, source, new LV_Enemy(target,LV_transfer_to),LV_transfer_to));
+        if (card != null && resetCardXP) {
+            CardXPFields.setAddedXP(card, 0);
         }
-        if (LV_transfer_from >= 1){
-            CardXPFields.addXP(card, LV_transfer_from);
+
+        if (target == null) {
+            Wiz.att(new RemoveSpecificPowerAction(target, source, LV_Enemy.POWER_ID));
+            if (LV_transfer_to >= 1) {
+                Wiz.att(new ApplyPowerAction(target, source, new LV_Enemy(target, LV_transfer_to), LV_transfer_to));
+            }
+        }
+        if (card != null) {
+            if (LV_transfer_from >= 1) {
+                CardXPFields.addXP(card, LV_transfer_from);
+            }
         }
         isDone = true;
     }

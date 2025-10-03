@@ -19,9 +19,9 @@ public class EnemyPowerStealPatch {
             clz = CurlUpPower.class,
             method = "onAttacked"
     )
-    public static class CurlUpPowerPatch {
+    public static class CurlUpPowerOnAttackedPatch {
         @SpirePrefixPatch
-        public static SpireReturn<Integer> onAttackedPatch(CurlUpPower __instance, DamageInfo info, int damageAmount) {
+        public static SpireReturn<Integer> Prefix(CurlUpPower __instance, DamageInfo info, int damageAmount) {
             // If this power is on a monster, continue normally
             if (__instance.owner instanceof AbstractMonster) {
                 return SpireReturn.Continue();
@@ -40,9 +40,9 @@ public class EnemyPowerStealPatch {
             clz = FlightPower.class,
             method = "onRemove"
     )
-    public static class FlightPowerPatch {
+    public static class FlightPowerOnRemovePatch {
         @SpirePrefixPatch
-        public static SpireReturn<Void> onRemovePatch(FlightPower __instance) {
+        public static SpireReturn<Void> Prefix(FlightPower __instance) {
             if (__instance.owner instanceof AbstractMonster) {
                 return SpireReturn.Continue();
             }

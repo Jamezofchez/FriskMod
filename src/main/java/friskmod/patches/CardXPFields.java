@@ -58,11 +58,7 @@ public class CardXPFields {
     public static void setAddedXP(AbstractCard card, int amount) {
         int resultXP = getCardXP(card) + amount;
         if (resultXP <= 0) {
-            if (resultXP == 0){
-                return;
-            }
-            amount = -getCardInherentXP(card);
-
+            amount = 0;
         }
         try {
             Wiz.att(new SetAddedXPAction(card, amount));
@@ -89,8 +85,8 @@ public class CardXPFields {
     }
 
     @SpirePatch2(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
-    public static class makeStatEquivalentCopy {
-        public static void postfix(AbstractCard result, AbstractCard self) {
+    public static class AbstractCardMakeStatEquivalentCopy {
+        public static void Postfix(AbstractCard result, AbstractCard self) {
             CardXPFields.setAddedXP(result, getCardAddedXP(self));
         }
     }

@@ -24,11 +24,8 @@ public class LV_Enemy extends BasePower {
         if (type != DamageInfo.DamageType.NORMAL) {
             return damage;
         }
-        for (AbstractPower pow : this.owner.powers) {
-            if (Objects.equals(pow.ID, PleadedPower.POWER_ID)) {
-                pow.flash();
-                return damage - this.amount;
-            }
+        if(this.owner.hasPower(PleadedPower.POWER_ID)){
+            return damage - this.amount;
         }
         return damage + this.amount;
     }

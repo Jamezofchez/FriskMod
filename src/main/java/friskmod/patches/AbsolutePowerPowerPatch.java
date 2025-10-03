@@ -13,6 +13,7 @@ import friskmod.powers.AbsolutePowerPower;
 import friskmod.powers.PreventLVLoss;
 import friskmod.util.Wiz;
 
+
 import java.util.Objects;
 
 public class AbsolutePowerPowerPatch
@@ -20,22 +21,22 @@ public class AbsolutePowerPowerPatch
     @SpirePatch2(clz = DamageAction.class, method = "update")
     public static class DamageActionUpdate {
         @SpirePostfixPatch
-        public static void postfix(DamageAction __instance) {
+        public static void Postfix(DamageAction __instance) {
             if (__instance.isDone) {
                 DamageInfo info = ReflectionHacks.getPrivate(__instance, DamageAction.class, "info"); //ReflectionHacks needed as damageType isn't accurate
                 AbstractCreature source = info.owner;
                 DamageInfo.DamageType damageType = info.type;
                 if (source == AbstractDungeon.player && damageType == DamageInfo.DamageType.NORMAL) {
-                    for (AbstractPower pow : __instance.source.powers){
-                        if (Objects.equals(pow.ID, AbsolutePowerPower.POWER_ID)){
-                            int energyGain = pow.amount;
-                            int damageDealt = __instance.amount;
-                            if (damageDealt % 10 == 9){
-                                Wiz.atb(new GainEnergyAction(energyGain));
-                                pow.flash();
-                            }
+                    AbstractPower pow = AbstractDungeon.player.getPower(PreventLVLoss.POWER_ID);
+                    if (pow != null) {
+                        int energyGain = pow.amount;
+                        int damageDealt = __instance.amount;
+                        if (damageDealt % 10 == 9){
+                            Wiz.atb(new GainEnergyAction(energyGain));
+                            pow.flash();
                         }
                     }
+
                 }
             }
         }

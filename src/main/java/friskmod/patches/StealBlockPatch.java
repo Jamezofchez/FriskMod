@@ -12,7 +12,7 @@ public class StealBlockPatch {
             clz = AbstractCreature.class,
             method = "renderBlockIconAndValue"
     )
-    public static class RenderIconPatch {
+    public static class AbstractCreatureRenderBlockIconAndValue {
         @SpirePrefixPatch
         public static void Prefix(AbstractCreature __instance, @ByRef float[] x, @ByRef float[] y) {
             if (StealAllBlockAction.activatedInstance != null && StealAllBlockAction.activatedInstance.targetMonsters.contains(__instance)) {

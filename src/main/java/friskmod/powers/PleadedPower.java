@@ -34,7 +34,11 @@ public class PleadedPower extends BasePower {
     }
 
     public void updateDescription() {
-        this.description = String.format(DESCRIPTIONS[0], amount);
+        int LV_enemy = 0;
+        if (owner != null) {
+            LV_enemy = owner.getPower(LV_Enemy.POWER_ID).amount;
+        }
+        this.description = String.format(DESCRIPTIONS[0], LV_enemy, amount);
     }
 
 }

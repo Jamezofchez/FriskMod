@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import java.util.ArrayList;
 
+import friskmod.cards.LevelUp;
 import friskmod.patches.CardXPFields;
 
 public class UpgradeWithXPAction extends AbstractGameAction {
@@ -16,7 +17,6 @@ public class UpgradeWithXPAction extends AbstractGameAction {
 //    public static final String[] TEXT = uiStrings.TEXT;
 
     private AbstractPlayer p;
-    private ArrayList<AbstractCard> cannotUpgrade = new ArrayList<>();
     private boolean all;
 
     public UpgradeWithXPAction(boolean all) {
@@ -42,6 +42,13 @@ public class UpgradeWithXPAction extends AbstractGameAction {
             if (c.canUpgrade() && CardXPFields.getCardXPBool(c)) {
                 if (cardGroup.type == CardGroup.CardGroupType.HAND) {
                     c.superFlash();
+                }
+                if (c.cardID.equals(LevelUp.ID)){
+                    if (!c.upgraded){ // allow LevelUp to effectively upgrade itself
+                        upgradeAllCardsInGroup(p.drawPile);
+                        upgradeAllCardsInGroup(p.discardPile);
+                        upgradeAllCardsInGroup(p.exhaustPile);
+                    }
                 }
                 c.upgrade();
             }

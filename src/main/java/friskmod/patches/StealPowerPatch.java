@@ -25,7 +25,7 @@ public class StealPowerPatch {
             clz = AbstractPower.class,
             method = "renderIcons"
     )
-    public static class RenderIconPatch {
+    public static class AbstractPowerRenderIconPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPower __instance, SpriteBatch sb, @ByRef float[] x, @ByRef float[] y, Color c) {
             if (StealPowerAction.activatedInstance != null && StealPowerAction.activatedInstance.affectedPowers.contains(__instance)) {
@@ -62,7 +62,7 @@ public class StealPowerPatch {
     }
 
     @SpirePatch2(clz = AbstractPower.class, method = "renderAmount")
-    public static class RenderAmountPatch {
+    public static class AbstractPowerRenderAmountPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPower __instance, SpriteBatch sb, @ByRef float[] x, @ByRef float[] y, Color c, float ___fontScale) {
             if (StealPowerAction.activatedInstance != null && StealPowerAction.activatedInstance.affectedPowers.contains(__instance)) {

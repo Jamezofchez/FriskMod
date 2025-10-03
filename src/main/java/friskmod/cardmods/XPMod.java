@@ -38,11 +38,6 @@ public class XPMod
         }
     }
 
-    public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-        int xp = CardXPFields.getCardXP(card); // Get the card’s XP value
-        return damage + xp; // Increase base damage by XP
-    }
-
 //    public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
 //        if (card.type == AbstractCard.CardType.ATTACK){
 //            AbstractPower LV_enemy_power = target.getPower(LV_Enemy.POWER_ID);
