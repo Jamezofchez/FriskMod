@@ -1,11 +1,13 @@
 package friskmod.actions;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -15,21 +17,24 @@ import com.megacrit.cardcrawl.powers.PoisonPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlyingDaggerEffect;
 import com.megacrit.cardcrawl.vfx.combat.PotionBounceEffect;
+import friskmod.cards.AbstractEasyCard;
+import friskmod.util.Wiz;
 import friskmod.vfx.FlurryOfKnivesVFX;
 
 public class FlurryOfKnivesAction extends AbstractGameAction {
     private static final float POST_ATTACK_WAIT_DUR = 0.4F;
 
-    public FlurryOfKnivesAction(AbstractCreature target, int amount, int numTimes) {
+    private int numTimes;
+    private int amount;
+    private AbstractCard sourceCard;
+    public FlurryOfKnivesAction(AbstractCreature target, int amount, int numTimes, AbstractCard sourceCard) {
         this.target = target;
         this.actionType = ActionType.DAMAGE;
         this.duration = 0.01F;
         this.numTimes = numTimes;
         this.amount = amount;
+        this.sourceCard = sourceCard;
     }
-
-    private int numTimes;
-    private int amount;
 
     public void update() {
         // Early exit if no monsters remain at all
@@ -47,16 +52,15 @@ public class FlurryOfKnivesAction extends AbstractGameAction {
                 // Only decrement numTimes if we’re actually going to damage a living target
                 if (randomMonster.currentHealth > 0) {
                     this.numTimes--;
-                }
-
-                addToTop(new FlurryOfKnivesAction(randomMonster, this.amount, this.numTimes));
-
-                // Queue damage if target is alive
-                if (randomMonster.currentHealth > 0) {
-                    addToTop(new DamageAction(randomMonster, new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.NONE));
-                    addToTop(new WaitAction(POST_ATTACK_WAIT_DUR));
+                    DamageAction action = new DamageAction(randomMonster, new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.NORMAL), AttackEffect.SLASH_HORIZONTAL);
+                    BindingHelper.bindAction(this.sourceCard, action);
+                    addToBot(action);
                     throwDaggerEffect();
                 }
+                addToBot(new WaitAction(POST_ATTACK_WAIT_DUR));
+                FlurryOfKnivesAction action = new FlurryOfKnivesAction(randomMonster, this.amount, this.numTimes, this.sourceCard);
+                BindingHelper.bindAction(this.sourceCard, action);
+                addToBot(action);
             }
         }
 

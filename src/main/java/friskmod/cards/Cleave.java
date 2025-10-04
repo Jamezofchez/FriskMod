@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 import friskmod.character.Frisk;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.LV_Enemy;
+import friskmod.powers.LV_Hero;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
@@ -50,7 +51,7 @@ public class Cleave extends AbstractEasyCard {
                 int xp = CardXPFields.getCardAddedXP(card);
                 CardXPFields.setAddedXP(card, 0);
                 if (xp > 0) {
-                    addToBot(new ApplyPowerAction(p, p, new LV_Enemy(p, xp), xp));
+                    addToBot(new ApplyPowerAction(p, p, new LV_Hero(p, xp), xp));
                 }
                 this.isDone = true;
             }

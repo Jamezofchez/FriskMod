@@ -5,8 +5,11 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.UpgradeWithXPAction;
 import friskmod.character.Frisk;
+import friskmod.patches.CardXPFields;
+import friskmod.powers.LV_Hero;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
@@ -32,6 +35,18 @@ public class LevelUp extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        if (!upgraded){
+            if (CardXPFields.getCardXPBool(this)) {
+                upgrade();
+            } else{
+                AbstractPower posspow = p.getPower(LV_Hero.POWER_ID);
+                if (posspow != null) {
+                    if (posspow.amount > 0) {
+                        upgrade();
+                    }
+                }
+            }
+        }
         dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
         addToBot(new UpgradeWithXPAction(upgraded));
     }

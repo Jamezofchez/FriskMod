@@ -31,8 +31,8 @@
   },
   "${modID}:DogShrine": {
     "NAME": "Dog Shrine",
-    "DESCRIPTION": "Exhaust !M! card. NL Draw cards equal to its friskmod:XP.",
-    "UPGRADE_DESCRIPTION": "Exhaust !M! cards. NL Draw cards equal to its friskmod:XP."
+    "DESCRIPTION": "Exhaust up to !M! card. NL Draw cards equal to its friskmod:XP.",
+    "UPGRADE_DESCRIPTION": "Exhaust up to !M! cards. NL Draw cards equal to their friskmod:XP."
   },
   "${modID}:Flex": {
     "NAME": "Flex",
@@ -49,7 +49,7 @@
   "${modID}:LevelUp": {
     "NAME": "Level Up",
     "DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your hand with friskmod:XP for the rest of combat.",
-    "UPGRADED_DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your deck with friskmod:XP for the rest of combat."
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your deck with friskmod:XP for the rest of combat."
 
   },
   "${modID}:LoveSaver": {

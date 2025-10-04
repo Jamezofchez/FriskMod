@@ -20,12 +20,14 @@
   "${modID}:PleadedPower": {
     "NAME": "Pleaded",
     "DESCRIPTIONS": [
-      "#yAttacks deal #b%s less damage for their ${modID}:LV_Enemy for the next #b%s turns."
+      "#yAttacks deal #b%s less damage for their ${modID}:LV_Enemy for #b%s turn.",
+      "#yAttacks deal #b%s less damage for their ${modID}:LV_Enemy for #b%s turns."
     ]
   },
   "${modID}:PreventLVLoss": {
     "NAME": "Prevent LV Loss",
     "DESCRIPTIONS": [
+      "Prevent the next #b%s time you would lose ${modID}:LV_Hero.",
       "Prevent the next #b%s times you would lose ${modID}:LV_Hero."
     ]
   }

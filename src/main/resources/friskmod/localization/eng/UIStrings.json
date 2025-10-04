@@ -15,13 +15,13 @@
   },
   "${modID}:StealPowerAction": {
     "TEXT": [
-      "It would be cruel to steal %s",
-      "It would be cruel to steal %s and %s"
+      "Seems like the enemy won't let go of %s!",
+      "Seems like the enemy won't let go of %s and %s!"
     ]
   },
   "${modID}:RecycleXPAction": {
       "TEXT": [
-        "Choose a card to sacrifice"
+        "sacrifice"
       ]
   },
   "${modID}:Plead": {

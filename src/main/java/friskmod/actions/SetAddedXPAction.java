@@ -19,7 +19,7 @@ public class SetAddedXPAction extends AbstractGameAction {
     public void update() {
         CardXPFields.flashXPColor(card);
         CardXPFields.XPFields.addedXP.set(card, amount);
-        CardModifierManager.addModifier(card, new XPMod());
+        CardModifierManager.addModifier(card, new XPMod());  //why?
         card.initializeDescription();
         isDone = true;
     }

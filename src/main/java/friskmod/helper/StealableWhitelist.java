@@ -57,6 +57,7 @@ public class StealableWhitelist {
             addSynonym(SharpHidePower.POWER_ID, ThornsPower.POWER_ID, ThornsPower.class);
             addSynonym(IntangiblePower.POWER_ID, IntangiblePlayerPower.POWER_ID, IntangiblePlayerPower.class);
             addSynonym(LV_Enemy.POWER_ID, LV_Hero.POWER_ID, LV_Hero.class);
+            addSynonym(RegenerateMonsterPower.POWER_ID, RegenPower.POWER_ID, RegenPower.class); //permanent but non-permanent for player
         }
     }
     public static final PowerSynonymsManager powerSynonyms = new PowerSynonymsManager();
@@ -79,6 +80,7 @@ public class StealableWhitelist {
     }
     private static void ritualPostProcess(AbstractPower pow) {
         ReflectionHacks.setPrivate(pow, RitualPower.class, "isPlayer", true);
+        pow.amount = 1;
     }
     private static void initializeSynonyms() {
         for (Map.Entry<String, PowerSynonymsManager.PowerSynonym> entry : powerSynonyms.synonymMap.entrySet()) {

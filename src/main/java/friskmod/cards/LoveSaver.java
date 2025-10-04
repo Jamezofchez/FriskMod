@@ -39,7 +39,7 @@ public class LoveSaver extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new PreventLVLoss(p,magicNumber), magicNumber));
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
+        dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
     }
 
     @Override

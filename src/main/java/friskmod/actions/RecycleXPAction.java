@@ -44,7 +44,7 @@ public class RecycleXPAction extends AbstractGameAction {
                 this.p.hand.moveToExhaustPile(this.p.hand.getBottomCard());
                 this.tickDuration();
             } else {
-                AbstractDungeon.handCardSelectScreen.open(TEXT[0], numRecycles, false);
+                AbstractDungeon.handCardSelectScreen.open(TEXT[0], numRecycles, true);
                 this.tickDuration();
             }
         } else {

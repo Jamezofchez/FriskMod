@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -51,7 +52,9 @@ public class FlurryOfKnives extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractMonster randomMonster = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-        addToBot((AbstractGameAction) new FlurryOfKnivesAction( randomMonster, damage, this.magicNumber));
+        FlurryOfKnivesAction action = new FlurryOfKnivesAction(randomMonster, damage, this.magicNumber, this);
+        BindingHelper.bindAction(this, action);
+        addToBot(action);
     }
     @Override
     public void upgrade() {

@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon; //debug
 import friskmod.patches.CardXPFields; // adjust if needed
 import friskmod.powers.LV_Enemy;
 import friskmod.util.Wiz;
@@ -34,21 +35,23 @@ public class SwapXPAction extends AbstractGameAction {
         //remove lv from enemy
         //add lv to enemy
         //add xp to card
-        if (card != null && resetCardXP) {
-            CardXPFields.setAddedXP(card, 0);
-        }
-
-        if (target == null) {
-            Wiz.att(new RemoveSpecificPowerAction(target, source, LV_Enemy.POWER_ID));
-            if (LV_transfer_to >= 1) {
-                Wiz.att(new ApplyPowerAction(target, source, new LV_Enemy(target, LV_transfer_to), LV_transfer_to));
-            }
-        }
         if (card != null) {
             if (LV_transfer_from >= 1) {
                 CardXPFields.addXP(card, LV_transfer_from);
             }
         }
+        if (target != null) {
+            if (LV_transfer_to >= 1) {
+                Wiz.att(new ApplyPowerAction(target, source, new LV_Enemy(target, LV_transfer_to), LV_transfer_to));
+            }
+        }
+        if (target != null) {
+            Wiz.att(new RemoveSpecificPowerAction(target, source, LV_Enemy.POWER_ID));
+        }
+        if (card != null && resetCardXP) {
+            CardXPFields.setAddedXP(card, 0);
+        }
+
         isDone = true;
     }
 }

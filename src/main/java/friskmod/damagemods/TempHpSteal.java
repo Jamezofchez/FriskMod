@@ -15,12 +15,18 @@ public class TempHpSteal extends AbstractDamageModifier {
 
     //This hook grabs the lastDamageTaken once it is updated upon attacking the monster.
     //This lets us heal the attacker equal to the damage that was actually dealt to the target
-    @Override
+  @Override
     public void onLastDamageTakenUpdate(DamageInfo info, int lastDamageTaken, int overkillAmount, AbstractCreature targetHit) {
         if (lastDamageTaken > 0) {
-            Wiz.atb(new AddTemporaryHPAction(info.owner, info.owner, info.base));
+            Wiz.atb(new AddTemporaryHPAction(info.owner, info.owner, lastDamageTaken));
         }
     }
+//    @Override
+//    public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) { //should only heal unblocked dmg
+//        if (damageAmount > 0) {
+//            Wiz.atb(new AddTemporaryHPAction(info.owner, info.owner, damageAmount));
+//        }
+//    }
 
     @Override
     public AbstractDamageModifier makeCopy() {
