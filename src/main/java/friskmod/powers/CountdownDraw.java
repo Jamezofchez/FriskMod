@@ -6,19 +6,19 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 
-public class CountdownOffguardPower extends AbstractCountdownPower {
-    public static final String POWER_ID = FriskMod.makeID(CountdownOffguardPower.class.getSimpleName());
+public class CountdownDrawPower extends AbstractCountdownPower {
+    public static final String POWER_ID = FriskMod.makeID(CountdownDrawPower.class.getSimpleName());
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
 
-    public CountdownOffguardPower(AbstractCreature owner, int amount, int countdown) {
+    public CountdownDrawPower(AbstractCreature owner, int amount, int countdown) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
     }
 
     @Override
-    public void onCountdownTrigger() {
+    public void onCountdownTrigger(boolean expire) {
         addToBot(new DrawCardAction(owner, amount));
-        addToBot(new RemoveSpecificPowerAction(owner, owner, this));
+        super.onCountdownTrigger(expire);
     }
 
     @Override
