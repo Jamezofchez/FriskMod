@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.StealPowerAction;
+import friskmod.helper.StealableWhitelist;
 
 import java.util.Map;
 
@@ -29,14 +30,18 @@ public class StealPowerPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPower __instance, SpriteBatch sb, @ByRef float[] x, @ByRef float[] y, Color c) {
             if (StealPowerAction.activatedInstance != null && StealPowerAction.activatedInstance.affectedPowers.contains(__instance)) {
-                origAlpha = c.a;
-//                int mapAmount = StealPowerAction.activatedInstance.stealablePows.get(__instance.ID);
-//                if (mapAmount > 0) {
-//                    if (__instance.amount > mapAmount) {
-//                        renderIcons(__instance, sb, x[0], y[0], c);
-//                    }
-//                }
-                StealPowerAction.activatedInstance.calcPosition(__instance.ID, x, y, c, false);
+                if(StealableWhitelist.getInstance().checkPreProcess(__instance)) {
+                    if (StealPowerAction.activatedInstance.steal){
+                        origAlpha = c.a;
+                    }
+                    //                int mapAmount = StealPowerAction.activatedInstance.stealablePows.get(__instance.ID);
+                    //                if (mapAmount > 0) {
+                    //                    if (__instance.amount > mapAmount) {
+                    //                        renderIcons(__instance, sb, x[0], y[0], c);
+                    //                    }
+                    //                }
+                    StealPowerAction.activatedInstance.calcPosition(__instance.ID, x, y, c, false);
+                }
             }
         }
 

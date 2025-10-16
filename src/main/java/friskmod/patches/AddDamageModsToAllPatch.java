@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 
 public class AddDamageModsToAllPatch {
-    @SpirePatch2(
+    @SpirePatch2( //postfix
             clz = DamageModifierManager.class,
             method = "modifiers"
     )

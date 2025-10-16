@@ -1,15 +1,15 @@
-package yourmod.cards.cardvars;
+package friskmod.cards.cardvars;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import yourmod.cards.AbstractEasyCard;
+import friskmod.cards.AbstractEasyCard;
 
-import static yourmod.ModFile.makeID;
+import static friskmod.FriskMod.makeID;
 
 public class SecondDamage extends AbstractEasyDynamicVariable {
 
     @Override
     public String key() {
-        return makeID("sd");
+        return makeID("D2");
     }
 
     @Override

@@ -1,15 +1,15 @@
-package yourmod.cards.cardvars;
+package friskmod.cards.cardvars;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import yourmod.cards.AbstractEasyCard;
+import friskmod.cards.AbstractEasyCard;
 
-import static yourmod.ModFile.makeID;
+import static friskmod.FriskMod.makeID;
 
 public class SecondMagicNumber extends AbstractEasyDynamicVariable {
 
     @Override
     public String key() {
-        return makeID("m2");
+        return makeID("M2");
     }
 
     @Override

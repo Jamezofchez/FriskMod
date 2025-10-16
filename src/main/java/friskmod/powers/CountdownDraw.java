@@ -1,18 +1,31 @@
 package friskmod.powers;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 
-public class CountdownDrawPower extends AbstractCountdownPower {
-    public static final String POWER_ID = FriskMod.makeID(CountdownDrawPower.class.getSimpleName());
+public class CountdownDraw extends AbstractCountdownPower {
+    public static final String POWER_ID = FriskMod.makeID(CountdownDraw.class.getSimpleName());
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+
+    public static final String NAME = powerStrings.NAME;
+
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
 
-    public CountdownDrawPower(AbstractCreature owner, int amount, int countdown) {
+    private final int UPG_CARD_DRAW;
+
+    public CountdownDraw(AbstractCreature owner, int amount, int countdown, int upg_amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
+        this.name = NAME;
+        this.UPG_CARD_DRAW = upg_amount;
+        updateDescription();
     }
 
     @Override
@@ -23,15 +36,25 @@ public class CountdownDrawPower extends AbstractCountdownPower {
 
     @Override
     public AbstractPower makeCopy() {
-        return new CountdownDrawPower(owner, amount, amount2);
+        return new CountdownDraw(owner, amount, amount2, UPG_CARD_DRAW);
     }
 
     @Override
     public void updateDescription() {
-        String baseDescription = DESCRIPTIONS[1];
-        if (amount == 1){
-            baseDescription = DESCRIPTIONS[0];
+        int descNum = 0;
+        if (amount2 == 1){
+            descNum += 2;
         }
-        this.description = String.format(baseDescription, amount);
+        if (amount == 1){
+            descNum += 1;
+        }
+        String baseDescription = DESCRIPTIONS[descNum];
+        this.description = String.format(baseDescription, amount2, amount);
+    }
+    @Override
+    public void upgrade(){
+        super.upgrade();
+        this.amount += UPG_CARD_DRAW;
+        updateDescription();
     }
 }

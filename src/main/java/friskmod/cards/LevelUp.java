@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import friskmod.actions.CustomSFXAction;
 import friskmod.actions.UpgradeWithXPAction;
 import friskmod.character.Frisk;
 import friskmod.patches.CardXPFields;
@@ -19,7 +20,8 @@ public class LevelUp extends AbstractEasyCard {
     public static final String ID = makeID(LevelUp.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
-    private static final int DAMAGE = 4;
+    private static final int DAMAGE = 5;
+    private static final int UPG_DAMAGE = 2;
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
@@ -49,9 +51,12 @@ public class LevelUp extends AbstractEasyCard {
         }
         dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
         addToBot(new UpgradeWithXPAction(upgraded));
+        addToBot(new CustomSFXAction("snd_levelup"));
+
     }
 
     @Override
     public void upp() {
+        upgradeDamage(UPG_DAMAGE);
     }
 }

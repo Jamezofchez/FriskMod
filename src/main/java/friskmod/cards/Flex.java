@@ -8,6 +8,7 @@ import friskmod.character.Frisk;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
 import friskmod.util.CardStats;
+import friskmod.util.FriskTags;
 
 
 import static friskmod.FriskMod.makeID;
@@ -30,11 +31,11 @@ public class Flex extends AbstractEasyCard {
     public Flex() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = GIVEN_LV;
-        tags.add(CardTags.STARTER_DEFEND);
+        tags.add(FriskTags.BRAVERY);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new LV_Hero(AbstractDungeon.player, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new LV_Hero(p, magicNumber), magicNumber));
         for(AbstractMonster monster : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!monster.isDying && !monster.isDead) {
                 addToBot(new ApplyPowerAction(monster, p, new LV_Enemy(monster, magicNumber), magicNumber));

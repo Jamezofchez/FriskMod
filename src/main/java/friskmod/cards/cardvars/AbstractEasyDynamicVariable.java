@@ -1,4 +1,4 @@
-package yourmod.cards.cardvars;
+package friskmod.cards.cardvars;
 
 import basemod.abstracts.DynamicVariable;
 

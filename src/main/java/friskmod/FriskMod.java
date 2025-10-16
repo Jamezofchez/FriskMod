@@ -2,14 +2,18 @@ package friskmod;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.abstracts.DynamicVariable;
 import basemod.interfaces.*;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import friskmod.actions.AfterCardUseAction;
+import friskmod.actions.OnBattleStartAction;
 import friskmod.cards.*;
+import friskmod.cards.cardvars.AbstractEasyDynamicVariable;
 import friskmod.character.Frisk;
 import friskmod.helper.StealableWhitelist;
-import friskmod.util.GeneralUtils;
-import friskmod.util.KeywordInfo;
-import friskmod.util.Sounds;
-import friskmod.util.TextureLoader;
+import friskmod.relics.BaseRelic;
+import friskmod.util.*;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
@@ -37,10 +41,13 @@ public class FriskMod implements
         StartGameSubscriber,
         EditCharactersSubscriber,
         EditCardsSubscriber,
+        EditRelicsSubscriber,
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         AddAudioSubscriber,
-        PostInitializeSubscriber {
+        PostInitializeSubscriber,
+        OnCardUseSubscriber,
+        OnStartBattleSubscriber{
     public static ModInfo info;
     public static String modID; //Edit your pom.xml to change this
     static { loadModInfo(); }
@@ -163,9 +170,67 @@ public class FriskMod implements
         }
     }
 
+    private void addAudio(String key){
+        String path = audioPath(key + ".wav");
+        BaseMod.addAudio(key, path);
+    }
+
     @Override
     public void receiveAddAudio() {
-        loadAudio(Sounds.class);
+        //loadAudio(Sounds.class);
+        //BaseMod.addAudio("STRIKE", makeAudioPath("SFX_Strike.wav"));
+        addAudio("ding");
+        addAudio("deltarune_explosion");
+        addAudio("mus_create");
+        addAudio("mus_drumcuica");
+        addAudio("mus_drumcuica2");
+        addAudio("mus_explosion");
+        addAudio("mus_f_glock");
+        addAudio("mus_f_noise");
+        addAudio("mus_sfx_abreak");
+        addAudio("mus_sfx_a_lithit2");
+        addAudio("mus_sfx_a_target");
+        addAudio("mus_sfx_bookspin");
+        addAudio("mus_sfx_eyeflash");
+        addAudio("mus_sfx_frypan");
+        addAudio("mus_sfx_gigapunch");
+        addAudio("mus_sfx_gunshot");
+        addAudio("mus_sfx_rainbowbeam_1");
+        addAudio("mus_sfx_segapower");
+        addAudio("mus_sfx_segapower2");
+        addAudio("mus_sfx_spellcast");
+        addAudio("mus_sfx_voice_triple");
+        addAudio("snd_arrow");
+        addAudio("snd_b");
+        addAudio("snd_bell");
+        addAudio("snd_bombsplosion");
+        addAudio("snd_break1");
+        addAudio("snd_break1_c");
+        addAudio("snd_buyitem");
+        addAudio("snd_catsalad");
+        addAudio("snd_damage");
+        addAudio("snd_dumbvictory");
+        addAudio("snd_escaped");
+        addAudio("snd_grab");
+        addAudio("snd_heal_c");
+        addAudio("snd_heartshot");
+        addAudio("snd_hurt1");
+        addAudio("snd_impact");
+        addAudio("snd_item");
+        addAudio("snd_laz");
+        addAudio("snd_levelup");
+        addAudio("snd_mysterygo");
+        addAudio("snd_phone");
+        addAudio("snd_power");
+        addAudio("snd_punchstrong");
+        addAudio("snd_saber3");
+        addAudio("snd_save");
+        addAudio("snd_select");
+        addAudio("snd_shock");
+        addAudio("snd_spearrise");
+        addAudio("snd_tearcard");
+        addAudio("snd_vaporized");
+        addAudio("test");
     }
 
     private static final String[] AUDIO_EXTENSIONS = { ".ogg", ".wav", ".mp3" }; //There are more valid types, but not really worth checking them all here
@@ -285,14 +350,44 @@ public class FriskMod implements
 
     @Override
     public void receiveEditCards() {
+        new AutoAdd(modID)
+                .packageFilter(AbstractEasyDynamicVariable.class)
+                .any(DynamicVariable.class, (info, var) ->
+                        BaseMod.addDynamicVariable(var));
         new AutoAdd(modID) //Loads files from this mod
                 .packageFilter(AbstractEasyCard.class) //In the same package as this class
                 .setDefaultSeen(true) //And marks them as seen in the compendium
                 .cards(); //Adds the cards
     }
+    @Override
+    public void receiveEditRelics() {
+        new AutoAdd(modID) //Loads files from this mod
+                .packageFilter(BaseRelic.class) //In the same package as this class
+                .any(BaseRelic.class, (info, relic) -> { //Run this code for any classes that extend this class
+                    if (relic.pool != null)
+                        BaseMod.addRelicToCustomPool(relic, relic.pool); //Register a custom character specific relic
+                    else
+                        BaseMod.addRelic(relic, relic.relicType); //Register a shared or base game character specific relic
 
+//                    //If the class is annotated with @AutoAdd.Seen, it will be marked as seen, making it visible in the relic library.
+//                    //If you want all your relics to be visible by default, just remove this if statement.
+//                    if (info.seen)
+//                        UnlockTracker.markRelicAsSeen(relic.relicId);
+                });
+    }
     @Override
     public void receiveStartGame() {
-        StealableWhitelist.initialize();
+        StealableWhitelist.getInstance();
+    }
+    @Override
+    public void receiveCardUsed(AbstractCard abstractCard) {
+        //XPModifierAll.setActiveCard(abstractCard);
+        Wiz.atb(new AfterCardUseAction(abstractCard));
+    }
+
+
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        Wiz.atb(new OnBattleStartAction(abstractRoom));
     }
 }

@@ -22,7 +22,7 @@
 //import java.util.Objects;
 //
 //
-//public class DEPRECIATEDXPDamageActionPatch {
+//public class XPDamageActionPatch {
 //    @SpirePatch2(clz = DamageAction.class, method = SpirePatch.CLASS)
 //    public static class DamageActionFields {
 //        public static SpireField<Boolean> isLVRecalc = new SpireField<>(() -> false);

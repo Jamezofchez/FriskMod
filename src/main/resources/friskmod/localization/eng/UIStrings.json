@@ -15,18 +15,69 @@
   },
   "${modID}:StealPowerAction": {
     "TEXT": [
-      "Seems like the enemy won't let go of %s!",
-      "Seems like the enemy won't let go of %s and %s!"
+      "Seems like enemies won't let go of %s!",
+      "Seems like enemies won't let go of %s and %s!"
     ]
   },
-  "${modID}:RecycleXPAction": {
+  "${modID}:StealableWhitelist": {
+    "TEXT": [
+      "Something went wrong when stealing %s!",
+      "The heart is too strong... I can't handle its overwhelming Strength!",
+      "I can't steal or copy %s as the enemy has always had it!"
+    ]
+  },
+  "${modID}:ToAsh": {
+    "TEXT": [
+      "I have non-Skill cards in my hand."
+    ]
+  },
+  "${modID}:DogShrine": {
       "TEXT": [
-        "sacrifice"
+        "Choose %s card to sacrifice.",
+        "Choose %s cards to sacrifice."
       ]
+  },
+  "${ModID}:Overcome": {
+    "TEXT": [
+      "persevere"
+    ]
   },
   "${modID}:Plead": {
     "TEXT": [
       "I do not have any block!"
+    ]
+  },
+  "${modID}:CountdownPounce": {
+    "TEXT": [
+      "That enemy intends to attack!"
+    ]
+  },
+  "${modID}:TrappedPatch": {
+    "TEXT": [
+      "${modID}:Trapped. NL ",
+      "NL ${modID}:Trapped. NL",
+      "I cannot play trapped cards!"
+    ]
+  },
+  "${modID}:BalletShoes": {
+    "TEXT": [
+      "There will be an even number of cards in my hand!"
+    ]
+  },
+  "${modID}:GiveInherentXPAction": {
+    "TEXT": [
+      "Choose %s card to give inherent XP.",
+      "Choose %s cards to give inherent XP."
+    ]
+  },
+  "${modID}:Im": {
+    "TEXT": [
+      "I cannot play Attacks right now!"
+    ]
+  },
+  "${modID}:AbstractMonsterSnapshotHistory": {
+    "TEXT": [
+      "This is the monster's first turn!"
     ]
   }
 }

@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -28,14 +29,14 @@ public class ScalesOfJustice extends AbstractEasyCard {
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DAMAGE = 0;
-    private static final int UPG_COST = 1;
+    private static final int UPG_TEMP_HP = 4;
+
     public ScalesOfJustice() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
+        this.magicNumber = this.baseMagicNumber = UPG_TEMP_HP;
         tags.add(FriskTags.JUSTICE);
-        tags.add(CardTags.HEALING);
         this.exhaust = true;
-        this.isEthereal = true;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -44,8 +45,10 @@ public class ScalesOfJustice extends AbstractEasyCard {
         if (m != null) {
             addToBot(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY, effectScale()), 0.2F));
         }
-
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
+        if (upgraded) {
+            addToTop(new AddTemporaryHPAction(p, p, magicNumber));
+        }
     }
 
     public void applyPowers() {
@@ -65,6 +68,5 @@ public class ScalesOfJustice extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        this.isEthereal = false;
     }
 }

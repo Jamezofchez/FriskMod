@@ -11,7 +11,9 @@ import friskmod.util.Wiz;
 public class TempHpSteal extends AbstractDamageModifier {
 //    TooltipInfo leechTooltip = null;
 
-    public TempHpSteal() {}
+    public TempHpSteal() {
+        this.priority = 999;
+    }
 
     //This hook grabs the lastDamageTaken once it is updated upon attacking the monster.
     //This lets us heal the attacker equal to the damage that was actually dealt to the target

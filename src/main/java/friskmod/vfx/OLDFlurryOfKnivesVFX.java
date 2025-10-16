@@ -1,16 +1,15 @@
 package friskmod.vfx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.FlyingDaggerEffect;
 
-public class FlurryOfKnivesVFX extends AbstractGameEffect {
+public class OLDFlurryOfKnivesVFX extends AbstractGameEffect {
     private boolean flipX;
     private int numKnives;
 
-    public FlurryOfKnivesVFX(int numKnives, boolean shouldFlip) {
+    public OLDFlurryOfKnivesVFX(int numKnives, boolean shouldFlip) {
         this.flipX = shouldFlip;
         this.numKnives = numKnives;
     }
@@ -48,7 +47,7 @@ public class FlurryOfKnivesVFX extends AbstractGameEffect {
 }
 
 
-/* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\vfx\combat\FlurryOfKnivesVFX.class
+/* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\vfx\combat\OLDFlurryOfKnivesVFX.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       1.1.3
  */

@@ -2,47 +2,77 @@ package friskmod.powers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.FriskMod;
 
-public class CountdownPouncePower extends AbstractCountdownPower {
-    public static final String POWER_ID = FriskMod.makeID(CountdownPouncePower.class.getSimpleName());
+public class CountdownPounce extends AbstractCountdownPower {
+    public static final String POWER_ID = FriskMod.makeID(CountdownPounce.class.getSimpleName());
+
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(POWER_ID);
+
     public static final String[] TEXT = uiStrings.TEXT;
+
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+
+    public static final String NAME = powerStrings.NAME;
+
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
     private static final PowerType TYPE = PowerType.DEBUFF;
     private static final boolean TURN_BASED = false;
 
-    public CountdownPouncePower(AbstractCreature owner, int amount, int countdown) {
+    private final int UPG_DAMAGE;
+
+    public CountdownPounce(AbstractCreature owner, int amount, int countdown, int upg_amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
+        this.name = NAME;
+        this.UPG_DAMAGE = upg_amount;
+        updateDescription();
     }
 
     @Override
     public void onCountdownTrigger(boolean expire) {
-        if (owner != null && (owner instanceof AbstractMonster) && !(((AbstractMonster )owner).getIntentBaseDmg() >= 0)) {
-            addToBot(new DamageAction(owner, new DamageInfo(AbstractDungeon.player, amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        } else {
-            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
+        if (owner != null && (owner instanceof AbstractMonster)) {
+            if (((AbstractMonster) owner).getIntentBaseDmg() >= 0) {
+                //AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
+                addToBot(new DamageAction(owner, new DamageInfo(AbstractDungeon.player, amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+            } else {
+                addToBot(new DamageAction(owner, new DamageInfo(AbstractDungeon.player, amount*2, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+            }
         }
         super.onCountdownTrigger(expire);
     }
 
     @Override
     public AbstractPower makeCopy() {
-        return new CountdownDrawPower(owner, amount, amount2);
+        return new CountdownPounce(owner, amount, amount2, UPG_DAMAGE);
     }
 
     @Override
     public void updateDescription() {
-        String baseDescription = DESCRIPTIONS[0];
-        this.description = String.format(baseDescription, amount);
+        int descNum = 0;
+        if (amount2 == 1){
+            descNum += 2;
+        }
+        if (amount == 1){
+            descNum += 1;
+        }
+        String baseDescription = DESCRIPTIONS[descNum];
+        this.description = String.format(baseDescription, amount2, amount);
+    }
+
+    @Override
+    public void upgrade(){
+        super.upgrade();
+        this.amount += UPG_DAMAGE;
+        updateDescription();
     }
 }

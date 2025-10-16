@@ -3,6 +3,7 @@ package friskmod.cards;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.character.Frisk;
 import friskmod.powers.RememberPatiencePower;
 import friskmod.util.CardStats;
@@ -23,8 +24,9 @@ public class RememberPatience extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
 
-    private static final int MINIMUM_CARDS = 6;
+    private static final int MINIMUM_CARDS = 4;
     private static final int RETAIN_AMOUNT = 2;
+    private static final int UPG_MINIMUM_CARDS = -1;
 
     public RememberPatience() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -34,11 +36,15 @@ public class RememberPatience extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new RememberPatiencePower(p, RETAIN_AMOUNT, MINIMUM_CARDS),RETAIN_AMOUNT));
+        AbstractPower posspow = p.getPower(RememberPatiencePower.POWER_ID);
+        if (posspow != null) {
+            ((RememberPatiencePower) posspow).amount2 = Math.min(((RememberPatiencePower) posspow).amount2, MINIMUM_CARDS);
+        }
+        addToBot(new ApplyPowerAction(p, p, new RememberPatiencePower(p, RETAIN_AMOUNT, MINIMUM_CARDS), RETAIN_AMOUNT));
     }
 
     @Override
     public void upp() {
-        isInnate = true;
+        upgradeSecondMagic(UPG_MINIMUM_CARDS);
     }
 }

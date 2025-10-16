@@ -1,5 +1,7 @@
 package friskmod.powers;
 
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -20,6 +22,11 @@ public class PreventLVLoss extends BasePower {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
     }
 
+    public void afterXPConsumed() {
+        addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+    }
+
+    @Override
     public void atEndOfRound() {
 //       if (this.amount == 0) {
             addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));

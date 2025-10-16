@@ -14,31 +14,32 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
+import friskmod.cards.HugItOff;
 import friskmod.helper.StealableWhitelist;
 
 import java.util.*;
 
 import static friskmod.FriskMod.makeID;
-import static friskmod.helper.StealableWhitelist.powerSynonyms;
 
 /// This piece of sh*t is derived from with the Thievery pack.
 public class StealPowerAction extends AbstractGameAction {
-    public static final String ID = makeID("StealPowerAction");
+    public static final String ID = makeID(StealPowerAction.class.getSimpleName());
     private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
 
-
     public static final float POWER_ICON_PADDING_X = 48.0F * Settings.scale;
+
+    public final boolean steal;
     public float t;
 
     public Set<AbstractPower> affectedPowers;
 
     public Set<String> affectedIDs = new HashSet<>();
     //    public Set<String> removedIDs;
-    public Set<String> unaffectedIDs = new HashSet<>();;
+    public Set<String> unaffectedIDs = new HashSet<>();
 
 
     public final List<AbstractMonster> monsters;
-    public static final Set<String> stealablePows = StealableWhitelist.whiteList.keySet();
+    public static final Set<String> stealablePows = StealableWhitelist.getInstance().getWhitelist();
     public Map<String, Float> targetXMap = new HashMap<>();
     public Map<String, Float> targetYMap = new HashMap<>();
 
@@ -48,14 +49,22 @@ public class StealPowerAction extends AbstractGameAction {
 
     // Primary constructor — for multiple monsters
     public StealPowerAction(List<AbstractMonster> monsters) {
+        this(monsters, true);
+    }
+    public StealPowerAction(List<AbstractMonster> monsters, boolean steal) {
         this.actionType = ActionType.WAIT;
         this.duration = this.startDuration = Settings.ACTION_DUR_LONG * 0.75f;
         this.monsters = monsters;
+        this.steal = steal;
     }
 
     // Overload for a single monster
     public StealPowerAction(AbstractMonster m) {
         this(toList(m));
+    }
+
+    public StealPowerAction(AbstractMonster m, boolean steal) {
+        this(toList(m), steal);
     }
 
     // Helper method to create a list with a single monster (if non-null)
@@ -108,6 +117,11 @@ public class StealPowerAction extends AbstractGameAction {
 
             affectedPowers = new HashSet<>();
             for (AbstractMonster m : monsters) {
+//                AbstractPower posspow = m.getPower(ArtifactPower.POWER_ID);
+//                if (posspow != null) {
+//                    posspow.onSpecificTrigger();
+//                    continue;
+//                }
                 for (AbstractPower pow : m.powers) {
                     if (pow.type == AbstractPower.PowerType.BUFF) { //should handle e.g not stealing negative strength
                         if (stealablePows.contains(pow.ID)){
@@ -132,7 +146,7 @@ public class StealPowerAction extends AbstractGameAction {
                 int index = 0;
                 for (; index < p.powers.size(); index++) {
                     AbstractPower playerPow = p.powers.get(index);
-                    if (playerPow.ID.equals(ID) || synonymCheck(playerPow.ID,ID))
+                    if (playerPow.ID.equals(ID))
                         break;
                 }
                 targetXMap.put(ID, p.hb.cX - p.hb.width / 2.0F + 10.0F * Settings.scale + index * POWER_ICON_PADDING_X);
@@ -162,7 +176,7 @@ public class StealPowerAction extends AbstractGameAction {
 
             for (AbstractPower pow : affectedPowers) {
                 // You gain the power and enemy loses power
-                StealableWhitelist.attachClonePowerToPlayer(pow);
+                StealableWhitelist.getInstance().attachClonePowerToPlayer(pow, steal);
 
             }
 
@@ -183,15 +197,9 @@ public class StealPowerAction extends AbstractGameAction {
                 addToTop(new TalkAction(true, s, 0.1F, 3.5F));
             }
         } else {
-            t = (startDuration - duration) / startDuration;
+            t = (startDuration - duration) / startDuration; //isn't this just setting it to 0?
             activatedInstance = this;
         }
-    }
-
-    private boolean synonymCheck(String playerPow, String enemyPow) {
-        String possMatch = powerSynonyms.lookupPlayerID(enemyPow);
-        if (possMatch == null) return false;
-        return possMatch.equals(playerPow);
     }
 
 //    private AbstractPower getDuplicatedPower(AbstractCreature c, AbstractPower pow, int gainAmount) {

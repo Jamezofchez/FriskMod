@@ -1,22 +1,26 @@
 package friskmod.powers;
 
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 
-public class PleadedPower extends BasePower {
-    public static final String POWER_ID = FriskMod.makeID(PleadedPower.class.getSimpleName());
-    private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
+public class Pleaded extends BasePower {
+    public static final String POWER_ID = FriskMod.makeID(Pleaded.class.getSimpleName());
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    public static final String NAME = powerStrings.NAME;
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.DEBUFF;
     private static final boolean TURN_BASED = true;
 
     //The only thing TURN_BASED controls is the color of the number on the power icon.
     //Turn based powers are white, non-turn based powers are red or green depending on if their amount is positive or negative.
     //For a power to actually decrease/go away on its own they do it themselves.
     //Look at powers that do this like VulnerablePower and DoubleTapPower.
-    public PleadedPower(AbstractCreature owner, int amount) {
+    public Pleaded(AbstractCreature owner, int amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
     }
 
@@ -30,7 +34,7 @@ public class PleadedPower extends BasePower {
 
     @Override
     public AbstractPower makeCopy() {
-        return new PleadedPower(owner, amount);
+        return new Pleaded(owner, amount);
     }
 
     public void updateDescription() {

@@ -1,14 +1,11 @@
 package friskmod.patches;
 
-import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -18,17 +15,27 @@ import friskmod.actions.CustomSFXAction;
 import friskmod.util.Wiz;
 
 public class AudioToActionPatch{
+    @SpirePatch2(clz = AbstractGameAction.class, method = SpirePatch.CLASS)
+    public static class SFXDoneFields {
+        public static SpireField<Boolean> triggeredSFX = new SpireField<>(() -> Boolean.FALSE);
+    }
+    private static boolean isSFXDone(AbstractGameAction action) {
+        if (!SFXDoneFields.triggeredSFX.get(action)){
+            SFXDoneFields.triggeredSFX.set(action, true);
+            return false;
+        }
+        return true;
+    }
     @SpirePatch2(
             clz = HealAction.class,
             method = "update"
     )
+
     public static class HealActionUpdatePatch {
         @SpirePrefixPatch
         public static void Prefix(HealAction __instance) {
             {
-                float duration = ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "duration");
-                float startDuration = ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "startDuration");
-                if (duration == startDuration) {
+                if (!isSFXDone(__instance)) {
                     if (__instance.target == AbstractDungeon.player) {
                         Wiz.atb(new CustomSFXAction("snd_heal_c"));
                     }
@@ -44,9 +51,7 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(AbstractGameAction __instance) {
             {
-                float duration = ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "duration");
-                float startDuration = ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "startDuration");
-                if (duration == startDuration) {
+                if (!isSFXDone(__instance)) {
                     if (__instance.target == AbstractDungeon.player) {
                         Wiz.atb(new CustomSFXAction("snd_heal_c"));
                     }
@@ -76,8 +81,7 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(LoseHPAction __instance) {
             {
-                float duration = ReflectionHacks.getPrivate(__instance, AbstractGameAction.class, "duration");
-                if (duration == 0.33F){
+                if (!isSFXDone(__instance)) {
                     if (__instance.target == AbstractDungeon.player && __instance.source == AbstractDungeon.player) {
                         Wiz.atb(new CustomSFXAction("snd_hurt1"));
                     }

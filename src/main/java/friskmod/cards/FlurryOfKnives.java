@@ -14,7 +14,6 @@ import friskmod.actions.FlurryOfKnivesAction;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
-import friskmod.vfx.FlurryOfKnivesVFX;
 
 
 import static friskmod.FriskMod.makeID;
@@ -37,7 +36,7 @@ public class FlurryOfKnives extends AbstractEasyCard {
             3 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DAMAGE = 9;
-    private static final int NUM_KNIVES = 3;
+    private static final int NUM_KNIVES = 2;
     private static final int UPG_NUM_KNIVES = 1;
 
 

@@ -5,8 +5,6 @@ import friskmod.FriskMod;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 
-import java.util.Objects;
-
 public class LV_Enemy extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(LV_Enemy.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
@@ -24,7 +22,7 @@ public class LV_Enemy extends BasePower {
         if (type != DamageInfo.DamageType.NORMAL) {
             return damage;
         }
-        if(this.owner.hasPower(PleadedPower.POWER_ID)){
+        if(this.owner.hasPower(Pleaded.POWER_ID)){
             return damage - this.amount;
         }
         return damage + this.amount;

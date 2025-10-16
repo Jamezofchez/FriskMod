@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
@@ -33,6 +34,7 @@ public class Strike_Frisk extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+//        addToBot(new CustomSFXAction("snd_laz"));
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
     }
 

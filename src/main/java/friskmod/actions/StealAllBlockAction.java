@@ -9,6 +9,8 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import friskmod.util.Wiz;
 
@@ -77,8 +79,16 @@ public class StealAllBlockAction extends AbstractGameAction {
                     AbstractCreature source = AbstractDungeon.player;
                     AbstractDungeon.effectList.add(new FlashAtkImgEffect(source.hb.cX, source.hb.cY, AttackEffect.SHIELD));
                     int amount = target.currentBlock;
-                    Wiz.att(new GainBlockAction(source, source, amount));
-                    Wiz.att(new LoseBlockAction(target, source, amount));
+                    if (amount > 0) {
+                        AbstractPower posspow = target.getPower(ArtifactPower.POWER_ID);
+                        if (posspow != null) {
+                            posspow.flash();
+                            posspow.onSpecificTrigger();
+                            continue;
+                        }
+                        Wiz.att(new GainBlockAction(source, source, amount));
+                        Wiz.att(new LoseBlockAction(target, source, amount));
+                    }
                 }
             }
 

@@ -1,14 +1,15 @@
 package friskmod.powers;
 
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import friskmod.patches.perseverance.PerseveranceFields;
 
-public class OvercomePower extends BasePower {
-    public static final String POWER_ID = FriskMod.makeID(OvercomePower.class.getSimpleName());
+public class Overcome extends BasePower {
+    public static final String POWER_ID = FriskMod.makeID(Overcome.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
 
@@ -16,13 +17,13 @@ public class OvercomePower extends BasePower {
     //Turn based powers are white, non-turn based powers are red or green depending on if their amount is positive or negative.
     //For a power to actually decrease/go away on its own they do it themselves.
     //Look at powers that do this like VulnerablePower and DoubleTapPower.
-    public OvercomePower(AbstractCreature owner, int amount) {
+    public Overcome(AbstractCreature owner, int amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
     }
 
     @Override
     public AbstractPower makeCopy() {
-        return new OvercomePower(owner, amount);
+        return new Overcome(owner, amount);
     }
 
     @Override
@@ -32,6 +33,24 @@ public class OvercomePower extends BasePower {
 //       } else {
 //            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
 //       }
+        refreshAllCardOvercome();
+    }
+
+    private void resetOvercome(AbstractCard c){
+        if( PerseveranceFields.isPerseverableFromOvercome.get(c)) {
+            PerseveranceFields.isPerseverableFromOvercome.set(c, false);
+            PerseveranceFields.setIsPerseverable(c, false);
+        }
+    }
+
+    private void refreshAllCardOvercome() {
+        if (AbstractDungeon.player == null) return;
+        for (AbstractCard c : AbstractDungeon.player.hand.group) resetOvercome(c);
+        for (AbstractCard c : AbstractDungeon.player.drawPile.group) resetOvercome(c);
+        for (AbstractCard c : AbstractDungeon.player.discardPile.group) resetOvercome(c);
+        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) resetOvercome(c);
+        // Limbo (cards being played/created)
+        for (AbstractCard c : AbstractDungeon.player.limbo.group) resetOvercome(c);
     }
 
     public void updateDescription() {

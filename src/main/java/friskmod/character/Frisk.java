@@ -18,9 +18,9 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
-import com.megacrit.cardcrawl.relics.BurningBlood;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import friskmod.cards.*;
+import friskmod.relics.HeartShapedLocket;
 
 import java.util.ArrayList;
 
@@ -47,10 +47,10 @@ public class Frisk extends CustomPlayer {
         public static class Enums {
             @SpireEnum
             public static PlayerClass THE_FALLEN_HUMAN;
-            @SpireEnum(name = "CHARACTER_FRISK_COLOR")
+            @SpireEnum(name = "FRISK_RED")
             // These two MUST match. Change it to something unique for your character.
             public static AbstractCard.CardColor CARD_COLOR;
-            @SpireEnum(name = "CHARACTER_FRISK_COLOR")
+            @SpireEnum(name = "FRISK_RED")
             @SuppressWarnings("unused")
             public static CardLibrary.LibraryType LIBRARY_COLOR;
         }
@@ -71,7 +71,9 @@ public class Frisk extends CustomPlayer {
         private static final String SMALL_ORB = characterPath("cardback/small_orb.png");
 
         //This is used to color *some* images, but NOT the actual cards. For that, edit the images in the cardback folder!
-        private static final Color cardColor = new Color(128f/255f, 128f/255f, 128f/255f, 1f);
+//        private static final Color cardColor = new Color(128f/255f, 128f/255f, 128f/255f, 1f);
+        private static final Color cardColor = new Color(1.0F, 0.0F, 0.0F, 1.0F);
+
 
         //Methods that will be used in the main mod file
         public static void registerColor() {
@@ -160,7 +162,7 @@ public class Frisk extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         //IDs of starting relics. You can have multiple, but one is recommended.
-        retVal.add(BurningBlood.ID);
+        retVal.add(HeartShapedLocket.ID);
 
         return retVal;
     }
@@ -169,7 +171,7 @@ public class Frisk extends CustomPlayer {
     public AbstractCard getStartCardForEvent() {
         //This card is used for the Gremlin card matching game.
         //It should be a non-strike non-defend starter card, but it doesn't have to be.
-        return new Strike_Red();
+        return new BadMemory();
     }
 
     /*- Below this is methods that you should *probably* adjust, but don't have to. -*/
@@ -189,9 +191,9 @@ public class Frisk extends CustomPlayer {
         };
     }
 
-    private final Color cardRenderColor = Color.LIGHT_GRAY.cpy(); //Used for some vfx on moving cards (sometimes) (maybe)
-    private final Color cardTrailColor = Color.LIGHT_GRAY.cpy(); //Used for card trail vfx during gameplay.
-    private final Color slashAttackColor = Color.LIGHT_GRAY.cpy(); //Used for a screen tint effect when you attack the heart.
+    private final Color cardRenderColor = Color.RED.cpy(); //Used for some vfx on moving cards (sometimes) (maybe)
+    private final Color cardTrailColor = Color.RED.cpy(); //Used for card trail vfx during gameplay.
+    private final Color slashAttackColor = Color.RED.cpy(); //Used for a screen tint effect when you attack the heart.
     @Override
     public Color getCardRenderColor() {
         return cardRenderColor;
@@ -219,13 +221,13 @@ public class Frisk extends CustomPlayer {
     public void doCharSelectScreenSelectEffect() {
         //This occurs when you click the character's button in the character select screen.
         //See SoundMaster for a full list of existing sound effects, or look at BaseMod's wiki for adding custom audio.
-        CardCrawlGame.sound.playA("ATTACK_DAGGER_2", MathUtils.random(-0.2F, 0.2F));
+        CardCrawlGame.sound.playA("snd_save", MathUtils.random(-0.2F, 0.2F));
         CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.SHORT, false);
     }
     @Override
     public String getCustomModeCharacterButtonSoundKey() {
         //Similar to doCharSelectScreenSelectEffect, but used for the Custom mode screen. No shaking.
-        return "ATTACK_DAGGER_2";
+        return "snd_save";
     }
 
     //Don't adjust these four directly, adjust the contents of the CharacterStrings.json file.

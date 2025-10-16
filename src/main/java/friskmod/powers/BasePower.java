@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public abstract class BasePower extends AbstractPower
     implements CloneablePowerInterface {
-    private static PowerStrings getPowerStrings(String ID)
+    protected static PowerStrings getPowerStrings(String ID)
     {
         return CardCrawlGame.languagePack.getPowerStrings(ID);
     }
@@ -32,17 +32,29 @@ public abstract class BasePower extends AbstractPower
     public BasePower(String id, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         this(id, powerType, isTurnBased, owner, null, amount);
     }
+    public BasePower(String id, String uniquesuffix, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
+        this(id, uniquesuffix, powerType, isTurnBased, owner, null, amount);
+    }
     public BasePower(String id, PowerType powerType, boolean isTurnBased, AbstractCreature owner, AbstractCreature source, int amount) {
         this(id, powerType, isTurnBased, owner, source, amount, true);
     }
     public BasePower(String id, PowerType powerType, boolean isTurnBased, AbstractCreature owner, AbstractCreature source, int amount, boolean initDescription) {
         this(id, powerType, isTurnBased, owner, source, amount, initDescription, true);
     }
+    public BasePower(String id, String uniquesuffix, PowerType powerType, boolean isTurnBased, AbstractCreature owner, AbstractCreature source, int amount) {
+        this(id, uniquesuffix, powerType, isTurnBased, owner, source, amount, true);
+    }
+    public BasePower(String id, String uniquesuffix, PowerType powerType, boolean isTurnBased, AbstractCreature owner, AbstractCreature source, int amount, boolean initDescription) {
+        this(id, uniquesuffix, powerType, isTurnBased, owner, source, amount, initDescription, true);
+    }
     public BasePower(String id, PowerType powerType, boolean isTurnBased, AbstractCreature owner, AbstractCreature source, int amount, boolean initDescription, boolean loadImage) {
-        this.ID = id;
+        this(id, "", powerType, isTurnBased, owner, source, amount, initDescription, loadImage);
+    }
+    public BasePower(String id, String uniquesuffix, PowerType powerType, boolean isTurnBased, AbstractCreature owner, AbstractCreature source, int amount, boolean initDescription, boolean loadImage) {
+        this.ID = id + uniquesuffix;
         this.isTurnBased = isTurnBased;
 
-        PowerStrings strings = getPowerStrings(this.ID);
+        PowerStrings strings = getPowerStrings(id);
         this.name = strings.NAME;
         this.DESCRIPTIONS = strings.DESCRIPTIONS;
 

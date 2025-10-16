@@ -5,12 +5,10 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.LoseBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.character.Frisk;
-import friskmod.powers.PleadedPower;
+import friskmod.powers.Pleaded;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
@@ -42,12 +40,21 @@ public class Plead extends AbstractEasyCard {
         tags.add(FriskTags.KINDNESS);
     }
     @Override
+    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+        boolean canUse = super.canUse(p, m);
+        if (!canUse)
+            return false;
+        int playerBlock = p.currentBlock;
+        if (playerBlock <= 0){ //persevere check
+            canUse = false;
+            this.cantUseMessage = TEXT[0];
+//            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
+        }
+        return canUse;
+    }
+    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         int playerBlock = p.currentBlock;
-        if (playerBlock <= 0){
-            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
-            return;
-        }
         addToBot(new LoseBlockAction(p, p, playerBlock));
         if (upgraded) {
             List<AbstractMonster> enemies = Wiz.getEnemies();
@@ -65,7 +72,7 @@ public class Plead extends AbstractEasyCard {
     private void useEnemies(AbstractPlayer p, List<AbstractMonster> enemies, int playerBlock) {
         for (AbstractMonster mo : enemies) {
             addToBot(new GainBlockAction(mo, p, playerBlock));
-            addToBot(new ApplyPowerAction(mo, p, new PleadedPower(mo, POWER_AMOUNT), POWER_AMOUNT));
+            addToBot(new ApplyPowerAction(mo, p, new Pleaded(mo, POWER_AMOUNT), POWER_AMOUNT));
         }
     }
 

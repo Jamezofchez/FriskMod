@@ -1,13 +1,41 @@
 package friskmod.helper;
 
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import com.megacrit.cardcrawl.vfx.TintEffect;
 
 import java.lang.reflect.*;
 import java.util.*;
 
+import static friskmod.FriskMod.makeID;
 
-public AbstractMonsterSnapshotHistory {
+
+public class AbstractMonsterSnapshotHistory {
+    public static final String ID = makeID(AbstractMonsterSnapshotHistory.class.getSimpleName());
+    private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
+    
+    private final List<AbstractMonsterSnapshot> snapshots = new LinkedList<>();
+
+    public void store(AbstractMonster m, EnemyMoveInfo lastMove, String moveName) {
+        AbstractMonsterSnapshot currentSnapshot = new AbstractMonsterSnapshot();
+        currentSnapshot.store(m, lastMove, moveName);
+        snapshots.add(currentSnapshot);
+        
+    }
+    
+    public void restore(AbstractMonster m) {
+        if (snapshots.isEmpty()){
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, (UI_STRINGS.TEXT[0]), true));
+        } else{
+            snapshots.get(snapshots.size()-1).restore(m);
+            snapshots.remove(snapshots.size()-1);
+        }
+    }
+
     public class AbstractMonsterSnapshot {
         private class Snapshot {
             public final Map<Field, Object> snapshotFields = new HashMap<>();

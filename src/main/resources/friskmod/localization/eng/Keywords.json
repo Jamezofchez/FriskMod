@@ -40,13 +40,101 @@
     "NAMES": [
       "LV"
     ],
-    "DESCRIPTION": "Your next #yAttack will gain equivalent #y${modID}:XP. Enemies deal equivalent extra damage."
+    "DESCRIPTION": "Your next #yAttack will gain equivalent #y${modID}:XP. NL Enemies deal equivalent extra damage. NL Stolen #yStrength is converted into #y${modID}:LV."
   },
   {
-    "PROPER_NAME": "TempHPSteal",
+    "PROPER_NAME": "KR",
     "NAMES": [
-      "TempHPSteal"
+      "KR"
     ],
-    "DESCRIPTION": "Gain Temp HP equal to this #yAttack's damage."
+    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose HP. NL KR cannot kill."
+  },
+  {
+    "PROPER_NAME": "Countdown",
+    "NAMES": [
+      "Countdown",
+      "Countdowns"
+    ],
+    "DESCRIPTION": "A power that triggers an effect after a certain number of cards have been played."
+  },
+  {
+    "PROPER_NAME": "Wait",
+    "NAMES": [
+      "Wait",
+      "wait",
+      "Wait "
+    ],
+    "DESCRIPTION": "Triggers an effect after a certain number of cards have been played."
+  },
+  {
+    "PROPER_NAME": "Expiry",
+    "NAMES": [
+      "Expiry",
+      "expiry",
+      "expiry,"
+
+  ],
+  "DESCRIPTION": "A unique effect that occurs when a #yCountdown reaches 0."
+  },
+  {
+    "PROPER_NAME": "Persevere",
+    "NAMES": [
+      "Persevere",
+      "Persevered"
+    ],
+    "DESCRIPTION": "Play this card while disregarding any conditions for playability. NL If a card is persevered, add an #Trapped copy of the card to your hand."
+  },
+  {
+    "PROPER_NAME": "Critical",
+    "NAMES": [
+      "Critical",
+      "Critical:"
+    ],
+    "DESCRIPTION": "Critical cards have a bonus effect when in the middle of your hand or #yPersevered"
+  },
+  {
+    "PROPER_NAME": "Determination",
+    "NAMES": [
+      "Determination"
+    ],
+    "DESCRIPTION": "Prevent the next time you would lose HP from Attacks."
+  },
+  {
+    "PROPER_NAME": "Fallen Down",
+    "NAMES": [
+      "Fallen Down",
+      "Fallen_Down"
+    ],
+    "DESCRIPTION": "Receive 50% more damage from non-Attacks."
+  },
+  {
+    "PROPER_NAME": "Steal",
+    "NAMES": [
+      "Steal"
+    ],
+    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV."
+  },
+  {
+    "PROPER_NAME": "Copy",
+    "NAMES": [
+      "Copy"
+    ],
+    "DESCRIPTION": "Attempt to #Copy any buffs the enemy has. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV."
+  },
+  {
+    "PROPER_NAME": "Inherent",
+    "NAMES": [
+      "Inherent",
+      "inherent"
+    ],
+    "DESCRIPTION": "#y${modID}:XP which cannot be lost."
+  },
+  {
+    "PROPER_NAME": "Trapped",
+    "NAMES": [
+      "Trapped",
+      "trapped"
+    ],
+    "DESCRIPTION": "#yTrapped cards cannot be played, even by #y${modID}:Persevere effects. NL #yTrapped cards cause you to lose energy equal to their cost when drawn."
   }
 ]

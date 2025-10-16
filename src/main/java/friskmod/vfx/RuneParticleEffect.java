@@ -1,4 +1,4 @@
-package thePackmaster.vfx.psychicpack;
+package friskmod.vfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,14 +10,14 @@ import com.badlogic.gdx.utils.Array;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
-import static thePackmaster.SpireAnniversary5Mod.makeImagePath;
+import static friskmod.FriskMod.imagePath;
 
-public class RuneParticleEffect extends AbstractGameEffect {
+public class RuneParticleEffect extends AbstractGameEffect { //might be nice to have particle effect of hate?
     private static final TextureAtlas runeAtlas;
     private static final Array<TextureAtlas.AtlasRegion> runes;
 
     static {
-        runeAtlas = new TextureAtlas(Gdx.files.internal(makeImagePath("vfx/rune.atlas")));
+        runeAtlas = new TextureAtlas(Gdx.files.internal(imagePath("vfx/rune.atlas")));
         runes = runeAtlas.getRegions();
     }
 

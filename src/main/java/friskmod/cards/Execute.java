@@ -1,7 +1,6 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.actions.GiveInherentXPAction;
@@ -12,8 +11,8 @@ import friskmod.util.FriskTags;
 
 import static friskmod.FriskMod.makeID;
 
-public class Expertise extends AbstractEasyCard {
-    public static final String ID = makeID(Expertise.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class Execute extends AbstractEasyCard {
+    public static final String ID = makeID(Execute.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -22,19 +21,19 @@ public class Expertise extends AbstractEasyCard {
             CardType.ATTACK, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
             CardRarity.UNCOMMON, //Rarity. BASIC is for starting cards, then there's COMMON/UNCOMMON/RARE, and then SPECIAL and CURSE. SPECIAL is for cards you only get from events. Curse is for curses, except for special curses like Curse of the Bell and Necronomicurse.
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
-            1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
+            2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 7;
-    private static final int UPG_DAMAGE = 2;
+    private static final int DAMAGE = 13;
+    private static final int UPG_DAMAGE = 3;
     private static final int NUM_CARDS = 1;
     private static final int GIVEN_XP = 3;
-    private static final int UPG_GIVEN_XP = 2;
+//    private static final int UPG_GIVEN_XP = 2;
 
-    public Expertise() {
+    public Execute() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
         baseMagicNumber = magicNumber = GIVEN_XP;
-        tags.add(CardTags.STARTER_DEFEND);
+        tags.add(FriskTags.BRAVERY);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -49,6 +48,6 @@ public class Expertise extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeDamage(UPG_DAMAGE);
-        upgradeMagicNumber(UPG_GIVEN_XP);
+//        upgradeMagicNumber(UPG_GIVEN_XP);
     }
 }

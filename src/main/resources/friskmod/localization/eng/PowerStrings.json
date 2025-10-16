@@ -5,6 +5,49 @@
       "Gain #b%s [E] every time an attack's damage ends in a 9."
     ]
   },
+  "${modID}:CountdownPounce": {
+    "NAME": "Countdown to pounce",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack."
+    ]
+  },
+  "${modID}:CountdownDraw": {
+    "NAME": "Countdown to draw",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, draw #b%s cards.",
+      "On #yExpiry after playing #b%s cards, draw #b%s card.",
+      "On #yExpiry after playing #b%s card, draw #b%s cards.",
+      "On #yExpiry after playing #b%s card, draw #b%s card."
+    ]
+  },
+  "${modID}:Determination": {
+    "NAME": "DETERMINATION",
+    "DESCRIPTIONS": [
+      "Prevent the next #b%s time you would lose HP from Attacks.",
+      "Prevent the next #b%s times you would lose HP from Attacks."
+    ]
+  },
+  "${modID}:EvolvePower": {
+    "NAME": "Evolve",
+    "DESCRIPTIONS": [
+      "Gain #b%s ${modID}:LV whenever you play a card."
+    ]
+  },
+  "${modID}:FallenDown": {
+    "NAME": "Fallen Down",
+    "DESCRIPTIONS": [
+      "Receive #b%s%% more damage from non-Attacks."
+    ]
+  },
+  "${modID}:Karma": {
+    "NAME": "Karma",
+    "DESCRIPTIONS": [
+      "Takes #b%s damage whenever you lose HP, but cannot kill on its own."
+    ]
+  },
   "${modID}:LV_Enemy": {
     "NAME": "LV",
     "DESCRIPTIONS": [
@@ -17,18 +60,50 @@
       "Your next #yAttack will gain #b%s ${modID}:XP."
     ]
   },
-  "${modID}:PleadedPower": {
+  "${modID}:Overcome": {
+    "NAME": "Overcome",
+    "DESCRIPTIONS": [
+      "Your next #b%s card which fails to play this turn is ${modID}:Persevered.",
+      "Your next #b%s cards which fail to play this turn are ${modID}:Persevered."
+    ]
+  },
+  "${modID}:Pleaded": {
     "NAME": "Pleaded",
     "DESCRIPTIONS": [
-      "#yAttacks deal #b%s less damage for their ${modID}:LV_Enemy for #b%s turn.",
-      "#yAttacks deal #b%s less damage for their ${modID}:LV_Enemy for #b%s turns."
+      "#yAttacks deal #b%s less damage for their ${modID}:LV for #b%s turn.",
+      "#yAttacks deal #b%s less damage for their ${modID}:LV for #b%s turns."
     ]
   },
   "${modID}:PreventLVLoss": {
     "NAME": "Prevent LV Loss",
     "DESCRIPTIONS": [
-      "Prevent the next #b%s time you would lose ${modID}:LV_Hero.",
-      "Prevent the next #b%s times you would lose ${modID}:LV_Hero."
+      "Prevent the next #b%s time you would lose ${modID}:LV this turn.",
+      "Prevent the next #b%s times you would lose ${modID}:LV this turn."
+    ]
+  },
+  "${modID}:RememberBraveryPower": {
+    "NAME": "Bravery",
+    "DESCRIPTIONS": [
+      "Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP."
+    ]
+  },
+  "${modID}:RememberKindnessPower": {
+    "NAME": "Kindness",
+    "DESCRIPTIONS": [
+      "Whenever an enemy is buffed, it gains #b%s #yWeak.",
+      "Whenever an enemy is buffed, it gains #b%s #yWeak. NL Whenever an enemy gains Block, it gains #b%s #yVulnerable"
+    ]
+  },
+  "${modID}:RememberPatiencePower": {
+    "NAME": "Patience",
+    "DESCRIPTIONS": [
+      "Whenever you have #b%s or more cards in your hand, #yRetain #b%s cards this turn."
+    ]
+  },
+  "${modID}:TornNotebookPower": {
+    "NAME": "Torn Notebook",
+    "DESCRIPTIONS": [
+      "The next #b%s times you lose HP or Temp HP, gain 1 #yBuffer."
     ]
   }
 }

@@ -17,64 +17,163 @@
     "NAME": "Bad Memory",
     "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand."
   },
+  "${modID}:BalletShoes": {
+    "NAME": "Ballet Shoes",
+    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and Exhaust it."
+  },
+  "${modID}:OLDBurnOut": {
+    "NAME": "Burn Out",
+    "DESCRIPTION": "Draw !M! cards. NL Add a *Burn into your hand."
+  },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
-    "DESCRIPTION": "Deal !D! damage. NL Gain Temp HP equal to the unblocked damage dealt."
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Gain Temp HP equal to the unblocked damage dealt."
   },
   "${modID}:Cleave": {
     "NAME": "Cleave",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Convert this card's friskmod:XP to friskmod:LV."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Convert this card's ${modID}:XP to ${modID}:LV."
+  },
+  "${modID}:CopyCat": {
+    "NAME": "Copy Cat",
+    "DESCRIPTION": "${modID}:Copy the enemy's buffs. Deal !D! damage. "
   },
   "${modID}:Defend_Frisk": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
+  "${modID}:Determination": {
+    "NAME": "DETERMINATION",
+    "DESCRIPTION": "Apply !M! ${modID}:Determination. NL Apply !${modID}:M2! ${modID}:Fallen_Down. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Apply !M! ${modID}:Determination. NL Apply !${modID}:M2! ${modID}:Fallen_Down."
+  },
   "${modID}:DogShrine": {
     "NAME": "Dog Shrine",
-    "DESCRIPTION": "Exhaust up to !M! card. NL Draw cards equal to its friskmod:XP.",
-    "UPGRADE_DESCRIPTION": "Exhaust up to !M! cards. NL Draw cards equal to their friskmod:XP."
+    "DESCRIPTION": "Exhaust up to !M! card. NL Draw cards equal to its ${modID}:XP.",
+    "UPGRADE_DESCRIPTION": "Exhaust up to !M! cards. NL Draw cards equal to their ${modID}:XP."
+  },
+  "${modID}:DontNeedFriends": {
+    "NAME": "Don't Need Friends",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Add a *I'm... to your hand."
+  },
+  "${modID}:Evolve": {
+    "NAME": "Evolve",
+    "DESCRIPTION": "Gain !M! ${modID}:LV whenever you play a card."
+  },
+  "${modID}:Execute": {
+    "NAME": "Execute",
+    "DESCRIPTION": "Deal !D! damage. NL Give 1 card at random !M! ${modID}:inherent ${modID}:XP.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Give up to 1 card !M! ${modID}:inherent ${modID}:XP."
+  },
+  "${modID}:Expertise": {
+    "NAME": "Expertise",
+    "DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Choose a card .",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Give up to 1 card !M! ${modID}:XP."
   },
   "${modID}:Flex": {
     "NAME": "Flex",
-    "DESCRIPTION": "Give EVERYONE !M! friskmod:LV."
+    "DESCRIPTION": "Give EVERYONE !M! ${modID}:LV."
   },
   "${modID}:FlurryOfKnives": {
     "NAME": "Flurry Of Knives",
-    "DESCRIPTION": "Deal !D! damage !M! times. NL Can be Upgraded any number of times."
+    "DESCRIPTION": "Deal !D! damage to a random enemy !M! times. NL Can be Upgraded any number of times."
   },
   "${modID}:FreakBullet": {
     "NAME": "Freak Bullet",
-    "DESCRIPTION": "Deal !D! damage. NL This card always has at least !M! friskmod:XP."
+    "DESCRIPTION": "Deal !D! damage. NL This card always has at least !M! ${modID}:inherent ${modID}:XP."
+  },
+  "${modID}:FriendsForever": {
+    "NAME": "Friends Forever",
+    "DESCRIPTION": "Prevent the next time you would lose ${modID}:LV. NL Deal !D! damage.",
+    "UPGRADE_DESCRIPTION": "Prevent the next !M! times you would lose ${modID}:LV. NL Deal !D! damage."
+  },
+  "${modID}:ItsYou": {
+    "NAME": "It's you!",
+    "DESCRIPTION": "Retain. NL Gain !M! ${modID}:LV. NL Exhaust."
+  },
+  "${modID}:Im": {
+    "NAME": "I'm...",
+    "DESCRIPTION": "Ethereal. NL While in hand, you cannot play Attacks."
+  },
+  "${modID}:HugItOff": {
+    "NAME": "Hug It Off",
+    "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! card.",
+    "UPGRADE_DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! cards."
   },
   "${modID}:LevelUp": {
     "NAME": "Level Up",
-    "DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your hand with friskmod:XP for the rest of combat.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your deck with friskmod:XP for the rest of combat."
-
+    "DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your hand with ${modID}:XP for the rest of combat.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your deck with ${modID}:XP for the rest of combat."
   },
-  "${modID}:LoveSaver": {
-    "NAME": "Love Saver",
-    "DESCRIPTION": "Prevent the next time you would lose friskmod:LV. NL Deal !D! damage.",
-    "UPGRADE_DESCRIPTION": "Prevent the next !M! times you would lose friskmod:LV. NL Deal !D! damage."
+  "${modID}:Overcome": {
+    "NAME": "Overcome",
+    "DESCRIPTION": "Ethereal. NL The next card that fails to play this turn is ${modID}:Persevered.",
+    "UPGRADE_DESCRIPTION": "The next card that fails to play this turn is ${modID}:Persevered."
   },
   "${modID}:Plead": {
     "NAME": "Plead",
-    "DESCRIPTION": "If you have Block, give your Block to the enemy. NL That enemy deals less damage for their friskmod:LV this turn.",
-    "UPGRADE_DESCRIPTION": "If you have Block, give your Block to ALL enemies. NL ALL enemies deal less damage for their friskmod:LV this turn."
+    "DESCRIPTION": "If you have Block, give your Block to the enemy. NL That enemy deals less damage for their ${modID}:LV this turn.",
+    "UPGRADE_DESCRIPTION": "If you have Block, give your Block to ALL enemies. NL ALL enemies deal less damage for their ${modID}:LV this turn."
+  },
+  "${modID}:Pounce": {
+    "NAME": "Pounce",
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL Deals double damage if the enemy does not intend to attack."
+  },
+  "${modID}:RememberBravery": {
+    "NAME": "Remember Bravery",
+    "DESCRIPTION": "Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP."
+  },
+  "${modID}:RememberKindness": {
+    "NAME": "Remember Kindness",
+    "DESCRIPTION": "Whenever an enemy is buffed, it gains !M! Weak.",
+    "UPGRADE_DESCRIPTION": "Whenever an enemy is buffed, it gains !M! Weak. NL Whenever an enemy gains Block, it gains !M! Vulnerable."
+  },
+  "${modID}:RememberPatience": {
+    "NAME": "Remember Patience",
+    "DESCRIPTION": "Whenever you have !${modID}:M2! or more cards in your hand, Retain !M! cards this turn."
+  },
+  "${modID}:SaviourStrike": {
+    "NAME": "Saviour Strike",
+    "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust."
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",
-    "DESCRIPTION": "Ethereal. NL Deal damage equal to your missing HP. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
+    "DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Gain !M! Temp HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:Sleep": {
+    "NAME": "Sleep",
+    "DESCRIPTION": "Retain. NL Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns."
+  },
+  "${modID}:SnowedInn": {
+    "NAME": "Snowed Inn",
+    "DESCRIPTION": "Gain !M! Temp HP. NL Trigger ALL of your ${modID}:Countdowns."
   },
   "${modID}:Steal": {
     "NAME": "Steal",
     "DESCRIPTION": "Steal ALL enemies' Block and buffs.",
-    "UPGRADE_DESCRIPTION": "Steal ALL enemies' Block and buffs. Trustworthy"
+    "UPGRADE_DESCRIPTION": "Steal ALL enemies' Block and buffs. NL ${modID}:Critical: Gain [E] .",
+    "EXTENDED_DESCRIPTION": [
+      "NL (Block steal is negated by Artifact)"
+    ]
   },
   "${modID}:Strike_Frisk": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
+  },
+  "${modID}:ToAsh": {
+    "NAME": "To Ash",
+    "DESCRIPTION": "Can only be played if every card in your hand is an Skill. NL Apply !M! ${modID}:KR."
+  },
+  "${modID}:TornNotebook": {
+    "NAME": "Torn Notebook",
+    "DESCRIPTION": "The next !M! times you lose HP, gain 1 Buffer. NL ${modID}:Critical: Gain !${modID}:M2! Buffer."
+  },
+  "${modID}:VineBloom": {
+    "NAME": "Vine Bloom",
+    "DESCRIPTION": "Deal !D! damage twice. NL Give the enemy !M! Thorns."
   }
 }

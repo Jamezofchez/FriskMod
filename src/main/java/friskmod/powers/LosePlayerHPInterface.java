@@ -1,5 +1,5 @@
 package friskmod.powers;
 
-public interface LosePlayerTempHPInterface { //might not be needed
-    void onPlayerTempLoseHP(int amount);
+public interface LosePlayerHPInterface {
+    void onPlayerLoseHP(int amount, boolean tempHP, boolean overflow);
 }

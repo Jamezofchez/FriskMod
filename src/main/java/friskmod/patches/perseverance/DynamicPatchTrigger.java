@@ -8,7 +8,6 @@ import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.NotFoundException;
 import org.clapper.util.classutil.ClassFinder;
-import friskmod.patches.perseverance.occult.PerseverancePatch;
 
 import java.io.File;
 import java.net.URISyntaxException;

@@ -5,5 +5,12 @@
     "DESCRIPTIONS": [
       "Gain [E] at the start of your turn. [E] is an energy icon."
     ]
+  },
+  "${modID}:HeartShapedLocket": {
+    "NAME": "Heart-Shaped Locket",
+    "FLAVOR": "It says \"Best Friends Forever.\"",
+    "DESCRIPTIONS": [
+      "At the start of each combat, add a #yIt's #yyou! into your hand."
+    ]
   }
 }

@@ -80,6 +80,8 @@ public abstract class AbstractEasyCard extends CustomCard {
             case ATTACK:
             case POWER:
             case SKILL:
+            case STATUS:
+            case CURSE:
                 textureString = imagePath("cards/" + cardName + ".png");
                 break;
             default:

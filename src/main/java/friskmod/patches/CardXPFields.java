@@ -51,7 +51,7 @@ public class CardXPFields {
         try {
             Wiz.att(new SetInherentXPAction(card, amount));
         } catch (Exception e) {
-            FriskMod.logger.warn("{}: queue setting inherentXP failed", FriskMod.modID);
+//            FriskMod.logger.warn("{}: queue setting inherentXP failed", FriskMod.modID);
             XPFields.inherentXP.set(card, amount);
             CardModifierManager.addModifier(card, new XPMod());
             card.initializeDescription();
@@ -65,7 +65,7 @@ public class CardXPFields {
         try {
             Wiz.att(new SetAddedXPAction(card, amount));
         } catch (Exception e) {
-            FriskMod.logger.warn("{}: queue setting addedXP failed", FriskMod.modID);
+//            FriskMod.logger.warn("{}: queue setting addedXP failed", FriskMod.modID);
             XPFields.addedXP.set(card, amount);
             CardModifierManager.addModifier(card, new XPMod());
             card.initializeDescription();
@@ -80,6 +80,14 @@ public class CardXPFields {
         int newXP = previousCardXP + amount;
         setAddedXP(card, newXP);
     }
+    public static void addInherentXP(AbstractCard card, int amount) {
+        if (amount == 0) {
+            return;
+        }
+        int previousCardXP = getCardInherentXP(card);
+        int newXP = previousCardXP + amount;
+        setInherentXP(card, newXP);
+    }
 
     public static void flashXPColor(AbstractCard card) {
         if (getCardXPBool(card)){
@@ -88,10 +96,32 @@ public class CardXPFields {
         }
 //        card.superFlash(STABLE_TINT.cpy());
     }
-    //TODO
+    @SpirePatch(
+            clz = AbstractCard.class,
+            method = "makeStatEquivalentCopy"
+    )
+    public static class AbstractCardMakeStatEquivalentCopyPatch {
+        @SpirePostfixPatch
+        public static AbstractCard transferIt(AbstractCard __result, AbstractCard __instance)
+        {
+            XPFields.inherentXP.set(__result, XPFields.inherentXP.get(__instance));
+            XPFields.addedXP.set(__result, XPFields.addedXP.get(__instance));
+            __result.initializeDescription();
+            return __result;
+        }
+    }
+//    @SpirePatch(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
+//    public static class MakeStatEquivalentCopy {
+//        public static AbstractCard Postfix(AbstractCard result, AbstractCard self) {
+//            setAddedXP(result, XPFields.addedXP.get(self));
+//            return result;
+//        }
+//    }
+
 //    @SpirePatch2(clz = AbstractCard.class, method = "makeStatEquivalentCopy")
-//    public static class makeStatEquivalentCopy {
-//        public static void postfix(AbstractCard result, AbstractCard self) {
+//    public static class AbstractCardMakeStatEquivalentCopy {
+//        @SpirePostfixPatch
+//        public static void Postfix(AbstractCard result, AbstractCard self) {
 //            CardXPFields.setAddedXP(result, getCardAddedXP(self));
 //        }
 //    }

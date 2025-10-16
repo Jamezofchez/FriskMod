@@ -1,9 +1,14 @@
 package friskmod.helper;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.monsters.beyond.Transient;
+import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import basemod.interfaces.CloneablePowerInterface;
 
@@ -11,154 +16,242 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.BooleanSupplier;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.FriskMod;
+import friskmod.patches.InherentPowerTagFields;
+import friskmod.powers.Determination;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
 import friskmod.util.Wiz;
 import basemod.ReflectionHacks;
 
+import static friskmod.FriskMod.makeID;
+
 public class StealableWhitelist {
-    // Maps power ID to a function that gets an appropriate clone of that power
-    public static final Map<String, Consumer<AbstractPower>> whiteList = new HashMap<>();
+    public static final String ID = makeID(StealableWhitelist.class.getSimpleName());
+    private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
 
-    public static class PowerSynonymsManager {
+    public static StealableWhitelist INSTANCE = null;
 
-        // Inner class to hold the data
-        public static class PowerSynonym {
-            public final String playerID;
-            public final Class<? extends AbstractPower> playerClass;
-
-            public PowerSynonym(String playerID, Class<? extends AbstractPower> playerClass) {
-                this.playerID = playerID;
-                this.playerClass = playerClass;
-            }
+    public static StealableWhitelist getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new StealableWhitelist();
+            INSTANCE.initializeWhitelist();
         }
-
-        public final Map<String, PowerSynonym> synonymMap = new HashMap<>();
-
-        private void addSynonym(String enemyID, String playerID, Class<? extends AbstractPower> playerClass) {
-            synonymMap.put(enemyID, new PowerSynonym(playerID, playerClass));
-        }
-        public String lookupPlayerID(String enemyID) {
-            PowerSynonym syn = synonymMap.get(enemyID);
-            if (syn == null) return null;
-            return syn.playerID;
-        }
-        public Class<? extends AbstractPower> lookupPlayerClass(String enemyID) {
-            PowerSynonym syn = synonymMap.get(enemyID);
-            if (syn == null) return null;
-            return syn.playerClass;
-        }
-
-        private PowerSynonymsManager() {
-            addSynonym(SharpHidePower.POWER_ID, ThornsPower.POWER_ID, ThornsPower.class);
-            addSynonym(IntangiblePower.POWER_ID, IntangiblePlayerPower.POWER_ID, IntangiblePlayerPower.class);
-            addSynonym(LV_Enemy.POWER_ID, LV_Hero.POWER_ID, LV_Hero.class);
-            addSynonym(RegenerateMonsterPower.POWER_ID, RegenPower.POWER_ID, RegenPower.class); //permanent but non-permanent for player
-        }
+        return INSTANCE;
     }
-    public static final PowerSynonymsManager powerSynonyms = new PowerSynonymsManager();
 
-    public static void attachClonePowerToPlayer(AbstractPower pow){
-        Consumer<AbstractPower> consumer = whiteList.get(pow.ID);
+    // Maps power ID to a function that gets an appropriate clone of that power
+    private final Map<String, BiConsumer<AbstractPower, Boolean>> whiteList = new HashMap<>();
+
+    public void attachClonePowerToPlayer(AbstractPower pow, boolean steal){
+        BiConsumer<AbstractPower, Boolean> consumer = whiteList.get(pow.ID);
         if (consumer != null) {
-            consumer.accept(pow);
+            consumer.accept(pow, steal);
         } else {
             FriskMod.logger.warn("{}: attempted to clone unregistered power {}", FriskMod.modID, pow.ID);
         }
     }
 
-    public static void initialize() {
-        initializeNormals();
-        initializeSynonyms();
-        initializeOddballs();
-    }
-    private static void initializeOddballs() {
-    }
     private static void ritualPostProcess(AbstractPower pow) {
         ReflectionHacks.setPrivate(pow, RitualPower.class, "isPlayer", true);
         pow.amount = 1;
     }
-    private static void initializeSynonyms() {
-        for (Map.Entry<String, PowerSynonymsManager.PowerSynonym> entry : powerSynonyms.synonymMap.entrySet()) {
-            String key = entry.getKey();
-            PowerSynonymsManager.PowerSynonym value = entry.getValue();
-            initializeSynonym(key, value.playerClass);
+    private static void intangiblePostProcess(AbstractPower pow) {
+        pow.amount += 1;
+    }
+    private static int inherentPostProcess(boolean steal, AbstractPower enemyPower) {
+        if (steal && InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower)){
+            int inherentPowerAmount = InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower);
+            if (inherentPowerAmount >= enemyPower.amount){
+                FriskMod.logger.warn("{}: Somehow we are trying to steal an inherent power", FriskMod.modID);
+                return 0;
+            } else{
+                return inherentPowerAmount;
+            }
+        }
+        return 0;
+    }
+
+
+    private static boolean strengthPreProcess() {
+        if (AbstractDungeon.getMonsters().monsters.stream().anyMatch(m -> m instanceof CorruptHeart && m.hasPower(StrengthPower.POWER_ID) && m.getPower(StrengthPower.POWER_ID).amount > 10)) {
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[1], true));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean inherentPreProcess(AbstractPower enemyPower) {
+        if (enemyPower instanceof CurlUpPower){
+            return true;
+        }
+        if (enemyPower instanceof RegenerateMonsterPower){
+            return true;
+        }
+        if (InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower) && InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower) >= enemyPower.amount){
+            return false;
+        }
+        return true;
+    }
+    public boolean checkPreProcess(AbstractPower enemyPower){
+        if (enemyPower instanceof StrengthPower){
+            if (!strengthPreProcess()){
+                return false;
+            }
+        }
+        if (!inherentPreProcess(enemyPower)){
+            return false;
+        }
+        return true;
+
+    }
+
+    private void initializeWhitelist() {
+        //Only steal powers that are in a sense "non-permanent?"
+        //Normal enemy and player buffs
+        (new applyPowerBuilder(StrengthPower.POWER_ID)).addPreProcess(StealableWhitelist::strengthPreProcess).addSynonym(LV_Hero.class).build();
+        (new applyPowerBuilder(DexterityPower.POWER_ID)).build();
+        (new applyPowerBuilder(ArtifactPower.POWER_ID)).build();
+        (new applyPowerBuilder(PlatedArmorPower.POWER_ID)).build();
+        (new applyPowerBuilder(BlurPower.POWER_ID)).build();
+        (new applyPowerBuilder(BufferPower.POWER_ID)).build();
+        (new applyPowerBuilder(ThornsPower.POWER_ID)).build();
+
+        (new applyPowerBuilder(Determination.POWER_ID)).build();
+
+        //Modified enemy powers
+        (new applyPowerBuilder(CurlUpPower.POWER_ID)).build();
+        (new applyPowerBuilder(FlightPower.POWER_ID)).build(); //hopefully only on regain?
+        //Other enemy powers
+        (new applyPowerBuilder(RitualPower.POWER_ID)).addPostProcess(StealableWhitelist::ritualPostProcess).build();
+
+        //Synonym powers
+        (new applyPowerBuilder(SharpHidePower.POWER_ID)).addSynonym(ThornsPower.class).build();
+        (new applyPowerBuilder(IntangiblePower.POWER_ID)).addPostProcess(StealableWhitelist::intangiblePostProcess).addSynonym(IntangiblePlayerPower.class).build();
+        (new applyPowerBuilder(LV_Enemy.POWER_ID)).addSynonym(LV_Hero.class).build();
+        (new applyPowerBuilder(RegenerateMonsterPower.POWER_ID)).addSynonym(RegenPower.class).build();
+    }
+
+    public Set<String> getWhitelist() {
+        return whiteList.keySet();
+    }
+
+    private class applyPowerBuilder{
+        private BooleanSupplier preProcess = null;
+        private Consumer<AbstractPower> postProcess = null;
+        private final String enemyPowerID;
+        private Class<? extends AbstractPower> playerSynonym = null;
+        applyPowerBuilder(String enemyPowerID){
+            this.enemyPowerID = enemyPowerID;
+        }
+        applyPowerBuilder addPreProcess(BooleanSupplier preProcess){
+            this.preProcess = preProcess;
+            return this;
+        }
+        applyPowerBuilder addPostProcess(Consumer<AbstractPower> postProcess){
+            this.postProcess = postProcess;
+            return this;
+        }
+        applyPowerBuilder addSynonym(Class<? extends AbstractPower> playerSynonym){
+            this.playerSynonym = playerSynonym;
+            return this;
+        }
+        public void build(){
+            if (playerSynonym == null){
+                whiteList.put(enemyPowerID,applyCloneFactory());
+            } else{
+                whiteList.put(enemyPowerID,applySynonymCloneFactory());
+            }
+        }
+        private BiConsumer<AbstractPower, Boolean> applySynonymCloneFactory() {
+            return (enemyPower, steal) -> {
+                // Allow caller to check if valid
+                if (preProcess(enemyPower, steal)) return;
+                int amount = enemyPower.amount;
+                try {
+                    Constructor<? extends AbstractPower> ctor = playerSynonym.getConstructor(AbstractCreature.class, int.class);
+                    AbstractPower copy = ctor.newInstance(AbstractDungeon.player, amount);
+                    // Allow caller to customize before applying
+                    postProcess(enemyPower, steal, copy);
+
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException |
+                         InstantiationException e) {
+
+                    FriskMod.logger.warn("{}: synonym cloning failed", FriskMod.modID);
+                    AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, String.format(UI_STRINGS.TEXT[0], enemyPower.name), true));
+                }
+            };
+        }
+
+        private BiConsumer<AbstractPower, Boolean> applyCloneFactory() {
+            return (enemyPower, steal) -> {
+                // Allow caller to check if valid
+                if (preProcess(enemyPower, steal)) return;
+                if (enemyPower instanceof CloneablePowerInterface) {
+                    AbstractPower copy = ((CloneablePowerInterface) enemyPower).makeCopy();
+                    // Allow caller to customize before applying
+                    postProcess(enemyPower, steal, copy);
+                } else {
+                    FriskMod.logger.warn("{}: normal cloning failed", FriskMod.modID);
+                    AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, String.format(UI_STRINGS.TEXT[0], enemyPower.name), true));
+                }
+            };
+        }
+
+        private boolean preProcess(AbstractPower enemyPower, Boolean steal) {
+            if (preProcess != null){
+                if (!preProcess.getAsBoolean()) {
+                    return true;
+                }
+            }
+            if (!inherentPreProcess(enemyPower)){
+                AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, String.format(UI_STRINGS.TEXT[2], enemyPower.name), true));
+                return true;
+            }
+            return false;
+        }
+
+        private void postProcess(AbstractPower enemyPower, Boolean steal, AbstractPower copy) {
+            if (postProcess != null) {
+                postProcess.accept(copy);
+            }
+            int inherentPowerAmount = inherentPostProcess(steal, enemyPower);
+            if (inherentPowerAmount == 0) {
+                copy.owner = AbstractDungeon.player;
+                Wiz.att(new ApplyPowerAction(copy.owner, enemyPower.owner, copy, copy.amount));
+                if (steal) {
+                    AbstractCreature enemy = enemyPower.owner;
+                    Wiz.att(new RemoveSpecificPowerAction(enemy, copy.owner, enemyPower));
+                }
+            } else{ //steal must be true
+                copy.amount = copy.amount - inherentPowerAmount;
+                Wiz.att(new ApplyPowerAction(copy.owner, enemyPower.owner, copy, copy.amount));
+                AbstractCreature enemy = enemyPower.owner;
+                Wiz.att(new ReducePowerAction(enemy, copy.owner, enemyPower, inherentPowerAmount));
+            }
+            Wiz.att(Wiz.actionify(copy::updateDescription)); //incase desc depends on owner
         }
     }
 
-    private static void initializeNormals() {
-        //Only steal powers that are in a sense "non-permanent?"
-        initializeNormal(StrengthPower.POWER_ID);
-        initializeNormal(DexterityPower.POWER_ID);
-        initializeNormal(ArtifactPower.POWER_ID);
-        initializeNormal(PlatedArmorPower.POWER_ID);
-        initializeNormal(BlurPower.POWER_ID);
-        initializeNormal(BufferPower.POWER_ID);
-        initializeNormal(RegenPower.POWER_ID);
-
-//      initializeNormal(FlightPower.POWER_ID);
-        initializeNormal(CurlUpPower.POWER_ID);
-//      initializeNormal(AngryPower.POWER_ID);
-//      initializeNormalInherent(AngerPower.POWER_ID);
-//      initializeNormal(ThornsPower.POWER_ID);
-//      initializeNormal(MetallicizePower.POWER_ID);
-
-        initializeNormal(RitualPower.POWER_ID, StealableWhitelist::ritualPostProcess);
-
-    }
-
-    private static void initializeNormal(String powerID, Consumer<AbstractPower> postProcess) {
-        Consumer<AbstractPower> applyCopy = applyCloneFactory(postProcess);
-        whiteList.put(powerID, applyCopy);
-    }
-    private static void initializeNormal(String powerID) {
-        initializeNormal(powerID,null);
-    }
-
-    private static void initializeSynonym(String enemyPowerID, Class<? extends AbstractPower> playerPowerClass) {
-        Consumer<AbstractPower> applyCopy = applySynonymCloneFactory(playerPowerClass);
-        whiteList.put(enemyPowerID, applyCopy);
-    }
-
-    private static Consumer<AbstractPower> applySynonymCloneFactory(Class<? extends AbstractPower> playerPowerClass) {
-        return (enemyPower) -> {
-            int amount = enemyPower.amount;
-            try {
-                Constructor<? extends AbstractPower> ctor = playerPowerClass.getConstructor(AbstractCreature.class, int.class);
-                AbstractPower copy = ctor.newInstance(AbstractDungeon.player, amount);
-                Wiz.att(new ApplyPowerAction(copy.owner, enemyPower.owner, copy, copy.amount));
-                Wiz.att(Wiz.actionify(copy::updateDescription));
-                AbstractCreature enemy = enemyPower.owner;
-                Wiz.att(new RemoveSpecificPowerAction(enemy,copy.owner, enemyPower));
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException |
-                     InstantiationException e) {
-                FriskMod.logger.warn("{}: synonym cloning failed", FriskMod.modID);
-            }
-        };
-    }
-
-    private static Consumer<AbstractPower> applyCloneFactory(Consumer<AbstractPower> postProcess) {
-        return (enemyPower) -> {
-            if (enemyPower instanceof CloneablePowerInterface) {
-                AbstractPower copy = ((CloneablePowerInterface) enemyPower).makeCopy();
-                // Allow caller to customize before applying
-                if (postProcess != null) {
-                    postProcess.accept(copy);
-                }
-                copy.owner = AbstractDungeon.player;
-                Wiz.att(new ApplyPowerAction(copy.owner, enemyPower.owner, copy, copy.amount));
-                Wiz.att(Wiz.actionify(copy::updateDescription));
-                AbstractCreature enemy = enemyPower.owner;
-                Wiz.att(new RemoveSpecificPowerAction(enemy, copy.owner, enemyPower));
-            } else {
-                FriskMod.logger.warn("{}: normal cloning failed", FriskMod.modID);
-            }
-        };
-    }
+//    private static void initializeNormal(String powerID, BiConsumer<AbstractPower, Boolean> postProcess) {
+//        BiConsumer<AbstractPower, Boolean> applyCopy = applyCloneFactory(postProcess);
+//        whiteList.put(powerID, applyCopy);
+//    }
+//    private static void initializeNormal(String powerID) {
+//        initializeNormal(powerID,null);
+//    }
+//
+//    private static void initializeSynonym(String enemyPowerID, Class<? extends AbstractPower> playerPowerClass) {
+//        BiConsumer<AbstractPower, Boolean> applyCopy = applySynonymCloneFactory(playerPowerClass);
+//        whiteList.put(enemyPowerID, applyCopy);
+//    }
 //    private static void applyCloneKeep(AbstractPower enemyPower) {
 //        if (enemyPower instanceof CloneablePowerInterface) {
 //            CloneablePowerInterface cloneable = (CloneablePowerInterface) enemyPower;

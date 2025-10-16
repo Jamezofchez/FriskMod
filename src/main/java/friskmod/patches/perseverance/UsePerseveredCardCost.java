@@ -1,4 +1,4 @@
-package friskmod.patches.perseverance.occult;
+package friskmod.patches.perseverance;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -23,7 +23,7 @@ public class UsePerseveredCardCost {
     {
         if (PerseveranceFields.isPerseverable.get(c) && c.costForTurn > EnergyPanel.totalCount)
         {
-            //occult card played with more cost than current energy
+            //perseverance card played with more cost than current energy
             temp = c.costForTurn;
             c.costForTurn = EnergyPanel.totalCount;
             reset = true;

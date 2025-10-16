@@ -1,4 +1,4 @@
-package friskmod.patches.perseverance.occult;
+package friskmod.patches.perseverance;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -15,8 +15,8 @@ import friskmod.vfx.RuneParticleEffect;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class OccultCostAndParticles {
-    private static final Color occultCostColor = new Color(0.7f, 0.3f, 1.0f, 1.0f);
+public class PersevereCostAndParticles {
+    private static final Color perseveranceCostColor = new Color(0.7f, 0.3f, 1.0f, 1.0f);
 
     //change number color to purple. rune particles emanate off of energy orb.
 
@@ -82,7 +82,7 @@ public class OccultCostAndParticles {
         {
             if (PerseveranceFields.isPerseverable.get(__instance))
             {
-                costColor[0] = occultCostColor;
+                costColor[0] = perseveranceCostColor;
             }
 
             for (AbstractGameEffect e : Fields.runeEffects.get(__instance))

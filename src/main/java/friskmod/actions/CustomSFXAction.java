@@ -3,13 +3,14 @@ package friskmod.actions;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 
 public class CustomSFXAction extends AbstractGameAction {
     private final String key;
 
-//    private final float pitchVar;
+//    private final float pitchVariance;
 
-    private final float pitchAdjust;
+    private final float adjust;
     
     private final float loudMultiplier;
 
@@ -18,29 +19,33 @@ public class CustomSFXAction extends AbstractGameAction {
         this(key, 0.0F);
     }
 
-    public CustomSFXAction(String key, float pitchVar) {
-        this(key, pitchVar, 1.0F);
+    public CustomSFXAction(String key, float pitchVariance) {
+        this(key, pitchVariance, 1.0F);
 
     }
 
-    public CustomSFXAction(String key, float pitchVar, float loudMultiplier) {
+    public CustomSFXAction(String key, float pitchVariance, float loudMultiplier) {
         this.key = key;
-        this.pitchAdjust = 1.0F + MathUtils.random(-pitchVar, pitchVar);
+        this.adjust = 1.0F + MathUtils.random(-pitchVariance, pitchVariance);
 //        this.adjust = pitchAdjust;
         this.loudMultiplier = loudMultiplier;
         this.actionType = AbstractGameAction.ActionType.WAIT;
+        this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
     }
 
-//  public CustomSFXAction(String key, float pitchVar, boolean pitchAdjust) {
+//  public CustomSFXAction(String key, float pitchVariance, boolean pitchAdjust) {
 //    this.key = key;
-//    this.pitchVar = pitchVar;
+//    this.pitchVariance = pitchVariance;
 //    this.adjust = pitchAdjust;
 //    this.actionType = AbstractGameAction.ActionType.WAIT;
 //  }
 
     public void update() {
-        CardCrawlGame.sound.playAV(this.key, this.pitchAdjust, this.loudMultiplier);
-        this.isDone = true;
+        if (duration == startDuration) {
+            CardCrawlGame.sound.playAV(this.key, this.adjust, this.loudMultiplier);
+//            CardCrawlGame.sound.play(this.key);
+        }
+        tickDuration();
     }
 }
 

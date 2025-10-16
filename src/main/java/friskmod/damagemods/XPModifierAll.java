@@ -1,24 +1,27 @@
 package friskmod.damagemods;
 
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
-import com.evacipated.cardcrawl.modthespire.lib.SpireField;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModContainer;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import friskmod.actions.AfterLVHeroConsumedAction;
-import friskmod.actions.SetAddedXPAction;
-import friskmod.actions.SwapXPAction;
+import friskmod.actions.*;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
 import friskmod.powers.PreventLVLoss;
+import friskmod.powers.RememberBraveryPower;
 import friskmod.util.Wiz;
 import basemod.ReflectionHacks;
 
@@ -33,7 +36,51 @@ public class XPModifierAll extends AbstractDamageModifier {
 //            ExtraXPInfo.totalEnemies.set(__instance, 0);
 //        }
 //    }
-    @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS)
+    public static AbstractCard activeCard = null;
+
+    public static void setActiveCard(AbstractCard card) {
+//        activeCard = card;
+    }
+
+//    // Patch DamageAction constructor
+//    @SpirePatch2(clz = DamageAction.class,
+//            method = SpirePatch.CONSTRUCTOR,
+//            paramtypez = {AbstractCreature.class, DamageInfo.class, AbstractGameAction.AttackEffect.class}
+//    )
+//    public static class DamageActionPatch {
+//        @SpirePostfixPatch
+//        public static void Postfix(DamageAction __instance, DamageInfo info) {
+//            if (info.owner == AbstractDungeon.player && activeCard != null && info.type == DamageInfo.DamageType.NORMAL && activeCard.type == AbstractCard.CardType.ATTACK) {
+//                boolean hasXPMod = DamageModifierManager.getDamageMods(info).stream().anyMatch(d -> d instanceof XPModifierAll);
+//                if (!hasXPMod){
+//                    DamageModContainer XPContainer = new DamageModContainer(AbstractDungeon.player, new XPModifierAll(activeCard));
+//                    BindingHelper.bindAction(XPContainer, __instance);
+//                }
+//            }
+//        }
+//    }
+//
+//    // Patch DamageAllEnemiesAction constructor
+//    @SpirePatch2(clz = DamageAllEnemiesAction.class,
+//            method = SpirePatch.CONSTRUCTOR,
+//            paramtypez = {
+//                    AbstractCreature.class,
+//                    int[].class,
+//                    DamageInfo.DamageType.class,
+//                    AbstractGameAction.AttackEffect.class
+//            }
+//    )
+//    public static class DamageAllEnemiesActionPatch {
+//        @SpirePostfixPatch
+//        public static void Postfix(DamageAllEnemiesAction __instance, DamageInfo.DamageType type) {
+//            if (__instance.source == AbstractDungeon.player && activeCard != null && type == DamageInfo.DamageType.NORMAL && activeCard.type == AbstractCard.CardType.ATTACK) {
+//                DamageModContainer XPContainer = new DamageModContainer(AbstractDungeon.player, new XPModifierAll(activeCard));
+//                BindingHelper.bindAction(XPContainer, __instance);
+//            }
+//        }
+//    }
+
+    @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS, paramtypez = {AbstractPlayer.class, AbstractMonster.class})
     public static class ExtraXPInfo {
         public static SpireField<Integer> originalCardXP = new SpireField<>(() -> -1);
         public static SpireField<Integer> enemiesProcessed = new SpireField<>(() -> 0);
@@ -44,6 +91,7 @@ public class XPModifierAll extends AbstractDamageModifier {
     private final AbstractCreature p = AbstractDungeon.player;
 
     public XPModifierAll(AbstractCard sourceCard) {
+        this.priority = -999;
         this.sourceCard = sourceCard;
     }
 
@@ -91,13 +139,13 @@ public class XPModifierAll extends AbstractDamageModifier {
         }
         sourceCard.initializeDescription();
         int newDamageAmount = sourceCard.damage;
-        int LV_transfer_from = 0;
-        LV_transfer_from = getLVFromTarget(target);
+        int LV_transfer_from = getLVFromTarget(target);
         Wiz.att(new AfterLVHeroConsumedAction(this, target, LV_transfer_from));
         // Add XP to the card
         if (sourceCard != null) {
             CardXPFields.addXP(sourceCard, consumeLVHeroForXP());
         }
+        Wiz.atb(new AfterXPConsumedAction());
         return newDamageAmount;
     }
 //    @Override
@@ -201,13 +249,21 @@ public class XPModifierAll extends AbstractDamageModifier {
         int XP_from_LV_Hero = 0;
         if (LV_Hero_Power != null) {
             XP_from_LV_Hero = LV_Hero_Power.amount;
-            AbstractPower targetPower = p.getPower(PreventLVLoss.POWER_ID);
+            AbstractPower targetPower;
+            targetPower = p.getPower(RememberBraveryPower.POWER_ID);
             if (targetPower != null) {
                 targetPower.flash();
-                targetPower.amount--;
-                if (targetPower.amount <= 0) {
-                    Wiz.att(new RemoveSpecificPowerAction(p, p, PreventLVLoss.POWER_ID));
+                for (int i = 0; i < targetPower.amount; i++) {
+                    Wiz.att(new GiveRandomCardXP(XP_from_LV_Hero));
                 }
+            }
+            targetPower = p.getPower(PreventLVLoss.POWER_ID);
+            if (targetPower != null) {
+                targetPower.flash();
+//                targetPower.amount--;
+//                if (targetPower.amount <= 0) {
+//                    Wiz.att(new RemoveSpecificPowerAction(p, p, PreventLVLoss.POWER_ID));
+//                }
             } else {
                 Wiz.att(new RemoveSpecificPowerAction(p, p, LV_Hero.POWER_ID));
             }

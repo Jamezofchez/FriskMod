@@ -4,6 +4,7 @@ import basemod.ReflectionHacks;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.Settings;
 import friskmod.damagemods.XPModifierAll;
 import friskmod.patches.CardXPFields;
 
@@ -17,6 +18,7 @@ public class AfterLVHeroConsumedAction extends AbstractGameAction {
         this.sourceCard = XPModifierAll.sourceCard;
         this.target = target;
         this.LV_transfer_from = LV_transfer_from;
+        this.duration = Settings.ACTION_DUR_FAST;
     }
     public void update() {
         this.isDone = true;

@@ -1,21 +1,31 @@
 package friskmod.cards;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.actions.RecycleXPAction;
 import friskmod.character.Frisk;
+import friskmod.patches.CardXPFields;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
+
+import java.util.List;
+import java.util.function.Consumer;
 
 import static friskmod.FriskMod.makeID;
 
 public class DogShrine extends AbstractEasyCard {
     public static final String ID = makeID(DogShrine.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
+    public static final String[] TEXT = uiStrings.TEXT;
+
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -35,8 +45,27 @@ public class DogShrine extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new RecycleXPAction(magicNumber));
+        String selectionText;
+        if (magicNumber == 1) {
+            selectionText = String.format(TEXT[0], magicNumber);
+        } else{
+            selectionText = String.format(TEXT[1], magicNumber);
+        }
+        addToBot(new SelectCardsInHandAction(magicNumber, selectionText, true, false, (x -> true), SacrificeCard()));
     }
+
+    private Consumer<List<AbstractCard>> SacrificeCard(){
+        return (List<AbstractCard> cardList) -> {
+            for (AbstractCard c: cardList) {
+                AbstractPlayer p = AbstractDungeon.player;
+                int xp = CardXPFields.getCardXP(c);
+                addToBot(new DrawCardAction(p, xp));
+                p.hand.moveToExhaustPile(c);
+            }
+        };
+    }
+
+
 
     @Override
     public void upp() {

@@ -19,7 +19,8 @@ import com.megacrit.cardcrawl.vfx.combat.FlyingDaggerEffect;
 import com.megacrit.cardcrawl.vfx.combat.PotionBounceEffect;
 import friskmod.cards.AbstractEasyCard;
 import friskmod.util.Wiz;
-import friskmod.vfx.FlurryOfKnivesVFX;
+
+import static friskmod.vfx.ThrowDaggerEffect.throwDaggerEffect;
 
 public class FlurryOfKnivesAction extends AbstractGameAction {
     private static final float POST_ATTACK_WAIT_DUR = 0.4F;
@@ -30,7 +31,7 @@ public class FlurryOfKnivesAction extends AbstractGameAction {
     public FlurryOfKnivesAction(AbstractCreature target, int amount, int numTimes, AbstractCard sourceCard) {
         this.target = target;
         this.actionType = ActionType.DAMAGE;
-        this.duration = 0.01F;
+        this.duration = 0.1F;
         this.numTimes = numTimes;
         this.amount = amount;
         this.sourceCard = sourceCard;
@@ -55,7 +56,7 @@ public class FlurryOfKnivesAction extends AbstractGameAction {
                     DamageAction action = new DamageAction(randomMonster, new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.NORMAL), AttackEffect.SLASH_HORIZONTAL);
                     BindingHelper.bindAction(this.sourceCard, action);
                     addToBot(action);
-                    throwDaggerEffect();
+                    throwDaggerEffect(5.0F);
                 }
                 addToBot(new WaitAction(POST_ATTACK_WAIT_DUR));
                 FlurryOfKnivesAction action = new FlurryOfKnivesAction(randomMonster, this.amount, this.numTimes, this.sourceCard);
@@ -63,30 +64,7 @@ public class FlurryOfKnivesAction extends AbstractGameAction {
                 addToBot(action);
             }
         }
-
         this.isDone = true;
-    }
-    private void throwDaggerEffect(){
-        boolean flipX = AbstractDungeon.getMonsters().shouldFlipVfx();
-        float playerX = AbstractDungeon.player.hb.cX;
-        float playerY = AbstractDungeon.player.hb.cY;
-
-        // Random vertical spread around player
-        //float offsetY = MathUtils.random(-100.0F, 100.0F) * Settings.scale;
-        // Forward-biased horizontal spread
-        //float offsetX = MathUtils.random(200.0F, 400.0F) * Settings.scale;
-        float offsetX = 0;
-        float offsetY = 0;
-        // Mirror depending on which way we’re facing
-        float x = flipX ? playerX - offsetX : playerX + offsetX;
-        float y = playerY + offsetY;
-
-        // Random small rotation variation (-15° to +15°)
-        final float ANGLE_DEVIATION = 5.0F;
-        float rotation = MathUtils.random(-ANGLE_DEVIATION, ANGLE_DEVIATION);
-        AbstractDungeon.effectsQueue.add(
-                new FlyingDaggerEffect(x, y, rotation, flipX)
-        );
     }
 }
 

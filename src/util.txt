@@ -1,2 +1,4 @@
 /\*(?: |[0-9])*?\*/
 Get-ChildItem -Path "" -Recurse -Filter "*.java" | Select-Object Name
+Get-ChildItem -Path "C:\Users\James\IdeaProjects\BasicMod\src\main\resources\friskmod\audio" -Recurse -Filter "*.wav" |
+>>     ForEach-Object { 'addAudio("{0}");' -f $_.BaseName }
