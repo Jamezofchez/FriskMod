@@ -1,4 +1,4 @@
 package friskmod.cards;
 
-public class Exposure {
+public class Im {
 }
