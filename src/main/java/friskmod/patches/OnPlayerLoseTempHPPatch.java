@@ -25,7 +25,7 @@ public class OnPlayerLoseTempHPPatch {
     public static void Insert(int[] damageAmount, int temporaryHealth) {
         int tempHPLost = Math.min(temporaryHealth, damageAmount[0]);
         boolean overflow = temporaryHealth < damageAmount[0];
-        Wiz.atb(new PlayerLoseHPAction(tempHPLost, true, overflow));
+        Wiz.att(new PlayerLoseHPAction(tempHPLost, true, overflow));
     }
     private static class TempHPLocator extends SpireInsertLocator {
         @Override

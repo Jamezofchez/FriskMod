@@ -36,6 +36,12 @@
       "Gain #b%s ${modID}:LV whenever you play a card."
     ]
   },
+  "${modID}:GarbageDumpPower": {
+    "NAME": "Garbage Dump",
+    "DESCRIPTIONS": [
+      "Gain #b%s Temp HP each time you spend #y${modID}:Wasted Energy."
+    ]
+  },
   "${modID}:FallenDown": {
     "NAME": "Fallen Down",
     "DESCRIPTIONS": [
@@ -105,5 +111,25 @@
     "DESCRIPTIONS": [
       "The next #b%s times you lose HP or Temp HP, gain 1 #yBuffer."
     ]
+  },
+  "${modID}:CountdownFlee": {
+    "NAME": "Countdown to flee",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way.",
+      "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way."
+    ]
+  },
+  "${modID}:Spared": {
+    "NAME": "Spared",
+    "DESCRIPTIONS": [
+      "If this enemy is attacked, they will instead gain #y${modID}:Betrayed."
+    ]
+  },
+  "${modID}:Betrayed": {
+    "NAME": "Betrayed",
+    "DESCRIPTIONS": [
+      "This enemy gains twice as much #y${modID}:LV when attacked."
+    ]
   }
+
 }

@@ -6,8 +6,12 @@ import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon; //debug
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import friskmod.helper.playBGM;
 import friskmod.patches.CardXPFields; // adjust if needed
+import friskmod.powers.Betrayed;
 import friskmod.powers.LV_Enemy;
+import friskmod.powers.Spared;
 import friskmod.util.Wiz;
 
 public class SwapXPAction extends AbstractGameAction {
@@ -42,7 +46,12 @@ public class SwapXPAction extends AbstractGameAction {
         }
         if (target != null) {
             if (LV_transfer_to >= 1) {
-                Wiz.att(new ApplyPowerAction(target, source, new LV_Enemy(target, LV_transfer_to), LV_transfer_to));
+                AbstractPower posspow = target.getPower(Betrayed.POWER_ID);
+                int actualLV_transfer_to = LV_transfer_to;
+                if (posspow != null) {
+                    actualLV_transfer_to *= 2;
+                }
+                Wiz.att(new ApplyPowerAction(target, source, new LV_Enemy(target, actualLV_transfer_to), actualLV_transfer_to));
             }
         }
         if (target != null) {

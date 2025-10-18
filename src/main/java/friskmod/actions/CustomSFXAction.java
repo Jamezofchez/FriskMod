@@ -42,8 +42,8 @@ public class CustomSFXAction extends AbstractGameAction {
 
     public void update() {
         if (duration == startDuration) {
-            CardCrawlGame.sound.playAV(this.key, this.adjust, this.loudMultiplier);
-//            CardCrawlGame.sound.play(this.key);
+//            CardCrawlGame.sound.playAV(this.key, this.adjust, this.loudMultiplier);
+            CardCrawlGame.sound.play(this.key);
         }
         tickDuration();
     }

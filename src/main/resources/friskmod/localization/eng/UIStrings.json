@@ -70,6 +70,12 @@
       "Choose %s cards to give inherent XP."
     ]
   },
+  "${modID}:UpgradeAndRetainAction": {
+    "TEXT": [
+      "Choose %s card to upgrade and retain.",
+      "Choose %s cards to upgrade and retain."
+    ]
+  },
   "${modID}:Im": {
     "TEXT": [
       "I cannot play Attacks right now!"
@@ -78,6 +84,11 @@
   "${modID}:AbstractMonsterSnapshotHistory": {
     "TEXT": [
       "This is the monster's first turn!"
+    ]
+  },
+  "${modID}:SmokeBombAction": {
+    "TEXT": [
+      "There's no escape!"
     ]
   }
 }

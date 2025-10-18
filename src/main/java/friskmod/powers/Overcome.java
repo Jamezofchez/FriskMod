@@ -33,6 +33,9 @@ public class Overcome extends BasePower {
 //       } else {
 //            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
 //       }
+    }
+    @Override
+    public void onRemove() {
         refreshAllCardOvercome();
     }
 

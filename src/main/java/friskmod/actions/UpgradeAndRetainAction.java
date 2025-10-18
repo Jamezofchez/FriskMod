@@ -1,4 +1,67 @@
 package friskmod.actions;
 
-public class UpgradeAndRetainAction {
+import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
+import friskmod.patches.CardXPFields;
+
+import java.util.List;
+import java.util.function.Consumer;
+
+import static friskmod.FriskMod.makeID;
+
+public class UpgradeAndRetainAction extends AbstractGameAction {
+    public static final String ID = makeID(UpgradeAndRetainAction.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
+    public static final String[] TEXT = uiStrings.TEXT;
+
+    private AbstractPlayer p;
+
+    public UpgradeAndRetainAction(int amount) {
+        this.p = AbstractDungeon.player;
+        this.amount = amount;
+        this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
+        this.actionType = ActionType.CARD_MANIPULATION;
+    }
+
+    public void update() {
+        if (this.duration == this.startDuration) {
+            if (this.p.hand.isEmpty()) {
+                this.isDone = true;
+                return;
+            }
+            String selectionText;
+            if (amount == 1) {
+                selectionText = String.format(TEXT[0], amount);
+            } else{
+                selectionText = String.format(TEXT[1], amount);
+            }
+            addToBot(new SelectCardsInHandAction(amount, selectionText, true, true, (x -> true), UpgradeAndRetain()));
+        }
+        tickDuration();
+    }
+
+    private Consumer<List<AbstractCard>> UpgradeAndRetain() {
+        return (List<AbstractCard> cardList) -> {
+            for (AbstractCard c : cardList) {
+                if (c.canUpgrade()) {
+                    c.upgrade();
+                }
+                c.retain = true;
+            }
+        };
+    }
 }
+
+
+/* Location:              C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\desktop-1.0.jar!\com\megacrit\cardcrawl\actions\common\UpgradeAndRetainAction.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

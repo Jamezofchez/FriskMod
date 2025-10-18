@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,10 +18,11 @@ import friskmod.character.Frisk;
 import friskmod.helper.StealableWhitelist;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.makeID;
 
-public class Steal extends AbstractCriticalCard {
+public class Steal extends AbstractEasyCard {
     public static final String ID = makeID(Steal.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     //These will be used in the constructor. Technically you can just use the values directly,
@@ -42,6 +44,12 @@ public class Steal extends AbstractCriticalCard {
     }
 
     @Override
+    public void update() {
+        super.update();
+        initializeDescription();
+    }
+
+    @Override
     public void initializeDescription() {
         if (!this.upgraded) {
             this.rawDescription = cardStrings.DESCRIPTION;
@@ -60,10 +68,12 @@ public class Steal extends AbstractCriticalCard {
 
     @Override
     public void triggerOnGlowCheck() {
-        glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
-                glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        super.triggerOnGlowCheck();
+        if (glowColor.equals(AbstractCard.BLUE_BORDER_GLOW_COLOR)) {
+            for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
+                    glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+                }
             }
         }
     }
@@ -73,14 +83,17 @@ public class Steal extends AbstractCriticalCard {
         addToBot(new StealAllBlockAction(AbstractDungeon.getMonsters().monsters));
         addToBot(new StealPowerAction(AbstractDungeon.getMonsters().monsters));
         if (upgraded) {
-            if (isCritical()){
-                TriggerCriticalEffect(p, m);
-            }
+//            if (isCritical()){
+//                TriggerCriticalEffect(p, m);
+//            }
+            Wiz.atb(new DrawCardAction(p, 1));
         }
     }
-    public void TriggerCriticalEffect(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainEnergyAction(CRITICAL_ENERGY_GAIN));
-    }
+
+//    @Override
+//    public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
+//        addToBot(new GainEnergyAction(CRITICAL_ENERGY_GAIN));
+//    }
 
     @Override
     public void upp() {

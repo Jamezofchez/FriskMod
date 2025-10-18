@@ -4,6 +4,7 @@ import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.DynamicVariable;
 import basemod.interfaces.*;
+import com.evacipated.cardcrawl.mod.stslib.patches.tempHp.BattleEnd;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.actions.AfterCardUseAction;
@@ -174,6 +175,10 @@ public class FriskMod implements
         String path = audioPath(key + ".wav");
         BaseMod.addAudio(key, path);
     }
+    private void addAudioOgg(String key){
+        String path = audioPath(key + ".ogg");
+        BaseMod.addAudio(key, path);
+    }
 
     @Override
     public void receiveAddAudio() {
@@ -279,6 +284,9 @@ public class FriskMod implements
 
     public static String audioPath(String file) {
         return resourcesFolder + "/audio/" + file;
+    }
+    public static String musicPath(String file) {
+        return resourcesFolder + "/audio/music/" + file;
     }
     public static String imagePath(String file) {
         return resourcesFolder + "/images/" + file;

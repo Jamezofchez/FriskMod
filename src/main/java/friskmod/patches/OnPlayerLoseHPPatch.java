@@ -27,7 +27,7 @@ public class OnPlayerLoseHPPatch {
     )
     public static void Insert(AbstractPlayer __instance, int damageAmount) {
         if (damageAmount > 0) {
-            Wiz.atb(new PlayerLoseHPAction(damageAmount, false));
+            Wiz.att(new PlayerLoseHPAction(damageAmount, false));
         }
     }
 

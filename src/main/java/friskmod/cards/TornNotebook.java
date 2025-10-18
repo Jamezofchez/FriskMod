@@ -44,13 +44,14 @@ public class TornNotebook extends AbstractCriticalCard {
         }
         addToBot(new ApplyPowerAction(p, p, new TornNotebookPower(p, magicNumber), magicNumber));
     }
-    @Override
-    public void TriggerCriticalEffect(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new BufferPower(p, secondMagic), secondMagic));
-    }
 
     @Override
     public void upp() {
         upgradeMagicNumber(UPG_REGAIN_BUFFER_AMOUNT);
+    }
+
+    @Override
+    public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new ApplyPowerAction(p, p, new BufferPower(p, secondMagic), secondMagic));
     }
 }

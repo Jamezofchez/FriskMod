@@ -28,10 +28,11 @@ public class AbstractMonsterSnapshotHistory {
     }
     
     public void restore(AbstractMonster m) {
-        if (snapshots.isEmpty()){
+        if (snapshots.isEmpty() || snapshots.size() == 1 ){
             AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, (UI_STRINGS.TEXT[0]), true));
         } else{
-            snapshots.get(snapshots.size()-1).restore(m);
+            snapshots.get(snapshots.size()-2).restore(m);
+            snapshots.remove(snapshots.size()-1);
             snapshots.remove(snapshots.size()-1);
         }
     }

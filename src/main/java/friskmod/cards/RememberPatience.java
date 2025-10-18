@@ -30,7 +30,7 @@ public class RememberPatience extends AbstractEasyCard {
 
     public RememberPatience() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        tags.add(FriskTags.YOU);
+        tags.add(FriskTags.PATIENCE);
         baseMagicNumber = magicNumber = RETAIN_AMOUNT;
         baseSecondMagic = secondMagic = MINIMUM_CARDS;
     }
@@ -38,9 +38,9 @@ public class RememberPatience extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractPower posspow = p.getPower(RememberPatiencePower.POWER_ID);
         if (posspow != null) {
-            ((RememberPatiencePower) posspow).amount2 = Math.min(((RememberPatiencePower) posspow).amount2, MINIMUM_CARDS);
+            ((RememberPatiencePower) posspow).amount2 = Math.min(((RememberPatiencePower) posspow).amount2, secondMagic);
         }
-        addToBot(new ApplyPowerAction(p, p, new RememberPatiencePower(p, RETAIN_AMOUNT, MINIMUM_CARDS), RETAIN_AMOUNT));
+        addToBot(new ApplyPowerAction(p, p, new RememberPatiencePower(p, magicNumber, secondMagic), magicNumber));
     }
 
     @Override

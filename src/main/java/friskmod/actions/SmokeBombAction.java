@@ -1,4 +1,4 @@
-package chronomuncher.actions;
+package friskmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -13,14 +13,16 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
 
+import static friskmod.FriskMod.makeID;
+
 public class SmokeBombAction extends AbstractGameAction {
   private AbstractPlayer p;
-  
+
   private boolean upgraded = false;
-  
-  private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("SmokeBombAction");
-  
-  public static final String[] TEXT = uiStrings.TEXT;
+
+    public static final String ID = makeID(SmokeBombAction.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
+    public static final String[] TEXT = uiStrings.TEXT;
   
   public SmokeBombAction(boolean upgraded) {
     this.upgraded = upgraded;

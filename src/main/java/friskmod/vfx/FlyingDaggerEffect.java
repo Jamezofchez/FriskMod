@@ -48,7 +48,7 @@ public class FlyingDaggerEffect extends AbstractGameEffect {
     }
 
     private void playRandomSfX() {
-        Wiz.atb(new CustomSFXAction("snd_laz", 0.2F)); //change
+        Wiz.att(new CustomSFXAction("snd_laz", 0.2F)); //change
     }
 
     public void update() {

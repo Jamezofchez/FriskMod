@@ -53,15 +53,17 @@ public class FlurryOfKnivesAction extends AbstractGameAction {
                 // Only decrement numTimes if we’re actually going to damage a living target
                 if (randomMonster.currentHealth > 0) {
                     this.numTimes--;
+                }
+                FlurryOfKnivesAction FlurryAction = new FlurryOfKnivesAction(randomMonster, this.amount, this.numTimes, this.sourceCard);
+                BindingHelper.bindAction(this.sourceCard, FlurryAction);
+                addToTop(FlurryAction);
+                addToTop(new WaitAction(POST_ATTACK_WAIT_DUR));
+                if (randomMonster.currentHealth > 0) {
                     DamageAction action = new DamageAction(randomMonster, new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.NORMAL), AttackEffect.SLASH_HORIZONTAL);
                     BindingHelper.bindAction(this.sourceCard, action);
-                    addToBot(action);
                     throwDaggerEffect(5.0F);
+                    addToTop(action);
                 }
-                addToBot(new WaitAction(POST_ATTACK_WAIT_DUR));
-                FlurryOfKnivesAction action = new FlurryOfKnivesAction(randomMonster, this.amount, this.numTimes, this.sourceCard);
-                BindingHelper.bindAction(this.sourceCard, action);
-                addToBot(action);
             }
         }
         this.isDone = true;

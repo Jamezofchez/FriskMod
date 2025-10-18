@@ -29,11 +29,12 @@ public class AbsolutePower extends AbstractEasyCard {
 
     public AbsolutePower() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
+        baseMagicNumber = magicNumber = ENERGY_GAIN;
         tags.add(FriskTags.YOU);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new AbsolutePowerPower(p, ENERGY_GAIN),ENERGY_GAIN));
+        addToBot(new ApplyPowerAction(p, p, new AbsolutePowerPower(p, magicNumber),magicNumber));
     }
 
     @Override

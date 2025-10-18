@@ -56,4 +56,9 @@ public class BurntPan extends AbstractCriticalCard {
     public void upp() {
         upgradeDamage(UPG_DAMAGE);
     }
+
+    @Override
+    public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
+
+    }
 }

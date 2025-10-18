@@ -113,11 +113,11 @@ public class BalletShoes extends AbstractEasyCard {
                 if (m == null || m.isDeadOrEscaped()) {
                     m = AbstractDungeon.getRandomMonster();
                 }
-                Wiz.atb(new CardPlayAction(chosenCard, m));
-                Wiz.atb(new CustomSFXAction("snd_punchstrong"));
-                Wiz.atb(new WaitAction(0.25f));
+                Wiz.att(new CardPlayAction(chosenCard, m));
+                Wiz.att(new CustomSFXAction("snd_punchstrong"));
+                Wiz.att(new WaitAction(0.25f));
             }
-            Wiz.atb(new CustomSFXAction("mus_sfx_voice_triple"));
+            Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
         }
         p.hand.moveToExhaustPile(chosenCard);
     }

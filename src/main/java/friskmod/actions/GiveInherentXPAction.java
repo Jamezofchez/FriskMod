@@ -53,7 +53,7 @@ public class GiveInherentXPAction extends AbstractGameAction {
                     selectionText = String.format(TEXT[1], amount);
                 }
 
-                addToBot(new SelectCardsInHandAction(amount, selectionText, true, false, (x -> true), GiveInherentXP()));
+                addToBot(new SelectCardsInHandAction(amount, selectionText, true, true, (x -> true), GiveInherentXP()));
             }
         }
         tickDuration();

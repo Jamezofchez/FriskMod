@@ -13,6 +13,8 @@ public class CopyPersevere {
     public static AbstractCard transferIt(AbstractCard __result, AbstractCard __instance)
     {
 //        PerseveranceFields.isPerseverable.set(__result, PerseveranceFields.isPerseverable.get(__instance));
+//        PerseveranceFields.perseverancePlayed.set(__result, PerseveranceFields.perseverancePlayed.get(__instance));
+        //maybe not?
         PerseveranceFields.trapped.set(__result, PerseveranceFields.trapped.get(__instance));
         __result.initializeDescription();
         return __result;

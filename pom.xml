@@ -119,6 +119,26 @@
                         <delimiter>${*}</delimiter>
                     </delimiters>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-audio</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/audio</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>audio</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

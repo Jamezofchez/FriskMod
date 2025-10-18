@@ -60,7 +60,7 @@ public class StealableWhitelist {
     }
 
     private static void ritualPostProcess(AbstractPower pow) {
-        ReflectionHacks.setPrivate(pow, RitualPower.class, "isPlayer", true);
+        ReflectionHacks.setPrivate(pow, RitualPower.class, "onPlayer", true);
         pow.amount = 1;
     }
     private static void intangiblePostProcess(AbstractPower pow) {

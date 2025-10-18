@@ -5,12 +5,9 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.CurlUpPower;
+import friskmod.character.Frisk;
 import friskmod.actions.CustomSFXAction;
 import friskmod.util.Wiz;
 
@@ -19,12 +16,16 @@ public class AudioToActionPatch{
     public static class SFXDoneFields {
         public static SpireField<Boolean> triggeredSFX = new SpireField<>(() -> Boolean.FALSE);
     }
-    private static boolean isSFXDone(AbstractGameAction action) {
-        if (!SFXDoneFields.triggeredSFX.get(action)){
-            SFXDoneFields.triggeredSFX.set(action, true);
+    private static boolean triggerSFX(AbstractGameAction action) {
+        if (AbstractDungeon.player == null || !AbstractDungeon.player.chosenClass
+                .equals(Frisk.Meta.Enums.THE_FALLEN_HUMAN)){
             return false;
         }
-        return true;
+        if (!SFXDoneFields.triggeredSFX.get(action)){
+            SFXDoneFields.triggeredSFX.set(action, true);
+            return true;
+        }
+        return false;
     }
     @SpirePatch2(
             clz = HealAction.class,
@@ -35,7 +36,7 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(HealAction __instance) {
             {
-                if (!isSFXDone(__instance)) {
+                if (triggerSFX(__instance)) {
                     if (__instance.target == AbstractDungeon.player) {
                         Wiz.atb(new CustomSFXAction("snd_heal_c"));
                     }
@@ -51,7 +52,7 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(AbstractGameAction __instance) {
             {
-                if (!isSFXDone(__instance)) {
+                if (triggerSFX(__instance)) {
                     if (__instance.target == AbstractDungeon.player) {
                         Wiz.atb(new CustomSFXAction("snd_heal_c"));
                     }
@@ -81,7 +82,7 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(LoseHPAction __instance) {
             {
-                if (!isSFXDone(__instance)) {
+                if (triggerSFX(__instance)) {
                     if (__instance.target == AbstractDungeon.player && __instance.source == AbstractDungeon.player) {
                         Wiz.atb(new CustomSFXAction("snd_hurt1"));
                     }

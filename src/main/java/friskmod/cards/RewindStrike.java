@@ -1,11 +1,8 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
 import friskmod.helper.AbstractMonsterSnapshotHistory;
 import friskmod.patches.MonsterLastMovePatch;
@@ -15,8 +12,8 @@ import friskmod.util.FriskTags;
 
 import static friskmod.FriskMod.makeID;
 
-public class SaviourStrike extends AbstractEasyCard {
-    public static final String ID = makeID(SaviourStrike.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class RewindStrike extends AbstractEasyCard {
+    public static final String ID = makeID(RewindStrike.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -27,7 +24,7 @@ public class SaviourStrike extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DAMAGE = 6;
-    public SaviourStrike() {
+    public RewindStrike() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
         tags.add(FriskTags.INTEGRITY);

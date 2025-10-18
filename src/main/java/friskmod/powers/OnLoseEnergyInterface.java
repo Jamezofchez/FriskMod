@@ -1,4 +1,5 @@
 package friskmod.powers;
 
-public class OnLoseEnergyInterface {
+public interface OnLoseEnergyInterface {
+    void LoseEnergyAction(int amount);
 }

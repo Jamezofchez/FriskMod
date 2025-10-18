@@ -33,7 +33,7 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
     @Override
     public void triggerOnGlowCheck() {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (isCriticalPos()) {
+        if (isCriticalPos() || PerseveranceFields.isPerseverable.get(this)) {
             glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         }
     }
@@ -65,7 +65,5 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
 
         CriticalEffect(p, m);
     }
-    public void CriticalEffect(AbstractPlayer p, AbstractMonster m){
-
-    }
+    public abstract void CriticalEffect(AbstractPlayer p, AbstractMonster m);
 }

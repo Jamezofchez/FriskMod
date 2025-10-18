@@ -136,5 +136,41 @@
       "trapped"
     ],
     "DESCRIPTION": "#yTrapped cards cannot be played, even by #y${modID}:Persevere effects. NL #yTrapped cards cause you to lose energy equal to their cost when drawn."
-  }
+  },
+  {
+    "PROPER_NAME": "Strike",
+    "NAMES": [
+      "Strike",
+      "Strikes"
+    ],
+    "DESCRIPTION": "Any card containing \"Strike\" in their name."
+  },
+  {
+    "PROPER_NAME": "Wasted",
+    "NAMES": [
+      "Wasted"
+    ],
+    "DESCRIPTION": "Any [E] used not playing cards. (Such as Void, or unspent energy at the end of turn)"
+  },
+  {
+    "PROPER_NAME": "Spare",
+    "NAMES": [
+      "Spare"
+    ],
+    "DESCRIPTION": "Escape from a non-boss combat after 12 cards have been played. NL Receive no rewards."
+  },
+  {
+    "PROPER_NAME": "Spared",
+    "NAMES": [
+      "Spared"
+    ],
+    "DESCRIPTION": "If this enemy is attacked, they will instead gain #y${modID}:Betrayed."
+  },  {
+  "PROPER_NAME": "Betrayed",
+  "NAMES": [
+    "Betrayed"
+  ],
+  "DESCRIPTION": "This enemy gains twice as much #y${modID}:LV when attacked."
+}
+
 ]

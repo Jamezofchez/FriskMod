@@ -1,4 +1,4 @@
-package chronomuncher.actions;
+package friskmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,7 +13,7 @@ public class GainGoldAction extends AbstractGameAction {
     this.source = source;
     this.target = (AbstractCreature)AbstractDungeon.player;
     this.increaseGold = goldAmount;
-    this.actionType = AbstractGameAction.ActionType.DAMAGE;
+    this.actionType = ActionType.DAMAGE;
     this.duration = Settings.ACTION_DUR_MED;
   }
   
