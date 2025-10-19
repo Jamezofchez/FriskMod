@@ -130,6 +130,14 @@
     "DESCRIPTION": "#y${modID}:XP which cannot be lost."
   },
   {
+    "PROPER_NAME": "Added",
+    "NAMES": [
+      "Added",
+      "added"
+    ],
+    "DESCRIPTION": "#y${modID}:XP which is transferred upon dealing unblocked attack damage."
+  },
+  {
     "PROPER_NAME": "Trapped",
     "NAMES": [
       "Trapped",
@@ -165,12 +173,20 @@
       "Spared"
     ],
     "DESCRIPTION": "If this enemy is attacked, they will instead gain #y${modID}:Betrayed."
-  },  {
+  },
+  {
   "PROPER_NAME": "Betrayed",
   "NAMES": [
     "Betrayed"
   ],
   "DESCRIPTION": "This enemy gains twice as much #y${modID}:LV when attacked."
-}
+  },
+  {
+    "PROPER_NAME": "Ghostly",
+    "NAMES": [
+      "Ghostly"
+    ],
+    "DESCRIPTION": "This card deals non-attack damage and is uneffected by Block modifiers."
+  }
 
 ]

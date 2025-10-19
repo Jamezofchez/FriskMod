@@ -20,7 +20,7 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         AbstractCreature source = info.owner;
         DamageInfo.DamageType damageType = info.type;
-        if (source == AbstractDungeon.player && damageType == DamageInfo.DamageType.NORMAL) {
+        if (source == AbstractDungeon.player && damageType == DamageInfo.DamageType.NORMAL || damageType == DamageInfo.DamageType.THORNS) { //hopefully plays well with blooky?
             AbstractPower pow = AbstractDungeon.player.getPower(AbsolutePowerPower.POWER_ID);
             if (pow != null) {
                 int energyGain = pow.amount;

@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.*;
+import friskmod.cards.SlackOff;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
@@ -105,6 +106,9 @@ public class XPModifierAll extends AbstractDamageModifier {
         }
         if (type != DamageInfo.DamageType.NORMAL){
             return damage;
+        }
+        if (card.cardID.equals(SlackOff.ID)){
+            return damage - getResultantXP();
         }
         return damage + getResultantXP();
     }

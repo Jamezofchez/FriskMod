@@ -38,7 +38,7 @@ public class AudioToActionPatch{
             {
                 if (triggerSFX(__instance)) {
                     if (__instance.target == AbstractDungeon.player) {
-                        Wiz.atb(new CustomSFXAction("snd_heal_c"));
+                        Wiz.att(new CustomSFXAction("snd_heal_c"));
                     }
                 }
             }
@@ -54,7 +54,7 @@ public class AudioToActionPatch{
             {
                 if (triggerSFX(__instance)) {
                     if (__instance.target == AbstractDungeon.player) {
-                        Wiz.atb(new CustomSFXAction("snd_heal_c"));
+                        Wiz.att(new CustomSFXAction("snd_heal_c"));
                     }
                 }
             }
@@ -69,7 +69,7 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(AbstractMonster __instance) {
             {
-                Wiz.atb(new CustomSFXAction("snd_vaporized"));
+                Wiz.att(new CustomSFXAction("snd_vaporized"));
             }
         }
     }
@@ -84,7 +84,7 @@ public class AudioToActionPatch{
             {
                 if (triggerSFX(__instance)) {
                     if (__instance.target == AbstractDungeon.player && __instance.source == AbstractDungeon.player) {
-                        Wiz.atb(new CustomSFXAction("snd_hurt1"));
+                        Wiz.att(new CustomSFXAction("snd_hurt1"));
                     }
                 }
             }

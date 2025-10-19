@@ -29,6 +29,10 @@
     "NAME": "Burn Out",
     "DESCRIPTION": "Draw !M! cards. NL Add a *Burn into your hand."
   },
+  "${modID}:Blooky": {
+    "NAME": "Blooky",
+    "DESCRIPTION": "Ethereal. NL Gain !B! Block. Your next card this turn is ${modID}:Ghostly."
+  },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Gain Temp HP equal to the unblocked damage dealt."
@@ -157,11 +161,23 @@
     "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Retain. Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust."
   },
+  "${modID}:Rock": {
+    "NAME": "Rock",
+    "DESCRIPTION": "Deal !D! damage. NL This card always has at least !M! ${modID}:inherent ${modID}:XP. NL Exhaust."
+  },
+  "${modID}:RockPuzzle": {
+    "NAME": "Rock Puzzle",
+    "DESCRIPTION": "Add !M! *Rocks into your hand."
+  },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",
     "DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Gain !M! Temp HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:SlackOff": {
+    "NAME": "Slack Off",
+    "DESCRIPTION": "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP decreases Attack damage for this card."
   },
   "${modID}:Sleep": {
     "NAME": "Sleep",

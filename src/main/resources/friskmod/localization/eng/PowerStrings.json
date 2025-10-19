@@ -2,7 +2,7 @@
   "${modID}:AbsolutePowerPower": {
     "NAME": "Absolute Power",
     "DESCRIPTIONS": [
-      "Gain #b%s [E] every time an attack's damage ends in a 9."
+      "Gain #b%s [E] every time you deal damage ending with a 9."
     ]
   },
   "${modID}:CountdownPounce": {
@@ -130,6 +130,12 @@
     "DESCRIPTIONS": [
       "This enemy gains twice as much #y${modID}:LV when attacked."
     ]
+  },
+  "${modID}:NonAttackPower": {
+    "NAME": "Powerless",
+    "DESCRIPTIONS": [
+      "You next #b%s #yAttack this turn will deal non-attack damage.",
+      "You next #b%s #yAttacks this turn will deal non-attack damage."
+    ]
   }
-
 }
