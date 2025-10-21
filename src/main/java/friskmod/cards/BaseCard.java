@@ -125,7 +125,7 @@ public abstract class BaseCard extends CustomCard {
     }
     protected final void setMagic(int magic, int magicUpgrade)
     {
-        this.baseMagicNumber = this.magicNumber = magic;
+        baseMagicNumber = magicNumber = magic;
         if (magicUpgrade != 0)
         {
             this.upgradeMagic = true;

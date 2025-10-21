@@ -39,7 +39,7 @@ public class KarmicStrike extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
+        dmg(m, AbstractGameAction.AttackEffect.FIRE);
         addToBot(new ApplyPowerAction(m, p, new Karma(m, magicNumber), magicNumber));
     }
 

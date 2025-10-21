@@ -47,7 +47,7 @@
     "NAMES": [
       "KR"
     ],
-    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose HP. NL KR cannot kill."
+    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose HP or Temp HP. NL KR cannot kill."
   },
   {
     "PROPER_NAME": "Countdown",
@@ -187,6 +187,20 @@
       "Ghostly"
     ],
     "DESCRIPTION": "This card deals non-attack damage and is uneffected by Block modifiers."
+  },
+  {
+    "PROPER_NAME": "Threatened",
+    "NAMES": [
+      "Threatened"
+    ],
+    "DESCRIPTION": "Total enemy attack damage is greater or equal to your current HP."
+  },
+  {
+    "PROPER_NAME": "Pickup",
+    "NAMES": [
+      "Pickup"
+    ],
+    "DESCRIPTION": "Effect triggers when you obtain this card."
   }
 
 ]

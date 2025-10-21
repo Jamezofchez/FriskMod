@@ -13,6 +13,12 @@
     "NAME": "Absolute Power",
     "DESCRIPTION": "Gain [E]  every time an attack's damage ends in a 9."
   },
+  "${modID}:Agami": {
+    "NAME": "Agami",
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR.",
+    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, give the enemy !M! ${modID}:LV and convert its ${modID}:LV into ${modID}:KR."
+
+  },
   "${modID}:AncientStrike": {
     "NAME": "Ancient Strike",
     "DESCRIPTION": "Give the enemy !M! Artifact. Deal !D! damage per Artifact stack."
@@ -29,6 +35,10 @@
     "NAME": "Burn Out",
     "DESCRIPTION": "Draw !M! cards. NL Add a *Burn into your hand."
   },
+  "${modID}:Bandage": {
+    "NAME": "Bandage",
+    "DESCRIPTION": "${modID}:Critical: Gain !M! Temp HP. NL ${modID}:Pickup: Heal !${modID}:M2! HP."
+  },
   "${modID}:Blooky": {
     "NAME": "Blooky",
     "DESCRIPTION": "Ethereal. NL Gain !B! Block. Your next card this turn is ${modID}:Ghostly."
@@ -36,6 +46,10 @@
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Gain Temp HP equal to the unblocked damage dealt."
+  },
+  "${modID}:ButterscotchPie": {
+    "NAME": "Butterscotch Pie",
+    "DESCRIPTION": "Convert your Block into Temp HP. Keep up to !M! Block. NL Exhaust."
   },
   "${modID}:Cleave": {
     "NAME": "Cleave",
@@ -45,9 +59,14 @@
     "NAME": "Copy Cat",
     "DESCRIPTION": "${modID}:Copy the enemy's buffs. Deal !D! damage. "
   },
-  "${modID}:CriticalStrike": {
+  "${modID}:OLDCriticalStrike": {
     "NAME": "Critical Strike",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Deal double damage."
+  },
+  "${modID}:DateGoneWrong": {
+    "NAME": "Date Gone Wrong",
+    "DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust."
   },
   "${modID}:Defend_Frisk": {
     "NAME": "Defend",
@@ -55,8 +74,7 @@
   },
   "${modID}:Determination": {
     "NAME": "DETERMINATION",
-    "DESCRIPTION": "Apply !M! ${modID}:Determination. NL Apply !${modID}:M2! ${modID}:Fallen_Down. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Apply !M! ${modID}:Determination. NL Apply !${modID}:M2! ${modID}:Fallen_Down."
+    "DESCRIPTION": "Apply !M! ${modID}:Determination. NL Apply !${modID}:M2! ${modID}:Fallen_Down. NL Exhaust."
   },
   "${modID}:DogShrine": {
     "NAME": "Dog Shrine",
@@ -106,6 +124,11 @@
     "NAME": "Garbage Dump",
     "DESCRIPTION": "Gain !M! Temp HP for every ${modID}:Wasted Energy spent."
   },
+  "${modID}:HugItOff": {
+    "NAME": "Hug It Off",
+    "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! card.",
+    "UPGRADE_DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! cards."
+  },
   "${modID}:Im": {
     "NAME": "I'm...",
     "DESCRIPTION": "Ethereal. NL While in hand, you cannot play Attacks."
@@ -118,10 +141,9 @@
     "NAME": "Karmic Strike",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:KR."
   },
-  "${modID}:HugItOff": {
-    "NAME": "Hug It Off",
-    "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! card.",
-    "UPGRADE_DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! cards."
+  "${modID}:Kriyamana": {
+    "NAME": "Kriyamana",
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
   },
   "${modID}:LevelUp": {
     "NAME": "Level Up",
@@ -141,6 +163,10 @@
   "${modID}:Pounce": {
     "NAME": "Pounce",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL Deals double damage if the enemy does not intend to attack."
+  },
+  "${modID}:Prarabdha": {
+    "NAME": "Prarabdha",
+    "DESCRIPTION": "Apply !M! ${modID}:KR. If ${modID}:Threatened, apply !M! ${modID}:KR again."
   },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
@@ -168,6 +194,11 @@
   "${modID}:RockPuzzle": {
     "NAME": "Rock Puzzle",
     "DESCRIPTION": "Add !M! *Rocks into your hand."
+  },
+  "${modID}:Sanchita": {
+    "NAME": "Sanchita",
+    "DESCRIPTION": "Apply !${modID}:M2! ${modID}:KR to a random enemy X times, where X is the amount of ${modID}:Wasted Energy spent last turn.",
+    "EXTENDED_DESCRIPTION": [" NL (Applies !${modID}:M2! ${modID}:KR !M! times.)"]
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",

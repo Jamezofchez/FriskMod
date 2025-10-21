@@ -51,7 +51,7 @@ public class FlurryOfKnives extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractMonster randomMonster = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-        FlurryOfKnivesAction action = new FlurryOfKnivesAction(randomMonster, damage, this.magicNumber, this);
+        FlurryOfKnivesAction action = new FlurryOfKnivesAction(randomMonster, damage, magicNumber, this);
         BindingHelper.bindAction(this, action);
         addToBot(action);
     }

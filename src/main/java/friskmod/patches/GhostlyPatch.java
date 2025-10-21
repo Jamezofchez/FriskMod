@@ -26,13 +26,6 @@ public class GhostlyPatch {
         public static void Prefix(AbstractCard __instance) {
             SetDamageTypeThorns(__instance);
         }
-        @SpirePostfixPatch
-        public static void Postfix(AbstractCard __instance) {
-            AbstractPower posspow = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
-            if (posspow != null){
-                Wiz.atb(new ResetDamageTypeAttack(__instance, (NonAttackPower) posspow));
-            }
-        }
     }
     @SpirePatch(clz = AbstractCard.class, method = "applyPowersToBlock")
     public static class AbstractCardApplyPowersToBlockPatch {
@@ -45,6 +38,16 @@ public class GhostlyPatch {
             }
         }
 
+    }
+    @SpirePatch(clz=AbstractCard.class, method = "use")
+    public static class AbstractCardUsePatch {
+        @SpirePostfixPatch
+        public static void Postfix(AbstractCard __instance) {
+            AbstractPower posspow = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
+            if (posspow != null){
+                Wiz.atb(new ResetDamageTypeAttack(__instance, (NonAttackPower) posspow));
+            }
+        }
     }
 
     private static void SetDamageTypeThorns(AbstractCard __instance) {

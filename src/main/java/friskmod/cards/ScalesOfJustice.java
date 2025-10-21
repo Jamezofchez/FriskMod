@@ -31,16 +31,20 @@ public class ScalesOfJustice extends AbstractEasyCard {
     private static final int DAMAGE = 0;
     private static final int UPG_TEMP_HP = 4;
 
+    private int getBaseDamage() {
+        return AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth;
+    }
+
     public ScalesOfJustice() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
-        this.magicNumber = this.baseMagicNumber = UPG_TEMP_HP;
+        magicNumber = baseMagicNumber = UPG_TEMP_HP;
         tags.add(FriskTags.JUSTICE);
         this.exhaust = true;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.baseDamage = p.maxHealth - p.currentHealth;
+        this.baseDamage = getBaseDamage();
         this.calculateCardDamage(m);
         if (m != null) {
             addToBot(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY, effectScale()), 0.2F));
@@ -49,14 +53,44 @@ public class ScalesOfJustice extends AbstractEasyCard {
         if (upgraded) {
             addToTop(new AddTemporaryHPAction(p, p, magicNumber));
         }
+        if (upgraded){
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        } else{
+            this.rawDescription = cardStrings.DESCRIPTION;
+        }
+        initializeDescription();
     }
 
     public void applyPowers() {
-        this.baseDamage = AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth;
+        this.baseDamage = getBaseDamage();
         super.applyPowers();
-        this.rawDescription = cardStrings.DESCRIPTION;
-        this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[0];
+        if (upgraded){
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        } else{
+            this.rawDescription = cardStrings.DESCRIPTION;
+        }
+        this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         this.initializeDescription();
+    }
+
+    public void onMoveToDiscard() {
+        if (upgraded){
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        } else{
+            this.rawDescription = cardStrings.DESCRIPTION;
+        }
+        initializeDescription();
+    }
+
+    public void calculateCardDamage(AbstractMonster mo) {
+        super.calculateCardDamage(mo);
+        if (upgraded){
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        } else{
+            this.rawDescription = cardStrings.DESCRIPTION;
+        }
+        this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
+        initializeDescription();
     }
 
     private int effectScale() {

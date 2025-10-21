@@ -55,12 +55,12 @@ public class BalletShoes extends AbstractEasyCard {
             int card_pos;
             List<AbstractCard> afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != this).collect(java.util.stream.Collectors.toList());
             boolean validFlag = false;
+            hand_size -= 1; //assume ballet shoes not in hand
             if (hand_size % 2 == 0) {
-                hand_size -= 1;
                 card_pos = (int) (hand_size - 1) / 2;
                 validFlag = true;
             } else{
-                hand_size -= 2;
+                hand_size -= 1;
                 card_pos = (int) (hand_size - 1) / 2;
             }
             AbstractCard chosenCard = afterHand.get(card_pos);
@@ -70,8 +70,7 @@ public class BalletShoes extends AbstractEasyCard {
                     BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(chosenCard, true);
                 }
             }
-            afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != chosenCard).collect(java.util.stream.Collectors.toList());
-            for (AbstractCard c : afterHand) { //no BalletShoes or currently glowing
+            for (AbstractCard c : afterHand) {
                 if (BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c) == true){
                     BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(chosenCard, false);
 //                    if (CardBorderGlowManager.getCustomGlowColors(chosenCard).isEmpty()) { //if it's not glowing??

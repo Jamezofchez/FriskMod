@@ -5,22 +5,38 @@
       "Gain #b%s [E] every time you deal damage ending with a 9."
     ]
   },
-  "${modID}:CountdownPounce": {
-    "NAME": "Countdown to pounce",
+  "${modID}:CountdownAgami": {
+    "NAME": "Agami",
     "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
-      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
-      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack.",
-      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack."
+      "On #yExpiry after playing #b%s cards, convert this enemy's ${modID}:LV to ${modID}:KR",
+      "On #yExpiry after playing #b%s cards, give this enemy #b%s ${modID}:LV and convert this enemy's ${modID}:LV to ${modID}:KR.",
+      "On #yExpiry after playing #b%s card, convert this enemy's ${modID}:LV to ${modID}:KR.",
+      "On #yExpiry after playing #b%s card, give this enemy #b%s ${modID}:LV and convert this enemy's ${modID}:LV to ${modID}:KR."
     ]
   },
   "${modID}:CountdownDraw": {
-    "NAME": "Countdown to draw",
+    "NAME": "Hug It Off",
     "DESCRIPTIONS": [
       "On #yExpiry after playing #b%s cards, draw #b%s cards.",
       "On #yExpiry after playing #b%s cards, draw #b%s card.",
       "On #yExpiry after playing #b%s card, draw #b%s cards.",
       "On #yExpiry after playing #b%s card, draw #b%s card."
+    ]
+  },
+  "${modID}:CountdownFlee": {
+    "NAME": "Mercy",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way.",
+      "On #yExpiry after playing #b%s card, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way."
+    ]
+  },
+  "${modID}:CountdownPounce": {
+    "NAME": "Pounce",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack."
     ]
   },
   "${modID}:Determination": {
@@ -110,13 +126,6 @@
     "NAME": "Torn Notebook",
     "DESCRIPTIONS": [
       "The next #b%s times you lose HP or Temp HP, gain 1 #yBuffer."
-    ]
-  },
-  "${modID}:CountdownFlee": {
-    "NAME": "Countdown to flee",
-    "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way.",
-      "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way."
     ]
   },
   "${modID}:Spared": {

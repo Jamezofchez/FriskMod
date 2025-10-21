@@ -1,6 +1,7 @@
 package friskmod.powers;
 
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -19,7 +20,8 @@ public class FallenDown extends BasePower {
     //Look at powers that do this like VulnerablePower and DoubleTapPower.
     public FallenDown(AbstractCreature owner, int amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
-        multiplier = 1.0F + (amount * multbyamount);
+//        multiplier = 1.0F + (amount * multbyamount);
+        multiplier = 1.0F + multbyamount;
         updateDescription();
     }
 
@@ -27,12 +29,12 @@ public class FallenDown extends BasePower {
         return multiplier;
     }
 
-    @Override
-    public void stackPower(int stackAmount){
-        super.stackPower(stackAmount);
-        multiplier = multiplier + (stackAmount * multbyamount);
-        updateDescription();
-    }
+//    @Override
+//    public void stackPower(int stackAmount){ //ooo you want to stack this?
+//        super.stackPower(stackAmount);
+//        multiplier = multiplier + (stackAmount * multbyamount);
+//        updateDescription();
+//    }
 
 
     @Override
@@ -51,5 +53,14 @@ public class FallenDown extends BasePower {
         }
         return damage;
     }
+    @Override
+    public void atEndOfRound() {
+       if (this.amount == 0) {
+            addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+       } else {
+            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+       }
+    }
+
 
 }

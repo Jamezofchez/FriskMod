@@ -6,6 +6,7 @@ import basemod.abstracts.DynamicVariable;
 import basemod.interfaces.*;
 import com.evacipated.cardcrawl.mod.stslib.patches.tempHp.BattleEnd;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.red.Hemokinesis;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.actions.AfterCardUseAction;
 import friskmod.actions.OnBattleStartAction;

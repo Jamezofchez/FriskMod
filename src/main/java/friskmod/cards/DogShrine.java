@@ -51,7 +51,7 @@ public class DogShrine extends AbstractEasyCard {
         } else{
             selectionText = String.format(TEXT[1], magicNumber);
         }
-        addToBot(new SelectCardsInHandAction(magicNumber, selectionText, true, false, (x -> true), SacrificeCard()));
+        addToTop(new SelectCardsInHandAction(magicNumber, selectionText, true, true, (x -> true), SacrificeCard()));
     }
 
     private Consumer<List<AbstractCard>> SacrificeCard(){

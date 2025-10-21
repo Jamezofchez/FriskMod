@@ -24,21 +24,24 @@ public class GarbageDump extends AbstractEasyCard {
             CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int TEMP_HP = 3;
-    private static final int UPG_TEMP_HP = 1;
+//    private static final int TEMP_HP = 3;
+//    private static final int UPG_TEMP_HP = 1;
+    private static final int BLOCK = 4;
+    private static final int UPG_BLOCK = 2;
+
 
     public GarbageDump() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        this.baseMagicNumber = this.magicNumber = TEMP_HP;
+        baseBlock = BLOCK;
         tags.add(FriskTags.PATIENCE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new GarbageDumpPower(p, magicNumber),magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new GarbageDumpPower(p, block),block));
     }
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_TEMP_HP);
+        upgradeBlock(UPG_BLOCK);
     }
 }

@@ -1,18 +1,14 @@
 package friskmod.powers;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.orbs.Dark;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import friskmod.FriskMod;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import friskmod.util.Wiz;
 
-public class GarbageDumpPower extends BasePower implements OnLoseEnergyInterface {
+public class GarbageDumpPower extends BasePower implements WastedEnergyInterface {
     public static final String POWER_ID = FriskMod.makeID(GarbageDumpPower.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
@@ -38,7 +34,7 @@ public class GarbageDumpPower extends BasePower implements OnLoseEnergyInterface
     }
 
     @Override
-    public void LoseEnergyAction(int amount) {
+    public void WasteEnergyAction(int amount) {
         if (amount <= 0) {
             return;
         }
@@ -47,21 +43,22 @@ public class GarbageDumpPower extends BasePower implements OnLoseEnergyInterface
             WastedEnergy();
         }
     }
-    @Override
-    public void atEndOfTurn(boolean isPlayer) {
-        if (isPlayer) {
-            if (EnergyPanel.getCurrentEnergy() <= 0) {
-                return;
-            }
-            this.flash();
-            for (int i = 0; i < EnergyPanel.getCurrentEnergy(); i++) {
-                WastedEnergy();
-            }
-        }
-    }
+//    @Override
+//    public void atEndOfTurn(boolean isPlayer) {
+//        if (isPlayer) {
+//            if (EnergyPanel.getCurrentEnergy() <= 0) {
+//                return;
+//            }
+//            this.flash();
+//            for (int i = 0; i < EnergyPanel.getCurrentEnergy(); i++) {
+//                WastedEnergy();
+//            }
+//        }
+//    }
 
     private void WastedEnergy() {
-        Wiz.atb(new AddTemporaryHPAction(owner, owner, amount));
+//        Wiz.atb(new AddTemporaryHPAction(owner, owner, amount));
+        Wiz.atb(new GainBlockAction(owner, owner, amount));
     }
 
 }
