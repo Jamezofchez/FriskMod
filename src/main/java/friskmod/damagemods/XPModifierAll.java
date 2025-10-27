@@ -19,12 +19,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.*;
 import friskmod.cards.SlackOff;
 import friskmod.patches.CardXPFields;
-import friskmod.powers.LV_Enemy;
-import friskmod.powers.LV_Hero;
-import friskmod.powers.PreventLVLoss;
-import friskmod.powers.RememberBraveryPower;
+import friskmod.powers.*;
 import friskmod.util.Wiz;
 import basemod.ReflectionHacks;
+
+import static friskmod.helper.SharedFunctions.consumeLVHeroForXP;
 
 
 public class XPModifierAll extends AbstractDamageModifier {
@@ -107,10 +106,15 @@ public class XPModifierAll extends AbstractDamageModifier {
         if (type != DamageInfo.DamageType.NORMAL){
             return damage;
         }
+        int modifier = getResultantXP();
         if (card.cardID.equals(SlackOff.ID)){
-            return damage - getResultantXP();
+            modifier = -modifier;
         }
-        return damage + getResultantXP();
+        AbstractPower posspow = AbstractDungeon.player.getPower(Pleaded.POWER_ID);
+        if (posspow != null){
+            modifier = -(modifier*posspow.amount);
+        }
+        return damage + modifier;
     }
 
     private int getResultantXP() {
@@ -246,33 +250,6 @@ public class XPModifierAll extends AbstractDamageModifier {
             LV_transfer_from = LV_Enemy - 1;
         }
         return LV_transfer_from;
-    }
-
-    private int consumeLVHeroForXP() {
-        AbstractPower LV_Hero_Power = p.getPower(LV_Hero.POWER_ID);
-        int XP_from_LV_Hero = 0;
-        if (LV_Hero_Power != null) {
-            XP_from_LV_Hero = LV_Hero_Power.amount;
-            AbstractPower targetPower;
-            targetPower = p.getPower(RememberBraveryPower.POWER_ID);
-            if (targetPower != null) {
-                targetPower.flash();
-                for (int i = 0; i < targetPower.amount; i++) {
-                    Wiz.att(new GiveRandomCardXP(XP_from_LV_Hero));
-                }
-            }
-            targetPower = p.getPower(PreventLVLoss.POWER_ID);
-            if (targetPower != null) {
-                targetPower.flash();
-//                targetPower.amount--;
-//                if (targetPower.amount <= 0) {
-//                    Wiz.att(new RemoveSpecificPowerAction(p, p, PreventLVLoss.POWER_ID));
-//                }
-            } else {
-                Wiz.att(new RemoveSpecificPowerAction(p, p, LV_Hero.POWER_ID));
-            }
-        }
-        return XP_from_LV_Hero;
     }
 
     @Override

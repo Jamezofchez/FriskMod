@@ -36,17 +36,17 @@ public class Overcome extends BasePower {
     }
     @Override
     public void onRemove() {
-        refreshAllCardOvercome();
+        resetCardsOvercome();
     }
 
     private void resetOvercome(AbstractCard c){
-        if( PerseveranceFields.isPerseverableFromOvercome.get(c)) {
-            PerseveranceFields.isPerseverableFromOvercome.set(c, false);
+        if( PerseveranceFields.overcomePlayed.get(c)) {
+            PerseveranceFields.overcomePlayed.set(c, false);
             PerseveranceFields.setIsPerseverable(c, false);
         }
     }
 
-    private void refreshAllCardOvercome() {
+    private void resetCardsOvercome() {
         if (AbstractDungeon.player == null) return;
         for (AbstractCard c : AbstractDungeon.player.hand.group) resetOvercome(c);
         for (AbstractCard c : AbstractDungeon.player.drawPile.group) resetOvercome(c);

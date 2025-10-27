@@ -25,11 +25,11 @@ public class Pleaded extends BasePower {
     }
 
     public void atEndOfRound() {
-        if (this.amount == 0) {
+//        if (this.amount == 0) {
             addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-        } else {
-            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-        }
+//        } else {
+//            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+//        }
     }
 
     @Override
@@ -45,11 +45,8 @@ public class Pleaded extends BasePower {
                 LV_enemy = lvPower.amount;
             }
         }
-        String baseDescription = DESCRIPTIONS[1];
-        if (amount == 1){
-            baseDescription = DESCRIPTIONS[0];
-        }
-        this.description = String.format(baseDescription, LV_enemy, amount);
+        String baseDescription = DESCRIPTIONS[0];
+        this.description = String.format(baseDescription, LV_enemy*amount);
     }
 
 }

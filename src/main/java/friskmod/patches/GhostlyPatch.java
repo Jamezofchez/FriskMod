@@ -4,8 +4,10 @@ import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.ResetDamageTypeAttack;
@@ -38,16 +40,6 @@ public class GhostlyPatch {
             }
         }
 
-    }
-    @SpirePatch(clz=AbstractCard.class, method = "use")
-    public static class AbstractCardUsePatch {
-        @SpirePostfixPatch
-        public static void Postfix(AbstractCard __instance) {
-            AbstractPower posspow = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
-            if (posspow != null){
-                Wiz.atb(new ResetDamageTypeAttack(__instance, (NonAttackPower) posspow));
-            }
-        }
     }
 
     private static void SetDamageTypeThorns(AbstractCard __instance) {

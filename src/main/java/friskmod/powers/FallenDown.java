@@ -10,7 +10,7 @@ import friskmod.FriskMod;
 public class FallenDown extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(FallenDown.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = PowerType.DEBUFF;
-    private static final boolean TURN_BASED = false;
+    private static final boolean TURN_BASED = true;
     private float multiplier;
     private static final float multbyamount = 0.5F;
 

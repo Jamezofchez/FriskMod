@@ -35,12 +35,13 @@ public class TrappedPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractCard __instance) {
             if (PerseveranceFields.trapped.get(__instance)) {
-                int cardCost = __instance.costForTurn;
-                if (cardCost == -1) {
-                    Wiz.atb(new LoseEnergyAction(EnergyPanel.getCurrentEnergy()));
-                } else if (cardCost > 0) {
-                    Wiz.atb(new LoseEnergyAction(cardCost));
-                }
+//                int cardCost = __instance.costForTurn;
+//                if (cardCost == -1) {
+//                    Wiz.atb(new LoseEnergyAction(EnergyPanel.getCurrentEnergy()));
+//                } else if (cardCost > 0) {
+//                    Wiz.atb(new LoseEnergyAction(cardCost));
+//                }
+                Wiz.atb(new LoseEnergyAction(1));
             }
         }
     }

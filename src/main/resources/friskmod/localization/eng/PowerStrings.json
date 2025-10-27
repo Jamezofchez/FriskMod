@@ -92,8 +92,7 @@
   "${modID}:Pleaded": {
     "NAME": "Pleaded",
     "DESCRIPTIONS": [
-      "#yAttacks deal #b%s less damage for their ${modID}:LV for #b%s turn.",
-      "#yAttacks deal #b%s less damage for their ${modID}:LV for #b%s turns."
+      "#yAttacks deal #b%s less damage this turn."
     ]
   },
   "${modID}:PreventLVLoss": {
@@ -145,6 +144,18 @@
     "DESCRIPTIONS": [
       "You next #b%s #yAttack this turn will deal non-attack damage.",
       "You next #b%s #yAttacks this turn will deal non-attack damage."
+    ]
+  },
+  "${modID}:Vitality": {
+    "NAME": "Vitality",
+    "DESCRIPTIONS": [
+      "Increases Temp HP gained from cards by #b%s"
+    ]
+  },
+  "${modID}:FavouriteNumberPower": {
+    "NAME": "Demonify",
+    "DESCRIPTIONS": [
+      "Your next #b%s Attacks this turn are #y${modID}:Demonified"
     ]
   }
 }

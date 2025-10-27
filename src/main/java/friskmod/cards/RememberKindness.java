@@ -23,6 +23,7 @@ public class RememberKindness extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DEBUFF_AMOUNT = 1;
+    private static final int UPG_DEBUFF_AMOUNT = 1;
 
     public RememberKindness() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -36,6 +37,6 @@ public class RememberKindness extends AbstractEasyCard {
 
     @Override
     public void upp() {
-
+        upgradeMagicNumber(UPG_DEBUFF_AMOUNT);
     }
 }

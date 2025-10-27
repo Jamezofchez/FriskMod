@@ -143,7 +143,7 @@
       "Trapped",
       "trapped"
     ],
-    "DESCRIPTION": "#yTrapped cards cannot be played, even by #y${modID}:Persevere effects. NL #yTrapped cards cause you to lose energy equal to their cost when drawn."
+    "DESCRIPTION": "#yTrapped cards cannot be played, even by #y${modID}:Persevere effects. NL #yTrapped cards cause you to lose 1 energy when drawn."
   },
   {
     "PROPER_NAME": "Strike",
@@ -201,6 +201,27 @@
       "Pickup"
     ],
     "DESCRIPTION": "Effect triggers when you obtain this card."
+  },
+  {
+    "PROPER_NAME": "Pleaded",
+    "NAMES": [
+      "Pleaded"
+    ],
+    "DESCRIPTION": "Attacks will deal 1 less damage for their #y${modID}:LV or #y${modID}:XP this turn."
+  },
+  {
+  "PROPER_NAME": "Vitality",
+  "NAMES": [
+    "Vitality"
+  ],
+  "DESCRIPTION": "Vitality improves Temp HP gained from ALL sources."
+},
+  {
+    "PROPER_NAME": "Demonify",
+    "NAMES": [
+      "Demonify",
+      "Demonified"
+    ],
+    "DESCRIPTION": "Your next Attack will end in 9 (You will gain #y${modID}:LV until it does)."
   }
-
 ]

@@ -188,10 +188,13 @@ public class PerseverancePatch {
         if (PerseveranceFields.trapped.get(c)) {
             PerseveranceFields.setIsPerseverable(c, false); //maybe problem
         } else {
-            AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
-            if (pow != null) {
-                if (!PerseveranceFields.isPerseverable.get(c) && !defaultBoolean) {
-                    PerseveranceFields.setIsPerseverable(c, true, true);
+            if (!defaultBoolean) {
+                AbstractPower posspow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
+                if (posspow != null) {
+                    if (!PerseveranceFields.isPerseverable.get(c)) {
+                        PerseveranceFields.setIsPerseverable(c, true, true);
+                        PerseveranceFields.overcomePlayed.set(c, true);
+                    }
                 }
             }
         }
@@ -399,25 +402,6 @@ public class PerseverancePatch {
             }
         }
     }
-//    @SpirePatch2(
-//            clz = AbstractRoom.class,
-//            method = "endTurn"
-//    )
-//    public static class AbstractRoomEndTurnPatch{
-//        @SpirePrefixPatch
-//        public static void Prefix(){
-//            resetOvercome();
-//        }
-//    }
-
-    private static void resetOvercome() {
-        for (AbstractCard c : AbstractDungeon.player.hand.group) {
-            if (PerseveranceFields.isPerseverableFromOvercome.get(c)) {
-                PerseveranceFields.setIsPerseverable(c, false); //maybe problem
-            }
-        }
-    }
-
     @SpirePatch(
             clz = UseCardAction.class,
             method = SpirePatch.CONSTRUCTOR,
@@ -426,26 +410,28 @@ public class PerseverancePatch {
     public static class OnCardPersevered {
         @SpirePrefixPatch
         public static void Prefix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
-            if (card != null && PerseveranceFields.perseverePlayed.get(card)) {
-                if (PerseveranceFields.isPerseverableFromOvercome.get(card)) {
-                    PerseveranceFields.isPerseverableFromOvercome.set(card, false);
-                    AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
-                    if (pow != null) {
-                        pow.flash();
-                        Wiz.atb(new ReducePowerAction(AbstractDungeon.player, AbstractDungeon.player, Overcome.POWER_ID, 1));
-                    } else{
-                        FriskMod.logger.warn("{}: isPerseverableFromOvercome set but no power found", FriskMod.modID);
+            if (!card.dontTriggerOnUseCard) {
+                if (card != null && PerseveranceFields.perseverePlayed.get(card)) {
+                    if (PerseveranceFields.overcomePlayed.get(card)) {
+                        PerseveranceFields.overcomePlayed.set(card, false);
+                        AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
+                        if (pow != null) {
+                            pow.flash();
+                            Wiz.atb(new ReducePowerAction(AbstractDungeon.player, AbstractDungeon.player, Overcome.POWER_ID, 1));
+                        } else {
+                            FriskMod.logger.warn("{}: overcomePlayed set but no power found", FriskMod.modID);
+                        }
                     }
+                    __instance.exhaustCard = true;
+                    if (PerseveranceFields.insufficientEnergy.get(card)) {
+                        int refundEnergy = PerseveranceFields.currentEnergy.get(card);
+                        Wiz.atb(new GainEnergyAction(refundEnergy));
+                    }
+                    PerseveranceFields.setIsPerseverable(card, false);
+                    AbstractCard tmp = card.makeStatEquivalentCopy();
+                    PerseveranceFields.trapped.set(tmp, true);
+                    Wiz.atb(new MakeTempCardInHandAction(tmp));
                 }
-                __instance.exhaustCard = true;
-                if (PerseveranceFields.insufficientEnergy.get(card)) {
-                    int refundEnergy = PerseveranceFields.currentEnergy.get(card);
-                    Wiz.atb(new GainEnergyAction(refundEnergy));
-                }
-                PerseveranceFields.setIsPerseverable(card, false);
-                AbstractCard tmp = card.makeStatEquivalentCopy();
-                PerseveranceFields.trapped.set(tmp, true);
-                Wiz.atb(new MakeTempCardInHandAction(tmp));
             }
         }
         @SpirePostfixPatch

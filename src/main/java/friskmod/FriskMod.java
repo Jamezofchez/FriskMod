@@ -205,6 +205,7 @@ public class FriskMod implements
         addAudio("mus_sfx_segapower");
         addAudio("mus_sfx_segapower2");
         addAudio("mus_sfx_spellcast");
+        addAudio("mus_sfx_star");
         addAudio("mus_sfx_voice_triple");
         addAudio("snd_arrow");
         addAudio("snd_b");
@@ -236,6 +237,7 @@ public class FriskMod implements
         addAudio("snd_spearrise");
         addAudio("snd_tearcard");
         addAudio("snd_vaporized");
+        addAudio("snd_wrongvictory");
         addAudio("test");
     }
 

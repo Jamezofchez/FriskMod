@@ -42,28 +42,28 @@ public class RememberKindnessPatch {
         }
 
     }
-    @SpirePatch2(clz = GainBlockAction.class, method = SpirePatch.CLASS)
-    public static class BlockKindnessTrigger {
-        public static SpireField<Boolean> triggeredKindness = new SpireField<>(() -> Boolean.FALSE);
-    }
-    @SpirePatch2(
-            clz = GainBlockAction.class,
-            method = "update"
-    )
-    public static class ApplyBlockActionUpdatePatch {
-        @SpirePrefixPatch
-        public static void Prefix(GainBlockAction __instance){
-            if (!BlockKindnessTrigger.triggeredKindness.get(__instance)){
-                BlockKindnessTrigger.triggeredKindness.set(__instance, true);
-                if (__instance.target instanceof AbstractMonster) {
-                    if (__instance.amount > 0) {
-                        handleKindness(__instance.target, false);
-                    }
-                }
-            }
-        }
-
-    }
+//    @SpirePatch2(clz = GainBlockAction.class, method = SpirePatch.CLASS)
+//    public static class BlockKindnessTrigger {
+//        public static SpireField<Boolean> triggeredKindness = new SpireField<>(() -> Boolean.FALSE);
+//    }
+//    @SpirePatch2(
+//            clz = GainBlockAction.class,
+//            method = "update"
+//    )
+//    public static class ApplyBlockActionUpdatePatch {
+//        @SpirePrefixPatch
+//        public static void Prefix(GainBlockAction __instance){
+//            if (!BlockKindnessTrigger.triggeredKindness.get(__instance)){
+//                BlockKindnessTrigger.triggeredKindness.set(__instance, true);
+//                if (__instance.target instanceof AbstractMonster) {
+//                    if (__instance.amount > 0) {
+//                        handleKindness(__instance.target, false);
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
 
     private static void handleKindness(AbstractCreature target, boolean fromBuff) {
         AbstractPower posspow = AbstractDungeon.player.getPower(RememberKindnessPower.POWER_ID);
@@ -73,9 +73,9 @@ public class RememberKindnessPatch {
             if (fromBuff) {
                 Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new WeakPower(target, debuff_amount, false), debuff_amount));
             }
-            if (!fromBuff && ((RememberKindnessPower) posspow).upgraded) {
-                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new VulnerablePower(target, debuff_amount, false), debuff_amount));
-            }
+//            if (!fromBuff && ((RememberKindnessPower) posspow).upgraded) {
+//                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new VulnerablePower(target, debuff_amount, false), debuff_amount));
+//            }
         }
     }
 }

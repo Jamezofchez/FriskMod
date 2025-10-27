@@ -36,7 +36,7 @@ public class Steal extends AbstractEasyCard {
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
 
-    private static final int CRITICAL_ENERGY_GAIN = 1;
+    private static final int UPG_DRAW_AMOUNT = 1;
 
     public Steal() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -68,12 +68,10 @@ public class Steal extends AbstractEasyCard {
 
     @Override
     public void triggerOnGlowCheck() {
-        super.triggerOnGlowCheck();
-        if (glowColor.equals(AbstractCard.BLUE_BORDER_GLOW_COLOR)) {
-            for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
-                    glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-                }
+        glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
+                glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
             }
         }
     }
@@ -86,7 +84,7 @@ public class Steal extends AbstractEasyCard {
 //            if (isCritical()){
 //                TriggerCriticalEffect(p, m);
 //            }
-            Wiz.atb(new DrawCardAction(p, 1));
+            Wiz.atb(new DrawCardAction(p, UPG_DRAW_AMOUNT));
         }
     }
 

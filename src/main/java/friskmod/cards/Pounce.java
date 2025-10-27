@@ -25,7 +25,7 @@ public class Pounce extends AbstractEasyCard {
     );
     private static final int DAMAGE = 10;
     private static final int UPG_DAMAGE = 4;
-    private static final int WAIT_TIMER = 4;
+    private static final int WAIT_TIMER = 5;
 
 
     public Pounce() {

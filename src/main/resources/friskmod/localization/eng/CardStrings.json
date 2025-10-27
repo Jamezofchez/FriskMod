@@ -51,6 +51,10 @@
     "NAME": "Butterscotch Pie",
     "DESCRIPTION": "Convert your Block into Temp HP. Keep up to !M! Block. NL Exhaust."
   },
+  "${modID}:Chill": {
+    "NAME": "Chill",
+    "DESCRIPTION": "Retain. Costs 1 less [E] NL for each ${modID}:Wasted energy last turn. NL Deal !D! damage. "
+  },
   "${modID}:Cleave": {
     "NAME": "Cleave",
     "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Convert this card's ${modID}:XP to ${modID}:LV."
@@ -103,6 +107,10 @@
     "DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Choose a card .",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Give up to 1 card !M! ${modID}:XP."
   },
+  "${modID}:FavouriteNumber": {
+    "NAME": "Favourite Number",
+    "DESCRIPTION": "Your next attack this turn is ${modID}:Demonified. Deal !D! damage."
+  },
   "${modID}:Flex": {
     "NAME": "Flex",
     "DESCRIPTION": "Give EVERYONE !M! ${modID}:LV."
@@ -122,7 +130,7 @@
   },
   "${modID}:GarbageDump": {
     "NAME": "Garbage Dump",
-    "DESCRIPTION": "Gain !M! Temp HP for every ${modID}:Wasted Energy spent."
+    "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted Energy spent."
   },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
@@ -175,8 +183,7 @@
   },
   "${modID}:RememberKindness": {
     "NAME": "Remember Kindness",
-    "DESCRIPTION": "Whenever an enemy is buffed, it gains !M! Weak.",
-    "UPGRADE_DESCRIPTION": "Whenever an enemy is buffed, it gains !M! Weak. NL Whenever an enemy gains Block, it gains !M! Vulnerable."
+    "DESCRIPTION": "Whenever an enemy is buffed, it gains !M! Weak."
   },
   "${modID}:RememberPatience": {
     "NAME": "Remember Patience",
@@ -195,8 +202,8 @@
     "NAME": "Rock Puzzle",
     "DESCRIPTION": "Add !M! *Rocks into your hand."
   },
-  "${modID}:Sanchita": {
-    "NAME": "Sanchita",
+  "${modID}:OLDSanchita": {
+    "NAME": "OLDSanchita",
     "DESCRIPTION": "Apply !${modID}:M2! ${modID}:KR to a random enemy X times, where X is the amount of ${modID}:Wasted Energy spent last turn.",
     "EXTENDED_DESCRIPTION": [" NL (Applies !${modID}:M2! ${modID}:KR !M! times.)"]
   },
@@ -205,6 +212,10 @@
     "DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Gain !M! Temp HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:SelfReflection": {
+    "NAME": "Self Reflection",
+    "DESCRIPTION": "Gain !M! Strength. NL Gain !M! ${modID}:Vitality. NL Gain !M! ${modID}:Pleaded."
   },
   "${modID}:SlackOff": {
     "NAME": "Slack Off",
