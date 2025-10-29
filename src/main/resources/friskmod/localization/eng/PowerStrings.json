@@ -111,8 +111,7 @@
   "${modID}:RememberKindnessPower": {
     "NAME": "Kindness",
     "DESCRIPTIONS": [
-      "Whenever an enemy is buffed, it gains #b%s #yWeak.",
-      "Whenever an enemy is buffed, it gains #b%s #yWeak. NL Whenever an enemy gains Block, it gains #b%s #yVulnerable"
+      "Whenever you buff an enemy, it gains #b%s #Vulnerable."
     ]
   },
   "${modID}:RememberPatiencePower": {

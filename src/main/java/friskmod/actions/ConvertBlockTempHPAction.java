@@ -14,7 +14,7 @@ public class ConvertBlockTempHPAction extends AbstractGameAction
 
     public ConvertBlockTempHPAction(AbstractCreature c, int sparedBlock) {
         this.c = c;
-        this.actionType = ActionType.WAIT;
+        this.actionType = ActionType.SPECIAL;
         this.sparedBlock = sparedBlock;
     }
 

@@ -1,7 +1,11 @@
 package friskmod.powers;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
@@ -41,13 +45,7 @@ public class CountdownAgami extends AbstractCountdownPower {
 
     @Override
     public void updateDescription() {
-        int descNum = 0;
-        if (amount2 == 1){
-            descNum += 2;
-        }
-        if (amount != 0){
-            descNum += 1;
-        }
+        int descNum = getDescNum();
         String baseDescription = DESCRIPTIONS[descNum];
         if (descNum % 2 == 0) {
             this.description = String.format(baseDescription, amount2);
@@ -55,10 +53,31 @@ public class CountdownAgami extends AbstractCountdownPower {
             this.description = String.format(baseDescription, amount2, amount);
         }
     }
+
+    private int getDescNum() {
+        int descNum = 0;
+        if (amount2 == 1){
+            descNum += 2;
+        }
+        if (amount != 0){
+            descNum += 1;
+        }
+        return descNum;
+    }
+
     @Override
     public void upgrade(){
         super.upgrade();
         this.amount += UPG_LV_GAIN;
         updateDescription();
+    }
+    @Override
+    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
+        int descNum = getDescNum();
+        if (descNum % 2 == 0) {
+            FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString(this.amount2), x, y * Settings.scale, this.fontScale, Color.CYAN.cpy());
+        } else {
+            super.renderAmount(sb, x, y, c);
+        }
     }
 }

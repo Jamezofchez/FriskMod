@@ -21,8 +21,6 @@ public class ResetDamageTypeAttack extends AbstractGameAction {
     @Override
     public void update() {
         this.isDone = true;
-        ReflectionHacks.setPrivate(card, AbstractCard.class, "damageType", DamageInfo.DamageType.NORMAL);
-        card.damageTypeForTurn = DamageInfo.DamageType.NORMAL;
         power.onSpecificTrigger();
     }
 }

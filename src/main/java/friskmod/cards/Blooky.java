@@ -25,8 +25,12 @@ public class Blooky extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int BLOCK = 8;
-    private static final int UPG_BLOCK = 3;
+//    private static final int UPG_BLOCK = 3;
+    private static final int UPG_BLOCK = 1;
     private static final int POWER_AMOUNT = 1;
+    private static final int UPG_POWER_AMOUNT = 1;
+
+
 
 
     public Blooky() {
@@ -45,5 +49,6 @@ public class Blooky extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeBlock(UPG_BLOCK);
+        upgradeMagicNumber(UPG_POWER_AMOUNT);
     }
 }

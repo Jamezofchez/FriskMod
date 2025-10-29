@@ -9,20 +9,20 @@ public class RememberKindnessPower extends BasePower {
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
 
-    public boolean upgraded;
+//    public boolean upgraded;
 
     //The only thing TURN_BASED controls is the color of the number on the power icon.
     //Turn based powers are white, non-turn based powers are red or green depending on if their amount is positive or negative.
     //For a power to actually decrease/go away on its own they do it themselves.
     //Look at powers that do this like VulnerablePower and DoubleTapPower.
-    public RememberKindnessPower(AbstractCreature owner, int amount, boolean upgraded) {
+    public RememberKindnessPower(AbstractCreature owner, int amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
-        this.upgraded = upgraded; //currently unused
+//        this.upgraded = upgraded; //currently unused
     }
 
     @Override
     public AbstractPower makeCopy() {
-        return new RememberKindnessPower(owner, amount, upgraded);
+        return new RememberKindnessPower(owner, amount);
     }
 
     public void updateDescription() {

@@ -1,25 +1,22 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import com.megacrit.cardcrawl.vfx.combat.HemokinesisEffect;
 import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
+import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
 
 import static friskmod.FriskMod.makeID;
 
-public class Kriyamana extends AbstractEasyCard {
-    public static final String ID = makeID(Kriyamana.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class AnnoyingDog extends AbstractCriticalCard {
+    public static final String ID = makeID(AnnoyingDog.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -27,26 +24,44 @@ public class Kriyamana extends AbstractEasyCard {
             CardType.ATTACK, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
             CardRarity.UNCOMMON, //Rarity. BASIC is for starting cards, then there's COMMON/UNCOMMON/RARE, and then SPECIAL and CURSE. SPECIAL is for cards you only get from events. Curse is for curses, except for special curses like Curse of the Bell and Necronomicurse.
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
-            1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
+            0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 12;
-    private static final int UPG_DAMAGE = 5;
-    private static final int HP_LOSS = 2;
-    public Kriyamana() {
+    private static final int DAMAGE_AND_BLOCK = 10;
+    private static final int UPG_DAMAGE_AND_BLOCK = 3;
+    public AnnoyingDog() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseDamage = DAMAGE;
-        baseMagicNumber = magicNumber = HP_LOSS;
-        tags.add(FriskTags.JUSTICE);
+        baseDamage = DAMAGE_AND_BLOCK;
+        baseBlock = DAMAGE_AND_BLOCK;
+        tags.add(FriskTags.PERSEVERANCE);
+        PerseveranceFields.trapped.set(this, true);
+        initializeDescription();
     }
+
+    @Override
+    public void triggerOnOtherCardPlayed(AbstractCard c) { //delete
+    }
+
+    @Override
+    public void triggerOnEndOfPlayerTurn() {
+        super.triggerOnEndOfPlayerTurn();
+        PerseveranceFields.trapped.set(this, true);
+        initializeDescription();
+    }
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new VFXAction(new HemokinesisEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY), 0.5F));
-        addToBot(new LoseHPAction(p, p, this.magicNumber));
-        addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.NONE));
+        blck();
+        dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
     }
 
     @Override
     public void upp() {
-        upgradeDamage(UPG_DAMAGE);
+        upgradeDamage(UPG_DAMAGE_AND_BLOCK);
+        upgradeBlock(UPG_DAMAGE_AND_BLOCK);
+    }
+
+    @Override
+    public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
+
     }
 }

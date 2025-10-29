@@ -3,6 +3,9 @@ package friskmod.actions;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.RemoveAllTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.patches.core.AbstractCreature.TempHPField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,6 +19,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
 import friskmod.cards.HugItOff;
 import friskmod.helper.StealableWhitelist;
+import friskmod.util.Wiz;
 
 import java.util.*;
 
@@ -130,6 +134,13 @@ public class StealPowerAction extends AbstractGameAction {
                         } else{
                             unaffectedIDs.add(pow.ID);
                         }
+                    }
+                }
+                int monsterTempHP = TempHPField.tempHp.get(m);
+                if (monsterTempHP > 0){
+                    Wiz.att(new AddTemporaryHPAction(p, p, monsterTempHP));
+                    if (steal) {
+                        Wiz.att(new RemoveAllTemporaryHPAction(m, p));
                     }
                 }
             }

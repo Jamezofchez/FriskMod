@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
 
+import java.util.List;
+
 public abstract class AbstractCriticalCard extends AbstractEasyCard{
     public boolean trig_critical = false;
     public AbstractCriticalCard(String ID, CardStats info) {
@@ -47,10 +49,16 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
         return (trig_critical);
     }
 
-    public boolean isCriticalPos()
-    {
-        double hand_pos = (AbstractDungeon.player.hand.group.indexOf(this)+0.5);
-        double hand_size = (AbstractDungeon.player.hand.size());
+    public boolean isCriticalPos(){
+        return isCriticalPos(-1);
+    }
+    public boolean isCriticalPos(int indexToRemove){
+        List<AbstractCard> hand = AbstractDungeon.player.hand.group;
+        if (indexToRemove != -1){
+            hand.remove(indexToRemove);
+        }
+        double hand_pos = hand.indexOf(this)+0.5;
+        double hand_size = hand.size();
         double relative = Math.abs(hand_pos-hand_size/2);
 
         return (relative<1);

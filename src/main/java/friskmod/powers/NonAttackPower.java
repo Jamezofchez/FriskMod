@@ -1,11 +1,15 @@
 package friskmod.powers;
 
+import basemod.ReflectionHacks;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import friskmod.patches.GhostlyPatch;
 
 public class NonAttackPower extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(NonAttackPower.class.getSimpleName());
@@ -34,6 +38,32 @@ public class NonAttackPower extends BasePower {
         this.flash();
         addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
     }
+    @Override
+    public void onRemove() {
+        resetCardsGhostly();
+    }
+
+    private void resetGhostly(AbstractCard card){
+        if (GhostlyPatch.GhostlyCardFields.isGhostly.get(card)) {
+            ReflectionHacks.setPrivate(card, AbstractCard.class, "damageType", DamageInfo.DamageType.NORMAL);
+            card.damageTypeForTurn = DamageInfo.DamageType.NORMAL;
+            card.dontTriggerOnUseCard = false;
+            GhostlyPatch.GhostlyCardFields.isGhostly.set(card, false);
+            GhostlyPatch.GhostlyDamageTypeFields.isGhostly.set(card.damageTypeForTurn, false);
+
+        }
+    }
+
+    private void resetCardsGhostly() {
+        if (AbstractDungeon.player == null) return;
+        for (AbstractCard c : AbstractDungeon.player.hand.group) resetGhostly(c);
+        for (AbstractCard c : AbstractDungeon.player.drawPile.group) resetGhostly(c);
+        for (AbstractCard c : AbstractDungeon.player.discardPile.group) resetGhostly(c);
+        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) resetGhostly(c);
+        // Limbo (cards being played/created)
+        for (AbstractCard c : AbstractDungeon.player.limbo.group) resetGhostly(c);
+    }
+
 
     @Override
     public AbstractPower makeCopy() {

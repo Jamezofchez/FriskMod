@@ -23,6 +23,10 @@
     "NAME": "Ancient Strike",
     "DESCRIPTION": "Give the enemy !M! Artifact. Deal !D! damage per Artifact stack."
   },
+  "${modID}:AnnoyingDog": {
+    "NAME": "Annoying Dog",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL ${modID}:Critical: Temporarily ${modID}:Unseal this card."
+  },
   "${modID}:BadMemory": {
     "NAME": "Bad Memory",
     "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand."
@@ -41,7 +45,13 @@
   },
   "${modID}:Blooky": {
     "NAME": "Blooky",
-    "DESCRIPTION": "Ethereal. NL Gain !B! Block. Your next card this turn is ${modID}:Ghostly."
+    "DESCRIPTION": "Ethereal. NL Gain !B! Block. Your next card this turn is ${modID}:Ghostly.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Gain !B! Block. Your next two cards this turn are ${modID}:Ghostly."
+
+  },
+  "${modID}:BreakFree": {
+    "NAME": "Break Free",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Unseal all cards in your hand."
   },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
@@ -183,7 +193,7 @@
   },
   "${modID}:RememberKindness": {
     "NAME": "Remember Kindness",
-    "DESCRIPTION": "Whenever an enemy is buffed, it gains !M! Weak."
+    "DESCRIPTION": "Whenever you buff an enemy, it gains !M! Vulnerable."
   },
   "${modID}:RememberPatience": {
     "NAME": "Remember Patience",
@@ -206,6 +216,10 @@
     "NAME": "OLDSanchita",
     "DESCRIPTION": "Apply !${modID}:M2! ${modID}:KR to a random enemy X times, where X is the amount of ${modID}:Wasted Energy spent last turn.",
     "EXTENDED_DESCRIPTION": [" NL (Applies !${modID}:M2! ${modID}:KR !M! times.)"]
+  },
+  "${modID}:Sanchita": {
+    "NAME": "Sanchita",
+    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! Temp HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",

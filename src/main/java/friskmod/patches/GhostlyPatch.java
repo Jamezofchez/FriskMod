@@ -1,20 +1,22 @@
 package friskmod.patches;
 
 import basemod.ReflectionHacks;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import friskmod.actions.ResetDamageTypeAttack;
 import friskmod.powers.NonAttackPower;
-import friskmod.util.Wiz;
 
 public class GhostlyPatch {
+    @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS)
+    public static class GhostlyCardFields {
+        public static SpireField<Boolean> isGhostly = new SpireField<>(() -> false);
+    }
+    @SpirePatch2(clz = DamageInfo.DamageType.class, method = SpirePatch.CLASS)
+    public static class GhostlyDamageTypeFields {
+        public static SpireField<Boolean> isGhostly = new SpireField<>(() -> false);
+    }
     @SpirePatch(clz = AbstractCard.class, method = "calculateCardDamage")
     public static class AbstractCardCalculateCardDamagePatch {
         @SpirePrefixPatch
@@ -47,8 +49,13 @@ public class GhostlyPatch {
             if(ReflectionHacks.getPrivate(__instance, AbstractCard.class, "damageType") == DamageInfo.DamageType.NORMAL || __instance.damageTypeForTurn == DamageInfo.DamageType.NORMAL) {
                 AbstractPower posspow = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
                 if (posspow != null){
-                    ReflectionHacks.setPrivate(__instance, AbstractCard.class, "damageType", DamageInfo.DamageType.THORNS);
-                    __instance.damageTypeForTurn = DamageInfo.DamageType.THORNS;
+                    if (!__instance.dontTriggerOnUseCard) {
+                        ReflectionHacks.setPrivate(__instance, AbstractCard.class, "damageType", DamageInfo.DamageType.THORNS);
+                        __instance.damageTypeForTurn = DamageInfo.DamageType.THORNS;
+                        GhostlyDamageTypeFields.isGhostly.set(__instance.damageTypeForTurn, true);
+                        __instance.dontTriggerOnUseCard = true;
+                        GhostlyCardFields.isGhostly.set(__instance, true);
+                    }
                 }
             }
         }

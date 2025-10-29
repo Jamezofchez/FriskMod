@@ -393,7 +393,9 @@ public class FriskMod implements
     @Override
     public void receiveCardUsed(AbstractCard abstractCard) {
         //XPModifierAll.setActiveCard(abstractCard);
-        Wiz.atb(new AfterCardUseAction(abstractCard));
+        if (!abstractCard.dontTriggerOnUseCard) {
+            Wiz.atb(new AfterCardUseAction(abstractCard));
+        }
     }
 
 

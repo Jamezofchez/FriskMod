@@ -19,7 +19,7 @@ public class ConvertLVKarmaAction extends AbstractGameAction
 
     public ConvertLVKarmaAction(AbstractCreature c, int extraLV) {
         this.c = c;
-        this.actionType = ActionType.WAIT;
+        this.actionType = ActionType.SPECIAL;
         this.extraLV = extraLV;
     }
 

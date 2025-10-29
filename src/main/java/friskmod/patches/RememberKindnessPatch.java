@@ -35,12 +35,13 @@ public class RememberKindnessPatch {
                 PowerKindessTrigger.triggeredKindness.set(__instance, true);
                 if (__instance.target instanceof AbstractMonster) {
                     if (___powerToApply.type == AbstractPower.PowerType.BUFF) {
-                        handleKindness(__instance.target, true);
+                        if (__instance.source == AbstractDungeon.player){
+                            handleKindness(__instance.target, true);
+                        }
                     }
                 }
             }
         }
-
     }
 //    @SpirePatch2(clz = GainBlockAction.class, method = SpirePatch.CLASS)
 //    public static class BlockKindnessTrigger {
@@ -71,10 +72,10 @@ public class RememberKindnessPatch {
             posspow.flash();
             int debuff_amount = posspow.amount;
             if (fromBuff) {
-                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new WeakPower(target, debuff_amount, false), debuff_amount));
+                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new VulnerablePower(target, debuff_amount, false), debuff_amount));
             }
 //            if (!fromBuff && ((RememberKindnessPower) posspow).upgraded) {
-//                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new VulnerablePower(target, debuff_amount, false), debuff_amount));
+//                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new WeakPower(target, debuff_amount, false), debuff_amount));
 //            }
         }
     }

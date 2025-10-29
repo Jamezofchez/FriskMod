@@ -12,10 +12,18 @@ import friskmod.util.Wiz;
 
 public class SharedFunctions {
     public static int consumeLVHeroForXP() {
+        return consumeLVHeroForXP(false);
+    }
+    public static int consumeLVHeroForXP(boolean secondConsume) {
         AbstractPlayer p = AbstractDungeon.player;
         AbstractPower LV_Hero_Power = p.getPower(LV_Hero.POWER_ID);
         int XP_from_LV_Hero = 0;
         if (LV_Hero_Power != null) {
+            if (secondConsume) {
+                if (!((LV_Hero) LV_Hero_Power).getFromFavouriteNumber()){
+                    return 0;
+                }
+            }
             XP_from_LV_Hero = LV_Hero_Power.amount;
             if (XP_from_LV_Hero > 0) {
                 AbstractPower targetPower;

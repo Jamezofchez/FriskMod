@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.actions.CustomSFXAction;
+import friskmod.patches.GhostlyPatch;
 import friskmod.powers.*;
 import friskmod.util.Wiz;
 
@@ -26,12 +27,7 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
         int newDamageAmount = damageAmount;
         AbstractCreature source = info.owner;
         DamageInfo.DamageType damageType = info.type;
-        AbstractPower possBlooky = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
-        boolean hasBlooky = false;
-        if (possBlooky != null){
-            hasBlooky = true;
-        }
-        if (source == AbstractDungeon.player && (damageType == DamageInfo.DamageType.NORMAL || hasBlooky)) { //hopefully plays well with blooky?
+        if (source == AbstractDungeon.player && (damageType == DamageInfo.DamageType.NORMAL || GhostlyPatch.GhostlyDamageTypeFields.isGhostly.get(damageType))) { //hopefully plays well with blooky?
             int damageDealt = info.output;
             AbstractPower possFavourite = AbstractDungeon.player.getPower(FavouriteNumberPower.POWER_ID);
             if (possFavourite != null) {
@@ -81,7 +77,9 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
         if (remainderLV > 0){
             extraLV++;
         }
-        Wiz.att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LV_Hero(AbstractDungeon.player, extraLV), extraLV));
+        LV_Hero LV = new LV_Hero(AbstractDungeon.player, extraLV);
+        LV.setFromFavouriteNumber();
+        Wiz.att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, LV, extraLV));
         if (healFlag){
             Wiz.att(new CustomSFXAction("snd_wrongvictory"));
             Wiz.att(new HealAction(target, AbstractDungeon.player, 9));

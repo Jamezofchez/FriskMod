@@ -27,10 +27,10 @@ public class SmokeBombAction extends AbstractGameAction {
   public SmokeBombAction(boolean upgraded) {
     this.upgraded = upgraded;
     this.p = AbstractDungeon.player;
+    this.actionType = ActionType.SPECIAL; //this is so shit, but to make sure it doesnt happens
   }
   
   public void update() {
-    boolean fightingBoss = false;
     for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
       if (m.type == AbstractMonster.EnemyType.BOSS) {
         AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));

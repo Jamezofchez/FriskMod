@@ -30,7 +30,6 @@ public class FlurryOfKnivesAction extends AbstractGameAction {
     private AbstractCard sourceCard;
     public FlurryOfKnivesAction(AbstractCreature target, int amount, int numTimes, AbstractCard sourceCard) {
         this.target = target;
-        this.actionType = ActionType.DAMAGE;
         this.duration = 0.1F;
         this.numTimes = numTimes;
         this.amount = amount;

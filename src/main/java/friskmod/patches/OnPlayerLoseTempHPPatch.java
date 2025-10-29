@@ -5,6 +5,7 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import friskmod.actions.PlayerLoseHPAction;
 import friskmod.util.Wiz;
 import javassist.CtBehavior;
@@ -22,10 +23,13 @@ public class OnPlayerLoseTempHPPatch {
             locator= OnPlayerLoseTempHPPatch.TempHPLocator.class,
             localvars={"damageAmount", "temporaryHealth"}
     )
-    public static void Insert(int[] damageAmount, int temporaryHealth) {
+    public static void Insert(Object[] __args, int[] damageAmount, int temporaryHealth, DamageInfo info) {
+        AbstractCreature creature = (AbstractCreature) __args[0];
         int tempHPLost = Math.min(temporaryHealth, damageAmount[0]);
         boolean overflow = temporaryHealth < damageAmount[0];
-        Wiz.att(new PlayerLoseHPAction(tempHPLost, true, overflow));
+        if (creature == AbstractDungeon.player){
+            Wiz.att(new PlayerLoseHPAction(tempHPLost, info, true, overflow));
+        }
     }
     private static class TempHPLocator extends SpireInsertLocator {
         @Override

@@ -25,9 +25,9 @@ public class OnPlayerLoseHPPatch {
             locator=HPLocator.class,
             localvars={"damageAmount"}
     )
-    public static void Insert(AbstractPlayer __instance, int damageAmount) {
+    public static void Insert(AbstractPlayer __instance, int damageAmount, DamageInfo info) {
         if (damageAmount > 0) {
-            Wiz.att(new PlayerLoseHPAction(damageAmount, false));
+            Wiz.att(new PlayerLoseHPAction(damageAmount, info, false));
         }
     }
 

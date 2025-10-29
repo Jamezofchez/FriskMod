@@ -26,7 +26,7 @@ public class GarbageDump extends AbstractEasyCard {
     );
 //    private static final int TEMP_HP = 3;
 //    private static final int UPG_TEMP_HP = 1;
-    private static final int BLOCK = 4;
+    private static final int BLOCK = 5;
     private static final int UPG_BLOCK = 2;
 
 

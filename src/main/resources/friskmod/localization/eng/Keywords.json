@@ -186,7 +186,7 @@
     "NAMES": [
       "Ghostly"
     ],
-    "DESCRIPTION": "This card deals non-attack damage and is uneffected by Block modifiers."
+    "DESCRIPTION": "This card deals non-attack damage, is uneffected by Block modifiers, and isn't treated as a card played."
   },
   {
     "PROPER_NAME": "Threatened",
@@ -223,5 +223,13 @@
       "Demonified"
     ],
     "DESCRIPTION": "Your next Attack will end in 9 (You will gain #y${modID}:LV until it does)."
+  },
+  {
+    "PROPER_NAME": "Unseal",
+    "NAMES": [
+      "Unseal",
+      "Unseal"
+    ],
+    "DESCRIPTION": "Makes a #y${modID}:Trapped card untrapped."
   }
 ]

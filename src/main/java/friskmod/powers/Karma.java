@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+import friskmod.actions.KarmaDamageAction;
 
 public class Karma extends BasePower implements HealthBarRenderPower, LosePlayerHPInterface {
     public static final String POWER_ID = FriskMod.makeID(Karma.class.getSimpleName());
@@ -39,8 +40,7 @@ public class Karma extends BasePower implements HealthBarRenderPower, LosePlayer
             return;
         }
         if (dmgamount > 0) {
-            flashWithoutSound();
-            addToBot(new DamageAction(this.owner, new DamageInfo(AbstractDungeon.player, Math.min(this.owner.currentHealth-1, this.amount), DamageInfo.DamageType.HP_LOSS)));
+            addToTop(new KarmaDamageAction(this));
         }
     }
     @Override

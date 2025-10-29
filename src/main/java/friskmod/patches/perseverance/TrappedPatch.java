@@ -10,6 +10,9 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import friskmod.util.Wiz;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static friskmod.FriskMod.makeID;
 
 public class TrappedPatch {
@@ -22,8 +25,17 @@ public class TrappedPatch {
     public static class TrappedDescription {
         @SpirePrefixPatch
         public static void Prefix(AbstractCard __instance) {
-            if (PerseveranceFields.trapped.get(__instance) && (!__instance.rawDescription.startsWith(Trapped[0]) && !__instance.rawDescription.contains(Trapped[1]))) {
-                __instance.rawDescription = Trapped[0] + __instance.rawDescription;
+            if (PerseveranceFields.trapped.get(__instance)) {
+                if ((!__instance.rawDescription.startsWith(Trapped[0]) && !__instance.rawDescription.contains(Trapped[1]))) {
+                    __instance.rawDescription = Trapped[0] + __instance.rawDescription;
+                }
+            } else{
+                /*
+                    "${modID}:Trapped. NL ",
+                    "NL ${modID}:Trapped. NL",
+                 */
+                __instance.rawDescription = __instance.rawDescription.replaceFirst(Pattern.quote(Trapped[0]), "");
+
             }
         }
     }

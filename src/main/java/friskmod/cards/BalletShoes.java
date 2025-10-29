@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.actions.BalletShoesAction;
 import friskmod.actions.CardPlayAction;
 import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
@@ -51,11 +52,10 @@ public class BalletShoes extends AbstractEasyCard {
     public void update() {
         super.update();
         try {
-            double hand_size = (AbstractDungeon.player.hand.size());
             int card_pos;
             List<AbstractCard> afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != this).collect(java.util.stream.Collectors.toList());
+            double hand_size = (afterHand.size());
             boolean validFlag = false;
-            hand_size -= 1; //assume ballet shoes not in hand
             if (hand_size % 2 == 0) {
                 card_pos = (int) (hand_size - 1) / 2;
                 validFlag = true;
@@ -98,28 +98,33 @@ public class BalletShoes extends AbstractEasyCard {
         return canUse;
     }
 
+//    @Override
+//    public void use(AbstractPlayer p, AbstractMonster m) {
+//        double hand_size = (AbstractDungeon.player.hand.size())-1; //hasn't updated yet?
+//        if (hand_size % 2 == 0) {
+//            --hand_size;
+//        }
+//        int card_pos = (int) (hand_size-1)/2;
+//        List<AbstractCard> afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != this).collect(java.util.stream.Collectors.toList());
+//        AbstractCard chosenCard = afterHand.get(card_pos);
+//        if (chosenCard != null) {
+//            for (int i = 0; i < magicNumber; ++i) {
+//                if (m == null || m.isDeadOrEscaped()) {
+//                    m = AbstractDungeon.getRandomMonster();
+//                }
+//                Wiz.att(new CardPlayAction(chosenCard, m));
+//                Wiz.att(new CustomSFXAction("snd_punchstrong"));
+//                Wiz.att(new WaitAction(0.25f));
+//            }
+//            Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
+//        }
+//        p.hand.moveToExhaustPile(chosenCard);
+//    }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        double hand_size = (AbstractDungeon.player.hand.size())-1; //hasn't updated yet?
-        if (hand_size % 2 == 0) {
-            --hand_size;
-        }
-        int card_pos = (int) (hand_size-1)/2;
-        List<AbstractCard> afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != this).collect(java.util.stream.Collectors.toList());
-        AbstractCard chosenCard = afterHand.get(card_pos);
-        if (chosenCard != null) {
-            for (int i = 0; i < magicNumber; ++i) {
-                if (m == null || m.isDeadOrEscaped()) {
-                    m = AbstractDungeon.getRandomMonster();
-                }
-                Wiz.att(new CardPlayAction(chosenCard, m));
-                Wiz.att(new CustomSFXAction("snd_punchstrong"));
-                Wiz.att(new WaitAction(0.25f));
-            }
-            Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
-        }
-        p.hand.moveToExhaustPile(chosenCard);
+        addToBot(new BalletShoesAction(m, magicNumber));
     }
+
 
     @Override
     public void upp() {

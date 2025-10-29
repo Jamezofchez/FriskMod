@@ -32,7 +32,7 @@ public class RememberKindness extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new RememberKindnessPower(p, DEBUFF_AMOUNT, upgraded),DEBUFF_AMOUNT));
+        addToBot(new ApplyPowerAction(p, p, new RememberKindnessPower(p, DEBUFF_AMOUNT),DEBUFF_AMOUNT));
     }
 
     @Override

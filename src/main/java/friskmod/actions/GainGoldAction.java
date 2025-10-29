@@ -13,7 +13,7 @@ public class GainGoldAction extends AbstractGameAction {
     this.source = source;
     this.target = (AbstractCreature)AbstractDungeon.player;
     this.increaseGold = goldAmount;
-    this.actionType = ActionType.DAMAGE;
+    this.actionType = ActionType.DAMAGE; //this is so shit, but to make sure it happens
     this.duration = Settings.ACTION_DUR_MED;
   }
   

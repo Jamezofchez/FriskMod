@@ -1,25 +1,23 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import com.megacrit.cardcrawl.vfx.combat.HemokinesisEffect;
 import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
+import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
 
 import static friskmod.FriskMod.makeID;
 
-public class Kriyamana extends AbstractEasyCard {
-    public static final String ID = makeID(Kriyamana.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class BreakFree extends AbstractEasyCard {
+    public static final String ID = makeID(BreakFree.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -29,20 +27,25 @@ public class Kriyamana extends AbstractEasyCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 12;
-    private static final int UPG_DAMAGE = 5;
-    private static final int HP_LOSS = 2;
-    public Kriyamana() {
+    private static final int DAMAGE = 8;
+    private static final int UPG_DAMAGE = 4;
+    public BreakFree() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
-        baseMagicNumber = magicNumber = HP_LOSS;
-        tags.add(FriskTags.JUSTICE);
+        tags.add(FriskTags.PERSEVERANCE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new VFXAction(new HemokinesisEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY), 0.5F));
-        addToBot(new LoseHPAction(p, p, this.magicNumber));
-        addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.NONE));
+        addToBot(new CustomSFXAction("mus_sfx_abreak"));
+        dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
+        for (AbstractCard c : AbstractDungeon.player.hand.group) unsealCard(c);
+    }
+
+    private void unsealCard(AbstractCard c) {
+        if (PerseveranceFields.trapped.get(c)){
+            PerseveranceFields.trapped.set(c, false);
+            c.initializeDescription();
+        }
     }
 
     @Override
