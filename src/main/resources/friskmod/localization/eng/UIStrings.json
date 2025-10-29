@@ -95,5 +95,10 @@
     "TEXT": [
       "I am not Threatened!"
     ]
+  },
+  "${modID}:Prarabdha": {
+    "TEXT": [
+      "NL Exhaust."
+    ]
   }
 }

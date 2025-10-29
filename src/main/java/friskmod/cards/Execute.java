@@ -23,7 +23,7 @@ public class Execute extends AbstractEasyCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 13;
+    private static final int DAMAGE = 7;
     private static final int UPG_DAMAGE = 3;
     private static final int NUM_CARDS = 1;
     private static final int GIVEN_XP = 3;
@@ -37,6 +37,7 @@ public class Execute extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        dmg(m, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
         if (!upgraded) {
             addToBot(new GiveInherentXPAction(NUM_CARDS, GIVEN_XP, true));

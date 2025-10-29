@@ -15,7 +15,7 @@ public class GiveRandomCardXP extends AbstractGameAction {
 
     private AbstractPlayer p;
 
-    private int XPamount;
+    public int XPamount;
 
     public GiveRandomCardXP(int XPamount) {
         this.p = AbstractDungeon.player;

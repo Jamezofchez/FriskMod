@@ -12,7 +12,7 @@ public class FallenDown extends BasePower {
     private static final AbstractPower.PowerType TYPE = PowerType.DEBUFF;
     private static final boolean TURN_BASED = true;
     private float multiplier;
-    private static final float multbyamount = 0.5F;
+    private static final float multbyamount = 0.66F; //75% is in line with Paper Frog. Damage increases like +2 +2 +1
 
     //The only thing TURN_BASED controls is the color of the number on the power icon.
     //Turn based powers are white, non-turn based powers are red or green depending on if their amount is positive or negative.

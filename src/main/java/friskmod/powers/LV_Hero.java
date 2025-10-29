@@ -1,23 +1,15 @@
 package friskmod.powers;
 
-import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import friskmod.patches.CardXPFields;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 
-import java.util.Objects;
-
 public class LV_Hero extends BasePower{
     public static final String POWER_ID = FriskMod.makeID(LV_Hero.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
-    private boolean fromFavouriteNumber = false;
+    private int favouriteNumberAmount = 0;
     //The only thing TURN_BASED controls is the color of the number on the power icon.
     //Turn based powers are white, non-turn based powers are red or green depending on if their amount is positive or negative.
     //For a power to actually decrease/go away on its own they do it themselves.
@@ -27,12 +19,12 @@ public class LV_Hero extends BasePower{
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
     }
 
-    public boolean getFromFavouriteNumber() {
-        return fromFavouriteNumber;
+    public int getFavouriteNumberAmount() {
+        return favouriteNumberAmount;
     }
 
-    public void setFromFavouriteNumber() {
-        fromFavouriteNumber = true;
+    public void setFromFavouriteNumber(int amount) {
+        favouriteNumberAmount = amount;
     }
 
     @Override

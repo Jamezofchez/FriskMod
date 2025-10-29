@@ -23,12 +23,12 @@ public class CountdownAgami extends AbstractCountdownPower {
     private static final PowerType TYPE = PowerType.DEBUFF;
     private static final boolean TURN_BASED = false;
 
-    private final int UPG_LV_GAIN;
+    private final int DETONATION_AMOUNT;
 
     public CountdownAgami(AbstractCreature owner, int amount, int countdown, int upg_amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
         this.name = NAME;
-        this.UPG_LV_GAIN = upg_amount;
+        this.DETONATION_AMOUNT = upg_amount;
         updateDescription();
     }
 
@@ -40,7 +40,7 @@ public class CountdownAgami extends AbstractCountdownPower {
 
     @Override
     public AbstractPower makeCopy() {
-        return new CountdownAgami(owner, amount, amount2, UPG_LV_GAIN);
+        return new CountdownAgami(owner, amount, amount2, DETONATION_AMOUNT);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CountdownAgami extends AbstractCountdownPower {
     @Override
     public void upgrade(){
         super.upgrade();
-        this.amount += UPG_LV_GAIN;
+        this.amount += DETONATION_AMOUNT;
         updateDescription();
     }
     @Override

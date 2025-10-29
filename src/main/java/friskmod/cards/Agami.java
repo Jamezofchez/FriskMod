@@ -26,7 +26,7 @@ public class Agami extends AbstractEasyCard {
     );
     private static final int WAIT_TIMER = 5;
     private static final int LV_GAIN = 0;
-    private static final int UPG_LV_GAIN = 3;
+    private static final int UPG_LV_GAIN = 1;
 
 
     public Agami() {
@@ -46,6 +46,6 @@ public class Agami extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_LV_GAIN);
+//        upgradeMagicNumber(UPG_LV_GAIN);
     }
 }

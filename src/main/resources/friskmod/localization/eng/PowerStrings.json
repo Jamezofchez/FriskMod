@@ -8,10 +8,10 @@
   "${modID}:CountdownAgami": {
     "NAME": "Agami",
     "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, convert this enemy's ${modID}:LV to ${modID}:KR",
-      "On #yExpiry after playing #b%s cards, give this enemy #b%s ${modID}:LV and convert this enemy's ${modID}:LV to ${modID}:KR.",
-      "On #yExpiry after playing #b%s card, convert this enemy's ${modID}:LV to ${modID}:KR.",
-      "On #yExpiry after playing #b%s card, give this enemy #b%s ${modID}:LV and convert this enemy's ${modID}:LV to ${modID}:KR."
+      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR",
+      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR. #y${modID}:Detonate its #y${modID}:KR #b%s times.",
+      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR.",
+      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR. #y${modID}:Detonate its #y${modID}:KR #b%s times."
     ]
   },
   "${modID}:CountdownDraw": {
@@ -49,13 +49,13 @@
   "${modID}:EvolvePower": {
     "NAME": "Evolve",
     "DESCRIPTIONS": [
-      "Gain #b%s ${modID}:LV whenever you play a card."
+      "Gain #b%s #y${modID}:LV whenever you play a card."
     ]
   },
   "${modID}:GarbageDumpPower": {
     "NAME": "Garbage Dump",
     "DESCRIPTIONS": [
-      "Gain #b%s Temp HP each time you spend #y${modID}:Wasted Energy."
+      "Gain #b%s Block each time you spend #y${modID}:Wasted Energy."
     ]
   },
   "${modID}:FallenDown": {
@@ -70,6 +70,12 @@
       "Takes #b%s damage whenever you lose HP, but cannot kill on its own."
     ]
   },
+  "${modID}:KillWithKindnessPower": {
+    "NAME": "Kindness",
+    "DESCRIPTIONS": [
+      "Whenever you buff an enemy, it gains #b%s #Vulnerable."
+    ]
+  },
   "${modID}:LV_Enemy": {
     "NAME": "LV",
     "DESCRIPTIONS": [
@@ -79,14 +85,14 @@
   "${modID}:LV_Hero": {
     "NAME": "LV",
     "DESCRIPTIONS": [
-      "Your next #yAttack will gain #b%s ${modID}:XP."
+      "Your next #yAttack will gain #b%s #y${modID}:XP."
     ]
   },
   "${modID}:Overcome": {
     "NAME": "Overcome",
     "DESCRIPTIONS": [
-      "Your next #b%s card which fails to play this turn is ${modID}:Persevered.",
-      "Your next #b%s cards which fail to play this turn are ${modID}:Persevered."
+      "Your next #b%s card which fails to play this turn is #y${modID}:Persevered.",
+      "Your next #b%s cards which fail to play this turn are #y${modID}:Persevered."
     ]
   },
   "${modID}:Pleaded": {
@@ -98,20 +104,14 @@
   "${modID}:PreventLVLoss": {
     "NAME": "Prevent LV Loss",
     "DESCRIPTIONS": [
-      "Prevent the next #b%s time you would lose ${modID}:LV this turn.",
-      "Prevent the next #b%s times you would lose ${modID}:LV this turn."
+      "Prevent the next #b%s time you would lose #y${modID}:LV this turn.",
+      "Prevent the next #b%s times you would lose #y${modID}:LV this turn."
     ]
   },
   "${modID}:RememberBraveryPower": {
     "NAME": "Bravery",
     "DESCRIPTIONS": [
-      "Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP."
-    ]
-  },
-  "${modID}:RememberKindnessPower": {
-    "NAME": "Kindness",
-    "DESCRIPTIONS": [
-      "Whenever you buff an enemy, it gains #b%s #Vulnerable."
+      "Whenever you would lose #y${modID}:LV, a random card in your hand gains equivalent #y${modID}:XP."
     ]
   },
   "${modID}:RememberPatiencePower": {
@@ -123,7 +123,7 @@
   "${modID}:TornNotebookPower": {
     "NAME": "Torn Notebook",
     "DESCRIPTIONS": [
-      "The next #b%s times you lose HP or Temp HP, gain 1 #yBuffer."
+      "The next #b%s times you lose HP, gain 1 #yBuffer."
     ]
   },
   "${modID}:Spared": {
@@ -148,7 +148,7 @@
   "${modID}:Vitality": {
     "NAME": "Vitality",
     "DESCRIPTIONS": [
-      "Increases Temp HP gained from cards by #b%s"
+      "Increases #y${modID}:Temp_HP gained from cards by #b%s"
     ]
   },
   "${modID}:FavouriteNumberPower": {

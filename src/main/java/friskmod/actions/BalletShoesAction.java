@@ -1,11 +1,13 @@
 package friskmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.Wiz;
 
 import java.util.List;
@@ -22,25 +24,27 @@ public class BalletShoesAction extends AbstractGameAction {
 
     @Override
     public void update() {
-        double hand_size = (AbstractDungeon.player.hand.size())-1; //hasn't updated yet?
-        if (hand_size % 2 == 0) {
-            --hand_size;
-        }
-        int card_pos = (int) (hand_size-1)/2;
+//        double hand_size = (AbstractDungeon.player.hand.size())-1; //hasn't updated yet?
+//        if (hand_size % 2 == 0) {
+//            --hand_size;
+//        }
         List<AbstractCard> afterHand = AbstractDungeon.player.hand.group;
+        double hand_size = afterHand.size();
+        int card_pos = (int) (hand_size-1)/2;
+        if (card_pos < 0) { //no cards in hand
+            return;
+        }
         AbstractCard chosenCard = afterHand.get(card_pos);
         if (chosenCard != null) {
             for (int i = 0; i < numTimes; ++i) {
-                if (m == null || m.isDeadOrEscaped()) {
-                    m = AbstractDungeon.getRandomMonster();
-                }
-                Wiz.att(new CardPlayAction(chosenCard, m));
-                Wiz.att(new CustomSFXAction("snd_punchstrong"));
                 Wiz.att(new WaitAction(0.25f));
+                Wiz.att(new CustomSFXAction("snd_punchstrong"));
+                Wiz.att(new CardPlayAction(chosenCard, m));
             }
             Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
+            AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
+            PerseveranceFields.trapped.set(tmp, true);
+            Wiz.atb(new MakeTempCardInHandAction(tmp));
         }
-        AbstractDungeon.player.hand.moveToExhaustPile(chosenCard);
     }
-
 }

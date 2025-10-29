@@ -1,15 +1,18 @@
 package friskmod.damagemods;
 
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.actions.CustomSFXAction;
+import friskmod.helper.SharedFunctions;
 import friskmod.patches.GhostlyPatch;
 import friskmod.powers.*;
 import friskmod.util.Wiz;
@@ -77,13 +80,24 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
         if (remainderLV > 0){
             extraLV++;
         }
-        LV_Hero LV = new LV_Hero(AbstractDungeon.player, extraLV);
-        LV.setFromFavouriteNumber();
-        Wiz.att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, LV, extraLV));
-        if (healFlag){
-            Wiz.att(new CustomSFXAction("snd_wrongvictory"));
-            Wiz.att(new HealAction(target, AbstractDungeon.player, 9));
-            return 0;
+        if (extraLV > 0) {
+            LV_Hero LV = new LV_Hero(AbstractDungeon.player, extraLV);
+            LV.setFromFavouriteNumber(extraLV);
+            int index = 0;
+            for (AbstractGameAction action : AbstractDungeon.actionManager.actions) {
+                if (action instanceof RemoveSpecificPowerAction){
+                    if (SharedFunctions.MarkLVConsumedRemoveSpecificPowerActionPatch.isLVConsumed.get(action)){
+                        AbstractDungeon.actionManager.actions.add(index+1, new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, LV, extraLV));
+                        break;
+                    }
+                }
+                ++index;
+            }
+            if (healFlag) {
+                Wiz.att(new CustomSFXAction("snd_wrongvictory"));
+                Wiz.att(new HealAction(target, AbstractDungeon.player, 9));
+                return 0;
+            }
         }
         int newDamageAmount = damageAmount + (extraLV*LV_power);
         if (newDamageAmount % 10 != 9) { //overshot

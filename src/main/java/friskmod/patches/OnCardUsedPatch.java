@@ -33,7 +33,7 @@ public class OnCardUsedPatch {
             if (!card.dontTriggerOnUseCard){
                 AbstractPower possNonAttackPower = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
                 if (possNonAttackPower != null) {
-                    Wiz.atb(new ResetDamageTypeAttack(card, (NonAttackPower) possNonAttackPower));
+                    Wiz.atb(new ResetDamageTypeAttack((NonAttackPower) possNonAttackPower));
                 }
                 AbstractPower possFavouriteNumber = AbstractDungeon.player.getPower(FavouriteNumberPower.POWER_ID);
                 if (possFavouriteNumber != null) {

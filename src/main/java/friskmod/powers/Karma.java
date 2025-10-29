@@ -40,9 +40,14 @@ public class Karma extends BasePower implements HealthBarRenderPower, LosePlayer
             return;
         }
         if (dmgamount > 0) {
-            addToTop(new KarmaDamageAction(this));
+            triggerKarma();
         }
     }
+
+    public void triggerKarma() {
+        addToTop(new KarmaDamageAction(this));
+    }
+
     @Override
     public void updateDescription() {
         String baseDescription = DESCRIPTIONS[0];

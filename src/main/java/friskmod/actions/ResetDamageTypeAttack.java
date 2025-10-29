@@ -9,14 +9,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.powers.NonAttackPower;
 
 public class ResetDamageTypeAttack extends AbstractGameAction {
-    private AbstractCard card;
     private NonAttackPower power;
 
-    public ResetDamageTypeAttack(AbstractCard card, NonAttackPower power) {
-        this.card = card;
+    public ResetDamageTypeAttack(NonAttackPower power) {
         this.power = power;
-        this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
-        this.actionType = ActionType.USE;
     }
     @Override
     public void update() {

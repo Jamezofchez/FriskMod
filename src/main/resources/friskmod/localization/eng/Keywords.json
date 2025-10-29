@@ -47,7 +47,7 @@
     "NAMES": [
       "KR"
     ],
-    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose HP or Temp HP. NL KR cannot kill."
+    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose HP. NL KR cannot kill."
   },
   {
     "PROPER_NAME": "Countdown",
@@ -105,7 +105,15 @@
       "Fallen Down",
       "Fallen_Down"
     ],
-    "DESCRIPTION": "Receive 50% more damage from non-Attacks."
+    "DESCRIPTION": "Receive 66% more damage from non-Attacks."
+  },
+  {
+    "PROPER_NAME": "Temp HP",
+    "NAMES": [
+      "Temp HP",
+      "Temp_HP"
+    ],
+    "DESCRIPTION": "Until end of combat, prevents damage to HP. Frisk cards treat Temp HP loss as HP loss."
   },
   {
     "PROPER_NAME": "Steal",
@@ -141,7 +149,8 @@
     "PROPER_NAME": "Trapped",
     "NAMES": [
       "Trapped",
-      "trapped"
+      "trapped",
+      "Trap"
     ],
     "DESCRIPTION": "#yTrapped cards cannot be played, even by #y${modID}:Persevere effects. NL #yTrapped cards cause you to lose 1 energy when drawn."
   },
@@ -214,7 +223,7 @@
   "NAMES": [
     "Vitality"
   ],
-  "DESCRIPTION": "Vitality improves Temp HP gained from ALL sources."
+  "DESCRIPTION": "Vitality improves #y${modID}:Temp_HP gained from ALL sources."
 },
   {
     "PROPER_NAME": "Demonify",
@@ -231,5 +240,13 @@
       "Unseal"
     ],
     "DESCRIPTION": "Makes a #y${modID}:Trapped card untrapped."
+  },
+  {
+    "PROPER_NAME": "Detonate",
+    "NAMES": [
+      "Detonate",
+      "Detonate"
+    ],
+    "DESCRIPTION": "#y${modID}:KR deals damage as if you had lost HP."
   }
 ]

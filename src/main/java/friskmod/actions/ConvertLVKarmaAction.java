@@ -15,12 +15,12 @@ public class ConvertLVKarmaAction extends AbstractGameAction
 
     private final AbstractPlayer p = AbstractDungeon.player;
 
-    private final int extraLV;
+    private final int DETONATION_AMOUNT;
 
-    public ConvertLVKarmaAction(AbstractCreature c, int extraLV) {
+    public ConvertLVKarmaAction(AbstractCreature c, int DETONATION_AMOUNT) {
         this.c = c;
         this.actionType = ActionType.SPECIAL;
-        this.extraLV = extraLV;
+        this.DETONATION_AMOUNT = DETONATION_AMOUNT;
     }
 
     @Override
@@ -30,10 +30,12 @@ public class ConvertLVKarmaAction extends AbstractGameAction
         if (posspow != null){
             KR_Amount = posspow.amount;
         }
-        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(c, p, new Karma(c, KR_Amount), KR_Amount));
-        if (extraLV > 0) {
-            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(c, p, new LV_Enemy(c, extraLV), extraLV));
+        if (DETONATION_AMOUNT > 0) {
+            for (int i = 0; i < DETONATION_AMOUNT; i++) {
+                AbstractDungeon.actionManager.addToTop(new DetonateKarmaAction(c));
+            }
         }
+        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(c, p, new Karma(c, KR_Amount), KR_Amount));
         AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(c, p, LV_Enemy.POWER_ID));
         this.isDone = true;
     }

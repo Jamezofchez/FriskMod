@@ -31,11 +31,11 @@ public class CardPlayAction extends AbstractGameAction {
             tmp.target_x = Settings.WIDTH / 2.0F - 300.0F * Settings.scale;
             tmp.target_y = Settings.HEIGHT / 2.0F;
             if (m == null || m.isDeadOrEscaped()) {
-                m = (AbstractDungeon.getCurrRoom()).monsters.getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+                m = AbstractDungeon.getRandomMonster();
             }
             tmp.calculateCardDamage(m);
             tmp.purgeOnUse = true;
-            AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), false);
+            AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
         }
         tickDuration();
     }

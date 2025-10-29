@@ -16,7 +16,7 @@
   "${modID}:Agami": {
     "NAME": "Agami",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR.",
-    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, give the enemy !M! ${modID}:LV and convert its ${modID}:LV into ${modID}:KR."
+    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR. NL ${modID}:Detonate its ${modID}:KR. "
 
   },
   "${modID}:AncientStrike": {
@@ -33,7 +33,7 @@
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
-    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and Exhaust it."
+    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and ${modID}:Trap it."
   },
   "${modID}:OLDBurnOut": {
     "NAME": "Burn Out",
@@ -41,7 +41,7 @@
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",
-    "DESCRIPTION": "${modID}:Critical: Gain !M! Temp HP. NL ${modID}:Pickup: Heal !${modID}:M2! HP."
+    "DESCRIPTION": "${modID}:Critical: Gain !M! ${modID}:Temp_HP. NL ${modID}:Pickup: Heal !${modID}:M2! HP."
   },
   "${modID}:Blooky": {
     "NAME": "Blooky",
@@ -55,11 +55,11 @@
   },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
-    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Gain Temp HP equal to the unblocked damage dealt."
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Gain ${modID}:Temp_HP equal to the unblocked damage dealt."
   },
   "${modID}:ButterscotchPie": {
     "NAME": "Butterscotch Pie",
-    "DESCRIPTION": "Convert your Block into Temp HP. Keep up to !M! Block. NL Exhaust."
+    "DESCRIPTION": "Convert your Block into ${modID}:Temp_HP. Keep up to !M! Block. NL Exhaust."
   },
   "${modID}:Chill": {
     "NAME": "Chill",
@@ -109,8 +109,8 @@
   },
   "${modID}:Execute": {
     "NAME": "Execute",
-    "DESCRIPTION": "Deal !D! damage. NL Give 1 card at random !M! ${modID}:inherent ${modID}:XP.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Give up to 1 card !M! ${modID}:inherent ${modID}:XP."
+    "DESCRIPTION": "Deal !D! damage twice. NL Give 1 card at random !M! ${modID}:inherent ${modID}:XP.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage twice. NL Give up to 1 card !M! ${modID}:inherent ${modID}:XP."
   },
   "${modID}:OLDExpertise": {
     "NAME": "Expertise",
@@ -159,6 +159,10 @@
     "NAME": "Karmic Strike",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:KR."
   },
+  "${modID}:KillWithKindness": {
+    "NAME": "Kill With Kindness",
+    "DESCRIPTION": "Whenever you buff an enemy, it gains !M! Vulnerable."
+  },
   "${modID}:Kriyamana": {
     "NAME": "Kriyamana",
     "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
@@ -182,18 +186,18 @@
     "NAME": "Pounce",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL Deals double damage if the enemy does not intend to attack."
   },
+  "${modID}:OLDPrarabdha": {
+    "NAME": "OLDPrarabdha",
+    "DESCRIPTION": "Apply !M! ${modID}:KR. If ${modID}:Threatened, apply !M! ${modID}:KR again."
+  },
   "${modID}:Prarabdha": {
     "NAME": "Prarabdha",
-    "DESCRIPTION": "Apply !M! ${modID}:KR. If ${modID}:Threatened, apply !M! ${modID}:KR again."
+    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, add a *Steal into your hand. NL It costs 0 this turn and exhausts."
   },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
     "DESCRIPTION": "Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP.",
     "UPGRADE_DESCRIPTION": "Innate. NL Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP."
-  },
-  "${modID}:RememberKindness": {
-    "NAME": "Remember Kindness",
-    "DESCRIPTION": "Whenever you buff an enemy, it gains !M! Vulnerable."
   },
   "${modID}:RememberPatience": {
     "NAME": "Remember Patience",
@@ -219,12 +223,12 @@
   },
   "${modID}:Sanchita": {
     "NAME": "Sanchita",
-    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! Temp HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
+    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! ${modID}:Temp_HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",
     "DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Gain !M! Temp HP. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Gain !M! ${modID}:Temp_HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
   },
   "${modID}:SelfReflection": {
@@ -242,7 +246,7 @@
   },
   "${modID}:SnowedInn": {
     "NAME": "Snowed Inn",
-    "DESCRIPTION": "Gain !M! Temp HP. NL Trigger ALL of your ${modID}:Countdowns."
+    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Trigger ALL of your ${modID}:Countdowns."
   },
   "${modID}:Spare": {
     "NAME": "Spare",
