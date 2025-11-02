@@ -84,13 +84,13 @@ public class Steal extends AbstractEasyCard {
 //            if (isCritical()){
 //                TriggerCriticalEffect(p, m);
 //            }
-            Wiz.atb(new DrawCardAction(p, UPG_DRAW_AMOUNT));
+            Wiz.atb(new DrawCardAction(p, UPG_DRAW_AMOUNT)); //not the best upgrade but eh
         }
     }
 
 //    @Override
 //    public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
-//        addToBot(new GainEnergyAction(CRITICAL_ENERGY_GAIN));
+//        addToBot(new GainEnergyAction(CRITICAL_ENERGY_GAIN)); //glow confusion
 //    }
 
     @Override

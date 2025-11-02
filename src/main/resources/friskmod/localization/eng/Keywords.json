@@ -116,13 +116,6 @@
     "DESCRIPTION": "Until end of combat, prevents damage to HP. Frisk cards treat Temp HP loss as HP loss."
   },
   {
-    "PROPER_NAME": "Steal",
-    "NAMES": [
-      "Steal"
-    ],
-    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV."
-  },
-  {
     "PROPER_NAME": "Copy",
     "NAMES": [
       "Copy"
@@ -248,5 +241,49 @@
       "Detonate"
     ],
     "DESCRIPTION": "#y${modID}:KR deals damage as if you had lost HP."
+  },
+  {
+    "PROPER_NAME": "Steal",
+    "NAMES": [
+      "Steal",
+      "Steal"
+    ],
+    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL The card will glow if anything can be stolen."
+  },
+  {
+    "PROPER_NAME": "Steal",
+    "NAMES": [
+      "Steal",
+      "Steal"
+    ],
+    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL The card will glow if anything can be stolen."
+  },
+  {
+    "PROPER_NAME": "Draft",
+    "NAMES": [
+      "Draft"
+    ],
+    "DESCRIPTION": "Choose an effect to obtain from a selection of choices. NL Choose a remaining effect for the enemy."
+  },
+  {
+    "PROPER_NAME": "Dream",
+    "NAMES": [
+      "Dream"
+    ],
+    "DESCRIPTION": "A positive effect."
+  },
+  {
+    "PROPER_NAME": "Nightmare",
+    "NAMES": [
+      "Nightmare"
+    ],
+    "DESCRIPTION": "A negative effect."
+  },
+  {
+    "PROPER_NAME": "NEO",
+    "NAMES": [
+      "NEO"
+    ],
+    "DESCRIPTION": "The target takes damage for each point of Block it gains. Didn't you know NEO is famous for its high defense?"
   }
 ]

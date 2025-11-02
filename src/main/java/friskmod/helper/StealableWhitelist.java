@@ -92,9 +92,9 @@ public class StealableWhitelist {
         if (enemyPower instanceof CurlUpPower){
             return true;
         }
-        if (enemyPower instanceof RegenerateMonsterPower){
-            return true;
-        }
+//        if (enemyPower instanceof RegenerateMonsterPower){
+//            return true;
+//        }
         if (InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower) && InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower) >= enemyPower.amount){
             return false;
         }
@@ -125,6 +125,8 @@ public class StealableWhitelist {
         (new applyPowerBuilder(ThornsPower.POWER_ID)).build();
 
         (new applyPowerBuilder(Determination.POWER_ID)).build();
+        (new applyPowerBuilder(EvolvePower.POWER_ID)).build();
+
 
         //Modified enemy powers
         (new applyPowerBuilder(CurlUpPower.POWER_ID)).build();

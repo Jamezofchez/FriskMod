@@ -114,6 +114,12 @@
       "Whenever you would lose #y${modID}:LV, a random card in your hand gains equivalent #y${modID}:XP."
     ]
   },
+  "${modID}:RememberKindnessPower": {
+    "NAME": "Kindness",
+    "DESCRIPTIONS": [
+      "Whenever an enemy gains Block, it gains #b%s Weak."
+    ]
+  },
   "${modID}:RememberPatiencePower": {
     "NAME": "Patience",
     "DESCRIPTIONS": [
@@ -136,6 +142,12 @@
     "NAME": "Betrayed",
     "DESCRIPTIONS": [
       "This enemy gains twice as much #y${modID}:LV when attacked."
+    ]
+  },
+  "${modID}:NEO": {
+    "NAME": "NEO",
+    "DESCRIPTIONS": [
+      "The target takes #b%s damage for each point of Block it gains. Reduced by 1 on turn end."
     ]
   },
   "${modID}:NonAttackPower": {

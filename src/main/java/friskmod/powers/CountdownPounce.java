@@ -3,6 +3,7 @@ package friskmod.powers;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -31,6 +32,8 @@ public class CountdownPounce extends AbstractCountdownPower {
 
     private final int UPG_DAMAGE;
 
+    public boolean doPlayerNormalDamage = false;
+
     public CountdownPounce(AbstractCreature owner, int amount, int countdown, int upg_amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
         this.name = NAME;
@@ -41,7 +44,7 @@ public class CountdownPounce extends AbstractCountdownPower {
     @Override
     public void onCountdownTrigger(boolean expire) {
         if (owner != null && (owner instanceof AbstractMonster)) {
-            if (((AbstractMonster) owner).getIntentBaseDmg() >= 0) {
+            if (doNormalDamage()) {
                 //AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
                 addToBot(new DamageAction(owner, new DamageInfo(AbstractDungeon.player, amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
             } else {
@@ -66,13 +69,35 @@ public class CountdownPounce extends AbstractCountdownPower {
             descNum += 1;
         }
         String baseDescription = DESCRIPTIONS[descNum];
-        this.description = String.format(baseDescription, amount2, amount);
+        if (doNormalDamage()) {
+            this.description = String.format(baseDescription, amount2, amount);
+        } else{
+            this.description = String.format(baseDescription, amount2, amount*2);
+        }
+    }
+
+    private boolean doNormalDamage() {
+        if ((owner instanceof AbstractPlayer)) {
+            return doPlayerNormalDamage;
+        } else{
+            return ((AbstractMonster) owner).getIntentBaseDmg() >= 0;
+
+        }
+    }
+
+    public void onTurnStart() {
+        setPlayerNormalDamage(false);
     }
 
     @Override
     public void upgrade(){
         super.upgrade();
         this.amount += UPG_DAMAGE;
+        updateDescription();
+    }
+
+    public void setPlayerNormalDamage(boolean b) {
+        doPlayerNormalDamage = b;
         updateDescription();
     }
 }

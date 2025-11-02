@@ -26,6 +26,5 @@ public class FriskTags {
     @SpireEnum
     public static AbstractCard.CardTags PERSEVERANCE;
 
-
 }
 

@@ -16,12 +16,12 @@ import static friskmod.FriskMod.makeID;
 
 public abstract class AbstractChooseCard extends AbstractEasyCard {
 
-    public AbstractChooseCard(){
+    public AbstractChooseCard(String ID){
         super(
                 ID,
                 new CardStats(
-                        Frisk.Meta.Enums.CARD_COLOR,
-                        CardType.POWER,
+                        CardColor.COLORLESS,
+                        CardType.SKILL,
                         CardRarity.SPECIAL,
                         CardTarget.NONE,
                         -2
@@ -29,5 +29,14 @@ public abstract class AbstractChooseCard extends AbstractEasyCard {
         );
     }
 
-    public abstract void chooseOption(AbstractPlayer p, AbstractMonster m);
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        chooseOption();
+    }
+
+    @Override
+    public void onChoseThisOption() {
+        chooseOption();
+    }
+
+    public abstract void chooseOption();
 }

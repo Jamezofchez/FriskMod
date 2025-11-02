@@ -5,13 +5,16 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.actions.StealAllBlockAction;
+import friskmod.actions.StealPowerAction;
 import friskmod.character.Frisk;
+import friskmod.helper.StealableWhitelist;
 import friskmod.helper.ThreatenedCheck;
 import friskmod.powers.Karma;
 import friskmod.powers.LV_Enemy;
-import friskmod.powers.LV_Hero;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
@@ -23,7 +26,7 @@ public class Prarabdha extends AbstractEasyCard {
     public static final String[] TEXT = uiStrings.TEXT;
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
-    private AbstractCard stealCard;
+//    private AbstractCard stealCard;
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
@@ -39,29 +42,42 @@ public class Prarabdha extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = KARMA_AND_LV_AMOUNT;
         tags.add(FriskTags.JUSTICE);
-        stealCard = new Steal();
-        stealCard.setCostForTurn(0);
-        stealCard.initializeDescription();
-        stealCard.rawDescription = stealCard.rawDescription + TEXT[0];
-        stealCard.exhaust = true;
-        this.cardsToPreview = stealCard;
+//        stealCard = new Steal();
+//        stealCard.setCostForTurn(0);
+//        stealCard.initializeDescription();
+//        stealCard.rawDescription = stealCard.rawDescription + TEXT[0];
+//        stealCard.exhaust = true;
+//        this.cardsToPreview = stealCard;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(m, p, new LV_Enemy(m, magicNumber), magicNumber));
         addToBot(new ApplyPowerAction(m, p, new Karma(m, magicNumber), magicNumber));
-        if (ThreatenedCheck.isThreatened()) {
+        if (extraEffectCheck()) {
             glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-            addToBot(new MakeTempCardInHandAction(stealCard.makeStatEquivalentCopy()));
         }
     }
 
     @Override
     public void triggerOnGlowCheck() {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (ThreatenedCheck.isThreatened()) {
+        if (extraEffectCheck()) {
             glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+            addToBot(new StealAllBlockAction(AbstractDungeon.getMonsters().monsters));
+            addToBot(new StealPowerAction(AbstractDungeon.getMonsters().monsters));
         }
+    }
+
+    private boolean extraEffectCheck(){
+        if (!ThreatenedCheck.isThreatened()){
+            return false;
+        }
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

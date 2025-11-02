@@ -99,6 +99,10 @@
     "NAME": "Don't Need Friends",
     "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Add a *I'm... to your hand."
   },
+  "${modID}:Dream": {
+    "NAME": "Dream",
+    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Nightmare. NL ${modID}:Draft !M! ${modID}:Dream for each unique Debuff the enemy has."
+  },
   "${modID}:Duel": {
     "NAME": "Dual!",
     "DESCRIPTION": "Put ALL ${modID}:Strikes from your draw pile to your hand. NL Exhaust."
@@ -184,7 +188,7 @@
   },
   "${modID}:Pounce": {
     "NAME": "Pounce",
-    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL Deals double damage if the enemy does not intend to attack."
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL Deals double damage if the target does not intend to attack."
   },
   "${modID}:OLDPrarabdha": {
     "NAME": "OLDPrarabdha",
@@ -192,12 +196,16 @@
   },
   "${modID}:Prarabdha": {
     "NAME": "Prarabdha",
-    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, add a *Steal into your hand. NL It costs 0 this turn and exhausts."
+    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, ${modID}:Steal ALL enemies' Block and buffs."
   },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
     "DESCRIPTION": "Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP.",
     "UPGRADE_DESCRIPTION": "Innate. NL Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP."
+  },
+  "${modID}:RememberKindness": {
+    "NAME": "Remember Kindness",
+    "DESCRIPTION": "Whenever an enemy gains Block, it gains !M! Weak."
   },
   "${modID}:RememberPatience": {
     "NAME": "Remember Patience",
@@ -255,8 +263,8 @@
   },
   "${modID}:Steal": {
     "NAME": "Steal",
-    "DESCRIPTION": "Steal ALL enemies' Block and buffs.",
-    "UPGRADE_DESCRIPTION": "Steal ALL enemies' Block and buffs. NL Draw a card.",
+    "DESCRIPTION": "${modID}:Steal ALL enemies' Block and buffs.",
+    "UPGRADE_DESCRIPTION": "${modID}:Steal ALL enemies' Block and buffs. NL Draw a card.",
     "EXTENDED_DESCRIPTION": [
       " NL (Block steal is negated by Artifact)"
     ]
@@ -264,6 +272,10 @@
   "${modID}:Strike_Frisk": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
+  },
+  "${modID}:Tinker": {
+    "NAME": "Tinker",
+    "DESCRIPTION": "Give the enemy !B! Block. NL Give the enemy !M! ${modID}:NEO."
   },
   "${modID}:ToAsh": {
     "NAME": "To Ash",

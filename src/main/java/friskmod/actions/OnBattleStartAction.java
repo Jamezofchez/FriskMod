@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.patches.InherentPowerTagFields;
 import friskmod.powers.AfterCardPlayedInterface;
+import friskmod.util.Wiz;
 
 public class OnBattleStartAction extends AbstractGameAction {
     private final AbstractRoom room;
@@ -23,6 +24,7 @@ public class OnBattleStartAction extends AbstractGameAction {
         isDone = true;
     }
     private void publishOnBattleStart() {
+        Wiz.att(new ResetDraftAction());
         for (AbstractCreature m : (AbstractDungeon.getMonsters()).monsters) {
             for (AbstractPower p : m.powers){
                 InherentPowerTagFields.inherentPowerFields.inherentPower.set(p, true);

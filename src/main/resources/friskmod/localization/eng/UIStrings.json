@@ -100,5 +100,29 @@
     "TEXT": [
       "NL Exhaust."
     ]
-  }
+  },
+  "${modID}:AbstractDreamNightmareCard": {
+    "TEXT": [
+      "Apply %s %s to %s.",
+      "yourself",
+      "the enemy",
+      "%s of %s",
+      "Dream",
+      "Nightmare"
+    ]
+  },
+  "${modID}:OpenDraftAction": {
+    "TEXT": [
+      "Apply a %s to %s.",
+      "Dream",
+      "Nightmare",
+      "yourself",
+      "the enemy"
+    ]
+  },
+  "${modID}:DreamOfDetermination": {
+  "TEXT": [
+    "Hopes and Dreams"
+  ]
+}
 }
