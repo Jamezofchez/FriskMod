@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -24,11 +25,13 @@ public class BalletShoesAction extends AbstractGameAction {
 
     @Override
     public void update() {
+        this.isDone = true;
 //        double hand_size = (AbstractDungeon.player.hand.size())-1; //hasn't updated yet?
 //        if (hand_size % 2 == 0) {
 //            --hand_size;
 //        }
-        List<AbstractCard> afterHand = AbstractDungeon.player.hand.group;
+        AbstractPlayer p = AbstractDungeon.player;
+        List<AbstractCard> afterHand = p.hand.group;
         double hand_size = afterHand.size();
         int card_pos = (int) (hand_size-1)/2;
         if (card_pos < 0) { //no cards in hand
@@ -41,10 +44,13 @@ public class BalletShoesAction extends AbstractGameAction {
                 Wiz.att(new CustomSFXAction("snd_punchstrong"));
                 Wiz.att(new CardPlayAction(chosenCard, m));
             }
-            Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
+            if (numTimes == 3){
+                Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
+            }
             AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
             PerseveranceFields.trapped.set(tmp, true);
             Wiz.atb(new MakeTempCardInHandAction(tmp));
+            p.hand.moveToExhaustPile(chosenCard);
         }
     }
 }

@@ -6,7 +6,9 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.PlayerLoseHPAction;
+import friskmod.powers.BarrierPower;
 import friskmod.util.Wiz;
 import javassist.CtBehavior;
 
@@ -19,6 +21,18 @@ import java.util.ArrayList;
         //AbstractCreature __instance, DamageInfo info, @ByRef int[] damageAmount, @ByRef boolean[] hadBlock
 )
 public class OnPlayerLoseTempHPPatch {
+    @SpirePrefixPatch
+    public static SpireReturn<Void> Prefix(Object[] __args) {
+        AbstractCreature creature = (AbstractCreature) __args[0];
+        if (creature instanceof AbstractPlayer) {
+            AbstractPower posspow = creature.getPower(BarrierPower.POWER_ID);
+            if (posspow != null) {
+                posspow.onSpecificTrigger();
+                return SpireReturn.Return();
+            }
+        }
+        return SpireReturn.Continue();
+    }
     @SpireInsertPatch(
             locator= OnPlayerLoseTempHPPatch.TempHPLocator.class,
             localvars={"damageAmount", "temporaryHealth"}

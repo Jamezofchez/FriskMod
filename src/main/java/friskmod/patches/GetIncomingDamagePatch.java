@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import friskmod.util.Wiz;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 
@@ -27,7 +28,7 @@ public class GetIncomingDamagePatch {
     public static class TIDHook {
         @SpireInsertPatch(locator = Locator.class)
         public static void hook(AbstractDungeon __instance, SpriteBatch sb) {
-            if (AbstractDungeon.player != null && AbstractDungeon.currMapNode != null && (AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT) {
+            if (Wiz.isInCombat()) {
                 int c = 0, dmg = 0, tmp = 0;
                 if (AbstractDungeon.getMonsters() != null) {
                     for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {

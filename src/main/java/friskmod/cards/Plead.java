@@ -57,7 +57,7 @@ public class Plead extends AbstractEasyCard {
         int playerBlock = p.currentBlock;
         addToBot(new LoseBlockAction(p, p, playerBlock));
         if (upgraded) {
-            List<AbstractMonster> enemies = Wiz.getEnemies();
+            List<AbstractMonster> enemies = Wiz.getMonsters();
             useEnemies(p, enemies, playerBlock);
         } else {
             // Wrap single target into a list

@@ -1,10 +1,14 @@
 package friskmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 import friskmod.util.Wiz;
 
 public class NEOHitAction extends AbstractGameAction {
@@ -17,11 +21,14 @@ public class NEOHitAction extends AbstractGameAction {
     }
 
     public void update() {
-        Wiz.att(new WaitAction(0.2F));
-        tickDuration();
-        if (this.isDone) {
-            Wiz.atb(new CustomSFXAction("snd_shock.wav"));
-            Wiz.atb(new DamageAction(this.target, new DamageInfo(this.source, this.amount, DamageInfo.DamageType.HP_LOSS), AttackEffect.LIGHTNING, false, true));
+        this.isDone = true;
+        if (this.source == null){
+            this.source = AbstractDungeon.player;
         }
+        int damage = this.amount*blockAmount;
+        Wiz.att(new DamageAction(this.target, new DamageInfo(this.target, damage, DamageInfo.DamageType.HP_LOSS), AbstractGameAction.AttackEffect.NONE, true));
+        float speedTime = 0.1F;
+        Wiz.att(new VFXAction(new LightningEffect(this.target.drawX, this.target.drawY), speedTime));
+        Wiz.att(new CustomSFXAction("snd_shock"));
     }
 }

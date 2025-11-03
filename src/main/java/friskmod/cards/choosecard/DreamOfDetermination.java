@@ -10,9 +10,9 @@ import static friskmod.FriskMod.makeID;
 
 public class DreamOfDetermination extends AbstractDreamCard{
     public static final String ID = makeID(DreamOfDetermination.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID(DreamOfDetermination.class.getSimpleName()));
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID(NightmareOfPleaded.class.getSimpleName()));
     private static final String[] TEXT = uiStrings.TEXT;
-    private static final int POWER_AMOUNT = 1;
+    private static final int POWER_AMOUNT = 2;
 
     public DreamOfDetermination() {
         super(ID);

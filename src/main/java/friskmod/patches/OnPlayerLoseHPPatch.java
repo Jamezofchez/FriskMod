@@ -7,7 +7,9 @@ import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.PlayerLoseHPAction;
+import friskmod.powers.BarrierPower;
 import friskmod.util.Wiz;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
@@ -20,7 +22,14 @@ import java.util.ArrayList;
         method="damage"
 )
 public class OnPlayerLoseHPPatch {
-
+    @SpirePrefixPatch
+    public static void Prefix(AbstractPlayer __instance, @ByRef DamageInfo info) {
+        AbstractPower posspow = __instance.getPower(BarrierPower.POWER_ID);
+        if (posspow != null) {
+            posspow.onSpecificTrigger();
+            info.output = 0;
+        }
+    }
     @SpireInsertPatch(
             locator=HPLocator.class,
             localvars={"damageAmount"}

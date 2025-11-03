@@ -51,16 +51,16 @@ public class Wiz {
     }
 
     public static void forAllMonstersLiving(Consumer<AbstractMonster> consumer) {
-        getEnemies().forEach(mo -> consumer.accept(mo));
+        getMonsters().forEach(mo -> consumer.accept(mo));
     }
 
     public static void forAllMonstersLivingTop(Consumer<AbstractMonster> consumer) {
-        ArrayList<AbstractMonster> enemies = getEnemies();
+        ArrayList<AbstractMonster> enemies = getMonsters();
         Collections.reverse(enemies);
         enemies.forEach(mo -> consumer.accept(mo));
     }
 
-    public static ArrayList<AbstractMonster> getEnemies() {
+    public static ArrayList<AbstractMonster> getMonsters() {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
         monsters.removeIf(AbstractCreature::isDeadOrEscaped);
         return monsters;

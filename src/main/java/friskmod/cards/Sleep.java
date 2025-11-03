@@ -45,7 +45,7 @@ public class Sleep extends AbstractEasyCard {
                 }
             }
         }
-        for (AbstractPower p : AbstractDungeon.player.powers) {
+        for (AbstractPower p : player.powers) {
             if (p instanceof AbstractCountdownPower) {
                 ((AbstractCountdownPower) p).addCountdown(magicNumber);
                 ((AbstractCountdownPower) p).upgrade();

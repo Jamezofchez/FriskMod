@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 import friskmod.character.Frisk;
 import friskmod.powers.NEO;
 import friskmod.util.CardStats;
@@ -29,14 +30,15 @@ public class Tinker extends AbstractEasyCard {
 
     public Tinker() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseDamage = BLOCK;
+        baseBlock = BLOCK;
         baseMagicNumber = magicNumber = NEO;
         tags.add(FriskTags.KINDNESS);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainBlockAction(m, p, block));
         addToBot(new ApplyPowerAction(m, p, new NEO(m, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(m, p, new ArtifactPower(m, magicNumber), magicNumber));
+        addToBot(new GainBlockAction(m, p, block));
     }
 
     @Override

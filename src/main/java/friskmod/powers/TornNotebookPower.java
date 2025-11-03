@@ -41,7 +41,7 @@ public class TornNotebookPower extends BasePower implements LosePlayerHPInterfac
         }
         if (amount > 0) {
             addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-            addToTop(new ApplyPowerAction(this.owner, this.owner, new BufferPower(this.owner, 1), 1));
+            addToTop(new ApplyPowerAction(this.owner, this.owner, new BarrierPower(this.owner, 1), 1));
         }
     }
 }

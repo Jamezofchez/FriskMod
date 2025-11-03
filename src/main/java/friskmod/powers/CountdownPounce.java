@@ -80,6 +80,9 @@ public class CountdownPounce extends AbstractCountdownPower {
         if ((owner instanceof AbstractPlayer)) {
             return doPlayerNormalDamage;
         } else{
+            if (owner == null){
+                return false;
+            }
             return ((AbstractMonster) owner).getIntentBaseDmg() >= 0;
 
         }

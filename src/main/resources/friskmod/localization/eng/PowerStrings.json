@@ -5,6 +5,12 @@
       "Gain #b%s [E] every time you deal damage ending with a 9."
     ]
   },
+  "${modID}:BarrierPower": {
+    "NAME": "Barrier",
+    "DESCRIPTIONS": [
+      "Prevent the next #b%s times you would lose HP or #y${modID}:Temp_HP."
+    ]
+  },
   "${modID}:CountdownAgami": {
     "NAME": "Agami",
     "DESCRIPTIONS": [
@@ -129,7 +135,7 @@
   "${modID}:TornNotebookPower": {
     "NAME": "Torn Notebook",
     "DESCRIPTIONS": [
-      "The next #b%s times you lose HP, gain 1 #yBuffer."
+      "The next #b%s times you lose HP, gain 1 ${modID}:Barrier."
     ]
   },
   "${modID}:Spared": {
@@ -147,7 +153,7 @@
   "${modID}:NEO": {
     "NAME": "NEO",
     "DESCRIPTIONS": [
-      "The target takes #b%s damage for each point of Block it gains. Reduced by 1 on turn end."
+      "Whenever the target gains Block, it takes #b%s damage for each point of Block it has. Reduced by 1 on turn end."
     ]
   },
   "${modID}:NonAttackPower": {
@@ -167,6 +173,12 @@
     "NAME": "Demonify",
     "DESCRIPTIONS": [
       "Your next #b%s Attacks this turn are #y${modID}:Demonified"
+    ]
+  },
+  "${modID}:LVRitual": {
+    "NAME": "Ritual",
+    "DESCRIPTIONS": [
+      "At the end of your turn, gain #b%s #y${modID}:LV."
     ]
   }
 }

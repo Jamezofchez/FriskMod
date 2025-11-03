@@ -1,17 +1,14 @@
 package friskmod.cards;
 
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ArtifactPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import friskmod.actions.StealAllBlockAction;
 import friskmod.actions.StealPowerAction;
 import friskmod.character.Frisk;
@@ -36,11 +33,14 @@ public class Steal extends AbstractEasyCard {
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
 
-    private static final int UPG_DRAW_AMOUNT = 1;
+    private static final int HP_STEAL = 2;
+    private static final int UPG_HP_STEAL = 1;
+
 
     public Steal() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.YOU);
+        baseMagicNumber = magicNumber = HP_STEAL;
     }
 
     @Override
@@ -49,27 +49,27 @@ public class Steal extends AbstractEasyCard {
         initializeDescription();
     }
 
-    @Override
-    public void initializeDescription() {
-        if (!this.upgraded) {
-            this.rawDescription = cardStrings.DESCRIPTION;
-        } else {
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-        }
-        try {
-            if (AbstractDungeon.getMonsters().monsters.stream().anyMatch(m -> m.hasPower(ArtifactPower.POWER_ID))) {
-                this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[0];
-            }
-        } catch (NullPointerException ignored){
-            //good code!
-        }
-        super.initializeDescription();
-    }
+//    @Override
+//    public void initializeDescription() {
+//        if (!this.upgraded) {
+//            this.rawDescription = cardStrings.DESCRIPTION;
+//        } else {
+//            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+//        }
+//        try {
+//            if (Wiz.getEnemies().stream().anyMatch(m -> m.hasPower(ArtifactPower.POWER_ID))) {
+//                this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[0];
+//            }
+//        } catch (NullPointerException ignored){
+//            //good code!
+//        }
+//        super.initializeDescription();
+//    }
 
     @Override
     public void triggerOnGlowCheck() {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+        for (AbstractMonster m : Wiz.getMonsters()) {
             if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
                 glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
             }
@@ -78,14 +78,13 @@ public class Steal extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new StealAllBlockAction(AbstractDungeon.getMonsters().monsters));
-        addToBot(new StealPowerAction(AbstractDungeon.getMonsters().monsters));
-        if (upgraded) {
-//            if (isCritical()){
-//                TriggerCriticalEffect(p, m);
-//            }
-            Wiz.atb(new DrawCardAction(p, UPG_DRAW_AMOUNT)); //not the best upgrade but eh
+        addToBot(new StealAllBlockAction(Wiz.getMonsters()));
+        addToBot(new StealPowerAction(Wiz.getMonsters()));
+        for (AbstractMonster monster : Wiz.getMonsters()) {
+            addToBot(new DamageAction(m, new DamageInfo(p, magicNumber, DamageInfo.DamageType.HP_LOSS), AbstractGameAction.AttackEffect.NONE, true));
+            addToBot(new AddTemporaryHPAction(p, p, magicNumber));
         }
+        
     }
 
 //    @Override

@@ -17,15 +17,18 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
-import friskmod.cards.HugItOff;
+import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
 import friskmod.util.Wiz;
 
 import java.util.*;
+import java.util.function.BiPredicate;
+import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 import static friskmod.FriskMod.makeID;
 
-/// This piece of sh*t is derived from with the Thievery pack.
+/// This piece of "sh*t" is derived from with the Thievery pack.
 public class StealPowerAction extends AbstractGameAction {
     public static final String ID = makeID(StealPowerAction.class.getSimpleName());
     private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
@@ -33,6 +36,8 @@ public class StealPowerAction extends AbstractGameAction {
     public static final float POWER_ICON_PADDING_X = 48.0F * Settings.scale;
 
     public final boolean steal;
+    private final boolean stealMatching;
+    public final Predicate<AbstractPower> globalPostProcess;
     public float t;
 
     public Set<AbstractPower> affectedPowers;
@@ -55,29 +60,58 @@ public class StealPowerAction extends AbstractGameAction {
     public StealPowerAction(List<AbstractMonster> monsters) {
         this(monsters, true);
     }
+
     public StealPowerAction(List<AbstractMonster> monsters, boolean steal) {
+        this(monsters, steal, false);
+    }
+
+    public StealPowerAction(List<AbstractMonster> monsters, boolean steal, boolean stealMatching) {
         this.actionType = ActionType.WAIT;
         this.duration = this.startDuration = Settings.ACTION_DUR_LONG * 0.75f;
         this.monsters = monsters;
         this.steal = steal;
+        this.stealMatching = stealMatching;
+        if (stealMatching) {
+            this.globalPostProcess = stealPowerMatchingCheck(monsters);
+        } else {
+            this.globalPostProcess = (pow) -> true;
+        }
+    }
+    private Predicate<AbstractPower> stealPowerMatchingCheck(List<AbstractMonster> monsters){
+        return (AbstractPower mpow) -> {
+            return stealMatchingCheck().test(monsters, mpow);
+        };
+    }
+
+    private BiPredicate<List<AbstractMonster>, AbstractPower> stealMatchingCheck(){
+        return (monsters, mpow) -> {
+            AbstractPlayer p = AbstractDungeon.player;
+            if (!(mpow.type == AbstractPower.PowerType.BUFF)){
+                return false;
+            }
+            for (AbstractPower ppow : p.powers) {
+                if (!(ppow.type == AbstractPower.PowerType.BUFF)){
+                    continue;
+                }
+                if (mpow.ID.equals(ppow.ID)){
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 
     // Overload for a single monster
     public StealPowerAction(AbstractMonster m) {
-        this(toList(m));
+        this(SharedFunctions.toList(m));
     }
 
     public StealPowerAction(AbstractMonster m, boolean steal) {
-        this(toList(m), steal);
+        this(SharedFunctions.toList(m), steal);
     }
 
-    // Helper method to create a list with a single monster (if non-null)
-    private static List<AbstractMonster> toList(AbstractMonster m) {
-        List<AbstractMonster> list = new ArrayList<>();
-        if (m != null) {
-            list.add(m);
-        }
-        return list;
+    public StealPowerAction(AbstractMonster m, boolean steal, boolean stealMatching) {
+        this(SharedFunctions.toList(m), steal, stealMatching);
     }
 
     public void calcPosition(String powID, float[] x, float[] y, Color c, boolean isAmount) {
@@ -136,11 +170,13 @@ public class StealPowerAction extends AbstractGameAction {
                         }
                     }
                 }
-                int monsterTempHP = TempHPField.tempHp.get(m);
-                if (monsterTempHP > 0){
-                    Wiz.att(new AddTemporaryHPAction(p, p, monsterTempHP));
-                    if (steal) {
-                        Wiz.att(new RemoveAllTemporaryHPAction(m, p));
+                if (!stealMatching || TempHPField.tempHp.get(p) > 0) {
+                    int monsterTempHP = TempHPField.tempHp.get(m);
+                    if (monsterTempHP > 0) {
+                        Wiz.att(new AddTemporaryHPAction(p, p, monsterTempHP));
+                        if (steal) {
+                            Wiz.att(new RemoveAllTemporaryHPAction(m, p));
+                        }
                     }
                 }
             }
@@ -187,7 +223,7 @@ public class StealPowerAction extends AbstractGameAction {
 
             for (AbstractPower pow : affectedPowers) {
                 // You gain the power and enemy loses power
-                StealableWhitelist.getInstance().attachClonePowerToPlayer(pow, steal);
+                StealableWhitelist.getInstance().attachClonePowerToPlayer(pow, steal, globalPostProcess);
 
             }
 

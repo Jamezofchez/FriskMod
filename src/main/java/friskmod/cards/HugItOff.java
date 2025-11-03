@@ -3,13 +3,13 @@ package friskmod.cards;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.character.Frisk;
 import friskmod.powers.AbstractCountdownPower;
 import friskmod.powers.CountdownDraw;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 
 import static friskmod.FriskMod.makeID;
@@ -40,11 +40,9 @@ public class HugItOff extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
-        for(AbstractMonster monster : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            if (!monster.isDying && !monster.isDead) {
-                addToBot(new GainBlockAction(monster, AbstractDungeon.player, block));
-            }
+        addToBot(new GainBlockAction(p, p, block));
+        for(AbstractMonster monster : Wiz.getMonsters()) {
+            addToBot(new GainBlockAction(monster, p, block));
         }
         AbstractCountdownPower countdown = new CountdownDraw(p, DRAW_CARDS, secondMagic, UPG_DRAW_CARDS);
         addToBot(new ApplyPowerAction(p, p, countdown, DRAW_CARDS));

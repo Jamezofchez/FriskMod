@@ -79,8 +79,8 @@
   },
   "${modID}:DateGoneWrong": {
     "NAME": "Date Gone Wrong",
-    "DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust."
+    "DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust."
   },
   "${modID}:Defend_Frisk": {
     "NAME": "Defend",
@@ -92,8 +92,8 @@
   },
   "${modID}:DogShrine": {
     "NAME": "Dog Shrine",
-    "DESCRIPTION": "Exhaust up to !M! card. NL Draw cards equal to its ${modID}:XP.",
-    "UPGRADE_DESCRIPTION": "Exhaust up to !M! cards. NL Draw cards equal to their ${modID}:XP."
+    "DESCRIPTION": "Exhaust !M! card. NL Draw cards equal to its ${modID}:XP.",
+    "UPGRADE_DESCRIPTION": "Exhaust !M! cards. NL Draw cards equal to their ${modID}:XP."
   },
   "${modID}:DontNeedFriends": {
     "NAME": "Don't Need Friends",
@@ -101,7 +101,7 @@
   },
   "${modID}:Dream": {
     "NAME": "Dream",
-    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Nightmare. NL ${modID}:Draft !M! ${modID}:Dream for each unique Debuff the enemy has."
+    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Nightmare. NL ${modID}:Draft !M! ${modID}:Dream for each unique debuff the enemy has."
   },
   "${modID}:Duel": {
     "NAME": "Dual!",
@@ -114,7 +114,7 @@
   "${modID}:Execute": {
     "NAME": "Execute",
     "DESCRIPTION": "Deal !D! damage twice. NL Give 1 card at random !M! ${modID}:inherent ${modID}:XP.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage twice. NL Give up to 1 card !M! ${modID}:inherent ${modID}:XP."
+    "UPGRADE_DESCRIPTION": "Deal !D! damage twice. NL Choose 1 card !M! ${modID}:inherent ${modID}:XP."
   },
   "${modID}:OLDExpertise": {
     "NAME": "Expertise",
@@ -154,6 +154,11 @@
   "${modID}:Im": {
     "NAME": "I'm...",
     "DESCRIPTION": "Ethereal. NL While in hand, you cannot play Attacks."
+  },
+  "${modID}:ItsAMatch": {
+    "NAME": "It's a match!",
+    "DESCRIPTION": "${modID}:Steal ${modID}:matching buffs. The enemy ${modID}:steals ${modID}:matching debuffs from you.",
+    "UPGRADE_DESCRIPTION": "${modID}:Steal ${modID}:matching buffs. ALL enemies ${modID}:steal ${modID}:matching debuffs from you."
   },
   "${modID}:ItsYou": {
     "NAME": "It's you!",
@@ -263,11 +268,7 @@
   },
   "${modID}:Steal": {
     "NAME": "Steal",
-    "DESCRIPTION": "${modID}:Steal ALL enemies' Block and buffs.",
-    "UPGRADE_DESCRIPTION": "${modID}:Steal ALL enemies' Block and buffs. NL Draw a card.",
-    "EXTENDED_DESCRIPTION": [
-      " NL (Block steal is negated by Artifact)"
-    ]
+    "DESCRIPTION": "${modID}:Steal ALL enemies' Block and buffs. NL ${modID}:Steal !M! HP from ALL enemies."
   },
   "${modID}:Strike_Frisk": {
     "NAME": "Strike",
@@ -275,7 +276,7 @@
   },
   "${modID}:Tinker": {
     "NAME": "Tinker",
-    "DESCRIPTION": "Give the enemy !B! Block. NL Give the enemy !M! ${modID}:NEO."
+    "DESCRIPTION": "Give the enemy !M! ${modID}:NEO. NL Give the enemy !M! Artifact. NL Give the enemy !B! Block."
   },
   "${modID}:ToAsh": {
     "NAME": "To Ash",
@@ -287,7 +288,7 @@
   },
   "${modID}:Twirl": {
     "NAME": "Twirl",
-    "DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Retain up to !M! card this turn, NL and upgrade it for the rest of combat."
+    "DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Retain !M! card this turn, NL and upgrade it for the rest of combat."
   },
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",

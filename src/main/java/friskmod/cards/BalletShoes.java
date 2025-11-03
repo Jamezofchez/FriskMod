@@ -72,10 +72,13 @@ public class BalletShoes extends AbstractEasyCard {
                 }
             }
             for (AbstractCard c : afterHand) {
+                if (c == chosenCard){
+                    continue;
+                }
                 if (BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c) == true){
-                    BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(chosenCard, false);
+                    BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(c, false);
 //                    if (CardBorderGlowManager.getCustomGlowColors(chosenCard).isEmpty()) { //if it's not glowing??
-                    chosenCard.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+                    c.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
                 }
             }
 

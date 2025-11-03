@@ -246,17 +246,11 @@
     "PROPER_NAME": "Steal",
     "NAMES": [
       "Steal",
-      "Steal"
-    ],
-    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL The card will glow if anything can be stolen."
-  },
-  {
-    "PROPER_NAME": "Steal",
-    "NAMES": [
       "Steal",
-      "Steal"
+      "steals",
+      "steal"
     ],
-    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL The card will glow if anything can be stolen."
+    "DESCRIPTION": "Attempt to #ySteal any Block and any buffs the enemy didn't start with. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. Enemy HP is converted into NL The card will glow if anything can be stolen."
   },
   {
     "PROPER_NAME": "Draft",
@@ -284,6 +278,20 @@
     "NAMES": [
       "NEO"
     ],
-    "DESCRIPTION": "The target takes damage for each point of Block it gains. Didn't you know NEO is famous for its high defense?"
+    "DESCRIPTION": "Whenever the target gains Block, it takes #b%s damage for each point of Block it has. Didn't you know NEO is famous for its high defense?"
+  },
+  {
+    "PROPER_NAME": "Matching",
+    "NAMES": [
+      "matching"
+    ],
+    "DESCRIPTION": "Both you and the enemy must have the same buff/debuff."
+  },
+  {
+    "PROPER_NAME": "Barrier",
+    "NAMES": [
+      "Barrier"
+    ],
+    "DESCRIPTION": "Prevent the next !M! times you would lose HP or ${modID}:Temp_HP."
   }
 ]

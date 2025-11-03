@@ -12,7 +12,7 @@ public class NEOPatch {
     public static void checkForDentedArmor(AbstractCreature creature, int blockAmount) {
         AbstractPower posspow = creature.getPower(NEO.POWER_ID);
         if (posspow != null) {
-            ((NEO) posspow).triggerNEO(blockAmount);
+            ((NEO) posspow).triggerNEO(creature.currentBlock);
         }
     }
 }

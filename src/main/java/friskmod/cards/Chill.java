@@ -17,6 +17,7 @@ import friskmod.patches.OnWasteEnergyPatch;
 import friskmod.powers.Karma;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 
 import static friskmod.FriskMod.makeID;
@@ -75,9 +76,8 @@ public class Chill extends AbstractEasyCard {
     @Override
     public AbstractCard makeCopy() {
         AbstractCard tmp = new Chill();
-        if (CardCrawlGame.dungeon != null && AbstractDungeon.currMapNode != null &&
-                (AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT)
-            tmp.setCostForTurn(this.cost - GameActionManager.totalDiscardedThisTurn); //???
+        if (Wiz.isInCombat())
+            tmp.setCostForTurn(this.cost - GameActionManager.totalDiscardedThisTurn); //stupid as IsCostForTurn isnt set
         return tmp;
     }
 

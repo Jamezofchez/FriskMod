@@ -44,8 +44,9 @@ public class OpenDraftAction extends AbstractGameAction {
         possNightmareChoices = new ArrayList<>();
         possNightmareChoices.add(new NightmareOfFrail());
         possNightmareChoices.add(new NightmareOfNEO());
-//        possNightmareChoices.add(new NightmareOfKarma());
+        possNightmareChoices.add(new NightmareOfKarma());
         possNightmareChoices.add(new NightmareOfPleaded());
+        possNightmareChoices.add(new NightmareOfPounce());
         possNightmareChoices.add(new NightmareOfVulnerable());
         possNightmareChoices.add(new NightmareOfWeak());
     }
@@ -71,19 +72,19 @@ public class OpenDraftAction extends AbstractGameAction {
         } else {
             choices = new ArrayList<>();
             for (int i = 0; i < selectionAmount; i++) {
-                boolean containsDupe;
+                boolean reroll;
                 AbstractCard card;
                 do {
-                    containsDupe = false;
+                    reroll = false;
                     int randomIndex = AbstractDungeon.cardRng.random(posschoices.size() - 1);
                     card = posschoices.get(randomIndex);
                     for (AbstractCard c : choices) {
                         if (c.cardID.equals(card.cardID)) {
-                            containsDupe = true;
+                            reroll = true;
                         }
                     }
-                } while (containsDupe);
-                choices.add(card);
+                } while (reroll);
+                choices.add(card.makeStatEquivalentCopy());
             }
         }
         setDraftTarget(target);

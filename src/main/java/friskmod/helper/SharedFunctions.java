@@ -8,14 +8,38 @@ import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.InvinciblePower;
 import friskmod.actions.GiveRandomCardXP;
+import friskmod.external.Downfall;
 import friskmod.powers.LV_Hero;
 import friskmod.powers.PreventLVLoss;
 import friskmod.powers.RememberBraveryPower;
 import friskmod.util.Wiz;
-
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import java.util.ArrayList;
+import java.util.List;
 public class SharedFunctions {
+    public static boolean isInvincible(AbstractMonster m){
+        if (m.getPower(InvinciblePower.POWER_ID) != null){
+            return true;
+        }
+        Downfall downfall = Downfall.getInstance();
+        if (downfall != null && downfall.checkNeowInvulnerable(m)){
+            return true;
+        }
+        return false;
+    }
+    // Helper method to create a list with a single monster (if non-null)
+    public static List<AbstractMonster> toList(AbstractMonster m) {
+        List<AbstractMonster> list = new ArrayList<>();
+        if (m != null) {
+            list.add(m);
+        }
+        return list;
+    }
+
     @SpirePatch2(clz = RemoveSpecificPowerAction.class, method = SpirePatch.CLASS)
     public static class MarkLVConsumedRemoveSpecificPowerActionPatch {
         public static SpireField<Boolean> isLVConsumed = new SpireField<>(() -> false);

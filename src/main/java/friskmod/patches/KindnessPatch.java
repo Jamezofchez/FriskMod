@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.WeakPower;
 import friskmod.powers.KillWithKindnessPower;
 import friskmod.powers.RememberKindnessPower;
 import friskmod.util.Wiz;
@@ -67,7 +68,7 @@ public class KindnessPatch {
             if (posspow != null) {
                 posspow.flash();
                 int debuff_amount = posspow.amount;
-                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new VulnerablePower(target, debuff_amount, false), debuff_amount));
+                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new WeakPower(target, debuff_amount, false), debuff_amount));
             }
         }
 

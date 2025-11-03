@@ -545,7 +545,7 @@ public abstract class BaseCard extends CustomCard {
                 var.value = var.calculation.apply(this, null, var.base);
             }
             if (isMultiDamage) {
-                ArrayList<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters;
+                ArrayList<AbstractMonster> monsters = Wiz.getEnemies();
                 AbstractMonster m;
                 for (LocalVarInfo var : cardVariables.values()) {
                     if (var.aoeValue == null || var.aoeValue.length != monsters.size())
@@ -571,7 +571,7 @@ public abstract class BaseCard extends CustomCard {
                 var.value = var.calculation.apply(this, m, var.base);
             }
             if (isMultiDamage) {
-                ArrayList<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters;
+                ArrayList<AbstractMonster> monsters = Wiz.getEnemies();
                 for (LocalVarInfo var : cardVariables.values()) {
                     if (var.aoeValue == null || var.aoeValue.length != monsters.size())
                         var.aoeValue = new int[monsters.size()];

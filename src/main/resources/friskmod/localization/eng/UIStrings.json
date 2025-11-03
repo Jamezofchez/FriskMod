@@ -21,9 +21,10 @@
   },
   "${modID}:StealableWhitelist": {
     "TEXT": [
-      "Something went wrong when stealing %s!",
-      "The heart is too strong... I can't handle its overwhelming Strength!",
-      "I can't steal or copy %s as the enemy has always had it!"
+      "Something went wrong when trying to take %s!",
+      "The enemy is Invincible... I can't handle its overwhelming Strength!",
+      "I can't steal or copy %s as the enemy has always had it!",
+      "I can't steal %s as the enemy doesn't have a matching power!"
     ]
   },
   "${modID}:ToAsh": {
@@ -123,6 +124,22 @@
   "${modID}:DreamOfDetermination": {
   "TEXT": [
     "Hopes and Dreams"
+  ]
+  },
+  "${modID}:NightmareOfPleaded": {
+    "TEXT": [
+      "Finale"
+    ]
+  },
+  "${modID}:EnemyStealMatchingDebuffsAction": {
+    "TEXT": [
+      "Something went wrong when the enemy tried to take %s!"
+    ]
+  },
+  "${modID}:OnBattleStartAction": {
+  "TEXT": [
+    "The Spheric Guardian's Artifact is preventing me from stealing Block!",
+    "If the enemy gains enough Strength... I might not be able to steal it!"
   ]
 }
 }
