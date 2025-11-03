@@ -93,6 +93,9 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
                 }
                 ++index;
             }
+            if (index == AbstractDungeon.actionManager.actions.size()){ //Couldn't find it??
+                Wiz.att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, LV, extraLV));
+            }
             if (healFlag) {
                 Wiz.att(new CustomSFXAction("snd_wrongvictory"));
                 Wiz.att(new HealAction(target, AbstractDungeon.player, 9));

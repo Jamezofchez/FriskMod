@@ -22,11 +22,9 @@ public class BadMemory extends AbstractEasyCard{
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int HP_LOSS = 2;
-    private static final int CARD_GAIN = 1;
     public BadMemory() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = HP_LOSS;
-        baseSecondMagic = secondMagic = CARD_GAIN;
         cardsToPreview = new FreakBullet();
         tags.add(FriskTags.YOU);
     }
@@ -34,7 +32,7 @@ public class BadMemory extends AbstractEasyCard{
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new LoseHPAction(p, p, magicNumber));
         AbstractCard newCard = cardsToPreview.makeStatEquivalentCopy();
-        addToBot(new MakeTempCardInHandAction(newCard, secondMagic));
+        addToBot(new MakeTempCardInHandAction(newCard));
     }
     @Override
     public void upp() {

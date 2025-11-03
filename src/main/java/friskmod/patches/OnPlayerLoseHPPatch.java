@@ -23,11 +23,11 @@ import java.util.ArrayList;
 )
 public class OnPlayerLoseHPPatch {
     @SpirePrefixPatch
-    public static void Prefix(AbstractPlayer __instance, @ByRef DamageInfo info) {
+    public static void Prefix(AbstractPlayer __instance, @ByRef DamageInfo[] info) {
         AbstractPower posspow = __instance.getPower(BarrierPower.POWER_ID);
         if (posspow != null) {
             posspow.onSpecificTrigger();
-            info.output = 0;
+            info[0].output = 0;
         }
     }
     @SpireInsertPatch(

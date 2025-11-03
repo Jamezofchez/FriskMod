@@ -50,6 +50,7 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
 
     @Override
     public void initializeDescription(){
+        String basename = TEXT[0];
         AbstractPower tmp = getPower();
         AbstractCreature tmpTarget = getTarget();
         String targetName;
@@ -58,7 +59,7 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         } else{
             targetName = TEXT[2];
         }
-        this.rawDescription = String.format(TEXT[0], tmp.amount, tmp.name, targetName);
+        this.rawDescription = String.format(basename, tmp.amount, tmp.name, targetName);
         super.initializeDescription();
     }
 

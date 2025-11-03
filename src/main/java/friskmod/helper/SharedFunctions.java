@@ -3,9 +3,7 @@ package friskmod.helper;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -17,7 +15,7 @@ import friskmod.powers.LV_Hero;
 import friskmod.powers.PreventLVLoss;
 import friskmod.powers.RememberBraveryPower;
 import friskmod.util.Wiz;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import java.util.ArrayList;
 import java.util.List;
 public class SharedFunctions {

@@ -81,7 +81,7 @@ public class Steal extends AbstractEasyCard {
         addToBot(new StealAllBlockAction(Wiz.getMonsters()));
         addToBot(new StealPowerAction(Wiz.getMonsters()));
         for (AbstractMonster monster : Wiz.getMonsters()) {
-            addToBot(new DamageAction(m, new DamageInfo(p, magicNumber, DamageInfo.DamageType.HP_LOSS), AbstractGameAction.AttackEffect.NONE, true));
+            addToBot(new DamageAction(monster, new DamageInfo(p, magicNumber, DamageInfo.DamageType.HP_LOSS), AbstractGameAction.AttackEffect.NONE, true));
             addToBot(new AddTemporaryHPAction(p, p, magicNumber));
         }
         
@@ -94,6 +94,6 @@ public class Steal extends AbstractEasyCard {
 
     @Override
     public void upp() {
-
+        upgradeMagicNumber(UPG_HP_STEAL);
     }
 }

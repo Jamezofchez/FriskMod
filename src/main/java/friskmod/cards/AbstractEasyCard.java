@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.function.Consumer;
 
+import friskmod.cards.drinks.GenericDrinkCard;
 import friskmod.character.Frisk;
 import friskmod.util.CardArtRoller;
 import friskmod.util.CardStats;
@@ -75,18 +76,26 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
         String textureString;
-
-        switch (cardType) {
-            case ATTACK:
-            case POWER:
-            case SKILL:
-            case STATUS:
-            case CURSE:
-                textureString = imagePath("cards/" + cardName + ".png");
+        switch (cardName) {
+            case "GenericDrinkCard":
+            case "EntropicCocktail":
+            case "FairyCocktail":
+            case "Ketchup":
+                textureString = imagePath("cards/Cocktail.png");
                 break;
             default:
-                textureString = imagePath("ui/missing.png");
-                break;
+                switch (cardType) {
+                    case ATTACK:
+                    case POWER:
+                    case SKILL:
+                    case STATUS:
+                    case CURSE:
+                        textureString = imagePath("cards/" + cardName + ".png");
+                        break;
+                    default:
+                        textureString = imagePath("ui/missing.png");
+                        break;
+                }
         }
 
         FileHandle h = Gdx.files.internal(textureString);
@@ -152,6 +161,12 @@ public abstract class AbstractEasyCard extends CustomCard {
             secondDamage = baseSecondDamage;
             isSecondDamageModified = true;
         }
+    }
+
+    protected void setUpgradeMagicNumber(int amount) {
+        this.baseMagicNumber = amount;
+        this.magicNumber = this.baseMagicNumber;
+        this.upgradedMagicNumber = true;
     }
 
     protected void upgradeSecondMagic(int amount) {

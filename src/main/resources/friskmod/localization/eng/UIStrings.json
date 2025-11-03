@@ -138,8 +138,26 @@
   },
   "${modID}:OnBattleStartAction": {
   "TEXT": [
-    "The Spheric Guardian's Artifact is preventing me from stealing Block!",
+    "That thing's Artifact is preventing me from stealing Block!",
     "If the enemy gains enough Strength... I might not be able to steal it!"
   ]
-}
+  },
+  "${modID}:AbstractDrinkCard": {
+    "TEXT": [
+        "%s %s",
+        "Cocktail",
+        "Sour",
+        "Fizz",
+        "Unknown"
+    ]
+  },
+  "${modID}:GenericDrinkCard": {
+    "TEXT": [
+       " NL Exhaust.",
+       "0 or 1 cost",
+       "0, 1 or 2 cost",
+       "#b%s%% chance to: NL ",
+       "This card should not be seen in 99 years!"
+    ]
+  }
 }

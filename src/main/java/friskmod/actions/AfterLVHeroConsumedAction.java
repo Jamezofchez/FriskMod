@@ -23,15 +23,14 @@ public class AfterLVHeroConsumedAction extends AbstractGameAction {
     }
     public void update() {
         this.isDone = true;
-        int newXP = 0;
-        if (sourceCard != null) {
-            newXP = CardXPFields.getCardXP(sourceCard);
-        }
         int LV_transfer_to = 0;
-        if (newXP > 0) {
-            LV_transfer_to = newXP - 1;
+        if (sourceCard != null) {
+            LV_transfer_to = CardXPFields.getCardXP(sourceCard);
         }
         LV_transfer_to += SharedFunctions.consumeLVHeroForXP(true); //should generally be zero unless FavouriteNumber
+        if (LV_transfer_to > 0) {
+            LV_transfer_to = LV_transfer_to - 1;
+        }
         boolean isMultiDamage = ReflectionHacks.getPrivate(sourceCard, AbstractCard.class, "isMultiDamage");
         if (isMultiDamage){
             XPModifierAll.handleAOEDamage(target, LV_transfer_to, LV_transfer_from);

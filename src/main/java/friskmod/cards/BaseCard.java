@@ -3,6 +3,7 @@ package friskmod.cards;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
+import collector.util.Wiz;
 import friskmod.FriskMod;
 import friskmod.util.CardStats;
 import friskmod.util.TriFunction;

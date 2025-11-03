@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
@@ -230,9 +231,13 @@ public class Wiz {
 
     public static int getLogicalCardCost(AbstractCard c) {
         if (!c.freeToPlay()) {
-            if (c.cost <= -1) {
-                return 0;
+            if (c.cost == -1) {
+                return EnergyPanel.totalCount;
             }
+            if (c.cost == -2) {
+                return 999;
+            }
+
             return c.costForTurn;
         }
         return 0;

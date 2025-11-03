@@ -293,5 +293,12 @@
       "Barrier"
     ],
     "DESCRIPTION": "Prevent the next !M! times you would lose HP or ${modID}:Temp_HP."
+  },
+  {
+    "PROPER_NAME": "Sip",
+    "NAMES": [
+      "Sip"
+    ],
+    "DESCRIPTION": "Add a card to your hand with related lesser effects."
   }
 ]

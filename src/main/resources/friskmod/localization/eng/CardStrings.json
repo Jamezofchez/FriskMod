@@ -146,6 +146,10 @@
     "NAME": "Garbage Dump",
     "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted Energy spent."
   },
+  "${modID}:Grillbys": {
+    "NAME": "Grillby's",
+    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take a ${modID}:Sip of all your potions."
+  },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
     "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! card.",
@@ -293,5 +297,22 @@
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",
     "DESCRIPTION": "Deal !D! damage twice. NL Give the enemy !M! Thorns."
+  },
+  "${modID}::DuplicationCocktail": {
+    "NAME": "Duplication Cocktail",
+    "DESCRIPTION": "Your next card that costs !${modID}:M2! or less is played twice. NL Exhaust."
+  },
+  "${modID}::EntropicCocktail": {
+    "NAME": "Entropic Cocktail",
+    "DESCRIPTION": "A random one of your potions turns into a new potion. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Each of your potions turns into a new potion. NL Exhaust."
+  },
+  "${modID}::FairyCocktail": {
+    "NAME": "Fairy Cocktail",
+    "DESCRIPTION": "Heal to !M!% of your Max HP and discard your Fairy Potion. NL Exhaust."
+  },
+  "${modID}::Ketchup": {
+    "NAME": "Ketchup",
+    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Exhaust."
   }
 }
