@@ -196,8 +196,8 @@
   },
   "${modID}:Overcome": {
     "NAME": "Overcome",
-    "DESCRIPTION": "Ethereal. NL The next card that fails to play this turn is ${modID}:Persevered.",
-    "UPGRADE_DESCRIPTION": "The next card that fails to play this turn is ${modID}:Persevered."
+    "DESCRIPTION": "Ethereal. NL The next card that fails to play is ${modID}:Persevered.",
+    "UPGRADE_DESCRIPTION": "The next two cards that fail to play are ${modID}:Persevered."
   },
   "${modID}:Plead": {
     "NAME": "Plead",
@@ -278,6 +278,10 @@
     "NAME": "Spare",
     "DESCRIPTION": "${modID}:Spare the enemy. NL They gain ${modID}:Spared. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "${modID}:Spare the enemy, and gain gold rewards if you flee. NL They gain ${modID}:Spared. NL Exhaust."
+  },
+  "${modID}:SpecialDeal": {
+    "NAME": "[[Specil Deal]]",
+    "DESCRIPTION": "Ethereal. NL Gain !M! ${modID}:Pleaded. NL ALL enemies gain !M! Artifact. NL Gain ${modID}:1997 gold."
   },
   "${modID}:Steal": {
     "NAME": "Steal",

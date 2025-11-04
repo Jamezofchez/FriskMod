@@ -18,7 +18,24 @@ import friskmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static friskmod.cards.SpecialDeal.NUM_CYCLES;
+
 public class SharedFunctions {
+
+    private static int SPECIAL_DEAL_BONUS;
+
+    public static void cycleDeals(){
+        SPECIAL_DEAL_BONUS = (SPECIAL_DEAL_BONUS + 1) % NUM_CYCLES;
+    }
+    public static void setSpecialDealBonus(int bonus){
+        SPECIAL_DEAL_BONUS = bonus;
+    }
+    public static int getSpecialDealBonus(){
+        return SPECIAL_DEAL_BONUS;
+    }
+
+
     public static boolean isInvincible(AbstractMonster m){
         if (m.getPower(InvinciblePower.POWER_ID) != null){
             return true;

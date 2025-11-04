@@ -50,7 +50,7 @@ public class EchoFlower extends AbstractEasyCard {
     public EchoFlower() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.INTEGRITY);
-        this.glowColor = Color.WHITE.cpy();
+        this.glowColor = Color.NAVY.cpy();
     }
     public void onPlayCard(AbstractCard c, AbstractMonster m) {
         if (c.purgeOnUse)
@@ -105,14 +105,10 @@ public class EchoFlower extends AbstractEasyCard {
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.lastCard != null) {
-            this.lastCard.purgeOnUse = true;
+//            this.lastCard.purgeOnUse = true;
             this.lastCard.use(p, m);
             this.lastCard = null;
         }
-    }
-
-    public boolean canUpgrade() {
-        return (this.lastCard == null) ? false : this.lastCard.canUpgrade();
     }
 
     public void upgrade() {

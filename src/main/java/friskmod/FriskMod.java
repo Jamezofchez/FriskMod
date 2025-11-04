@@ -2,15 +2,18 @@ package friskmod;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.abstracts.CustomSavable;
 import basemod.abstracts.DynamicVariable;
 import basemod.interfaces.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.actions.AfterCardUseAction;
 import friskmod.actions.OnBattleStartAction;
 import friskmod.cards.*;
 import friskmod.cards.cardvars.AbstractEasyDynamicVariable;
 import friskmod.character.Frisk;
+import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
 import friskmod.relics.BaseRelic;
 import friskmod.util.*;
@@ -27,6 +30,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.*;
+import hermit.cards.CursedWeapon;
 import org.scannotation.AnnotationDB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -81,6 +85,7 @@ public class FriskMod implements
         //If you want to set up a config panel, that will be done here.
         //You can find information about this on the BaseMod wiki page "Mod Config and Panel".
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
+        initializeSavedData();
     }
 
     /*----------Localization----------*/
@@ -236,6 +241,8 @@ public class FriskMod implements
         addAudio("snd_tearcard");
         addAudio("snd_vaporized");
         addAudio("snd_wrongvictory");
+        addAudio("spamton");
+        addAudio("spamton2");
         addAudio("test");
     }
 
@@ -387,6 +394,27 @@ public class FriskMod implements
     @Override
     public void receiveStartGame() {
         StealableWhitelist.getInstance();
+        if (!CardCrawlGame.loadingSave) {
+            SharedFunctions.setSpecialDealBonus(0);
+        }
+    }
+
+
+    private void initializeSavedData() {
+        BaseMod.addSaveField("SpecialDealCycle", new CustomSavable<Integer>() {
+            @Override
+            public Integer onSave() {
+                return SharedFunctions.getSpecialDealBonus();
+            }
+
+            @Override
+            public void onLoad(Integer s) {
+                if (s != null) {
+                    // Override Bonus.
+                    SharedFunctions.setSpecialDealBonus(s);
+                }
+            }
+        });
     }
     @Override
     public void receiveCardUsed(AbstractCard abstractCard) {

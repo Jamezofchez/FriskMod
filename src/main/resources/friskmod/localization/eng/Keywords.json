@@ -300,5 +300,13 @@
       "Sip"
     ],
     "DESCRIPTION": "Add a card to your hand with related lesser effects."
+  },
+  {
+    "PROPER_NAME": "1997",
+    "NAMES": [
+      "1997"
+    ],
+    "DESCRIPTION": "Gain 19 gold the first time played. Gain 19 gold the second time played. Gain 97 gold the third time played.",
+    "COLOR": "ffff00"
   }
 ]
