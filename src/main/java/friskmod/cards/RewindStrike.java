@@ -4,7 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.character.Frisk;
-import friskmod.helper.AbstractMonsterSnapshotHistory;
+import friskmod.helper.MonsterSnapshotHistory;
 import friskmod.patches.MonsterLastMovePatch;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
@@ -34,7 +34,7 @@ public class RewindStrike extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
-        AbstractMonsterSnapshotHistory snapshot = MonsterLastMovePatch.AbstractMonsterSnapshotFields.snapshot.get(m);
+        MonsterSnapshotHistory snapshot = MonsterLastMovePatch.AbstractMonsterSnapshotFields.snapshot.get(m);
         if (snapshot != null){
             snapshot.restore(m);
 

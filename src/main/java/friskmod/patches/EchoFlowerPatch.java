@@ -26,7 +26,7 @@ import javassist.CtBehavior;
 
 public class EchoFlowerPatch {
     @SpirePatch(clz = AbstractCard.class, method = "renderEnergy")
-    public static class PatchPearlescenceCostColor {
+    public static class PatchEchoFlowerCostColor {
         @SpireInsertPatch(locator = Locator.class, localvars = {"costColor"})
         public static void Insert(AbstractCard __instance, SpriteBatch _, Color ___ENERGY_COST_RESTRICTED_COLOR, @ByRef Color[] costColor) {
             if (__instance.price == -100 && AbstractDungeon.player != null && !__instance.hasEnoughEnergy())
@@ -42,7 +42,7 @@ public class EchoFlowerPatch {
     }
 
 //    @SpirePatch(clz = UseCardAction.class, method = "update")
-//    public static class PatchPearlescencePurge {
+//    public static class PatchEchoFlowerPurge {
 //        @SpireInsertPatch(locator = Locator.class)
 //        public static SpireReturn Insert(UseCardAction __instance, AbstractCard ___targetCard) {
 //            if (___targetCard instanceof EchoFlower) {
@@ -63,7 +63,7 @@ public class EchoFlowerPatch {
 //    }
 
     @SpirePatch(clz = SingleCardViewPopup.class, method = "render")
-    public static class PatchPearlescencePopup {
+    public static class PatchEchoFlowerPopup {
         @SpireInsertPatch(locator = Locator.class)
         public static SpireReturn Insert(SingleCardViewPopup __instance, SpriteBatch sb, AbstractCard ___card) {
             if (___card instanceof EchoFlower) {
@@ -79,7 +79,7 @@ public class EchoFlowerPatch {
                     method.setAccessible(true);
                     method.invoke(__instance, new Object[] { sb });
                 } catch (Exception e) {
-                    FriskMod.logger.warn("{}: reflection failed in PatchPearlescencePopup: {}", FriskMod.modID, String.valueOf(e));
+                    FriskMod.logger.warn("{}: reflection failed in PatchEchoFlowerPopup:", FriskMod.modID);
                 }
                 return SpireReturn.Return();
             }
@@ -96,7 +96,7 @@ public class EchoFlowerPatch {
 }
 
 
-/* Location:              C:\Program Files (x86)\Steam\steamapps\workshop\content\646570\2371967829\Reliquary.jar!\patches\PatchPearlescence.class
+/* Location:              C:\Program Files (x86)\Steam\steamapps\workshop\content\646570\2371967829\Reliquary.jar!\patches\PatchEchoFlower.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       1.1.3
  */

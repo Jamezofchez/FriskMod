@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
-import com.megacrit.cardcrawl.vfx.TintEffect;
+import friskmod.FriskMod;
 
 import java.lang.reflect.*;
 import java.util.*;
@@ -14,14 +14,14 @@ import java.util.*;
 import static friskmod.FriskMod.makeID;
 
 
-public class AbstractMonsterSnapshotHistory {
-    public static final String ID = makeID(AbstractMonsterSnapshotHistory.class.getSimpleName());
+public class MonsterSnapshotHistory {
+    public static final String ID = makeID(MonsterSnapshotHistory.class.getSimpleName());
     private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
     
-    private final List<AbstractMonsterSnapshot> snapshots = new LinkedList<>();
+    private final List<MonsterSnapshot> snapshots = new LinkedList<>();
 
     public void store(AbstractMonster m, EnemyMoveInfo lastMove, String moveName) {
-        AbstractMonsterSnapshot currentSnapshot = new AbstractMonsterSnapshot();
+        MonsterSnapshot currentSnapshot = new MonsterSnapshot();
         currentSnapshot.store(m, lastMove, moveName);
         snapshots.add(currentSnapshot);
         
@@ -37,7 +37,7 @@ public class AbstractMonsterSnapshotHistory {
         }
     }
 
-    public class AbstractMonsterSnapshot {
+    public class MonsterSnapshot {
         private class Snapshot {
             public final Map<Field, Object> snapshotFields = new HashMap<>();
             public EnemyMoveInfo lastMoveInfo;
@@ -64,7 +64,7 @@ public class AbstractMonsterSnapshotHistory {
                     field.setAccessible(true); //force private access
                     snapshot.snapshotFields.put(field, field.get(m)); //ig you're just fucked if you have a list??
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    FriskMod.logger.warn("{}: failed to store MonsterSnapshot", FriskMod.modID);
                 }
             }
         }
@@ -82,7 +82,7 @@ public class AbstractMonsterSnapshotHistory {
                     field.setAccessible(true);
                     field.set(m, savedValue);
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    FriskMod.logger.warn("{}: failed to restore MonsterSnapshot", FriskMod.modID);
                 }
             }
             EnemyMoveInfo currentMove = snapshot.lastMoveInfo;

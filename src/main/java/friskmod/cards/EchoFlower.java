@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.FriskMod;
 import friskmod.character.Frisk;
+import friskmod.helper.CardAttributeSnapshot;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
@@ -34,10 +35,9 @@ public class EchoFlower extends AbstractEasyCard {
 //            SpriteBatch.createDefaultShader().getVertexShaderSource(), Gdx.files
 //            .internal("friskmod/shaders/PearlescenceShader.glsl").readString(String.valueOf(StandardCharsets.UTF_8)));
 
+    private CardAttributeSnapshot snapshotMaker = new CardAttributeSnapshot();
 
     public AbstractCard lastCard;
-
-    private float time;
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
@@ -60,12 +60,7 @@ public class EchoFlower extends AbstractEasyCard {
         if (upgraded) {
             this.lastCard.upgrade();
         }
-        this.cardID = c.cardID;
-        this.type = this.lastCard.type;
-        this.target = c.target;
-        this.cost = this.lastCard.cost;
-        this.costForTurn = this.lastCard.costForTurn;
-        this.lastCard.price = -100;
+        setDynamicVariables(null);
     }
 
     public void update() {
@@ -100,19 +95,19 @@ public class EchoFlower extends AbstractEasyCard {
 
     public void calculateCardDamage(AbstractMonster mo) {
         if (this.lastCard != null)
-            this.lastCard.calculateCardDamage(mo);
+            setDynamicVariables(mo);
     }
 
     public void applyPowers() {
         if (this.lastCard != null)
-            this.lastCard.applyPowers();
+            setDynamicVariables(null);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.lastCard != null) {
+            this.lastCard.purgeOnUse = true;
             this.lastCard.use(p, m);
-            AbstractDungeon.player.limbo.addToBottom(this.lastCard);
-            stopGlowing();
+            this.lastCard = null;
         }
     }
 
@@ -149,7 +144,7 @@ public class EchoFlower extends AbstractEasyCard {
             renderGlow.setAccessible(true);
             renderGlow.invoke(this, new Object[] { sb });
         } catch (Exception e) {
-            FriskMod.logger.warn("{}: reflection failed in EchoFlower glow: {}", FriskMod.modID, String.valueOf(e));
+            FriskMod.logger.warn("{}: reflection failed in EchoFlower glow", FriskMod.modID);
         }
         if (this.lastCard == null) {
             // When there's no recorded last card, render normally to avoid an empty-looking card
@@ -189,7 +184,7 @@ public class EchoFlower extends AbstractEasyCard {
             renderCardBg.setAccessible(true);
             renderCardBg.invoke(this, new Object[] { sb, Float.valueOf(this.current_x), Float.valueOf(this.current_y) });
         } catch (Exception e) {
-            FriskMod.logger.warn("{}: reflection failed in EchoFlower bg: {}", FriskMod.modID, String.valueOf(e));
+            FriskMod.logger.warn("{}: reflection failed in EchoFlower bg", FriskMod.modID);
         }
         sb.setShader(oldShader);
     }
@@ -201,12 +196,20 @@ public class EchoFlower extends AbstractEasyCard {
                 renderTip.setAccessible(true);
                 renderTip.set(this.lastCard, renderTip.get(this));
             } catch (Exception e) {
-                FriskMod.logger.warn("{}: reflection failed in EchoFlower tip: {}", FriskMod.modID, String.valueOf(e));
+                FriskMod.logger.warn("{}: reflection failed in EchoFlower tip", FriskMod.modID);
             }
             this.lastCard.renderCardTip(sb);
         } else {
             super.renderCardTip(sb);
         }
+    }
+
+    private void setDynamicVariables(AbstractMonster targetMonster) {
+        this.lastCard.applyPowers();
+        if (targetMonster != null)
+            this.lastCard.calculateCardDamage(targetMonster);
+        snapshotMaker.store(this.lastCard);
+        snapshotMaker.restore(this);
     }
 
     @Override
