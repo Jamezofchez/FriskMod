@@ -110,7 +110,7 @@ public class XPModifierAll extends AbstractDamageModifier {
         if (card.cardID.equals(SlackOff.ID)){
             modifier = -modifier;
         }
-        AbstractPower posspow = AbstractDungeon.player.getPower(Pleaded.POWER_ID);
+        AbstractPower posspow = AbstractDungeon.player.getPower(Mercied.POWER_ID);
         if (posspow != null){
             modifier = -(modifier*posspow.amount);
         }

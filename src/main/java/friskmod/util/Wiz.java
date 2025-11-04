@@ -40,14 +40,19 @@ public class Wiz {
         cardsList.forEach(c -> consumer.accept(c));
     }
 
-    public static ArrayList<AbstractCard> getAllCardsInCardGroups(boolean includeHand, boolean includeExhaust) {
+    public static ArrayList<AbstractCard> getAllCardsInCardGroups(){
+        return getAllCardsInCardGroups(true, true, true);
+    }
+    public static ArrayList<AbstractCard> getAllCardsInCardGroups(boolean includeHand, boolean includeExhaust, boolean includeLimbo) {
         ArrayList<AbstractCard> masterCardsList = new ArrayList<>();
         masterCardsList.addAll(AbstractDungeon.player.drawPile.group);
-        masterCardsList.addAll(AbstractDungeon.player.discardPile.group);
         if (includeHand)
             masterCardsList.addAll(AbstractDungeon.player.hand.group);
+        masterCardsList.addAll(AbstractDungeon.player.discardPile.group);
         if (includeExhaust)
             masterCardsList.addAll(AbstractDungeon.player.exhaustPile.group);
+        if (includeLimbo)
+            masterCardsList.addAll(AbstractDungeon.player.limbo.group);
         return masterCardsList;
     }
 

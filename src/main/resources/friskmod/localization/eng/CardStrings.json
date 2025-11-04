@@ -247,6 +247,10 @@
     "DESCRIPTION": "Apply !${modID}:M2! ${modID}:KR to a random enemy X times, where X is the amount of ${modID}:Wasted Energy spent last turn.",
     "EXTENDED_DESCRIPTION": [" NL (Applies !${modID}:M2! ${modID}:KR !M! times.)"]
   },
+  "${modID}:Ruins": {
+    "NAME": "Ruins",
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL At the start of turn increase damage dealt by 5."
+  },
   "${modID}:Sanchita": {
     "NAME": "Sanchita",
     "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! ${modID}:Temp_HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
@@ -259,11 +263,16 @@
   },
   "${modID}:SelfReflection": {
     "NAME": "Self Reflection",
-    "DESCRIPTION": "Gain !M! Strength. NL Gain !M! ${modID}:Vitality. NL Gain !M! ${modID}:Pleaded."
+    "DESCRIPTION": "Gain !M! Strength. NL Gain !M! ${modID}:Vitality. NL Gain !M! ${modID}:Mercied."
   },
   "${modID}:SlackOff": {
     "NAME": "Slack Off",
-    "DESCRIPTION": "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP decreases Attack damage for this card."
+    "DESCRIPTION": "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP decreases Attack damage for this card.",
+    "EXTENDED_DESCRIPTION": [
+      "Get Serious",
+      "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP increases Attack damage for this card while you have ${modID}:Mercied."
+    ]
+
   },
   "${modID}:Sleep": {
     "NAME": "Sleep",
@@ -281,7 +290,7 @@
   },
   "${modID}:SpecialDeal": {
     "NAME": "[[Specil Deal]]",
-    "DESCRIPTION": "Ethereal. NL Gain !M! ${modID}:Pleaded. NL ALL enemies gain !M! Artifact. NL Gain ${modID}:1997 gold."
+    "DESCRIPTION": "Ethereal. NL Gain !M! ${modID}:Mercied. NL ALL enemies gain !M! Artifact. NL Gain ${modID}:1997 gold."
   },
   "${modID}:Steal": {
     "NAME": "Steal",

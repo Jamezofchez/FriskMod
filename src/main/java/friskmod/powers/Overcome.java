@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import friskmod.patches.perseverance.PerseveranceFields;
+import friskmod.util.Wiz;
 
 public class Overcome extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(Overcome.class.getSimpleName());
@@ -48,12 +49,9 @@ public class Overcome extends BasePower {
 
     private void resetCardsOvercome() {
         if (AbstractDungeon.player == null) return;
-        for (AbstractCard c : AbstractDungeon.player.hand.group) resetOvercome(c);
-        for (AbstractCard c : AbstractDungeon.player.drawPile.group) resetOvercome(c);
-        for (AbstractCard c : AbstractDungeon.player.discardPile.group) resetOvercome(c);
-        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) resetOvercome(c);
-        // Limbo (cards being played/created)
-        for (AbstractCard c : AbstractDungeon.player.limbo.group) resetOvercome(c);
+        for (AbstractCard c : Wiz.getAllCardsInCardGroups()){
+            resetOvercome(c);
+        }
     }
 
     public void updateDescription() {

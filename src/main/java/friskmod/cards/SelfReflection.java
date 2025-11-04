@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import friskmod.character.Frisk;
-import friskmod.powers.Pleaded;
+import friskmod.powers.Mercied;
 import friskmod.powers.Vitality;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
@@ -39,7 +39,7 @@ public class SelfReflection extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, magicNumber), magicNumber));
         addToBot(new ApplyPowerAction(p, p, new Vitality(p, magicNumber), magicNumber));
-        addToBot(new ApplyPowerAction(p, p, new Pleaded(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new Mercied(p, magicNumber), magicNumber));
     }
 
     @Override

@@ -35,9 +35,9 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
             AbstractPower possFavourite = AbstractDungeon.player.getPower(FavouriteNumberPower.POWER_ID);
             if (possFavourite != null) {
                 int LV_power = 1;
-                AbstractPower possPleaded = AbstractDungeon.player.getPower(Pleaded.POWER_ID);
-                if (possPleaded != null){
-                    LV_power = -possPleaded.amount;
+                AbstractPower possMercied = AbstractDungeon.player.getPower(Mercied.POWER_ID);
+                if (possMercied != null){
+                    LV_power = -possMercied.amount;
                 }
                 newDamageAmount = determineFavouriteNumberLV(damageAmount, LV_power, target);
                 possFavourite.onSpecificTrigger();

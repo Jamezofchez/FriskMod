@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
 import friskmod.cards.SpecialDeal;
 import friskmod.helper.SharedFunctions;
-import friskmod.powers.Pleaded;
+import friskmod.powers.Mercied;
 import friskmod.util.Wiz;
 
 public class SpecialDealAction extends AbstractGameAction {
@@ -22,7 +22,7 @@ public class SpecialDealAction extends AbstractGameAction {
     public void update() {
         SharedFunctions.cycleDeals();
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new ApplyPowerAction(p, p, new Pleaded(p, amount), amount));
+        addToBot(new ApplyPowerAction(p, p, new Mercied(p, amount), amount));
         for (AbstractMonster monster : Wiz.getMonsters()) {
             addToBot(new ApplyPowerAction(monster, p, new ArtifactPower(monster, amount), amount));
         }

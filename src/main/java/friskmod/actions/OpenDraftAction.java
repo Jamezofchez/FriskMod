@@ -45,7 +45,7 @@ public class OpenDraftAction extends AbstractGameAction {
         possNightmareChoices.add(new NightmareOfFrail());
         possNightmareChoices.add(new NightmareOfNEO());
         possNightmareChoices.add(new NightmareOfKarma());
-        possNightmareChoices.add(new NightmareOfPleaded());
+        possNightmareChoices.add(new NightmareOfMercied());
         possNightmareChoices.add(new NightmareOfPounce());
         possNightmareChoices.add(new NightmareOfVulnerable());
         possNightmareChoices.add(new NightmareOfWeak());

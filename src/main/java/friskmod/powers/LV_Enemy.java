@@ -22,7 +22,7 @@ public class LV_Enemy extends BasePower {
         if (type != DamageInfo.DamageType.NORMAL) {
             return damage;
         }
-        if(this.owner.hasPower(Pleaded.POWER_ID)){
+        if(this.owner.hasPower(Mercied.POWER_ID)){
             return damage - this.amount;
         }
         return damage + this.amount;

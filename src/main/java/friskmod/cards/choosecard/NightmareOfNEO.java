@@ -3,7 +3,7 @@ package friskmod.cards.choosecard;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.powers.Karma;
 import friskmod.powers.NEO;
-import friskmod.powers.Pleaded;
+import friskmod.powers.Mercied;
 
 import static friskmod.FriskMod.makeID;
 

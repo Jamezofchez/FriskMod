@@ -26,12 +26,44 @@ public class SlackOff extends AbstractEasyCard{
     private static final int ADDED_XP = 8;
     private static final int UPG_ADDED_XP = 3;
 
+    private boolean serious = false;
+
     public SlackOff() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = ADDED_XP;
         baseDamage = DAMAGE;
+        serious = false;
         CardXPFields.setAddedXP(this, magicNumber);
     }
+
+    public void setSeriousDescription() {
+        serious = true;
+    }
+
+    public void setNormalDescription() {
+        serious = false;
+    }
+
+    public void initializeTitle() {
+        if (serious) {
+            name = cardStrings.EXTENDED_DESCRIPTION[0];
+        } else{
+            name = cardStrings.NAME;
+        }
+        super.initializeTitle();
+    }
+    public void initializeDescription() {
+        if (serious) {
+            rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+        }
+        else {
+            rawDescription = cardStrings.DESCRIPTION;
+        }
+        initializeTitle();
+        super.initializeDescription();
+    }
+
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);

@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.character.Frisk;
-import friskmod.powers.Pleaded;
+import friskmod.powers.Mercied;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
@@ -72,7 +72,7 @@ public class Plead extends AbstractEasyCard {
     private void useEnemies(AbstractPlayer p, List<AbstractMonster> enemies, int playerBlock) {
         for (AbstractMonster mo : enemies) {
             addToBot(new GainBlockAction(mo, p, playerBlock));
-            addToBot(new ApplyPowerAction(mo, p, new Pleaded(mo, POWER_AMOUNT), POWER_AMOUNT));
+            addToBot(new ApplyPowerAction(mo, p, new Mercied(mo, POWER_AMOUNT), POWER_AMOUNT));
         }
     }
 

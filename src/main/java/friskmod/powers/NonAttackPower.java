@@ -10,6 +10,7 @@ import friskmod.FriskMod;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import friskmod.patches.GhostlyPatch;
+import friskmod.util.Wiz;
 
 public class NonAttackPower extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(NonAttackPower.class.getSimpleName());
@@ -56,12 +57,9 @@ public class NonAttackPower extends BasePower {
 
     private void resetCardsGhostly() {
         if (AbstractDungeon.player == null) return;
-        for (AbstractCard c : AbstractDungeon.player.hand.group) resetGhostly(c);
-        for (AbstractCard c : AbstractDungeon.player.drawPile.group) resetGhostly(c);
-        for (AbstractCard c : AbstractDungeon.player.discardPile.group) resetGhostly(c);
-        for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) resetGhostly(c);
-        // Limbo (cards being played/created)
-        for (AbstractCard c : AbstractDungeon.player.limbo.group) resetGhostly(c);
+        for (AbstractCard c : Wiz.getAllCardsInCardGroups()) {
+            resetGhostly(c);
+        }
     }
 
 

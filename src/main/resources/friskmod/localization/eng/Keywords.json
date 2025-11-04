@@ -205,9 +205,9 @@
     "DESCRIPTION": "Effect triggers when you obtain this card."
   },
   {
-    "PROPER_NAME": "Pleaded",
+    "PROPER_NAME": "Mercied",
     "NAMES": [
-      "Pleaded"
+      "Mercied"
     ],
     "DESCRIPTION": "Attacks will deal 1 less damage for their #y${modID}:LV or #y${modID}:XP this turn."
   },

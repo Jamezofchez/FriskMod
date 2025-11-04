@@ -39,10 +39,15 @@
   "${modID}:CountdownPounce": {
     "NAME": "Pounce",
     "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
-      "On #yExpiry after playing #b%s cards, deal #b%s damage if the target doesn't intend to attack.",
-      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack.",
-      "On #yExpiry after playing #b%s card, deal #b%s damage if the target doesn't intend to attack."
+      "On #yExpiry after playing #b%s cards, deal #b%s damage. Deals double damage if the target doesn't intend to attack.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage. Deals double damage if the target doesn't intend to attack."
+    ]
+  },
+  "${modID}:CountdownRuins": {
+    "NAME": "Ruins",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, deal #b%s damage. At the start of turn increase this amount by #b%s.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage. At the start of turn increase this amount by #b%s."
     ]
   },
   "${modID}:Determination": {
@@ -101,8 +106,8 @@
       "Your next #b%s cards which fail to play this turn are #y${modID}:Persevered."
     ]
   },
-  "${modID}:Pleaded": {
-    "NAME": "Pleaded",
+  "${modID}:Mercied": {
+    "NAME": "Mercied",
     "DESCRIPTIONS": [
       "#yAttacks deal #b%s less damage this turn."
     ]
