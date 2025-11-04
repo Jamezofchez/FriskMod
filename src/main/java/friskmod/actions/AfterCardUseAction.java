@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import friskmod.cards.BalletShoes;
 import friskmod.powers.AfterCardPlayedInterface;
 import friskmod.powers.CountdownPounce;
 
@@ -23,6 +24,11 @@ public class AfterCardUseAction extends AbstractGameAction {
         isDone = true;
     }
     private void publishOnUseCard() {
+        for (AbstractCard card : AbstractDungeon.player.hand.group) {
+            if (card instanceof BalletShoes){
+                ((BalletShoes) card).afterCardPlayed();
+            }
+        }
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
             for (AbstractPower p : m.powers) {
                 if (p instanceof CountdownPounce){

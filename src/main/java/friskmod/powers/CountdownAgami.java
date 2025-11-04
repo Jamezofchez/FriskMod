@@ -57,9 +57,6 @@ public class CountdownAgami extends AbstractCountdownPower {
     private int getDescNum() {
         int descNum = 0;
         if (amount2 == 1){
-            descNum += 2;
-        }
-        if (amount != 0){
             descNum += 1;
         }
         return descNum;
@@ -70,14 +67,5 @@ public class CountdownAgami extends AbstractCountdownPower {
         super.upgrade();
         this.amount += DETONATION_AMOUNT;
         updateDescription();
-    }
-    @Override
-    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
-        int descNum = getDescNum();
-        if (descNum % 2 == 0) {
-            FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString(this.amount2), x, y * Settings.scale, this.fontScale, Color.CYAN.cpy());
-        } else {
-            super.renderAmount(sb, x, y, c);
-        }
     }
 }

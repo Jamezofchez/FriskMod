@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.FriskMod;
 import friskmod.actions.BalletShoesAction;
 import friskmod.actions.CardPlayAction;
 import friskmod.actions.CustomSFXAction;
@@ -22,6 +23,7 @@ import friskmod.util.Wiz;
 
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import static friskmod.FriskMod.makeID;
 
@@ -50,17 +52,23 @@ public class BalletShoes extends AbstractEasyCard {
     }
 
     @Override
-    public void triggerOnGlowCheck() {
+    public void triggerWhenDrawn() {
+        Wiz.actB(this::makeMiddleCardGlow);
+    }
+
+    public void afterCardPlayed() {
+        makeMiddleCardGlow();
+    }
+
+    private void makeMiddleCardGlow() {
         try {
             int card_pos;
             List<AbstractCard> afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != this).collect(java.util.stream.Collectors.toList());
             double hand_size = (afterHand.size());
             boolean validFlag = false;
             card_pos = (int) (hand_size - 1) / 2;
-            if (hand_size % 2 == 0) {
+            if (hand_size % 2 != 0) {
                 validFlag = true;
-            } else{
-                card_pos -= 1;
             }
             AbstractCard chosenCard = afterHand.get(card_pos);
             if (validFlag) {
@@ -70,19 +78,20 @@ public class BalletShoes extends AbstractEasyCard {
                 }
             }
             for (AbstractCard c : afterHand) {
-                if (c == chosenCard){
+                if (validFlag && c == chosenCard) {
                     continue;
                 }
-                if (BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c) == true){
+                if (BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c) == true) {
                     BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(c, false);
-//                    if (CardBorderGlowManager.getCustomGlowColors(chosenCard).isEmpty()) { //if it's not glowing??
+                    //                    if (CardBorderGlowManager.getCustomGlowColors(chosenCard).isEmpty()) { //if it's not glowing??
                     c.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
                 }
             }
-        } catch (Exception e) {
-            //good code!
+        } catch (Exception ignored) {
+            FriskMod.logger.warn("{}: BalletShoes set middle glow failed",FriskMod.modID);
         }
     }
+
 
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {

@@ -57,16 +57,21 @@ public class CountdownPounce extends AbstractCountdownPower {
 
     @Override
     public void updateDescription() {
-        int descNum = 0;
-        if (amount2 == 1){
-            descNum += 1;
-        }
+        int descNum = getDescNum();
         String baseDescription = DESCRIPTIONS[descNum];
         if (doNormalDamage()) {
             this.description = String.format(baseDescription, amount2, amount);
         } else{
             this.description = String.format(baseDescription, amount2, amount*2);
         }
+    }
+
+    private int getDescNum() {
+        int descNum = 0;
+        if (amount2 == 1){
+            descNum += 1;
+        }
+        return descNum;
     }
 
     private boolean doNormalDamage() {

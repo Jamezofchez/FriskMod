@@ -22,9 +22,6 @@ public class PerseveranceFields {
         return setIsPerseverable(c, value, false);
     }
     public static boolean setIsPerseverable(AbstractCard c, boolean value, boolean fromOvercome) {
-        if (c instanceof BreakFree){
-            return true;
-        }
         if (value) {
             if (PerseveranceFields.trapped.get(c)) {
                 return false;

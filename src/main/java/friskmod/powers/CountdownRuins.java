@@ -49,12 +49,17 @@ public class CountdownRuins extends AbstractCountdownPower {
 
     @Override
     public void updateDescription() {
+        int descNum = getDescNum();
+        String baseDescription = DESCRIPTIONS[descNum];
+        this.description = String.format(baseDescription, amount2, amount, UPG_DAMAGE);
+    }
+
+    private int getDescNum() {
         int descNum = 0;
         if (amount2 == 1){
             descNum += 1;
         }
-        String baseDescription = DESCRIPTIONS[descNum];
-        this.description = String.format(baseDescription, amount2, amount, UPG_DAMAGE);
+        return descNum;
     }
 
     public void atStartOfTurn() {

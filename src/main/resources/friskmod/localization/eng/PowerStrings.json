@@ -15,9 +15,7 @@
     "NAME": "Agami",
     "DESCRIPTIONS": [
       "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR",
-      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR. #y${modID}:Detonate its #y${modID}:KR #b%s times.",
-      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR.",
-      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR. #y${modID}:Detonate its #y${modID}:KR #b%s times."
+      "On #yExpiry after playing #b%s card, give the enemy #b%s ${modID}:LV and convert this enemy's #y${modID}:LV to #y${modID}:KR."
     ]
   },
   "${modID}:CountdownDraw": {
@@ -165,6 +163,12 @@
     "NAME": "NEO",
     "DESCRIPTIONS": [
       "Whenever the target gains Block, it takes #b%s damage for each point of Block it has. Reduced by 1 on turn end."
+    ]
+  },
+  "${modID}:NewHome": {
+    "NAME": "New Home",
+    "DESCRIPTIONS": [
+      "Whenever you upgrade a ${modID}:Countdown, upgrade a random card in your hand and give it 3 #y${modID}:XP."
     ]
   },
   "${modID}:NonAttackPower": {

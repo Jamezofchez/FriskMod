@@ -26,7 +26,7 @@ public class Agami extends AbstractEasyCard {
     );
     private static final int WAIT_TIMER = 5;
     private static final int LV_GAIN = 0;
-    private static final int UPG_LV_GAIN = 1;
+    private static final int UPG_LV_GAIN = 3;
 
 
     public Agami() {

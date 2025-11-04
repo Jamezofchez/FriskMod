@@ -318,9 +318,9 @@
     "COLOR": "ffff00"
   },
   {
-    "PROPER_NAME": "force",
+    "PROPER_NAME": "Force",
     "NAMES": [
-      "force"
+      "Force"
     ],
     "DESCRIPTION": "${modID}:Persevere the card even if it is already playable."
   }

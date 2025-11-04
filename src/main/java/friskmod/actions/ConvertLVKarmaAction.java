@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.powers.Karma;
 import friskmod.powers.LV_Enemy;
+import friskmod.util.Wiz;
 
 public class ConvertLVKarmaAction extends AbstractGameAction
 {
@@ -15,28 +16,20 @@ public class ConvertLVKarmaAction extends AbstractGameAction
 
     private final AbstractPlayer p = AbstractDungeon.player;
 
-    private final int DETONATION_AMOUNT;
+    private final int additionalLV;
 
-    public ConvertLVKarmaAction(AbstractCreature c, int DETONATION_AMOUNT) {
+    public ConvertLVKarmaAction(AbstractCreature c, int additionalLV) {
         this.c = c;
         this.actionType = ActionType.SPECIAL;
-        this.DETONATION_AMOUNT = DETONATION_AMOUNT;
+        this.additionalLV = additionalLV;
     }
 
     @Override
     public void update() {
-        int KR_Amount = 0;
-        AbstractPower posspow = c.getPower(LV_Enemy.POWER_ID);
-        if (posspow != null){
-            KR_Amount = posspow.amount;
+        if (additionalLV > 0) {
+            Wiz.att(new ApplyPowerAction(c, p, new LV_Enemy(c, additionalLV), additionalLV));
+            Wiz.att(new ConsumeLVEnemyAgami(c));
         }
-        if (DETONATION_AMOUNT > 0) {
-            for (int i = 0; i < DETONATION_AMOUNT; i++) {
-                AbstractDungeon.actionManager.addToTop(new DetonateKarmaAction(c));
-            }
-        }
-        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(c, p, new Karma(c, KR_Amount), KR_Amount));
-        AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(c, p, LV_Enemy.POWER_ID));
         this.isDone = true;
     }
 }

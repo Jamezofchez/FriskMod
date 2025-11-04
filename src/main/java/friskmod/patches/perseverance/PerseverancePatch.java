@@ -411,7 +411,7 @@ public class PerseverancePatch {
         @SpirePrefixPatch
         public static void Prefix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
             if (!card.dontTriggerOnUseCard) {
-                if (card != null && (PerseveranceFields.perseverePlayed.get(card))) {
+                if (card != null && (PerseveranceFields.perseverePlayed.get(card) || PerseveranceFields.dontTrap.get(card))) {
                     if (PerseveranceFields.overcomePlayed.get(card)) {
                         PerseveranceFields.overcomePlayed.set(card, false);
                         AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);

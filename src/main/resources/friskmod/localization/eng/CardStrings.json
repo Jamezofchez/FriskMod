@@ -16,7 +16,7 @@
   "${modID}:Agami": {
     "NAME": "Agami",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR.",
-    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR. NL ${modID}:Detonate its ${modID}:KR. "
+    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, give the enemy #b%s ${modID}:LV and convert the enemy's ${modID}:LV into ${modID}:KR. "
 
   },
   "${modID}:AncientStrike": {
@@ -34,7 +34,7 @@
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
-    "DESCRIPTION": "On odd hand size, NL ${modID}:force ${modID}:Persevere the middle card in your hand !M! times and ${modID}:Trap it once."
+    "DESCRIPTION": "On odd hand size, NL ${modID}:Force ${modID}:Persevere the middle card in your hand !M! times and ${modID}:Trap it once."
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",

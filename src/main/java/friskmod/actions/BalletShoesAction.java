@@ -36,16 +36,14 @@ public class BalletShoesAction extends AbstractGameAction {
         AbstractCard chosenCard = afterHand.get(card_pos);
         if (chosenCard != null) {
             for (int i = 0; i < numTimes; ++i) {
-                Wiz.att(new WaitAction(0.25f));
-                Wiz.att(new CustomSFXAction("snd_punchstrong"));
 //                Wiz.att(new CardPlayAction(chosenCard, m));
-                AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
-                tmp.purgeOnUse = true;
-                PerseveranceFields.dontTrap.set(tmp, true);
-                Wiz.att(new PersevereCardAction(tmp, m, false));
+                PerseveranceFields.dontTrap.set(chosenCard, true);
+                Wiz.atb(new PersevereCardAction(chosenCard.makeSameInstanceOf(), m, false));
+                Wiz.atb(new CustomSFXAction("snd_punchstrong"));
+                Wiz.atb(new WaitAction(0.25f));
             }
             if (numTimes == 3){
-                Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));
+                Wiz.atb(new CustomSFXAction("mus_sfx_voice_triple"));
             }
             AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
             PerseveranceFields.trapped.set(tmp, true);

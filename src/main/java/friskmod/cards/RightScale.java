@@ -58,6 +58,7 @@ public class RightScale extends AbstractEasyCard {
     public void applyPowers() {
         this.baseDamage = getBaseDamage();
         super.applyPowers();
+        this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         this.initializeDescription();
     }
@@ -68,6 +69,7 @@ public class RightScale extends AbstractEasyCard {
 
     public void calculateCardDamage(AbstractMonster mo) {
         super.calculateCardDamage(mo);
+        this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         initializeDescription();
     }
