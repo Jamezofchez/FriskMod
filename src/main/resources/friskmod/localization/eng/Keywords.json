@@ -316,12 +316,5 @@
     ],
     "DESCRIPTION": "Gain 19 gold the first time played. Gain 19 gold the second time played. Gain 97 gold the third time played.",
     "COLOR": "ffff00"
-  },
-  {
-    "PROPER_NAME": "Force",
-    "NAMES": [
-      "Force"
-    ],
-    "DESCRIPTION": "${modID}:Persevere the card even if it is already playable."
   }
 ]

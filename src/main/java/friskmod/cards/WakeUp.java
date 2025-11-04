@@ -24,8 +24,8 @@ public class WakeUp extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int SCRY_AMOUNT = 4;
-    private static final int BLOCK = 4;
-    private static final int UPG_BLOCK = 4;
+    private static final int BLOCK = 5;
+    private static final int UPG_SCRY_AMOUNT = 2;
 
     public WakeUp() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -40,6 +40,6 @@ public class WakeUp extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeBlock(UPG_BLOCK);
+        upgradeMagicNumber(UPG_SCRY_AMOUNT);
     }
 }

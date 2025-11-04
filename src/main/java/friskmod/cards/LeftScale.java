@@ -1,6 +1,7 @@
 package friskmod.cards;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.vfx.combat.SearingBlowEffect;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 
 import static friskmod.FriskMod.makeID;
@@ -43,23 +45,29 @@ public class LeftScale extends AbstractEasyCard {
         this.exhaust = true;
     }
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        this.baseDamage = getBaseDamage();
-        this.calculateCardDamage(m);
+    public void use(AbstractPlayer p, AbstractMonster m) {;
         addToBot(new LoseHPAction(p, p, magicNumber));
-        if (m != null) {
-            addToBot(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY, effectScale()), 0.2F));
-        }
-        dmg(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
-        initializeDescription();
+        AbstractGameAction action = Wiz.actionify(() -> {
+            this.baseDamage = getBaseDamage();
+            this.calculateCardDamage(m);
+            if (m != null) {
+                addToBot(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY, effectScale()), 0.2F));
+            }
+            dmg(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
+            initializeDescription();
+        });
+        BindingHelper.bindAction(this, action);
+        addToBot(action);
     }
 
     public void applyPowers() {
         this.baseDamage = getBaseDamage();
+        this.baseDamage += magicNumber;
         super.applyPowers();
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         this.initializeDescription();
+        this.baseDamage -= magicNumber;
     }
 
     public void onMoveToDiscard() {
@@ -67,10 +75,13 @@ public class LeftScale extends AbstractEasyCard {
     }
 
     public void calculateCardDamage(AbstractMonster mo) {
+        this.baseDamage = getBaseDamage();
+        this.baseDamage += magicNumber;
         super.calculateCardDamage(mo);
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         initializeDescription();
+        this.baseDamage -= magicNumber;
     }
 
     private int effectScale() {

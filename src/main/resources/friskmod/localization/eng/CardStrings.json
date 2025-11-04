@@ -34,7 +34,7 @@
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
-    "DESCRIPTION": "On odd hand size, NL ${modID}:Force ${modID}:Persevere the middle card in your hand !M! times and ${modID}:Trap it once."
+    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and ${modID}:Trap it once."
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",
