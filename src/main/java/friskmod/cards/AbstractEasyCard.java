@@ -78,6 +78,7 @@ public abstract class AbstractEasyCard extends CustomCard {
         String textureString;
         switch (cardName) {
             case "GenericDrinkCard":
+            case "AncientCocktail":
             case "EntropicCocktail":
             case "FairyCocktail":
             case "Ketchup":

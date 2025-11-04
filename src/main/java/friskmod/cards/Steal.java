@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.actions.StealAllBlockAction;
+import friskmod.actions.StealEnemyHP;
 import friskmod.actions.StealPowerAction;
 import friskmod.character.Frisk;
 import friskmod.helper.StealableWhitelist;
@@ -57,7 +58,7 @@ public class Steal extends AbstractEasyCard {
 //            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
 //        }
 //        try {
-//            if (Wiz.getEnemies().stream().anyMatch(m -> m.hasPower(ArtifactPower.POWER_ID))) {
+//            if (Wiz.getMonsters().stream().anyMatch(m -> m.hasPower(ArtifactPower.POWER_ID))) {
 //                this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[0];
 //            }
 //        } catch (NullPointerException ignored){
@@ -81,10 +82,8 @@ public class Steal extends AbstractEasyCard {
         addToBot(new StealAllBlockAction(Wiz.getMonsters()));
         addToBot(new StealPowerAction(Wiz.getMonsters()));
         for (AbstractMonster monster : Wiz.getMonsters()) {
-            addToBot(new DamageAction(monster, new DamageInfo(p, magicNumber, DamageInfo.DamageType.HP_LOSS), AbstractGameAction.AttackEffect.NONE, true));
-            addToBot(new AddTemporaryHPAction(p, p, magicNumber));
+            addToBot(new StealEnemyHP(magicNumber, monster));
         }
-        
     }
 
 //    @Override

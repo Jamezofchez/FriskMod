@@ -3,7 +3,6 @@ package friskmod.cards;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
-import collector.util.Wiz;
 import friskmod.FriskMod;
 import friskmod.util.CardStats;
 import friskmod.util.TriFunction;
@@ -14,6 +13,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -546,7 +546,7 @@ public abstract class BaseCard extends CustomCard {
                 var.value = var.calculation.apply(this, null, var.base);
             }
             if (isMultiDamage) {
-                ArrayList<AbstractMonster> monsters = Wiz.getEnemies();
+                ArrayList<AbstractMonster> monsters = Wiz.getMonsters();
                 AbstractMonster m;
                 for (LocalVarInfo var : cardVariables.values()) {
                     if (var.aoeValue == null || var.aoeValue.length != monsters.size())
@@ -572,7 +572,7 @@ public abstract class BaseCard extends CustomCard {
                 var.value = var.calculation.apply(this, m, var.base);
             }
             if (isMultiDamage) {
-                ArrayList<AbstractMonster> monsters = Wiz.getEnemies();
+                ArrayList<AbstractMonster> monsters = Wiz.getMonsters();
                 for (LocalVarInfo var : cardVariables.values()) {
                     if (var.aoeValue == null || var.aoeValue.length != monsters.size())
                         var.aoeValue = new int[monsters.size()];

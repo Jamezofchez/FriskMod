@@ -11,7 +11,10 @@ import friskmod.actions.ResetCardCostLimit;
 import friskmod.helper.GrillbysHelper;
 import friskmod.util.Wiz;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static friskmod.FriskMod.makeID;
 
@@ -21,7 +24,7 @@ public class GenericDrinkCard extends AbstractDrinkCard {
     private static final String[] TEXT = uiStrings.TEXT;
 
     private static final int PROBABILITY = 50;
-    private static final int UPG_PROBABILITY = 90;
+    private static final int UPG_PROBABILITY = 75;
 
     private static final int HIGHEST_COST = 1;
     private static final int UPG_HIGHEST_COST = 2;
@@ -120,13 +123,36 @@ public class GenericDrinkCard extends AbstractDrinkCard {
 
     private String getPotencyDescription() {
         String rawDescription;
-        if (potion != null){
+        if (potion != null) {
             rawDescription = potion.description;
-        } else{
+        } else {
             rawDescription = TEXT[4];
         }
-        return rawDescription.replaceAll("\\d+", "!M!");
+
+        // Find all numbers in the string
+        Matcher matcher = Pattern.compile("\\d+").matcher(rawDescription);
+        List<String> numbers = new ArrayList<>();
+
+        while (matcher.find()) {
+            numbers.add(matcher.group());
+        }
+
+        if (numbers.isEmpty()) {
+            return rawDescription; // no numbers found
+        }
+
+        // Check if all numbers are the same
+        boolean allSame = numbers.stream().distinct().count() == 1;
+
+        if (allSame) {
+            // Replace all if all numbers are the same
+            return rawDescription.replaceAll("\\d+", "!M!");
+        } else {
+            // Replace only the first occurrence otherwise
+            return rawDescription.replaceFirst("\\d+", "!M!"); //guess??
+        }
     }
+
 
     @Override
     public void usePotion(AbstractMonster m) {

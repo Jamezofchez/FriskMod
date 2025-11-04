@@ -29,7 +29,8 @@
   },
   "${modID}:BadMemory": {
     "NAME": "Bad Memory",
-    "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand."
+    "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand.",
+    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Add an *Freak *Bullet+ to your hand."
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
@@ -107,14 +108,21 @@
     "NAME": "Dual!",
     "DESCRIPTION": "Put ALL ${modID}:Strikes from your draw pile to your hand. NL Exhaust."
   },
+  "${modID}:EchoFlower": {
+    "NAME": "Echo Flower",
+    "DESCRIPTION": "While in your hand, this card is a copy of the previous card you played this turn.",
+    "UPGRADE_DESCRIPTION": "While in your hand, this card is an upgraded copy of the previous card you played this turn.",
+    "EXTENDED_DESCRIPTION": [
+      "I must play another card first."
+    ]
+  },
   "${modID}:Evolve": {
     "NAME": "Evolve",
     "DESCRIPTION": "Gain !M! ${modID}:LV whenever you play a card."
   },
   "${modID}:Execute": {
     "NAME": "Execute",
-    "DESCRIPTION": "Deal !D! damage twice. NL Give 1 card at random !M! ${modID}:inherent ${modID}:XP.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage twice. NL Choose 1 card !M! ${modID}:inherent ${modID}:XP."
+    "DESCRIPTION": "Deal !D! damage twice. NL Choose 1 card to give !M! ${modID}:inherent ${modID}:XP."
   },
   "${modID}:OLDExpertise": {
     "NAME": "Expertise",
@@ -148,7 +156,8 @@
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
-    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take a ${modID}:Sip of all your potions."
+    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take a ${modID}:Sip of all your potions.",
+    "UPGRADE_DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take an upgraded ${modID}:Sip of all your potions. NL Exhaust."
   },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
@@ -182,8 +191,8 @@
   },
   "${modID}:LevelUp": {
     "NAME": "Level Up",
-    "DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your hand with ${modID}:XP for the rest of combat.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Upgrade ALL your cards in your deck with ${modID}:XP for the rest of combat."
+    "DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your hand with ${modID}:XP for the rest of combat.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your deck with ${modID}:XP for the rest of combat."
   },
   "${modID}:Overcome": {
     "NAME": "Overcome",
@@ -205,7 +214,7 @@
   },
   "${modID}:Prarabdha": {
     "NAME": "Prarabdha",
-    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, ${modID}:Steal ALL enemies' Block and buffs."
+    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, ${modID}:Steal ALL enemies' buffs and ${modID}:Steal !M! HP."
   },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
@@ -280,7 +289,7 @@
   },
   "${modID}:Tinker": {
     "NAME": "Tinker",
-    "DESCRIPTION": "Give the enemy !M! ${modID}:NEO. NL Give the enemy !M! Artifact. NL Give the enemy !B! Block."
+    "DESCRIPTION": "Give the enemy !M! Frail. NL Give the enemy !M! ${modID}:NEO. NL Give the enemy !B! Block."
   },
   "${modID}:ToAsh": {
     "NAME": "To Ash",
@@ -297,6 +306,14 @@
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",
     "DESCRIPTION": "Deal !D! damage twice. NL Give the enemy !M! Thorns."
+  },
+  "${modID}:WakeUp": {
+    "NAME": "Wake Up",
+    "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable cards discarded. NL Gain !B! Block for each Unplayable card exhausted."
+  },
+  "${modID}::AncientCocktail": {
+    "NAME": "Ancient Cocktail",
+    "DESCRIPTION": "EVERYONE gains !M! Artifact. NL Exhaust."
   },
   "${modID}::DuplicationCocktail": {
     "NAME": "Duplication Cocktail",

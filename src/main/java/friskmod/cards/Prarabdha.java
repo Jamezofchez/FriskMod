@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.actions.StealAllBlockAction;
+import friskmod.actions.StealEnemyHP;
 import friskmod.actions.StealPowerAction;
 import friskmod.character.Frisk;
 import friskmod.helper.StealableWhitelist;
@@ -17,7 +18,9 @@ import friskmod.powers.Karma;
 import friskmod.powers.LV_Enemy;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
-import hermit.util.Wiz;
+import friskmod.util.Wiz;
+
+import java.util.ArrayList;
 
 import static friskmod.FriskMod.makeID;
 
@@ -64,8 +67,10 @@ public class Prarabdha extends AbstractEasyCard {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         if (extraEffectCheck()) {
             glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-            addToBot(new StealAllBlockAction(Wiz.getEnemies()));
-            addToBot(new StealPowerAction(Wiz.getEnemies()));
+            addToBot(new StealPowerAction(Wiz.getMonsters()));
+            for (AbstractMonster monster : Wiz.getMonsters()) {
+                addToBot(new StealEnemyHP(magicNumber, monster));
+            }
         }
     }
 
@@ -73,7 +78,7 @@ public class Prarabdha extends AbstractEasyCard {
         if (!ThreatenedCheck.isThreatened()){
             return false;
         }
-        for (AbstractMonster m : Wiz.getEnemies()) {
+        for (AbstractMonster m : Wiz.getMonsters()) {
             if ((m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
                 return true;
             }

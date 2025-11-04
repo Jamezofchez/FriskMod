@@ -16,6 +16,8 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+import friskmod.helper.GrillbysHelper;
+import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.makeID;
 
@@ -47,9 +49,9 @@ public class LesserDuplication extends BasePower {
   }
   
   public void onUseCard(AbstractCard card, UseCardAction action) {
-    if (card.costForTurn > amount2 || card.cost == -1 || card.cost == -2)
+    if (!GrillbysHelper.checkLesserDuplication(card, amount2))
       return; 
-    if (!card.purgeOnUse && this.amount > 0) {
+    if (this.amount > 0) {
       flash();
       duplicatePlayedCard(card, (AbstractMonster)action.target);
       this.amount--;

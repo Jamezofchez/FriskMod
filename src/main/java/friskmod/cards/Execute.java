@@ -24,10 +24,10 @@ public class Execute extends AbstractEasyCard {
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DAMAGE = 7;
-    private static final int UPG_DAMAGE = 1;
+//    private static final int UPG_DAMAGE = 2;
     private static final int NUM_CARDS = 1;
-    private static final int GIVEN_XP = 5;
-//    private static final int UPG_GIVEN_XP = 2;
+    private static final int GIVEN_XP = 3;
+    private static final int UPG_GIVEN_XP = 2;
 
     public Execute() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -39,16 +39,16 @@ public class Execute extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
-        if (!upgraded) {
-            addToBot(new GiveInherentXPAction(NUM_CARDS, GIVEN_XP, true));
-        } else{
-            addToBot(new GiveInherentXPAction(NUM_CARDS, GIVEN_XP, false));
-        }
+//        if (!upgraded) {
+//            addToBot(new GiveInherentXPAction(NUM_CARDS, GIVEN_XP, true));
+//        } else{
+//            addToBot(new GiveInherentXPAction(NUM_CARDS, GIVEN_XP, false));
+//        }
+        addToBot(new GiveInherentXPAction(NUM_CARDS, GIVEN_XP, false));
     }
 
     @Override
     public void upp() {
-        upgradeDamage(UPG_DAMAGE);
-//        upgradeMagicNumber(UPG_GIVEN_XP);
+        upgradeMagicNumber(UPG_GIVEN_XP);
     }
 }

@@ -1,20 +1,18 @@
 package friskmod.cards;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.potions.AbstractPotion;
+import friskmod.actions.ScryBlockExhaustAction;
 import friskmod.character.Frisk;
-import friskmod.helper.GrillbysHelper;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
+
 import static friskmod.FriskMod.makeID;
 
-public class Grillbys extends AbstractEasyCard {
-    public static final String ID = makeID(Grillbys.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class WakeUp extends AbstractEasyCard {
+    public static final String ID = makeID(WakeUp.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -23,31 +21,25 @@ public class Grillbys extends AbstractEasyCard {
             CardType.SKILL, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
             CardRarity.UNCOMMON, //Rarity. BASIC is for starting cards, then there's COMMON/UNCOMMON/RARE, and then SPECIAL and CURSE. SPECIAL is for cards you only get from events. Curse is for curses, except for special curses like Curse of the Bell and Necronomicurse.
             CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
-            0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
+            1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int TEMP_HP = 2;
+    private static final int SCRY_AMOUNT = 4;
+    private static final int BLOCK = 4;
+    private static final int UPG_BLOCK = 4;
 
-    public Grillbys() {
+    public WakeUp() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseMagicNumber = magicNumber = TEMP_HP;
-        tags.add(FriskTags.YOU);
+        baseBlock = BLOCK;
+        baseMagicNumber = magicNumber = SCRY_AMOUNT;
+        tags.add(FriskTags.PERSEVERANCE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToTop(new AddTemporaryHPAction(p, p, magicNumber));
-        for (AbstractPotion potion : p.potions) {
-            if (potion == null || potion instanceof com.megacrit.cardcrawl.potions.PotionSlot) {
-                continue;
-            }
-            AbstractCard card = GrillbysHelper.getPotionCard(potion);
-            if (upgraded && card.canUpgrade()){
-                card.upgrade();
-            }
-            addToBot(new MakeTempCardInHandAction(card));
-        }
+        addToBot(new ScryBlockExhaustAction(magicNumber, block));
     }
 
     @Override
     public void upp() {
+        upgradeBlock(UPG_BLOCK);
     }
 }

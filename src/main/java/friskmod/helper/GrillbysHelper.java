@@ -114,4 +114,14 @@ public class GrillbysHelper {
                 return false;
         }
     }
+
+    public static boolean checkLesserDuplication(AbstractCard card, int maxCost){
+        if (Wiz.getLogicalCardCost(card) > maxCost){
+            return false;
+        }
+        if (card.purgeOnUse || card.dontTriggerOnUseCard){
+            return false;
+        }
+        return true;
+    }
 }
