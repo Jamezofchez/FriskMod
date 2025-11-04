@@ -7,7 +7,7 @@
 //import com.megacrit.cardcrawl.monsters.AbstractMonster;
 //import friskmod.character.Frisk;
 //import friskmod.helper.ThreatenedCheck;
-//import friskmod.patches.OnWasteEnergyPatch;
+//import friskmod.patches.WastedEnergyPatch;
 //import friskmod.powers.Karma;
 //import friskmod.util.CardStats;
 //import friskmod.util.FriskTags;
@@ -40,7 +40,7 @@
 //    }
 //
 //    private int getBaseMagic() {
-//        return OnWasteEnergyPatch.previous_e;
+//        return WastedEnergyPatch.previous_e;
 //    }
 //
 //    @Override

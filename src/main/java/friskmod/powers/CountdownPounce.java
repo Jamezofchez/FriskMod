@@ -17,10 +17,6 @@ import friskmod.FriskMod;
 public class CountdownPounce extends AbstractCountdownPower {
     public static final String POWER_ID = FriskMod.makeID(CountdownPounce.class.getSimpleName());
 
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(POWER_ID);
-
-    public static final String[] TEXT = uiStrings.TEXT;
-
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public static final String NAME = powerStrings.NAME;

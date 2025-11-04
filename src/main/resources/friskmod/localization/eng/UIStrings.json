@@ -138,8 +138,8 @@
   },
   "${modID}:OnBattleStartAction": {
   "TEXT": [
-    "That thing's Artifact is preventing me from stealing Block!",
-    "If the enemy gains enough Strength... I might not be able to steal it!"
+    "That thing's Barricade stops me stealing Block!",
+    "If the enemy gains enough Strength, I can't steal it!"
   ]
   },
   "${modID}:AbstractDrinkCard": {

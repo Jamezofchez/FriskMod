@@ -82,7 +82,14 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "Play this card while disregarding any conditions for playability. NL If a card is persevered, add an #Trapped copy of the card to your hand."
+    "DESCRIPTION": "If a card is unplayable, play it anyway. NL If a card is #ypersevered, add an #y${modID}:Trapped copy of the card to your hand."
+  },
+  {
+    "PROPER_NAME": "Perseverable",
+    "NAMES": [
+      "Perseverable"
+    ],
+    "DESCRIPTION": "This card can always be #y${modID}:Persevered."
   },
   {
     "PROPER_NAME": "Critical",
@@ -90,7 +97,7 @@
       "Critical",
       "Critical:"
     ],
-    "DESCRIPTION": "Critical cards have a bonus effect when in the middle of your hand or #yPersevered"
+    "DESCRIPTION": "'#yCritical cards have a bonus effect when in the middle of your hand or #y${modID}:Persevered"
   },
   {
     "PROPER_NAME": "Determination",
@@ -158,7 +165,8 @@
   {
     "PROPER_NAME": "Wasted",
     "NAMES": [
-      "Wasted"
+      "Wasted",
+      "Waste"
     ],
     "DESCRIPTION": "Any [E] used not playing cards. (Such as Void, or unspent energy at the end of turn)"
   },
@@ -308,5 +316,12 @@
     ],
     "DESCRIPTION": "Gain 19 gold the first time played. Gain 19 gold the second time played. Gain 97 gold the third time played.",
     "COLOR": "ffff00"
+  },
+  {
+    "PROPER_NAME": "force",
+    "NAMES": [
+      "force"
+    ],
+    "DESCRIPTION": "${modID}:Persevere the card even if it is already playable."
   }
 ]

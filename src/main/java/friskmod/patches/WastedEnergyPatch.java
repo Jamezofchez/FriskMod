@@ -1,16 +1,23 @@
 package friskmod.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
+import friskmod.powers.RecyclePower;
 import friskmod.powers.WastedEnergyInterface;
 import friskmod.util.Wiz;
 
-public class OnWasteEnergyPatch {
+public class WastedEnergyPatch {
     public static int previous_e = 0;
 
     @SpirePatch(
@@ -18,7 +25,16 @@ public class OnWasteEnergyPatch {
             method = "loseEnergy"
     )
     public static class AbstractPlayerLoseEnergyPatch {
-
+        @SpirePrefixPatch
+        public static SpireReturn<Void> Prefix() {
+            AbstractPower posspow = AbstractDungeon.player.getPower(RecyclePower.POWER_ID);
+            if (posspow != null){
+                posspow.onSpecificTrigger();
+                return SpireReturn.Return();
+            }
+            return SpireReturn.Continue();
+        }
+        @SpirePostfixPatch
         public static void Postfix(AbstractPlayer __instance, int e) {
             checkWastedEnergy(e);
         }
@@ -51,6 +67,20 @@ public class OnWasteEnergyPatch {
         for (AbstractPower p : AbstractDungeon.player.powers) {
             if (p instanceof WastedEnergyInterface) {
                 ((WastedEnergyInterface) p).WasteEnergyAction(e);
+            }
+        }
+    }
+
+    @SpirePatch(clz = EnergyManager.class, method = "recharge")
+    public static class EnergyManagerRechargePatch {
+        @SpirePrefixPatch
+        public static void Prefix(EnergyManager __instance) {
+            if (EnergyPanel.totalCount > 0) {
+                AbstractPower posspow = AbstractDungeon.player.getPower(RecyclePower.POWER_ID);
+                if (posspow != null){
+                    EnergyPanel.addEnergy(__instance.energy);
+                    posspow.onSpecificTrigger();
+                }
             }
         }
     }

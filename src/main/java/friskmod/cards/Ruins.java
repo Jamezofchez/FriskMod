@@ -33,13 +33,13 @@ public class Ruins extends AbstractEasyCard {
     public Ruins() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = DAMAGE;
-        baseSecondDamage = secondDamage = WAIT_TIMER;
+        baseSecondMagic = secondMagic = WAIT_TIMER;
         tags.add(FriskTags.PATIENCE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractCountdownPower countdown = new CountdownRuins(m, DAMAGE, secondMagic, UPG_DAMAGE);
-        addToBot(new ApplyPowerAction(m, p, countdown, DAMAGE));
+        AbstractCountdownPower countdown = new CountdownRuins(p, DAMAGE, secondMagic, UPG_DAMAGE);
+        addToBot(new ApplyPowerAction(p, p, countdown, DAMAGE));
         if (upgraded) {
             countdown.upgrade();
         }

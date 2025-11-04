@@ -45,21 +45,24 @@ public class SlackOff extends AbstractEasyCard{
     }
 
     public void initializeTitle() {
-        if (serious) {
-            name = cardStrings.EXTENDED_DESCRIPTION[0];
-        } else{
-            name = cardStrings.NAME;
+        if (cardStrings != null) {
+            if (serious) {
+                name = cardStrings.EXTENDED_DESCRIPTION[0];
+            } else {
+                name = cardStrings.NAME;
+            }
         }
         super.initializeTitle();
     }
     public void initializeDescription() {
-        if (serious) {
-            rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+        if (cardStrings != null) {
+            if (serious) {
+                rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+            } else {
+                rawDescription = cardStrings.DESCRIPTION;
+            }
+            initializeTitle();
         }
-        else {
-            rawDescription = cardStrings.DESCRIPTION;
-        }
-        initializeTitle();
         super.initializeDescription();
     }
 

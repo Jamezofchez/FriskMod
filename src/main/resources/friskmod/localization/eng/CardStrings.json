@@ -34,11 +34,7 @@
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
-    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and ${modID}:Trap it."
-  },
-  "${modID}:OLDBurnOut": {
-    "NAME": "Burn Out",
-    "DESCRIPTION": "Draw !M! cards. NL Add a *Burn into your hand."
+    "DESCRIPTION": "On odd hand size, NL ${modID}:force ${modID}:Persevere the middle card in your hand !M! times and ${modID}:Trap it once."
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",
@@ -52,7 +48,7 @@
   },
   "${modID}:BreakFree": {
     "NAME": "Break Free",
-    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Unseal all cards in your hand."
+    "DESCRIPTION": "${modID}:Unseal all cards in your hand. NL Deal !D! damage. NL ${modID}:Perseverable."
   },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
@@ -64,7 +60,7 @@
   },
   "${modID}:Chill": {
     "NAME": "Chill",
-    "DESCRIPTION": "Retain. Costs 1 less [E] NL for each ${modID}:Wasted energy last turn. NL Deal !D! damage. "
+    "DESCRIPTION": "Retain. Costs 1 less [E] NL for each ${modID}:Wasted *Energy last turn. NL Deal !D! damage. "
   },
   "${modID}:Cleave": {
     "NAME": "Cleave",
@@ -73,6 +69,14 @@
   "${modID}:CopyCat": {
     "NAME": "Copy Cat",
     "DESCRIPTION": "${modID}:Copy the enemy's buffs. Deal !D! damage. "
+  },
+  "${modID}:CroquetRoll": {
+    "NAME": "Croquet Roll",
+    "DESCRIPTION": "Unplayable. NL If *Exhausted, gain !M! ${modID}:Temp_HP and add a *Mallet into your hand.",
+    "UPGRADE_DESCRIPTION": "Unplayable. NL If *Exhausted, gain !M! ${modID}:Temp_HP and add a *Mallet+ into your hand.",
+    "EXTENDED_DESCRIPTION": [
+      "This is cut content! I can't play it."
+    ]
   },
   "${modID}:OLDCriticalStrike": {
     "NAME": "Critical Strike",
@@ -133,6 +137,10 @@
     "NAME": "Favourite Number",
     "DESCRIPTION": "Your next attack this turn is ${modID}:Demonified. Deal !D! damage."
   },
+  "${modID}:FistsFirst": {
+    "NAME": "Fists First",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Add an *Void to the top of your draw pile."
+  },
   "${modID}:Flex": {
     "NAME": "Flex",
     "DESCRIPTION": "Give EVERYONE !M! ${modID}:LV."
@@ -152,7 +160,7 @@
   },
   "${modID}:GarbageDump": {
     "NAME": "Garbage Dump",
-    "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted Energy spent."
+    "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted *Energy spent."
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
@@ -194,10 +202,14 @@
     "DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your hand with ${modID}:XP for the rest of combat.",
     "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your deck with ${modID}:XP for the rest of combat."
   },
+  "${modID}:Mallet": {
+    "NAME": "Mallet",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
+  },
   "${modID}:Overcome": {
     "NAME": "Overcome",
-    "DESCRIPTION": "Ethereal. NL The next card that fails to play is ${modID}:Persevered.",
-    "UPGRADE_DESCRIPTION": "The next two cards that fail to play are ${modID}:Persevered."
+    "DESCRIPTION": "The next two cards that fail to play this turn are ${modID}:Persevered.",
+    "UPGRADE_DESCRIPTION": "The next three cards that fail to play this turn are ${modID}:Persevered."
   },
   "${modID}:Plead": {
     "NAME": "Plead",
@@ -215,6 +227,10 @@
   "${modID}:Prarabdha": {
     "NAME": "Prarabdha",
     "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, ${modID}:Steal ALL enemies' buffs and ${modID}:Steal !M! HP."
+  },
+  "${modID}:Recycle": {
+    "NAME": "Recycle",
+    "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. Gain !M! ${modID}:LV per ${modID}:Wasted *Energy saved."
   },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
@@ -244,7 +260,7 @@
   },
   "${modID}:OLDSanchita": {
     "NAME": "OLDSanchita",
-    "DESCRIPTION": "Apply !${modID}:M2! ${modID}:KR to a random enemy X times, where X is the amount of ${modID}:Wasted Energy spent last turn.",
+    "DESCRIPTION": "Apply !${modID}:M2! ${modID}:KR to a random enemy X times, where X is the amount of ${modID}:Wasted *Energy spent last turn.",
     "EXTENDED_DESCRIPTION": [" NL (Applies !${modID}:M2! ${modID}:KR !M! times.)"]
   },
   "${modID}:Ruins": {
@@ -257,8 +273,18 @@
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",
-    "DESCRIPTION": "Deal damage equal to your missing HP. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal damage equal to your missing HP. NL Gain !M! ${modID}:Temp_HP. NL Exhaust.",
+    "DESCRIPTION": "Gain a *Left *Scale or NL Gain a *Right *Scale. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Gain a *Left *Scale and NL Gain a *Right *Scale. NL Exhaust."
+
+  },
+  "${modID}:LeftScale": {
+    "NAME": "Left Scale",
+    "DESCRIPTION": "Lose !M! HP. Deal damage equal to your missing HP. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:RightScale": {
+    "NAME": "Right Scale",
+    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. Deal damage equal to your ${modID}:Temp_HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
   },
   "${modID}:SelfReflection": {
@@ -276,8 +302,8 @@
   },
   "${modID}:Sleep": {
     "NAME": "Sleep",
-    "DESCRIPTION": "Retain. NL Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Retain. NL Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns."
+    "DESCRIPTION": "Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns."
   },
   "${modID}:SnowedInn": {
     "NAME": "Snowed Inn",
@@ -323,6 +349,10 @@
   "${modID}:WakeUp": {
     "NAME": "Wake Up",
     "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable cards discarded. NL Gain !B! Block for each Unplayable card exhausted."
+  },
+  "${modID}:WebSlash": {
+    "NAME": "Web Slash",
+    "DESCRIPTION": "Deal !D! damage. ${modID}:Persevere your rightmost card."
   },
   "${modID}::AncientCocktail": {
     "NAME": "Ancient Cocktail",

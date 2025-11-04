@@ -92,7 +92,14 @@ public class OpenDraftAction extends AbstractGameAction {
         for (AbstractCard c : choices) {
             c.initializeDescription();
         }
-        AbstractDungeon.cardRewardScreen.chooseOneOpen(choices); //making a skip skip both drafts seems hard and icba
+        if (choices.size() <= 1) {
+            if (choices.isEmpty()) {
+                return;
+            }
+            ((AbstractDreamNightmareCard) choices.get(0)).chooseOption();
+        } else {
+            AbstractDungeon.cardRewardScreen.chooseOneOpen(choices); //making a skip skip both drafts seems hard and icba
+        }
     }
     private String getSelectionText(DreamType type, AbstractCreature target) {
         String basename = TEXT[0];

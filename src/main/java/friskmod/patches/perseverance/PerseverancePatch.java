@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import friskmod.FriskMod;
 //import friskmod.cards.Exhaustion;
+import friskmod.cards.BreakFree;
 import friskmod.powers.Overcome;
 import friskmod.util.Wiz;
 import javassist.*;
@@ -185,17 +186,16 @@ public class PerseverancePatch {
     }
 
     private static void setPerserveable(AbstractCard c, boolean defaultBoolean) {
-        if (PerseveranceFields.trapped.get(c)) {
-            PerseveranceFields.setIsPerseverable(c, false); //maybe problem
-        } else {
-            if (!defaultBoolean) {
+        if (!defaultBoolean) {
+            if (!PerseveranceFields.isPerseverable.get(c)) {
                 AbstractPower posspow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
                 if (posspow != null) {
-                    if (!PerseveranceFields.isPerseverable.get(c)) {
-                        PerseveranceFields.setIsPerseverable(c, true, true);
+                    if (PerseveranceFields.setIsPerseverable(c, true, true)) {
                         PerseveranceFields.overcomePlayed.set(c, true);
                     }
                 }
+            } else{
+                PerseveranceFields.overcomePlayed.set(c, true);
             }
         }
     }
@@ -411,7 +411,7 @@ public class PerseverancePatch {
         @SpirePrefixPatch
         public static void Prefix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
             if (!card.dontTriggerOnUseCard) {
-                if (card != null && PerseveranceFields.perseverePlayed.get(card)) {
+                if (card != null && (PerseveranceFields.perseverePlayed.get(card))) {
                     if (PerseveranceFields.overcomePlayed.get(card)) {
                         PerseveranceFields.overcomePlayed.set(card, false);
                         AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
@@ -422,15 +422,18 @@ public class PerseverancePatch {
                             FriskMod.logger.warn("{}: overcomePlayed set but no power found", FriskMod.modID);
                         }
                     }
-                    __instance.exhaustCard = true;
                     if (PerseveranceFields.insufficientEnergy.get(card)) {
                         int refundEnergy = PerseveranceFields.currentEnergy.get(card);
                         Wiz.atb(new GainEnergyAction(refundEnergy));
                     }
                     PerseveranceFields.setIsPerseverable(card, false);
-                    AbstractCard tmp = card.makeStatEquivalentCopy();
-                    PerseveranceFields.trapped.set(tmp, true);
-                    Wiz.atb(new MakeTempCardInHandAction(tmp));
+                    __instance.exhaustCard = true;
+                    if (!PerseveranceFields.dontTrap.get(card)){
+                        AbstractCard tmp = card.makeStatEquivalentCopy();
+                        PerseveranceFields.trapped.set(tmp, true);
+                        Wiz.atb(new MakeTempCardInHandAction(tmp));
+                    }
+                    PerseveranceFields.dontTrap.set(card, false);
                 }
             }
         }

@@ -31,8 +31,7 @@ public class BadMemory extends AbstractEasyCard{
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new LoseHPAction(p, p, magicNumber));
-        AbstractCard newCard = cardsToPreview.makeStatEquivalentCopy();
-        addToBot(new MakeTempCardInHandAction(newCard));
+        addToBot(new MakeTempCardInHandAction(cardsToPreview.makeStatEquivalentCopy()));
     }
     @Override
     public void upp() {

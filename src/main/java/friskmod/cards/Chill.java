@@ -2,19 +2,12 @@ package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.BloodForBlood;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
-import friskmod.helper.ThreatenedCheck;
-import friskmod.patches.OnWasteEnergyPatch;
-import friskmod.powers.Karma;
+import friskmod.patches.WastedEnergyPatch;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
@@ -52,7 +45,7 @@ public class Chill extends AbstractEasyCard {
     }
 
     private int getReducedBaseCost() {
-        return OnWasteEnergyPatch.previous_e;
+        return WastedEnergyPatch.previous_e;
     }
 
     @Override

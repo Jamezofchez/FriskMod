@@ -50,19 +50,17 @@ public class BalletShoes extends AbstractEasyCard {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void triggerOnGlowCheck() {
         try {
             int card_pos;
             List<AbstractCard> afterHand = AbstractDungeon.player.hand.group.stream().filter(x -> x != this).collect(java.util.stream.Collectors.toList());
             double hand_size = (afterHand.size());
             boolean validFlag = false;
+            card_pos = (int) (hand_size - 1) / 2;
             if (hand_size % 2 == 0) {
-                card_pos = (int) (hand_size - 1) / 2;
                 validFlag = true;
             } else{
-                hand_size -= 1;
-                card_pos = (int) (hand_size - 1) / 2;
+                card_pos -= 1;
             }
             AbstractCard chosenCard = afterHand.get(card_pos);
             if (validFlag) {
@@ -81,9 +79,6 @@ public class BalletShoes extends AbstractEasyCard {
                     c.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
                 }
             }
-
-
-
         } catch (Exception e) {
             //good code!
         }

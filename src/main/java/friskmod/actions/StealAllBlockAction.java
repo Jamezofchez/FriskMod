@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.city.SphericGuardian;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
+import com.megacrit.cardcrawl.powers.BarricadePower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import friskmod.util.Wiz;
 
@@ -57,7 +58,8 @@ public class StealAllBlockAction extends AbstractGameAction {
         if (duration == startDuration) {
             boolean foundTarget = false;
             for (AbstractMonster target : targetMonsters){
-                if (!target.isDying && !target.isDead && target.currentBlock > 0) {
+                boolean haspow = target.hasPower(BarricadePower.POWER_ID);
+                if (!target.isDying && !target.isDead && target.currentBlock > 0 && !haspow) {
                     activatedInstance = this;
                     t = 0;
                     foundTarget = true;
@@ -81,14 +83,14 @@ public class StealAllBlockAction extends AbstractGameAction {
                     AbstractDungeon.effectList.add(new FlashAtkImgEffect(source.hb.cX, source.hb.cY, AttackEffect.SHIELD));
                     int amount = target.currentBlock;
                     if (amount > 0) {
-                        if (target instanceof SphericGuardian){
-                            AbstractPower posspow = target.getPower(ArtifactPower.POWER_ID);
-                            if (posspow != null) {
-                                posspow.flash();
-                                posspow.onSpecificTrigger();
-                                continue;
-                            }
-                        }
+//                        if (target instanceof SphericGuardian){
+//                            AbstractPower posspow = target.getPower(ArtifactPower.POWER_ID);
+//                            if (posspow != null) {
+//                                posspow.flash();
+//                                posspow.onSpecificTrigger();
+//                                continue;
+//                            }
+//                        }
                         Wiz.att(new GainBlockAction(source, source, amount));
                         Wiz.att(new LoseBlockAction(target, source, amount));
                     }

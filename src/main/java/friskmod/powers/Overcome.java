@@ -27,14 +27,14 @@ public class Overcome extends BasePower {
         return new Overcome(owner, amount);
     }
 
-//    @Override
-//    public void atEndOfRound() {
-////       if (this.amount == 0) {
-//        addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-////       } else {
-////            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-////       }
-//    }
+    @Override
+    public void atEndOfRound() {
+//       if (this.amount == 0) {
+        addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+//       } else {
+//            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+//       }
+    }
     @Override
     public void onRemove() {
         resetCardsOvercome();

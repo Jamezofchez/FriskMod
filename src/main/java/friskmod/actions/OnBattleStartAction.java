@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.city.SphericGuardian;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.BarricadePower;
 import com.megacrit.cardcrawl.powers.InvinciblePower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
@@ -39,7 +40,8 @@ public class OnBattleStartAction extends AbstractGameAction {
     private void publishOnBattleStart() {
         Wiz.att(new ResetDraftAction());
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-            if (m instanceof SphericGuardian){
+            boolean haspow = m.hasPower(BarricadePower.POWER_ID);
+            if (haspow){
                 AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[0], true));
             }
             if (isInvincible(m)){

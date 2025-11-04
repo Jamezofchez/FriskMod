@@ -119,6 +119,12 @@
       "Prevent the next #b%s times you would lose #y${modID}:LV this turn."
     ]
   },
+  "${modID}:RecyclePower": {
+    "NAME": "Recycle",
+    "DESCRIPTIONS": [
+      "Prevent the next time you would #y${modID}:Waste Energy. Gain #b%s #y${modID}:LV per #y${modID}:Wasted energy saved."
+    ]
+  },
   "${modID}:RememberBraveryPower": {
     "NAME": "Bravery",
     "DESCRIPTIONS": [

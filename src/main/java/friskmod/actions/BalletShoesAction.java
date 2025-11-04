@@ -26,10 +26,6 @@ public class BalletShoesAction extends AbstractGameAction {
     @Override
     public void update() {
         this.isDone = true;
-//        double hand_size = (AbstractDungeon.player.hand.size())-1; //hasn't updated yet?
-//        if (hand_size % 2 == 0) {
-//            --hand_size;
-//        }
         AbstractPlayer p = AbstractDungeon.player;
         List<AbstractCard> afterHand = p.hand.group;
         double hand_size = afterHand.size();
@@ -42,7 +38,11 @@ public class BalletShoesAction extends AbstractGameAction {
             for (int i = 0; i < numTimes; ++i) {
                 Wiz.att(new WaitAction(0.25f));
                 Wiz.att(new CustomSFXAction("snd_punchstrong"));
-                Wiz.att(new CardPlayAction(chosenCard, m));
+//                Wiz.att(new CardPlayAction(chosenCard, m));
+                AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
+                tmp.purgeOnUse = true;
+                PerseveranceFields.dontTrap.set(tmp, true);
+                Wiz.att(new PersevereCardAction(tmp, m, false));
             }
             if (numTimes == 3){
                 Wiz.att(new CustomSFXAction("mus_sfx_voice_triple"));

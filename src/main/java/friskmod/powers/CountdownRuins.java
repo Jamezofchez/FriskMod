@@ -17,17 +17,13 @@ import friskmod.FriskMod;
 public class CountdownRuins extends AbstractCountdownPower {
     public static final String POWER_ID = FriskMod.makeID(CountdownRuins.class.getSimpleName());
 
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(POWER_ID);
-
-    public static final String[] TEXT = uiStrings.TEXT;
-
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
     public static final String NAME = powerStrings.NAME;
 
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private static final PowerType TYPE = PowerType.DEBUFF;
+    private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
 
     private final int UPG_DAMAGE;

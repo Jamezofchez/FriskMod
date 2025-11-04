@@ -33,12 +33,13 @@ public class BreakFree extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
         tags.add(FriskTags.PERSEVERANCE);
+        PerseveranceFields.isPerseverable.set(this, true);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        for (AbstractCard c : AbstractDungeon.player.hand.group) unsealCard(c);
         addToBot(new CustomSFXAction("mus_sfx_abreak"));
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
-        for (AbstractCard c : AbstractDungeon.player.hand.group) unsealCard(c);
     }
 
     private void unsealCard(AbstractCard c) {

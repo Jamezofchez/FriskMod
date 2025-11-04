@@ -32,7 +32,6 @@ public class Sleep extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = INCREASE_COUNTDOWNS;
         tags.add(FriskTags.PATIENCE);
-        this.selfRetain = true;
         this.exhaust = true;
     }
     @Override
