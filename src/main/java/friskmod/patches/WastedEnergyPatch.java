@@ -29,7 +29,6 @@ public class WastedEnergyPatch {
         public static SpireReturn<Void> Prefix() {
             AbstractPower posspow = AbstractDungeon.player.getPower(RecyclePower.POWER_ID);
             if (posspow != null){
-                posspow.onSpecificTrigger();
                 return SpireReturn.Return();
             }
             return SpireReturn.Continue();
@@ -79,7 +78,6 @@ public class WastedEnergyPatch {
                 AbstractPower posspow = AbstractDungeon.player.getPower(RecyclePower.POWER_ID);
                 if (posspow != null){
                     EnergyPanel.addEnergy(__instance.energy);
-                    posspow.onSpecificTrigger();
                 }
             }
         }

@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 
-public class RecyclePower extends BasePower {
+public class RecyclePower extends BasePower implements WastedEnergyInterface{
     public static final String POWER_ID = FriskMod.makeID(RecyclePower.class.getSimpleName());
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
@@ -22,12 +22,6 @@ public class RecyclePower extends BasePower {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
     }
 
-    @Override
-    public void ,(){
-        this.flash();
-        addToBot(new ApplyPowerAction(this.owner, this.owner, new LV_Hero(this.owner, this.amount), this.amount));
-        addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
-    }
 
     @Override
     public AbstractPower makeCopy() {
@@ -38,4 +32,11 @@ public class RecyclePower extends BasePower {
         this.description = String.format(DESCRIPTIONS[0], amount);
     }
 
+    @Override
+    public void WasteEnergyAction(int wasted) {
+        int LVGain = wasted * amount;
+        this.flash();
+        addToBot(new ApplyPowerAction(this.owner, this.owner, new LV_Hero(this.owner, LVGain), LVGain));
+        addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
+    }
 }
