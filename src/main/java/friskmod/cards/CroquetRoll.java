@@ -1,6 +1,5 @@
 package friskmod.cards;
 
-import collector.cards.BurningStrike;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -12,8 +11,6 @@ import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
-
-import static collector.util.Wiz.makeInHand;
 import static friskmod.FriskMod.makeID;
 
 public class CroquetRoll extends AbstractEasyCard {

@@ -23,7 +23,7 @@ public class RecyclePower extends BasePower {
     }
 
     @Override
-    public void onSpecificTrigger(){
+    public void ,(){
         this.flash();
         addToBot(new ApplyPowerAction(this.owner, this.owner, new LV_Hero(this.owner, this.amount), this.amount));
         addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));

@@ -1,6 +1,5 @@
 package friskmod.cards;
 
-import collector.util.Wiz;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -13,6 +12,7 @@ import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 
 import static friskmod.FriskMod.makeID;
