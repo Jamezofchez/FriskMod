@@ -159,5 +159,53 @@
        "#b%s%% chance to: NL ",
        "This card should not be seen in 99 years!"
     ]
+  },
+  "${modID}:SoulBound": {
+    "TEXT": [
+      "the enemy"
+    ]
+  },
+  "${modID}:MultiIntentStrings": {
+    "TEXT": [
+      "This enemy intends to NL #yAttack ",
+      " for #b",
+      " damage.",
+      " damage #b",
+      " times.",
+      "This enemy intends to inflict a #yNegative #yEffect on ",
+      "."
+    ]
+  },
+  "${modID}:MassAttackIntent": {
+    "TEXT": [
+      "Mass Attack",
+      "This enemy intends to deal #b", " damage to ALL other characters", ".", " times."
+    ]
+  },
+  "${modID}:CounterAttackIntent": {
+    "TEXT": [
+      "Counter Attack",
+      "This enemy intends to NL #yCounter #yAttack for #b",
+      " damage.",
+      " damage #b",
+      " times."
+    ]
+  },
+  "${modID}:IntentStrings": {
+    "TEXT": [
+      "you",
+      "self",
+      "ALL enemies",
+      "random enemy",
+      "Lifesteal",
+      "ALL minions",
+      "Steals the rarest card",
+      "Cleanse debuffs",
+      "Add Parasite to master deck",
+      "Dies",
+      "Heals to half HP",
+      "Removes negative Strength",
+      "Summons"
+    ]
   }
 }

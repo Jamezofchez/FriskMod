@@ -29,7 +29,6 @@ public class Prarabdha extends AbstractEasyCard {
     public static final String[] TEXT = uiStrings.TEXT;
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
-//    private AbstractCard stealCard;
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
@@ -45,45 +44,43 @@ public class Prarabdha extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = KARMA_AND_LV_AMOUNT;
         tags.add(FriskTags.JUSTICE);
-//        stealCard = new Steal();
-//        stealCard.setCostForTurn(0);
-//        stealCard.initializeDescription();
-//        stealCard.rawDescription = stealCard.rawDescription + TEXT[0];
-//        stealCard.exhaust = true;
-//        this.cardsToPreview = stealCard;
+//        AbstractCard steal = new Steal();
+//        steal.upgrade();
+//        cardsToPreview = steal;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(m, p, new LV_Enemy(m, magicNumber), magicNumber));
         addToBot(new ApplyPowerAction(m, p, new Karma(m, magicNumber), magicNumber));
-        if (extraEffectCheck()) {
-            glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        }
+        addToBot(Wiz.actionify(() -> {
+            if (ThreatenedCheck.isThreatened()) {
+                for (AbstractMonster monster : Wiz.getMonsters()) {
+                    addToBot(new StealEnemyHP(magicNumber, monster));
+                }
+            }
+        }));
     }
 
-    @Override
-    public void triggerOnGlowCheck() {
-        glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (extraEffectCheck()) {
-            glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-            addToBot(new StealPowerAction(Wiz.getMonsters()));
-            for (AbstractMonster monster : Wiz.getMonsters()) {
-                addToBot(new StealEnemyHP(magicNumber, monster));
-            }
-        }
-    }
-
-    private boolean extraEffectCheck(){
-        if (!ThreatenedCheck.isThreatened()){
-            return false;
-        }
-        for (AbstractMonster m : Wiz.getMonsters()) {
-            if ((m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    @Override
+//    public void triggerOnGlowCheck() {
+//        glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+//        if (extraEffectCheck()) {
+//            glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+//
+//        }
+//    }
+//
+//    private boolean extraEffectCheck(){
+//        if (!ThreatenedCheck.isThreatened()){
+//            return false;
+//        }
+//        for (AbstractMonster m : Wiz.getMonsters()) {
+//            if ((m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 
     @Override

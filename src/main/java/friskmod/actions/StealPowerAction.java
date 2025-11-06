@@ -170,15 +170,6 @@ public class StealPowerAction extends AbstractGameAction {
                         }
                     }
                 }
-                if (!stealMatching || TempHPField.tempHp.get(p) > 0) {
-                    int monsterTempHP = TempHPField.tempHp.get(m);
-                    if (monsterTempHP > 0) {
-                        Wiz.att(new AddTemporaryHPAction(p, p, monsterTempHP));
-                        if (steal) {
-                            Wiz.att(new RemoveAllTemporaryHPAction(m, p));
-                        }
-                    }
-                }
             }
 
             if (affectedPowers.isEmpty()) {

@@ -162,6 +162,10 @@
     "NAME": "Garbage Dump",
     "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted *Energy spent."
   },
+  "${modID}:GladDummy": {
+    "NAME": "Glad Dummy",
+    "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:SoulBound ${modID}:Glad_Dummy. NL It has !M! HP."
+  },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
     "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take a ${modID}:Sip of all your potions.",
@@ -202,6 +206,10 @@
     "DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your hand with ${modID}:XP for the rest of combat.",
     "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your deck with ${modID}:XP for the rest of combat."
   },
+  "${modID}:MadDummy": {
+    "NAME": "Mad Dummy",
+    "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:SoulBound ${modID}:Mad_Dummy. NL It has !M! HP."
+  },
   "${modID}:Mallet": {
     "NAME": "Mallet",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
@@ -226,7 +234,7 @@
   },
   "${modID}:Prarabdha": {
     "NAME": "Prarabdha",
-    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. If ${modID}:Threatened, ${modID}:Steal ALL enemies' buffs and ${modID}:Steal !M! HP."
+    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. NL If ${modID}:Threatened, ${modID}:Steal !M! HP from ALL enemies."
   },
   "${modID}:Recycle": {
     "NAME": "Recycle",

@@ -1,5 +1,6 @@
 package friskmod.patches;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
@@ -23,7 +24,11 @@ public class KindnessPatch {
     }
 
     @SpirePatch2(clz = GainBlockAction.class, method = SpirePatch.CLASS)
-    public static class RememberKindnessTrigger {
+    public static class RememberKindnessBlockTrigger {
+        public static SpireField<Boolean> triggeredRememberKindness = new SpireField<>(() -> Boolean.FALSE);
+    }
+    @SpirePatch2(clz = AddTemporaryHPAction.class, method = SpirePatch.CLASS)
+    public static class RememberKindnessTempHPTrigger {
         public static SpireField<Boolean> triggeredRememberKindness = new SpireField<>(() -> Boolean.FALSE);
     }
 
@@ -53,8 +58,8 @@ public class KindnessPatch {
     public static class ApplyBlockActionUpdatePatch {
         @SpirePrefixPatch
         public static void Prefix(GainBlockAction __instance){
-            if (!RememberKindnessTrigger.triggeredRememberKindness.get(__instance)){
-                RememberKindnessTrigger.triggeredRememberKindness.set(__instance, true);
+            if (!RememberKindnessBlockTrigger.triggeredRememberKindness.get(__instance)){
+                RememberKindnessBlockTrigger.triggeredRememberKindness.set(__instance, true);
                 if (__instance.target instanceof AbstractMonster) {
                     if (__instance.amount > 0) {
                         handleRememberKindness(__instance.target);
@@ -63,15 +68,32 @@ public class KindnessPatch {
             }
         }
 
-        private static void handleRememberKindness(AbstractCreature target) {
-            AbstractPower posspow = AbstractDungeon.player.getPower(RememberKindnessPower.POWER_ID);
-            if (posspow != null) {
-                posspow.flash();
-                int debuff_amount = posspow.amount;
-                Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new WeakPower(target, debuff_amount, false), debuff_amount));
+    }
+    @SpirePatch2(
+            clz = AddTemporaryHPAction.class,
+            method = "update"
+    )
+    public static class ApplyTempHPActionUpdatePatch {
+        @SpirePrefixPatch
+        public static void Prefix(AddTemporaryHPAction __instance){
+            if (!RememberKindnessTempHPTrigger.triggeredRememberKindness.get(__instance)){
+                RememberKindnessTempHPTrigger.triggeredRememberKindness.set(__instance, true);
+                if (__instance.target instanceof AbstractMonster) {
+                    if (__instance.amount > 0) {
+                        handleRememberKindness(__instance.target);
+                    }
+                }
             }
         }
+    }
 
+    private static void handleRememberKindness(AbstractCreature target) {
+        AbstractPower posspow = AbstractDungeon.player.getPower(RememberKindnessPower.POWER_ID);
+        if (posspow != null) {
+            posspow.flash();
+            int debuff_amount = posspow.amount;
+            Wiz.atb(new ApplyPowerAction(target, AbstractDungeon.player, new WeakPower(target, debuff_amount, false), debuff_amount));
+        }
     }
 
     private static void handleKillWithKindness(AbstractCreature target) {

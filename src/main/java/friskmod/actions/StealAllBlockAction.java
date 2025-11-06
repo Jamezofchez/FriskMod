@@ -1,6 +1,9 @@
 package friskmod.actions;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.RemoveAllTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.patches.core.AbstractCreature.TempHPField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.LoseBlockAction;
@@ -18,6 +21,7 @@ import friskmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class StealAllBlockAction extends AbstractGameAction {
     public float t;
@@ -26,10 +30,16 @@ public class StealAllBlockAction extends AbstractGameAction {
 
     public static StealAllBlockAction activatedInstance = null;
 
+    public boolean stealMatching;
+
     // Primary constructor — for multiple monsters
     public StealAllBlockAction(List<AbstractMonster> monsters) {
+        this(monsters, false);
+    }
+    public StealAllBlockAction(List<AbstractMonster> monsters, boolean stealMatching) {
         this.amount = 0;
         this.duration = 0.5F;
+        this.stealMatching = stealMatching;
         actionType = ActionType.BLOCK;
         startDuration = duration = Settings.ACTION_DUR_MED;
         targetMonsters = monsters;
@@ -39,6 +49,10 @@ public class StealAllBlockAction extends AbstractGameAction {
     public StealAllBlockAction(AbstractMonster m) {
         this(toList(m));
     }
+    public StealAllBlockAction(AbstractMonster m, boolean stealMatching) {
+        this(toList(m), stealMatching);
+    }
+
     // Helper method to create a list with a single monster (if non-null)
     private static List<AbstractMonster> toList(AbstractMonster m) {
         List<AbstractMonster> list = new ArrayList<>();
@@ -60,6 +74,9 @@ public class StealAllBlockAction extends AbstractGameAction {
             for (AbstractMonster target : targetMonsters){
                 boolean haspow = target.hasPower(BarricadePower.POWER_ID);
                 if (!target.isDying && !target.isDead && target.currentBlock > 0 && !haspow) {
+                    if (stealMatching && !(target.currentBlock == AbstractDungeon.player.currentBlock || Objects.equals(TempHPField.tempHp.get(target), TempHPField.tempHp.get(AbstractDungeon.player)))) {
+                        continue;
+                    }
                     activatedInstance = this;
                     t = 0;
                     foundTarget = true;
@@ -81,8 +98,16 @@ public class StealAllBlockAction extends AbstractGameAction {
                 if (target != null) {
                     AbstractCreature source = AbstractDungeon.player;
                     AbstractDungeon.effectList.add(new FlashAtkImgEffect(source.hb.cX, source.hb.cY, AttackEffect.SHIELD));
-                    int amount = target.currentBlock;
-                    if (amount > 0) {
+
+                    int tempHpAmount = TempHPField.tempHp.get(target);
+                    if (tempHpAmount > 0) {
+                        if (!(stealMatching && !Objects.equals(tempHpAmount, TempHPField.tempHp.get(source)))) {
+                            Wiz.att(new AddTemporaryHPAction(source, source, tempHpAmount));
+                            Wiz.att(new RemoveAllTemporaryHPAction(target, source));
+                        }
+                    }
+                    int blockAmount = target.currentBlock;
+                    if (blockAmount > 0) {
 //                        if (target instanceof SphericGuardian){
 //                            AbstractPower posspow = target.getPower(ArtifactPower.POWER_ID);
 //                            if (posspow != null) {
@@ -91,8 +116,11 @@ public class StealAllBlockAction extends AbstractGameAction {
 //                                continue;
 //                            }
 //                        }
-                        Wiz.att(new GainBlockAction(source, source, amount));
-                        Wiz.att(new LoseBlockAction(target, source, amount));
+
+                        if (!(stealMatching && !(blockAmount == source.currentBlock))) {
+                            Wiz.att(new GainBlockAction(source, source, blockAmount));
+                            Wiz.att(new LoseBlockAction(target, source, blockAmount));
+                        }
                     }
                 }
             }

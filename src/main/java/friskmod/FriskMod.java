@@ -8,6 +8,9 @@ import basemod.interfaces.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import friskmod.customintent.CounterAttackIntent;
+import friskmod.customintent.CustomIntent;
+import friskmod.customintent.MassAttackIntent;
 import friskmod.actions.AfterCardUseAction;
 import friskmod.actions.OnBattleStartAction;
 import friskmod.cards.*;
@@ -30,7 +33,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.*;
-import hermit.cards.CursedWeapon;
 import org.scannotation.AnnotationDB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,7 +53,8 @@ public class FriskMod implements
         AddAudioSubscriber,
         PostInitializeSubscriber,
         OnCardUseSubscriber,
-        OnStartBattleSubscriber{
+        OnStartBattleSubscriber,
+        PostBattleSubscriber{
     public static ModInfo info;
     public static String modID; //Edit your pom.xml to change this
     static { loadModInfo(); }
@@ -85,6 +88,8 @@ public class FriskMod implements
         //If you want to set up a config panel, that will be done here.
         //You can find information about this on the BaseMod wiki page "Mod Config and Panel".
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
+        CustomIntent.add((CustomIntent)new MassAttackIntent());
+        CustomIntent.add((CustomIntent)new CounterAttackIntent());
         initializeSavedData();
     }
 
@@ -308,6 +313,12 @@ public class FriskMod implements
     public static String relicPath(String file) {
         return resourcesFolder + "/images/relics/" + file;
     }
+    public static String monsterPath(String file) {
+        return resourcesFolder + "/images/monsters/" + file;
+    }
+    public static String UIPath(String file) {
+        return resourcesFolder + "/images/monsters/" + file;
+    }
 
     /**
      * Checks the expected resources path based on the package name.
@@ -422,6 +433,10 @@ public class FriskMod implements
         if (!abstractCard.dontTriggerOnUseCard) {
             Wiz.atb(new AfterCardUseAction(abstractCard));
         }
+    }
+
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        DetailedIntent.intents.clear();
     }
 
 

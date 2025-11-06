@@ -1,0 +1,18 @@
+{
+  "${modID}:EmptyDummy": {
+    "MOVES": [
+      ""
+    ],
+    "NAME": "Empty Dummy",
+    "DIALOG": [
+    ]
+  },
+  "${modID}:AttackDummy": {
+    "MOVES": [
+      "Attack"
+    ],
+    "NAME": "Attack Dummy",
+    "DIALOG": [
+    ]
+  }
+}
