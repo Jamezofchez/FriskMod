@@ -30,7 +30,7 @@
   "${modID}:BadMemory": {
     "NAME": "Bad Memory",
     "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand.",
-    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Add an *Freak *Bullet+ to your hand."
+    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet+ to your hand."
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",

@@ -18,22 +18,18 @@ public class Ketchup extends AbstractDrinkCard{
     public Ketchup() {
         this(null);
     }
-    public Ketchup(AbstractPotion potion) {
-        super(ID, potion);
-        if (potion == null) {
-            baseMagicNumber = magicNumber = COMMON_TEMP_HP;
-        } else {
+    public Ketchup(AbstractPotion startpotion) {
+        super(ID, startpotion);
             switch (potion.rarity) {
-                case UNCOMMON:
-                    baseMagicNumber = magicNumber = UNCOMMON_TEMP_HP;
-                    break;
-                case RARE:
-                    baseMagicNumber = magicNumber = RARE_TEMP_HP;
-                    break;
-                default:
-                    baseMagicNumber = magicNumber = COMMON_TEMP_HP;
-                    break;
-            }
+            case UNCOMMON:
+                baseMagicNumber = magicNumber = UNCOMMON_TEMP_HP;
+                break;
+            case RARE:
+                baseMagicNumber = magicNumber = RARE_TEMP_HP;
+                break;
+            default:
+                baseMagicNumber = magicNumber = COMMON_TEMP_HP;
+                break;
         }
     }
 

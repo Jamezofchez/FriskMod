@@ -32,6 +32,20 @@ public class PersevereCostAndParticles {
     //Patch into the methods updateGlow and postfix renderEnergy
     @SpirePatch(
             clz = AbstractCard.class,
+            method = "triggerOnGlowCheck"
+    )
+    public static class AbstractCardTriggerOnGlowCheckPatch {
+        @SpirePrefixPatch
+        public static void Prefix(AbstractCard __instance)
+        {
+            if (PerseveranceFields.isPerseverable.get(__instance))
+            {
+                __instance.glowColor = Color.VIOLET.cpy();
+            }
+        }
+    }
+    @SpirePatch(
+            clz = AbstractCard.class,
             method = "updateGlow"
     )
     public static class RuneEffects {

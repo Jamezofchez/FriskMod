@@ -1,31 +1,32 @@
 package friskmod.patches.perseverance;
 
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.green.Reflex;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import friskmod.FriskMod;
 //import friskmod.cards.Exhaustion;
-import friskmod.cards.BreakFree;
 import friskmod.powers.Overcome;
 import friskmod.util.Wiz;
 import javassist.*;
 import javassist.bytecode.*;
 import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.BooleanMemberValue;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 import org.clapper.util.classutil.*;
 import org.clapper.util.classutil.ClassInfo;
 import friskmod.annotations.Playable;
@@ -37,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import static friskmod.FriskMod.makeID;
 
 //hooray for dynamic patching
 public class PerseverancePatch {
@@ -163,8 +166,14 @@ public class PerseverancePatch {
         setPerserveable(c, normallyUsable);
         if (PerseveranceFields.isPerseverable.get(c))
         {
-            PerseveranceFields.perseverePlayed.set(c, !normallyUsable || PerseveranceFields.insufficientEnergy.get(c));
+            if (!PerseveranceFields.perseverePlayed.get(c)) { //think its patching itself?
+                PerseveranceFields.perseverePlayed.set(c, !normallyUsable || PerseveranceFields.insufficientEnergy.get(c));
+            }
             return true;
+        } else{
+            if (PerseveranceFields.trapped.get(c)) {
+                c.cantUseMessage = "I cannot play trapped cards!";
+            }
         }
         return normallyUsable;
     }
@@ -172,15 +181,22 @@ public class PerseverancePatch {
     public static boolean checkEnergy(AbstractCard c, boolean normallyEnoughEnergy)
     {
         setPerserveable(c, normallyEnoughEnergy);
-        if (PerseveranceFields.isPerseverable.get(c))
-        {
+
+        if (PerseveranceFields.isPerseverable.get(c)) {
             PerseveranceFields.insufficientEnergy.set(c, !normallyEnoughEnergy);
-            if (PerseveranceFields.insufficientEnergy.get(c)) {
-                PerseveranceFields.currentEnergy.set(c, EnergyPanel.totalCount);
+            if (PerseveranceFields.trapped.get(c)) {
+                PerseveranceFields.cardEnergy.set(c, 0);
+            } else {
+                if (PerseveranceFields.insufficientEnergy.get(c)) {
+                    PerseveranceFields.cardEnergy.set(c, EnergyPanel.totalCount);
+                }
             }
             return true;
         } else{
-            PerseveranceFields.currentEnergy.set(c, 0);
+            if (PerseveranceFields.trapped.get(c)) {
+                c.cantUseMessage = "I cannot play trapped cards!";
+            }
+            PerseveranceFields.cardEnergy.set(c, 0);
         }
         return normallyEnoughEnergy;
     }
@@ -190,12 +206,9 @@ public class PerseverancePatch {
             if (!PerseveranceFields.isPerseverable.get(c)) {
                 AbstractPower posspow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
                 if (posspow != null) {
-                    if (PerseveranceFields.setIsPerseverable(c, true, true)) {
-                        PerseveranceFields.overcomePlayed.set(c, true);
-                    }
+                    PerseveranceFields.setIsPerseverable(c, true, true);
+                    PerseveranceFields.overcomePlayed.set(c, true);
                 }
-            } else{
-                PerseveranceFields.overcomePlayed.set(c, true);
             }
         }
     }
@@ -402,6 +415,14 @@ public class PerseverancePatch {
             }
         }
     }
+    @SpirePatch(clz = Reflex.class, method = "use")
+    public static class MakeReflexNotHaveAUse {
+
+        @SpirePrefixPatch
+        public static SpireReturn<?> Prefix(AbstractCard __instance, AbstractPlayer p, AbstractMonster m) {
+            return SpireReturn.Return();
+        }
+    }
     @SpirePatch(
             clz = UseCardAction.class,
             method = SpirePatch.CONSTRUCTOR,
@@ -413,32 +434,79 @@ public class PerseverancePatch {
             if (card == null || !PerseveranceFields.perseverePlayed.get(card)) {
                 return;
             }
-            if (PerseveranceFields.overcomePlayed.get(card)) {
-                PerseveranceFields.overcomePlayed.set(card, false);
-                AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
-                if (pow != null) {
-                    pow.flash();
-                    Wiz.atb(new ReducePowerAction(AbstractDungeon.player, AbstractDungeon.player, Overcome.POWER_ID, 1));
-                } else {
-                    FriskMod.logger.warn("{}: overcomePlayed set but no power found", FriskMod.modID);
-                }
-            }
             if (PerseveranceFields.insufficientEnergy.get(card)) {
-                int refundEnergy = PerseveranceFields.currentEnergy.get(card);
+                int refundEnergy = PerseveranceFields.cardEnergy.get(card);
                 Wiz.atb(new GainEnergyAction(refundEnergy));
             }
             PerseveranceFields.setIsPerseverable(card, false);
             __instance.exhaustCard = true;
-            if (card.type == AbstractCard.CardType.CURSE || card.type == AbstractCard.CardType.STATUS){
-                return;
+            if (!PerseveranceFields.trapped.get(card)) {
+                AbstractCard tmp = card.makeStatEquivalentCopy();
+                PerseveranceFields.trapped.set(tmp, true);
+                Wiz.atb(new MakeTempCardInHandAction(tmp));
+            } else{
+                PerseveranceFields.trapped.set(card, false);
             }
-            AbstractCard tmp = card.makeStatEquivalentCopy();
-            PerseveranceFields.trapped.set(tmp, true);
-            Wiz.atb(new MakeTempCardInHandAction(tmp));
         }
         @SpirePostfixPatch
         public static void Postfix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
             PerseveranceFields.perseverePlayed.set(card, false);
+        }
+
+        @SpirePatch(
+                clz = AbstractPlayer.class,
+                method = "useCard",
+                paramtypez = { AbstractCard.class, AbstractMonster.class, int.class }
+        )
+        public static class BlockUseCardExhaustPatch {
+            // Replace the direct call to c.use(p, m) with a guarded call
+            public static ExprEditor Instrument() {
+                return new ExprEditor() {
+                    @Override
+                    public void edit(MethodCall m) throws CannotCompileException {
+                        if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
+                            m.replace(
+                                    "{" +
+                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.isTrapped($0)") + "||" + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.isCurseOrStatus($0)") + ") {" +
+                                            "    " + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.handleExhaust($0)") + ";" +
+                                            "  } " +
+                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.isTrapped($0)") + ") {" +
+
+                                            "  } else {" +
+                                            "    $_ = $proceed($$);" +
+                                            "  }" +
+                                            "}"
+                            );
+                        }
+                    }
+                };
+            }
+            public static boolean isTrapped(AbstractCard c) {
+                if (c == null) {
+                    return false;
+                }
+                if (PerseveranceFields.perseverePlayed.get(c)) {
+                    if (PerseveranceFields.trapped.get(c)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            public static boolean isCurseOrStatus(AbstractCard c){
+                if (c == null) {
+                    return false;
+                }
+                if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
+                    return true;
+                }
+                return false;
+            }
+            public static void handleExhaust(AbstractCard c) {
+                if (c == null) {
+                    return;
+                }
+                c.exhaustOnUseOnce = true;
+            }
         }
     }
 

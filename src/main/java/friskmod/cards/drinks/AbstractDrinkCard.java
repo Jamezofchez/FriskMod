@@ -18,7 +18,7 @@ import static friskmod.FriskMod.makeID;
 public abstract class AbstractDrinkCard extends AbstractEasyCard {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID(AbstractDrinkCard.class.getSimpleName()));
     private static final String[] TEXT = uiStrings.TEXT;
-    AbstractPotion potion;
+    protected AbstractPotion potion;
     public AbstractDrinkCard(String ID, AbstractPotion potion){
         super(
                 ID,
@@ -134,7 +134,12 @@ public abstract class AbstractDrinkCard extends AbstractEasyCard {
 
     @Override
     public AbstractCard makeCopy() {
-        AbstractCard tmp = GrillbysHelper.getPotionCard(potion);;
+        AbstractCard tmp;
+        if (this instanceof Ketchup){
+            tmp = new Ketchup();
+        } else{
+            tmp = GrillbysHelper.getPotionCard(potion);
+        }
         return tmp;
     }
 }

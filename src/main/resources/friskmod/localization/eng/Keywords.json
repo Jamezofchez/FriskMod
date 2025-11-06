@@ -152,7 +152,7 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards cannot be played, even by #y${modID}:Persevere effects. NL #yTrapped cards cause you to lose 1 energy when drawn."
+    "DESCRIPTION": "#yTrapped cards are unplayable, and have no effect when played. NL #yTrapped cards cause you to lose 1 energy when drawn."
   },
   {
     "PROPER_NAME": "Strike",
@@ -168,7 +168,7 @@
       "Wasted",
       "Waste"
     ],
-    "DESCRIPTION": "Any [E] used not playing cards. NL (Such as Void, or unspent energy at the end of turn)"
+    "DESCRIPTION": "Any [E] used not playing cards. NL (Such as Void, or unspent lost energy at the end of turn)"
   },
   {
     "PROPER_NAME": "Spare",

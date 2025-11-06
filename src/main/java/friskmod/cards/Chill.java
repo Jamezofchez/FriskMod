@@ -42,10 +42,11 @@ public class Chill extends AbstractEasyCard {
         baseDamage = DAMAGE;
         tags.add(FriskTags.PERSEVERANCE);
         this.selfRetain = true;
+        setWastedCostForTurn();
     }
 
     private int getReducedBaseCost() {
-        return WastedEnergyPatch.previous_e;
+        return WastedEnergyPatch.previous_e_list.get(WastedEnergyPatch.previous_e_index);
     }
 
     @Override
@@ -60,19 +61,12 @@ public class Chill extends AbstractEasyCard {
         this.newCost = BASE_COST;
     }
 
-    public void atTurnStart() {
+    public void setWastedCostForTurn() {
         this.resetAttributes();
         this.newCost -= getReducedBaseCost();
         this.setCostForTurn(this.newCost);
     }
 
-    @Override
-    public AbstractCard makeCopy() {
-        AbstractCard tmp = new Chill();
-        if (Wiz.isInCombat())
-            tmp.setCostForTurn(this.cost - GameActionManager.totalDiscardedThisTurn); //stupid as IsCostForTurn isnt set
-        return tmp;
-    }
 
 
     @Override

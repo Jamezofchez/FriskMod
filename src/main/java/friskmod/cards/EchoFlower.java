@@ -71,9 +71,12 @@ public class EchoFlower extends AbstractEasyCard {
         }
     }
 
-    public boolean cardPlayable(AbstractMonster m) {
-        return (this.lastCard != null);
-    }
+//    public boolean cardPlayable(AbstractMonster m) {
+//
+//        return (this.lastCard != null);
+//
+//    }
+
 
     public boolean hasEnoughEnergy() {
         return (this.lastCard == null) ? super.hasEnoughEnergy() : this.lastCard.hasEnoughEnergy();
@@ -88,7 +91,10 @@ public class EchoFlower extends AbstractEasyCard {
             this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
             return false;
         }
-        boolean canUse = this.lastCard.canUse(p, m);
+        boolean canUse = super.canUse(p, m);
+        if (!canUse)
+            return false;
+        canUse = this.lastCard.canUse(p, m);
         this.cantUseMessage = this.lastCard.cantUseMessage;
         return canUse;
     }

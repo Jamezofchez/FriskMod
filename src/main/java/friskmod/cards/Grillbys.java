@@ -34,7 +34,11 @@ public class Grillbys extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new MakeTempCardInHandAction(cardsToPreview.makeStatEquivalentCopy()));
+//        AbstractCard ketchup = new Ketchup();
+//        if (upgraded) {
+//            ketchup.upgrade();
+//        }
+        addToBot(new MakeTempCardInHandAction(this.cardsToPreview.makeStatEquivalentCopy()));
         for (AbstractPotion potion : p.potions) {
             if (potion == null || potion instanceof com.megacrit.cardcrawl.potions.PotionSlot) {
                 continue;
