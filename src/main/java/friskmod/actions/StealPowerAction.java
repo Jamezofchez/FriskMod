@@ -19,6 +19,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
 import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
+import friskmod.powers.GladDummy;
+import friskmod.powers.MadDummy;
+import friskmod.powers.SoulBound;
 import friskmod.util.Wiz;
 
 import java.util.*;
@@ -166,7 +169,9 @@ public class StealPowerAction extends AbstractGameAction {
                             affectedPowers.add(pow);
                             affectedIDs.add(pow.ID);
                         } else{
-                            unaffectedIDs.add(pow.ID);
+                            if (!checkCommonBuffs(pow.ID)) {
+                                unaffectedIDs.add(pow.ID);
+                            }
                         }
                     }
                 }
@@ -238,6 +243,22 @@ public class StealPowerAction extends AbstractGameAction {
             t = (startDuration - duration) / startDuration; //isn't this just setting it to 0?
             activatedInstance = this;
         }
+    }
+
+    private boolean checkCommonBuffs(String ID) {
+            if (ID.equals(MinionPower.POWER_ID)){
+                return true;
+            }
+            if (ID.equals(MadDummy.POWER_ID)){
+                return true;
+            }
+            if (ID.equals(GladDummy.POWER_ID)){
+                return true;
+            }
+            if (ID.equals(SoulBound.POWER_ID)){
+                return true;
+            }
+            return false;
     }
 
 //    private AbstractPower getDuplicatedPower(AbstractCreature c, AbstractPower pow, int gainAmount) {

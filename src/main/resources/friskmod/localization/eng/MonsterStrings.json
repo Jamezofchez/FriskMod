@@ -7,11 +7,19 @@
     "DIALOG": [
     ]
   },
-  "${modID}:AttackDummy": {
+  "${modID}:MadDummy": {
     "MOVES": [
       "Attack"
     ],
-    "NAME": "Attack Dummy",
+    "NAME": "Mad Dummy",
+    "DIALOG": [
+    ]
+  },
+  "${modID}:GladDummy": {
+    "MOVES": [
+      "Hug"
+    ],
+    "NAME": "Glad Dummy",
     "DIALOG": [
     ]
   }

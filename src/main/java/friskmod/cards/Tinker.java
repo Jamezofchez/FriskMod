@@ -40,6 +40,7 @@ public class Tinker extends AbstractEasyCard {
         addToBot(new ApplyPowerAction(m, p, new FrailPower(m, magicNumber, false), magicNumber));
         addToBot(new ApplyPowerAction(m, p, new NEO(m, magicNumber), magicNumber));
         addToBot(Wiz.actionify(() -> {
+            m.applyPowers();
             addToBot(new GainBlockAction(m, p, block));
         }));
     }

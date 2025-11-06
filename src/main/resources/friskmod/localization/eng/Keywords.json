@@ -47,7 +47,7 @@
     "NAMES": [
       "KR"
     ],
-    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose HP. NL KR cannot kill."
+    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose more than 1 HP. NL KR cannot kill on its own."
   },
   {
     "PROPER_NAME": "Countdown",
@@ -82,7 +82,7 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "If a card is unplayable, play it anyway. NL If a card is #ypersevered, add an #y${modID}:Trapped copy of the card to your hand. NL If a curse or status card is #ypersevered, exhaust it instead."
+    "DESCRIPTION": "If a card is unplayable, play it anyway. NL If a card is #ypersevered, add an #y${modID}:Trapped copy of the card to your hand. NL If a curse, status or #y${modID}:Trapped card is #ypersevered, exhaust it instead."
   },
   {
     "PROPER_NAME": "Perseverable",
@@ -286,7 +286,7 @@
     "NAMES": [
       "NEO"
     ],
-    "DESCRIPTION": "Whenever the target gains Block, it takes #b%s damage for each point of Block it has. NL Didn't you know NEO is famous for its high defense?"
+    "DESCRIPTION": "Whenever the target gains Block, it takes #b%s damage. NL Didn't you know NEO is famous for its high defense?"
   },
   {
     "PROPER_NAME": "Matching",
@@ -339,6 +339,12 @@
       "Glad_Dummy"
     ],
     "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its ${modID}:SoulBound target."
+  },
+  {
+    "PROPER_NAME": "Overcome",
+    "NAMES": [
+      "Overcome"
+    ],
+    "DESCRIPTION": "When a card fails to play, #y${modID}:Persevere it and reduce by 1. Reduced by 1 on turn end."
   }
-
 ]

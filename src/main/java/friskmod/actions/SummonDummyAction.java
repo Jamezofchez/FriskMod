@@ -102,7 +102,7 @@ public class SummonDummyAction extends AbstractGameAction {
         addToTop((AbstractGameAction) new SpawnMonsterAction(dummy, true));
     }
 
-    private static final float BORDER = 20.0F * Settings.scale;
+    private static final float BORDER = 50.0F * Settings.scale;
 
     private static boolean overlap(Hitbox a, Hitbox b) {
         if (a.x > b.x + b.width + BORDER || b.x > a.x + a.width + BORDER)

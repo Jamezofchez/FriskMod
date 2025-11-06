@@ -23,11 +23,13 @@ public class Overcome extends AbstractEasyCard {
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int NUM_TO_PERSEVERE = 2;
+    private static final int UPG_NUM_TO_PERSEVERE = 1;
+
 
     public Overcome() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.PERSEVERANCE);
-        this.isEthereal = true;
+        baseMagicNumber = magicNumber = NUM_TO_PERSEVERE;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -36,6 +38,6 @@ public class Overcome extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        this.isEthereal = false;
+        upgradeMagicNumber(UPG_NUM_TO_PERSEVERE);
     }
 }

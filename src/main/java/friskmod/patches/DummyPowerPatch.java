@@ -35,6 +35,9 @@ public class DummyPowerPatch {
     public static class ApplyBlockActionUpdatePatch {
         @SpirePrefixPatch
         public static void Prefix(GainBlockAction __instance) {
+            if (!FrailOnEnemiesPatch.FrailTrigger.triggeredFrail.get(__instance)) {
+                FrailOnEnemiesPatch.ApplyBlockActionUpdatePatch.Prefix(__instance);
+            }
             if (!GladDummyBlockTrigger.triggeredGladDummy.get(__instance)) {
                 GladDummyBlockTrigger.triggeredGladDummy.set(__instance, true);
                 if (__instance.target instanceof AbstractMonster) {
@@ -93,8 +96,8 @@ public class DummyPowerPatch {
 
     @SpirePatch(clz = AbstractMonster.class, method = "damage")
     public static class OnLoseHPMonsterPatch {
-        @SpireInsertPatch(locator = Locator.class, localvars = {"damageAmount"})
-        public static void Insert(AbstractMonster m, DamageInfo info, int damageAmount) {
+        @SpireInsertPatch(locator = Locator.class)
+        public static void Insert(AbstractMonster m, DamageInfo info) {
             for (AbstractPower p : m.powers) {
                 if (p instanceof MadDummy)
                     ((MadDummy) p).onLoseHpMonster(m.lastDamageTaken);

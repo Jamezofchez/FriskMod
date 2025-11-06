@@ -214,10 +214,13 @@
     "NAME": "Mallet",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
   },
+  "${modID}:NiceCream": {
+    "NAME": "Nice Cream",
+    "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. NL Gain !M! ${modID}:LV per ${modID}:Wasted *Energy saved."
+  },
   "${modID}:Overcome": {
     "NAME": "Overcome",
-    "DESCRIPTION": "The next two cards that fail to play this turn are ${modID}:Persevered.",
-    "UPGRADE_DESCRIPTION": "The next three cards that fail to play this turn are ${modID}:Persevered."
+    "DESCRIPTION": "Gain !M! ${modID}:Overcome"
   },
   "${modID}:Plead": {
     "NAME": "Plead",
@@ -235,10 +238,6 @@
   "${modID}:Prarabdha": {
     "NAME": "Prarabdha",
     "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. NL If ${modID}:Threatened, ${modID}:Steal !M! HP from ALL enemies."
-  },
-  "${modID}:Recycle": {
-    "NAME": "Recycle",
-    "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. Gain !M! ${modID}:LV per ${modID}:Wasted *Energy saved."
   },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
@@ -333,6 +332,10 @@
   "${modID}:Strike_Frisk": {
     "NAME": "Strike",
     "DESCRIPTION": "Deal !D! damage."
+  },
+  "${modID}:ThunderingRage": {
+    "NAME": "Thundering Rage",
+    "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, gain !M! ${modID}:Overcome."
   },
   "${modID}:Tinker": {
     "NAME": "Tinker",

@@ -1,5 +1,6 @@
 package friskmod.powers;
 
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,7 +13,7 @@ import friskmod.util.Wiz;
 public class Overcome extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(Overcome.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
-    private static final boolean TURN_BASED = false;
+    private static final boolean TURN_BASED = true;
 
     //The only thing TURN_BASED controls is the color of the number on the power icon.
     //Turn based powers are white, non-turn based powers are red or green depending on if their amount is positive or negative.
@@ -29,11 +30,11 @@ public class Overcome extends BasePower {
 
     @Override
     public void atEndOfRound() {
-//       if (this.amount == 0) {
+       if (this.amount == 0) {
         addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-//       } else {
-//            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-//       }
+       } else {
+            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+       }
     }
     @Override
     public void onRemove() {
