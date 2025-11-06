@@ -3,9 +3,9 @@ package friskmod.powers;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.BufferPower;
 import friskmod.FriskMod;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import friskmod.util.interfaces.LosePlayerHPInterface;
 
 public class TornNotebookPower extends BasePower implements LosePlayerHPInterface {
     public static final String POWER_ID = FriskMod.makeID(TornNotebookPower.class.getSimpleName());

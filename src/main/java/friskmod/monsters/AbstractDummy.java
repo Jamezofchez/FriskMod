@@ -23,14 +23,9 @@ import friskmod.FriskMod;
 import friskmod.util.Wiz;
 
 public abstract class AbstractDummy extends AbstractFriskmodEnemy {
-    protected float x2;
-
-    protected float y2;
 
     public AbstractDummy(String name, String id, float x, float y, int hp) {
         super(name, id, hp, 0.0F, 0.0F, 110.0F, 110.0F, null, x, y);
-        this.x2 = x;
-        this.y2 = y;
         this.currentHealth = this.maxHealth = hp; //shouldnt be effected
     }
 }

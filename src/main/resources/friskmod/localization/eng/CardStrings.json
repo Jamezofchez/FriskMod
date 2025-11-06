@@ -168,8 +168,8 @@
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
-    "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take a ${modID}:Sip of all your potions.",
-    "UPGRADE_DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Take an upgraded ${modID}:Sip of all your potions. NL Exhaust."
+    "DESCRIPTION": "Add a *Ketchup to your hand. NL Take a ${modID}:Sip of all your potions.",
+    "UPGRADE_DESCRIPTION": "Add a *Ketchup+ to your hand. NL Take an upgraded ${modID}:Sip of all your potions. NL Exhaust."
   },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
@@ -362,24 +362,24 @@
     "NAME": "Web Slash",
     "DESCRIPTION": "Deal !D! damage. ${modID}:Persevere your rightmost card."
   },
-  "${modID}::AncientCocktail": {
+  "${modID}:AncientCocktail": {
     "NAME": "Ancient Cocktail",
     "DESCRIPTION": "EVERYONE gains !M! Artifact. NL Exhaust."
   },
-  "${modID}::DuplicationCocktail": {
+  "${modID}:DuplicationCocktail": {
     "NAME": "Duplication Cocktail",
     "DESCRIPTION": "Your next card that costs !${modID}:M2! or less is played twice. NL Exhaust."
   },
-  "${modID}::EntropicCocktail": {
+  "${modID}:EntropicCocktail": {
     "NAME": "Entropic Cocktail",
     "DESCRIPTION": "A random one of your potions turns into a new potion. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Each of your potions turns into a new potion. NL Exhaust."
   },
-  "${modID}::FairyCocktail": {
+  "${modID}:FairyCocktail": {
     "NAME": "Fairy Cocktail",
     "DESCRIPTION": "Heal to !M!% of your Max HP and discard your Fairy Potion. NL Exhaust."
   },
-  "${modID}::Ketchup": {
+  "${modID}:Ketchup": {
     "NAME": "Ketchup",
     "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Exhaust."
   }

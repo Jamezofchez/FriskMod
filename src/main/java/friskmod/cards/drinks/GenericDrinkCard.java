@@ -51,7 +51,6 @@ public class GenericDrinkCard extends AbstractDrinkCard {
         else if (GrillbysHelper.checkChance(potion)){
             drinkType = DrinkType.CHANCE;
             baseMagicNumber = magicNumber = getNewChance();
-
         }
     }
 

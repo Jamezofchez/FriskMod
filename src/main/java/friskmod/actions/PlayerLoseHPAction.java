@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import friskmod.powers.LosePlayerHPInterface;
+import friskmod.util.interfaces.LosePlayerHPInterface;
 
 public class PlayerLoseHPAction extends AbstractGameAction {
     private final int damageAmount;

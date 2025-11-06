@@ -76,7 +76,7 @@
   "${modID}:GladDummy": {
     "NAME": "Glad Dummy",
     "DESCRIPTIONS": [
-      "Gives EVERYONE 3 block on its turn. Whenever the dummy gains a power or gains Block, so does its ${modID}:SoulBound target."
+      "Gives EVERYONE 3 block on its turn. Whenever the dummy gains a power or gains Block, so does its ${modID}:SoulBound %s."
     ]
   },
   "${modID}:Karma": {
@@ -211,7 +211,7 @@
   "${modID}:MadDummy": {
     "NAME": "Mad Dummy",
     "DESCRIPTIONS": [
-      "Deals 3 damage to ALL enemies on its turn. Whenever the dummy takes damage, so does its ${modID}:SoulBound target.."
+      "Deals 3 damage to you on its turn. Whenever the dummy takes damage, so does its ${modID}:SoulBound %s."
     ]
   },
   "${modID}:LesserDuplication": {

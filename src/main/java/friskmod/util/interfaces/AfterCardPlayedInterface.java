@@ -1,4 +1,4 @@
-package friskmod.powers;
+package friskmod.util.interfaces;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 

@@ -1,12 +1,11 @@
 package friskmod.powers;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import friskmod.FriskMod;
 import friskmod.util.Wiz;
+import friskmod.util.interfaces.WastedEnergyInterface;
 
 public class GarbageDumpPower extends BasePower implements WastedEnergyInterface {
     public static final String POWER_ID = FriskMod.makeID(GarbageDumpPower.class.getSimpleName());

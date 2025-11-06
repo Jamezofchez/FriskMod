@@ -11,8 +11,9 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import friskmod.patches.GhostlyPatch;
 import friskmod.util.Wiz;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 
-public class NonAttackPower extends BasePower {
+public class NonAttackPower extends BasePower implements AfterCardPlayedInterface {
     public static final String POWER_ID = FriskMod.makeID(NonAttackPower.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
@@ -34,11 +35,6 @@ public class NonAttackPower extends BasePower {
 //       }
     }
 
-    @Override
-    public void onSpecificTrigger(){
-        this.flash();
-        addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-    }
     @Override
     public void onRemove() {
         resetCardsGhostly();
@@ -74,5 +70,11 @@ public class NonAttackPower extends BasePower {
             baseDescription = DESCRIPTIONS[0];
         }
         this.description = String.format(baseDescription, amount);
+    }
+
+    @Override
+    public void afterCardPlayed(AbstractCard card) {
+        this.flash();
+        addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
     }
 }

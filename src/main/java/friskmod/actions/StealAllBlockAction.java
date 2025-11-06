@@ -73,9 +73,15 @@ public class StealAllBlockAction extends AbstractGameAction {
             boolean foundTarget = false;
             for (AbstractMonster target : targetMonsters){
                 boolean haspow = target.hasPower(BarricadePower.POWER_ID);
-                if (!target.isDying && !target.isDead && target.currentBlock > 0 && !haspow) {
-                    if (stealMatching && !(target.currentBlock == AbstractDungeon.player.currentBlock || Objects.equals(TempHPField.tempHp.get(target), TempHPField.tempHp.get(AbstractDungeon.player)))) {
-                        continue;
+                if (!target.isDying && !target.isDead && !haspow) {
+                    if (stealMatching){
+                        if (!((target.currentBlock > 0 && AbstractDungeon.player.currentBlock > 0) || (TempHPField.tempHp.get(target) > 0 && TempHPField.tempHp.get(AbstractDungeon.player) > 0))){
+                            continue;
+                        }
+                    } else{
+                        if (!(target.currentBlock > 0 || TempHPField.tempHp.get(target) > 0)){
+                            continue;
+                        }
                     }
                     activatedInstance = this;
                     t = 0;
@@ -97,30 +103,31 @@ public class StealAllBlockAction extends AbstractGameAction {
             for (AbstractMonster target : targetMonsters) {
                 if (target != null) {
                     AbstractCreature source = AbstractDungeon.player;
-                    AbstractDungeon.effectList.add(new FlashAtkImgEffect(source.hb.cX, source.hb.cY, AttackEffect.SHIELD));
-
                     int tempHpAmount = TempHPField.tempHp.get(target);
                     if (tempHpAmount > 0) {
-                        if (!(stealMatching && !Objects.equals(tempHpAmount, TempHPField.tempHp.get(source)))) {
-                            Wiz.att(new AddTemporaryHPAction(source, source, tempHpAmount));
-                            Wiz.att(new RemoveAllTemporaryHPAction(target, source));
+                        if (stealMatching) {
+                            if (!(TempHPField.tempHp.get(source) > 0)){
+                                continue;
+                            }
                         }
+                        Wiz.att(new AddTemporaryHPAction(source, source, tempHpAmount));
+                        Wiz.att(new RemoveAllTemporaryHPAction(target, source));
                     }
+                }
+            }
+            for (AbstractMonster target : targetMonsters) {
+                AbstractCreature source = AbstractDungeon.player;
+                AbstractDungeon.effectList.add(new FlashAtkImgEffect(source.hb.cX, source.hb.cY, AttackEffect.SHIELD));
+                if (target != null) {
                     int blockAmount = target.currentBlock;
                     if (blockAmount > 0) {
-//                        if (target instanceof SphericGuardian){
-//                            AbstractPower posspow = target.getPower(ArtifactPower.POWER_ID);
-//                            if (posspow != null) {
-//                                posspow.flash();
-//                                posspow.onSpecificTrigger();
-//                                continue;
-//                            }
-//                        }
-
-                        if (!(stealMatching && !(blockAmount == source.currentBlock))) {
-                            Wiz.att(new GainBlockAction(source, source, blockAmount));
-                            Wiz.att(new LoseBlockAction(target, source, blockAmount));
+                        if (stealMatching) {
+                            if (!(source.currentBlock > 0)) {
+                                continue;
+                            }
                         }
+                        Wiz.att(new GainBlockAction(source, source, blockAmount));
+                        Wiz.att(new LoseBlockAction(target, source, blockAmount));
                     }
                 }
             }

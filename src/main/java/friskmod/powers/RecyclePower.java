@@ -1,14 +1,13 @@
 package friskmod.powers;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+import friskmod.util.interfaces.WastedEnergyInterface;
 
-public class RecyclePower extends BasePower implements WastedEnergyInterface{
+public class RecyclePower extends BasePower implements WastedEnergyInterface {
     public static final String POWER_ID = FriskMod.makeID(RecyclePower.class.getSimpleName());
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;

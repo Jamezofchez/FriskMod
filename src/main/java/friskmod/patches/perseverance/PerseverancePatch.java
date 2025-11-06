@@ -410,29 +410,31 @@ public class PerseverancePatch {
     public static class OnCardPersevered {
         @SpirePrefixPatch
         public static void Prefix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
-            if (!card.dontTriggerOnUseCard) {
-                if (card != null && (PerseveranceFields.perseverePlayed.get(card))) {
-                    if (PerseveranceFields.overcomePlayed.get(card)) {
-                        PerseveranceFields.overcomePlayed.set(card, false);
-                        AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
-                        if (pow != null) {
-                            pow.flash();
-                            Wiz.atb(new ReducePowerAction(AbstractDungeon.player, AbstractDungeon.player, Overcome.POWER_ID, 1));
-                        } else {
-                            FriskMod.logger.warn("{}: overcomePlayed set but no power found", FriskMod.modID);
-                        }
-                    }
-                    if (PerseveranceFields.insufficientEnergy.get(card)) {
-                        int refundEnergy = PerseveranceFields.currentEnergy.get(card);
-                        Wiz.atb(new GainEnergyAction(refundEnergy));
-                    }
-                    PerseveranceFields.setIsPerseverable(card, false);
-                    __instance.exhaustCard = true;
-                    AbstractCard tmp = card.makeStatEquivalentCopy();
-                    PerseveranceFields.trapped.set(tmp, true);
-                    Wiz.atb(new MakeTempCardInHandAction(tmp));
+            if (card == null || !PerseveranceFields.perseverePlayed.get(card)) {
+                return;
+            }
+            if (PerseveranceFields.overcomePlayed.get(card)) {
+                PerseveranceFields.overcomePlayed.set(card, false);
+                AbstractPower pow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
+                if (pow != null) {
+                    pow.flash();
+                    Wiz.atb(new ReducePowerAction(AbstractDungeon.player, AbstractDungeon.player, Overcome.POWER_ID, 1));
+                } else {
+                    FriskMod.logger.warn("{}: overcomePlayed set but no power found", FriskMod.modID);
                 }
             }
+            if (PerseveranceFields.insufficientEnergy.get(card)) {
+                int refundEnergy = PerseveranceFields.currentEnergy.get(card);
+                Wiz.atb(new GainEnergyAction(refundEnergy));
+            }
+            PerseveranceFields.setIsPerseverable(card, false);
+            __instance.exhaustCard = true;
+            if (card.type == AbstractCard.CardType.CURSE || card.type == AbstractCard.CardType.STATUS){
+                return;
+            }
+            AbstractCard tmp = card.makeStatEquivalentCopy();
+            PerseveranceFields.trapped.set(tmp, true);
+            Wiz.atb(new MakeTempCardInHandAction(tmp));
         }
         @SpirePostfixPatch
         public static void Postfix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {

@@ -64,8 +64,6 @@ public class SummonDummyAction extends AbstractGameAction {
                 dummy = new EmptyDummy(x, y, this.hp);
                 break;
         }
-        x = dummy.hb_x;
-        y = dummy.hb_y;
         float actualX = dummy.hb.x;
         float actualY = dummy.hb.y;
         float adjustDistance = 0.0F;
@@ -73,19 +71,22 @@ public class SummonDummyAction extends AbstractGameAction {
         float xOffset = 0.0F;
         float yOffset = 0.0F;
         boolean success = false;
+        EmptyDummy testDummy = new EmptyDummy(dummy.hb_x, dummy.hb_y, 0);
+        testDummy.hb = new Hitbox(dummy.hb.x, dummy.hb.y, dummy.hb.width, dummy.hb.height);
         while (!success) {
             success = true;
             for (AbstractMonster monster : (AbstractDungeon.getMonsters()).monsters) {
-                if (!monster.isDeadOrEscaped() || monster.id.equals("GremlinWarrior") || monster.id.equals("GremlinTsundere") || monster.id.equals("GremlinThief") || monster.id.equals("GremlinFat") || monster.id.equals("GremlinWizard") || monster.id.equals("Dagger"))
-                    if (overlap(monster.hb, dummy.hb)) {
-                        success = false;
-                        adjustAngle = (adjustAngle + 0.1F) % 6.2831855F;
-                        adjustDistance += 10.0F;
-                        xOffset = MathUtils.cos(adjustAngle) * adjustDistance;
-                        yOffset = MathUtils.sin(adjustAngle) * adjustDistance;
-                        dummy.hb.x = actualX + xOffset;
-                        dummy.hb.y = actualY + yOffset;
-                    }
+                //|| monster.id.equals("GremlinWarrior") || monster.id.equals("GremlinTsundere") || monster.id.equals("GremlinThief") || monster.id.equals("GremlinFat") || monster.id.equals("GremlinWizard") || monster.id.equals("Dagger")
+//                if (!monster.isDeadOrEscaped()) {
+                if (overlap(monster.hb, testDummy.hb)) {
+                    success = false;
+                    adjustAngle = (adjustAngle + 0.1F) % 6.2831855F;
+                    adjustDistance += 10.0F;
+                    xOffset = MathUtils.cos(adjustAngle) * adjustDistance;
+                    yOffset = MathUtils.sin(adjustAngle) * adjustDistance;
+                    testDummy.hb.x = actualX + xOffset;
+                    testDummy.hb.y = actualY + yOffset;
+                }
             }
         }
         dummy.hb.move(dummy.hb.x + dummy.hb.width / 2.0F, dummy.hb.y + dummy.hb.height / 2.0F);

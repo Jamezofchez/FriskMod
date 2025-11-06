@@ -98,6 +98,7 @@ public class GrillbysHelper {
             case "GhostInAJar":
             case "SmokeBomb":
             case "Ambrosia":
+            case "StancePotion":
                 return true;
             default:
                 return false;

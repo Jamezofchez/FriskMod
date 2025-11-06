@@ -20,6 +20,7 @@ import friskmod.patches.BalletShoesGlowFieldsPatch;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 
 
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.function.Consumer;
 
 import static friskmod.FriskMod.makeID;
 
-public class BalletShoes extends AbstractEasyCard {
+public class BalletShoes extends AbstractEasyCard implements AfterCardPlayedInterface {
     public static final String ID = makeID(BalletShoes.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
     public static final String[] TEXT = uiStrings.TEXT;
@@ -54,10 +55,6 @@ public class BalletShoes extends AbstractEasyCard {
     @Override
     public void triggerWhenDrawn() {
         Wiz.actB(this::makeMiddleCardGlow);
-    }
-
-    public void afterCardPlayed() {
-        makeMiddleCardGlow();
     }
 
     private void makeMiddleCardGlow() {
@@ -137,5 +134,10 @@ public class BalletShoes extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeMagicNumber(UPG_TIMES_PLAY);
+    }
+
+    @Override
+    public void afterCardPlayed(AbstractCard card) {
+        makeMiddleCardGlow();
     }
 }

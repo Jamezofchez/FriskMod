@@ -10,6 +10,7 @@ import friskmod.character.Frisk;
 import friskmod.powers.NEO;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.makeID;
 
@@ -38,7 +39,9 @@ public class Tinker extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(m, p, new FrailPower(m, magicNumber, false), magicNumber));
         addToBot(new ApplyPowerAction(m, p, new NEO(m, magicNumber), magicNumber));
-        addToBot(new GainBlockAction(m, p, block));
+        addToBot(Wiz.actionify(() -> {
+            addToBot(new GainBlockAction(m, p, block));
+        }));
     }
 
     @Override

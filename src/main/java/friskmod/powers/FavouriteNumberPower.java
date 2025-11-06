@@ -2,11 +2,13 @@ package friskmod.powers;
 
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 
-public class FavouriteNumberPower extends BasePower {
+public class FavouriteNumberPower extends BasePower implements AfterCardPlayedInterface {
     public static final String POWER_ID = FriskMod.makeID(FavouriteNumberPower.class.getSimpleName());
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
@@ -28,11 +30,6 @@ public class FavouriteNumberPower extends BasePower {
 //            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
 //       }
     }
-    @Override
-    public void onSpecificTrigger(){
-        this.flash();
-        addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-    }
 
     @Override
     public AbstractPower makeCopy() {
@@ -44,4 +41,9 @@ public class FavouriteNumberPower extends BasePower {
     }
 
 
+    @Override
+    public void afterCardPlayed(AbstractCard card) {
+        this.flash();
+        addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+    }
 }

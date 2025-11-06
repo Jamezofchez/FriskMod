@@ -3,12 +3,12 @@ package friskmod.powers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 
 public abstract class AbstractCountdownPower extends BasePower implements AfterCardPlayedInterface {
     //The only thing TURN_BASED controls is the color of the number on the power icon.

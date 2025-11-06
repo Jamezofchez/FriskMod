@@ -37,6 +37,7 @@ public class GladDummy extends BasePower {
         if (powerToApply instanceof CloneablePowerInterface) {
             flash();
             AbstractPower copy = ((CloneablePowerInterface) powerToApply).makeCopy();
+            copy.owner = this.boundTarget;
             addToBot(new ApplyPowerAction(this.boundTarget, this.owner, copy));
         }
     }
@@ -55,5 +56,9 @@ public class GladDummy extends BasePower {
             name = boundTarget.name;
         }
         this.description = String.format(DESCRIPTIONS[0], name);
+    }
+    @Override
+    public void flash() { //disable sound flashing
+        super.flashWithoutSound();
     }
 }

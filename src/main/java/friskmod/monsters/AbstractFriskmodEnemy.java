@@ -18,7 +18,6 @@ import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import friskmod.BetterSpriterAnimation;
 import friskmod.actions.CustomSFXAction;
-import friskmod.util.DetailedIntent;
 import friskmod.util.Wiz;
 import friskmod.vfx.VFXActionButItCanFizzle;
 import friskmod.vfx.WaitEffect;
@@ -166,41 +165,10 @@ public abstract class AbstractFriskmodEnemy extends CustomMonster {
         return Math.round(base);
     }
 
-    public void render(SpriteBatch sb) {
-        super.render(sb);
-        Map<Integer, ArrayList<DetailedIntent>> detailsMap = (Map<Integer, ArrayList<DetailedIntent>>)DetailedIntent.intents.get(this);
-        if (detailsMap != null && !this.isDead && !this.isDying && !AbstractDungeon.isScreenUp && !Wiz.adp().hasRelic("Runic Dome") && !Wiz.adp().hasPower("CardAugments:RunicPower"))
-            for (Iterator<Integer> iterator = detailsMap.keySet().iterator(); iterator.hasNext(); ) {
-                int intentNum = ((Integer)iterator.next()).intValue();
-                ArrayList<DetailedIntent> detailList = detailsMap.get(Integer.valueOf(intentNum));
-                for (int i = 0; i < detailList.size(); i++) {
-                    DetailedIntent detail = detailList.get(i);
-                    detail.renderDetails(sb, i + 1, intentNum + 1);
-                }
-            }
-    }
-
-    protected void setDetailedIntents() {
-        DetailedIntent.intents.put(this, getDetailedIntents());
-    }
-
-    protected Map<Integer, ArrayList<DetailedIntent>> getDetailedIntents() {
-        EnemyMoveInfo move = (EnemyMoveInfo)ReflectionHacks.getPrivate(this, AbstractMonster.class, "move");
-        Map<Integer, ArrayList<DetailedIntent>> detailsMap = new HashMap<>();
-        ArrayList<DetailedIntent> details = getDetails(move, -1);
-        if (details != null)
-            detailsMap.put(Integer.valueOf(-1), details);
-        return detailsMap;
-    }
-
-    protected ArrayList<DetailedIntent> getDetails(EnemyMoveInfo move, int intentNum) {
-        return null;
-    }
 
     public void createIntent() {
         super.createIntent();
         setMoveName();
-        setDetailedIntents();
     }
 
     protected void setMoveName() {
@@ -318,21 +286,9 @@ public abstract class AbstractFriskmodEnemy extends CustomMonster {
     protected void animationAction(String animation, String sound, float volume, AbstractCreature owner) {
         animationAction(animation, sound, volume, (AbstractCreature)null, owner);
     }
-
-    public int[] calcMassAttack(DamageInfo info) {
-        int[] damageArray = new int[(AbstractDungeon.getMonsters()).monsters.size() + 1];
-        info.applyPowers((AbstractCreature)this, (AbstractCreature)Wiz.adp());
-        damageArray[damageArray.length - 1] = info.output;
-        for (int i = 0; i < (AbstractDungeon.getMonsters()).monsters.size(); i++) {
-            AbstractMonster mo = (AbstractDungeon.getMonsters()).monsters.get(i);
-            info.applyPowers((AbstractCreature)this, (AbstractCreature)mo);
-            damageArray[i] = info.output;
-        }
-        return damageArray;
-    }
     
     public void applyToSelf(AbstractPower po) {
-        Wiz.atb((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, po, po.amount));
+        Wiz.atb((AbstractGameAction)new ApplyPowerAction((AbstractCreature)this, (AbstractCreature)this, po, po.amount, true));
     }
 
 

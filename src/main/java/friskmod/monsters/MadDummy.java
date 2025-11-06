@@ -1,12 +1,12 @@
 package friskmod.monsters;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import friskmod.BetterSpriterAnimation;
-import friskmod.customintent.IntentEnums;
 import friskmod.FriskMod;
 import friskmod.powers.SoulBound;
 import friskmod.util.Wiz;
@@ -23,7 +23,7 @@ public class MadDummy extends AbstractDummy {
         this.amount = amount;
         this.boundTarget = boundTarget;
         this.animation = new BetterSpriterAnimation(FriskMod.monsterPath("MadDummy/Spriter/MadDummy.scml"));
-        addMove((byte)0, IntentEnums.MASS_ATTACK, 3);
+        addMove((byte)0, Intent.ATTACK, 3);
     }
 
     public void usePreBattleAction() {
@@ -36,10 +36,8 @@ public class MadDummy extends AbstractDummy {
         super.takeTurn();
         switch (this.nextMove) {
             case 0:
-                int damageArray[];
                 attackAnimation((AbstractCreature) Wiz.adp());
-                damageArray = calcMassAttack(this.info);
-                Wiz.atb(new DamageAllEnemiesAction(this, damageArray, DamageInfo.DamageType.NORMAL, AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+                Wiz.atb(new DamageAction(Wiz.adp(), this.info));
                 resetIdle(0.25F);
                 waitAnimation(0.25F);
                 break;

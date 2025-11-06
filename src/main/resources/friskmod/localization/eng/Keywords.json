@@ -82,7 +82,7 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "If a card is unplayable, play it anyway. NL If a card is #ypersevered, add an #y${modID}:Trapped copy of the card to your hand."
+    "DESCRIPTION": "If a card is unplayable, play it anyway. NL If a card is #ypersevered, add an #y${modID}:Trapped copy of the card to your hand. NL If a curse or status card is #ypersevered, exhaust it instead."
   },
   {
     "PROPER_NAME": "Perseverable",
@@ -120,14 +120,14 @@
       "Temp HP",
       "Temp_HP"
     ],
-    "DESCRIPTION": "Until end of combat, prevents damage to HP. Frisk cards treat Temp HP loss as HP loss."
+    "DESCRIPTION": "Until end of combat, prevents damage to HP. NL Frisk cards treat Temp HP loss as HP loss."
   },
   {
     "PROPER_NAME": "Copy",
     "NAMES": [
       "Copy"
     ],
-    "DESCRIPTION": "Attempt to #Copy any buffs the enemy has. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV."
+    "DESCRIPTION": "Any buffs can only be copied if enemy didn't start with them. NL Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL The card will glow if anything can be copied."
   },
   {
     "PROPER_NAME": "Inherent",
@@ -168,7 +168,7 @@
       "Wasted",
       "Waste"
     ],
-    "DESCRIPTION": "Any [E] used not playing cards. (Such as Void, or unspent energy at the end of turn)"
+    "DESCRIPTION": "Any [E] used not playing cards. NL (Such as Void, or unspent energy at the end of turn)"
   },
   {
     "PROPER_NAME": "Spare",
@@ -232,7 +232,7 @@
       "Demonify",
       "Demonified"
     ],
-    "DESCRIPTION": "Your next Attack will end in 9 (You will gain #y${modID}:LV until it does)."
+    "DESCRIPTION": "Your next Attack will end in 9 NL (You will gain #y${modID}:LV until it does)."
   },
   {
     "PROPER_NAME": "Unseal",
@@ -258,7 +258,7 @@
       "steals",
       "steal"
     ],
-    "DESCRIPTION": "Any buffs such as Block can only be stolen if enemy didn't start with them. Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. Enemy HP is converted into ${modID}:Temp_HP. The card will glow if anything can be stolen."
+    "DESCRIPTION": "Any buffs can only be stolen if enemy didn't start with them. NL Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL Enemy HP is converted into ${modID}:Temp_HP. NL The card will glow if anything can be stolen."
   },
   {
     "PROPER_NAME": "Draft",
@@ -286,14 +286,14 @@
     "NAMES": [
       "NEO"
     ],
-    "DESCRIPTION": "Whenever the target gains Block, it takes #b%s damage for each point of Block it has. Didn't you know NEO is famous for its high defense?"
+    "DESCRIPTION": "Whenever the target gains Block, it takes #b%s damage for each point of Block it has. NL Didn't you know NEO is famous for its high defense?"
   },
   {
     "PROPER_NAME": "Matching",
     "NAMES": [
       "matching"
     ],
-    "DESCRIPTION": "Both you and the enemy must have the same amount of the buff, debuff, Block or ${modID}:Temp_HP."
+    "DESCRIPTION": "Both you and the enemy must have the same #yBuff or #yDebuff."
   },
   {
     "PROPER_NAME": "Barrier",
@@ -307,14 +307,14 @@
     "NAMES": [
       "Sip"
     ],
-    "DESCRIPTION": "Add a card to your hand with related lesser effects."
+    "DESCRIPTION": "Add a card to your hand with related lesser effects. NL (Will either have half the number displayed, cards restricted to 0 or 1 cost or only have a chance of being played)"
   },
   {
     "PROPER_NAME": "1997",
     "NAMES": [
       "1997"
     ],
-    "DESCRIPTION": "Gain 19 gold the first time played. Gain 19 gold the second time played. Gain 97 gold the third time played.",
+    "DESCRIPTION": "Gain 19 gold the first time played. NL Gain 19 gold the second time played. NL Gain 97 gold the third time played.",
     "COLOR": "ffff00"
   },
   {
@@ -322,7 +322,7 @@
     "NAMES": [
       "SoulBound"
     ],
-    "DESCRIPTION": "Targets the enemy attacked. Dies whenever the target dies."
+    "DESCRIPTION": "Targets the enemy attacked. NL Dies whenever the target dies."
   },
   {
     "PROPER_NAME": "Mad Dummy",
@@ -330,7 +330,7 @@
       "Mad Dummy",
       "Mad_Dummy"
     ],
-    "DESCRIPTION": "Deals 3 damage to ALL enemies on its turn. Whenever the dummy takes damage, so does its ${modID}:SoulBound target."
+    "DESCRIPTION": "Deals 3 damage to you on its turn. NL Whenever the dummy takes damage, so does its ${modID}:SoulBound target."
   },
   {
     "PROPER_NAME": "Glad Dummy",
@@ -338,7 +338,7 @@
       "Glad Dummy",
       "Glad_Dummy"
     ],
-    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. Whenever the dummy gains a power or gains Block, so does its ${modID}:SoulBound target."
+    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its ${modID}:SoulBound target."
   }
 
 ]

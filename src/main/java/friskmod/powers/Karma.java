@@ -2,13 +2,11 @@ package friskmod.powers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.HealthBarRenderPower;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.actions.KarmaDamageAction;
+import friskmod.util.interfaces.LosePlayerHPInterface;
 
 public class Karma extends BasePower implements HealthBarRenderPower, LosePlayerHPInterface {
     public static final String POWER_ID = FriskMod.makeID(Karma.class.getSimpleName());

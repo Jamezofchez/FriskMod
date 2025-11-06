@@ -5,17 +5,23 @@ import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.FriskMod;
 import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
 import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 
+
+import java.util.ArrayList;
 
 import static friskmod.FriskMod.makeID;
 
-public class AnnoyingDog extends AbstractCriticalCard {
+public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayedInterface {
     public static final String ID = makeID(AnnoyingDog.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
@@ -38,15 +44,12 @@ public class AnnoyingDog extends AbstractCriticalCard {
     }
 
     @Override
-    public void triggerOnOtherCardPlayed(AbstractCard c) { //delete
-    }
-
-    @Override
     public void triggerOnEndOfPlayerTurn() {
         super.triggerOnEndOfPlayerTurn();
         PerseveranceFields.trapped.set(this, true);
         initializeDescription();
     }
+
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -63,5 +66,25 @@ public class AnnoyingDog extends AbstractCriticalCard {
     @Override
     public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
 
+    }
+
+    @Override
+    public void afterCardPlayed(AbstractCard cardPlayed) {
+        untrapOnCritical();
+        if (cardPlayed.cardID.equals(BreakFree.ID)){
+            PerseveranceFields.trapped.set(this, false);
+        }
+        initializeDescription();
+    }
+
+    public void triggerWhenDrawn() {
+        Wiz.actB(this::untrapOnCritical);
+    }
+
+    private void untrapOnCritical() {
+        PerseveranceFields.trapped.set(this, true);
+        if (isCritical()) {
+            PerseveranceFields.trapped.set(this, false);
+        }
     }
 }

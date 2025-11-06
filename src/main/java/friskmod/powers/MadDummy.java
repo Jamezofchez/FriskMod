@@ -46,4 +46,9 @@ public class MadDummy extends BasePower {
         }
         this.description = String.format(DESCRIPTIONS[0], name);
     }
+
+    @Override
+    public void flash() { //disable sound flashing
+        super.flashWithoutSound();
+    }
 }

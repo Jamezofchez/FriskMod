@@ -8,9 +8,6 @@ import basemod.interfaces.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import friskmod.customintent.CounterAttackIntent;
-import friskmod.customintent.CustomIntent;
-import friskmod.customintent.MassAttackIntent;
 import friskmod.actions.AfterCardUseAction;
 import friskmod.actions.OnBattleStartAction;
 import friskmod.cards.*;
@@ -88,8 +85,7 @@ public class FriskMod implements
         //If you want to set up a config panel, that will be done here.
         //You can find information about this on the BaseMod wiki page "Mod Config and Panel".
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
-        CustomIntent.add((CustomIntent)new MassAttackIntent());
-        CustomIntent.add((CustomIntent)new CounterAttackIntent());
+//        CustomIntent.add((CustomIntent)new MassAttackIntent());
         initializeSavedData();
     }
 
@@ -436,7 +432,7 @@ public class FriskMod implements
     }
 
     public void receivePostBattle(AbstractRoom abstractRoom) {
-        DetailedIntent.intents.clear();
+
     }
 
 

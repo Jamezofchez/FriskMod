@@ -7,7 +7,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.cards.BalletShoes;
-import friskmod.powers.AfterCardPlayedInterface;
+import friskmod.powers.NonAttackPower;
+import friskmod.util.Wiz;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 import friskmod.powers.CountdownPounce;
 
 public class AfterCardUseAction extends AbstractGameAction {
@@ -24,28 +26,28 @@ public class AfterCardUseAction extends AbstractGameAction {
         isDone = true;
     }
     private void publishOnUseCard() {
-        for (AbstractCard card : AbstractDungeon.player.hand.group) {
-            if (card instanceof BalletShoes){
-                ((BalletShoes) card).afterCardPlayed();
+        for (AbstractCard c : AbstractDungeon.player.hand.group) {
+            if (c instanceof AfterCardPlayedInterface){
+                ((AfterCardPlayedInterface) c).afterCardPlayed(this.card);
             }
         }
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
             for (AbstractPower p : m.powers) {
                 if (p instanceof CountdownPounce){
-                    if (card != null){
-                        if (card.type == AbstractCard.CardType.ATTACK){
+                    if (this.card != null){
+                        if (this.card.type == AbstractCard.CardType.ATTACK){
                             ((CountdownPounce) p).setPlayerNormalDamage(true);
                         }
                     }
                 }
                 if (p instanceof AfterCardPlayedInterface) {
-                    ((AfterCardPlayedInterface) p).afterCardPlayed(card);
+                    ((AfterCardPlayedInterface) p).afterCardPlayed(this.card);
                 }
             }
         }
         for (AbstractPower p : AbstractDungeon.player.powers) {
             if (p instanceof AfterCardPlayedInterface)
-                ((AfterCardPlayedInterface) p).afterCardPlayed(card);
+                ((AfterCardPlayedInterface) p).afterCardPlayed(this.card);
         }
     }
 }
