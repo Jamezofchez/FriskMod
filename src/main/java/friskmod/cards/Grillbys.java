@@ -31,6 +31,7 @@ public class Grillbys extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.YOU);
         this.cardsToPreview = new Ketchup();
+        this.exhaust = true;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

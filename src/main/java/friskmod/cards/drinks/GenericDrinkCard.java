@@ -105,7 +105,7 @@ public class GenericDrinkCard extends AbstractDrinkCard {
         } else{
             costDescriptor = TEXT[2];
         }
-        return rawDescription.replaceFirst("(?<!dis|Dis)(cards?)", Matcher.quoteReplacement(costDescriptor) + " $1");
+        return rawDescription.replaceAll("(?<!dis|Dis)(cards?)", Matcher.quoteReplacement(costDescriptor) + " $1");
     }
 
     private String getChanceDescription() {

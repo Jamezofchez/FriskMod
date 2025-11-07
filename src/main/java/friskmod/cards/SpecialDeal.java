@@ -30,7 +30,7 @@ public class SpecialDeal extends AbstractEasyCard {
 
     public static final int JACKPOT_GOLD = 97;
 
-    public static final int Mercied_AND_ARTIFACT = 2;
+    public static final int NEO_AND_ARTIFACT = 2;
 
     public static final int UPG_COST = 1;
 
@@ -45,7 +45,7 @@ public class SpecialDeal extends AbstractEasyCard {
 
     public SpecialDeal() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        this.baseMagicNumber = magicNumber = Mercied_AND_ARTIFACT;
+        this.baseMagicNumber = magicNumber = NEO_AND_ARTIFACT;
         this.isEthereal = true;
         tags.add(CardTags.HEALING);
         tags.add(FriskTags.KINDNESS);

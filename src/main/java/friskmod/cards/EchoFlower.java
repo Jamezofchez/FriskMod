@@ -116,6 +116,9 @@ public class EchoFlower extends AbstractEasyCard {
             this.lastCard = null;
         }
     }
+    public void triggerOnEndOfPlayerTurn() {
+        this.lastCard = null;
+    }
 
     public void upgrade() {
         if (this.lastCard != null)

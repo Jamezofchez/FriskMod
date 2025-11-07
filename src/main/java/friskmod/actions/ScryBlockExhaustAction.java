@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.patches.perseverance.PerseveranceFields;
+import friskmod.patches.perseverance.PerseverancePatch;
 
 public class ScryBlockExhaustAction extends AbstractGameAction {
     private static final UIStrings uiStrings;
@@ -61,7 +62,7 @@ public class ScryBlockExhaustAction extends AbstractGameAction {
             } else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     AbstractDungeon.player.drawPile.moveToDiscardPile(c);
-                    if (c.cost == -2 || PerseveranceFields.trapped.get(c)) {
+                    if (PerseverancePatch.isUnplayable(c) || PerseveranceFields.trapped.get(c)) {
                         addToBot(new GainBlockAction(AbstractDungeon.player, blockPerCard));
                         addToBot(new ExhaustSpecificCardAction(c, AbstractDungeon.player.discardPile));
                     }

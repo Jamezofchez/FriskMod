@@ -14,51 +14,55 @@ import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 import static friskmod.helper.GrillbysHelper.isCardCostAllowed;
 
 public class LimitCardCostPatch {
-    @SpirePatch2(clz = AbstractDungeon.class, method = SpirePatch.CONSTRUCTOR,
-    paramtypez = {String.class, String.class, AbstractPlayer.class, ArrayList.class})
-    public static class DungeonCheck {
-        @SpireInstrumentPatch
-        public static ExprEditor instrument() {
-            return new ExprEditor() {
-                @Override
-                public void edit(MethodCall m) throws CannotCompileException {
-                    // Look for calls to hasTag(CardTags.HEALING)
-                    if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("hasTag")) {
-                        m.replace(
-                                "{ " +
-                                        "  boolean original = $proceed($$);" +
-                                        "  if ($1 == " + AbstractCard.CardTags.class.getName() + ".HEALING) {" +
-                                        "    $_ = (original || " + GrillbysHelper.class.getName() + ".isCardCostAllowed($0));" +
-                                        "  } else {" +
-                                        "    $_ = original;" +
-                                        "  }" +
-                                        "}"
-                        );
-                    }
-                }
-            };
+    @SpirePatch2(clz = AbstractCard.class, method = "hasTag")
+    public static class AvoidAddingHighCostPatch {
+        public static boolean Postfix(AbstractCard __instance, boolean __result){
+            return __result && isCardCostAllowed(__instance);
         }
     }
-    @SpirePatch2(clz = CardGroup.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {CardGroup.class, CardGroup.CardGroupType.class})
     @SpirePatch2(clz = CardGroup.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {CardGroup.CardGroupType.class})
-    public static class RestrictLowCostCardsPatch {
-        @SpirePrefixPatch
-        public static void replaceGroup(CardGroup __instance) {
-            __instance.group = new FilteredCardList();
+    @SpirePatch2(clz = CardGroup.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {CardGroup.class, CardGroup.CardGroupType.class})
+    public static class ReplaceCardGroupListPatch {
+
+        @SpirePostfixPatch
+        public static void Postfix(CardGroup __instance) {
+
+            // If already filtered, skip
+            if ( __instance.group instanceof FilteredCardList) {
+                return;
+            }
+
+            // Create a new filtered list
+            FilteredCardList filtered = new FilteredCardList();
+
+            // Copy across only allowed cards from existing group (if any)
+            if ( __instance.group != null) {
+                for (AbstractCard card :  __instance.group) {
+                    filtered.add(card);
+                }
+                __instance.group.clear();
+            }
+
+            // Replace the internal list
+            __instance.group = filtered;
         }
 
-        // Inner class that enforces the rule
         public static class FilteredCardList extends ArrayList<AbstractCard> {
+
             @Override
             public boolean add(AbstractCard card) {
                 if (isCardCostAllowed(card)) {
                     return super.add(card);
                 }
-                return true;
+                return false;
             }
 
             @Override
@@ -69,16 +73,18 @@ public class LimitCardCostPatch {
             }
 
             @Override
-            public boolean addAll(java.util.Collection<? extends AbstractCard> c) {
+            public boolean addAll(Collection<? extends AbstractCard> c) {
                 boolean changed = false;
                 for (AbstractCard card : c) {
-                    changed |= this.add(card);
+                    if (isCardCostAllowed(card)) {
+                        changed |= super.add(card);
+                    }
                 }
                 return changed;
             }
 
             @Override
-            public boolean addAll(int index, java.util.Collection<? extends AbstractCard> c) {
+            public boolean addAll(int index, Collection<? extends AbstractCard> c) {
                 if (c == null || c.isEmpty()) {
                     return false;
                 }
@@ -86,67 +92,96 @@ public class LimitCardCostPatch {
                 int pos = index;
                 for (AbstractCard card : c) {
                     if (isCardCostAllowed(card)) {
-                        super.add(pos, card);
-                        pos++;
+                        super.add(pos++, card);
                         inserted++;
                     }
                 }
                 return inserted > 0;
             }
+            @Override
+            public boolean remove(Object o) {
+                if (o instanceof AbstractCard && isCardCostAllowed((AbstractCard) o)) {
+                    return super.remove(o);
+                }
+                return false;
+            }
+
+            @Override
+            public AbstractCard remove(int index) {
+                AbstractCard c = super.get(index);
+                if (isCardCostAllowed(c)) {
+                    return super.remove(index);
+                }
+                // Don't remove disallowed cards
+                return c;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                boolean changed = false;
+                for (Object o : c) {
+                    if (o instanceof AbstractCard && isCardCostAllowed((AbstractCard) o)) {
+                        changed |= super.remove(o);
+                    }
+                }
+                return changed;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                // Only keep allowed and included cards
+                return super.removeIf(card -> !isCardCostAllowed(card) || !c.contains(card));
+            }
+
 //
 //            @Override
 //            public AbstractCard set(int index, AbstractCard element) {
+//                // Replacing should also respect the rule — but avoid instability
 //                if (isCardCostAllowed(element)) {
 //                    return super.set(index, element);
 //                }
+//                // If disallowed, keep the existing element
 //                return super.get(index);
+//            }
+
+//            // Override iterator to skip invalid cards during iteration
+//            @Override
+//            public Iterator<AbstractCard> iterator() {
+//                final Iterator<AbstractCard> it = super.iterator();
+//                return new Iterator<AbstractCard>() {
+//                    private AbstractCard nextOk = advance();
+//                    private AbstractCard advance() {
+//                        while (it.hasNext()) {
+//                            AbstractCard c = it.next();
+//                            if (isCardCostAllowed(c)) return c;
+//                        }
+//                        return null;
+//                    }
+//                    @Override
+//                    public boolean hasNext() { return nextOk != null; }
+//                    @Override
+//                    public AbstractCard next() {
+//                        if (nextOk == null) throw new NoSuchElementException();
+//                        AbstractCard out = nextOk;
+//                        nextOk = advance();
+//                        return out;
+//                    }
+//                    @Override
+//                    public void remove() {
+//                        it.remove(); // behave like normal iterator
+//                    }
+//                };
 //            }
 //
 //            @Override
-//            public boolean remove(Object o) {
-//                if (o instanceof AbstractCard) {
-//                    AbstractCard card = (AbstractCard) o;
-//                    if (isCardCostAllowed(card)) {
-//                        return super.remove(o);
+//            public void forEach(Consumer<? super AbstractCard> action) {
+//                // Respect the filter during forEach traversal
+//                for (AbstractCard c : this) {
+//                    if (isCardCostAllowed(c)) {
+//                        action.accept(c);
 //                    }
-//                    return false;
 //                }
-//                return super.remove(o);
 //            }
-
-            @Override
-            public java.util.Iterator<AbstractCard> iterator() {
-                final java.util.Iterator<AbstractCard> it = super.iterator();
-                return new java.util.Iterator<AbstractCard>() {
-                    private AbstractCard nextOk = advance();
-                    private AbstractCard advance() {
-                        while (it.hasNext()) {
-                            AbstractCard c = it.next();
-                            if (isCardCostAllowed(c)) return c;
-                        }
-                        return null;
-                    }
-                    @Override
-                    public boolean hasNext() {
-                        return nextOk != null;
-                    }
-                    @Override
-                    public AbstractCard next() {
-                        if (nextOk == null) throw new java.util.NoSuchElementException();
-                        AbstractCard out = nextOk;
-                        nextOk = advance();
-                        return out;
-                    }
-                };
-            }
-
-            @Override
-            public void forEach(java.util.function.Consumer<? super AbstractCard> action) {
-                // Ensure forEach respects the filter as well
-                for (AbstractCard c : this) {
-                    action.accept(c);
-                }
-            }
         }
     }
     public static class FilterLowCardsScreen{
@@ -159,25 +194,22 @@ public class LimitCardCostPatch {
         public static GridCardSelectScreen gridSelectScreen;
         public static HandCardSelectScreen handCardSelectScreen;
 
-        //public void open(CardGroup group, int numCards, String tipMsg, boolean forUpgrade, boolean forTransform, boolean canCancel, boolean forPurge) {
-        @SpirePatch2(
-            clz = GridCardSelectScreen.class,
-            method = "open",
-            paramtypez = {CardGroup.class, int.class, String.class, boolean.class, boolean.class, boolean.class, boolean.class}
-        )
-        public static class GridCardSelectScreenOpenPatch{
-            @SpirePrefixPatch
-            public static void Prefix(GridCardSelectScreen __instance, CardGroup group) {
-                if (group == null || group.group == null) return;
-                CardGroup filtered = new CardGroup(group, group.type);
-                filtered.group.clear();
-                for (AbstractCard c : group.group) {
-                    if (isCardCostAllowed(c)){
-                        filtered.group.add(c);
-                }
-                }
-                group.group = filtered.group;
+        @SpirePatch2(clz = GridCardSelectScreen.class, method = SpirePatch.CONSTRUCTOR)
+        public static class ReplaceGridCardSelectSelectedCards {
+            @SpireInstrumentPatch
+            public static ExprEditor instrument() {
+                return new ExprEditor() {
+                    @Override
+                    public void edit(javassist.expr.NewExpr e) throws CannotCompileException {
+                        if (e.getClassName().equals(ArrayList.class.getName())) {
+                            e.replace("{ $_ = new " + LimitCardCostPatch.ReplaceCardGroupListPatch.FilteredCardList.class.getName() + "(); }");
+                        }
+                    }
+                };
             }
         }
+
+
+
     }
 }

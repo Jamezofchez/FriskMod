@@ -168,8 +168,17 @@
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
-    "DESCRIPTION": "Add a *Ketchup to your hand. NL Take a ${modID}:Sip of all your potions.",
+    "DESCRIPTION": "Add a *Ketchup to your hand. NL Take a ${modID}:Sip of all your potions. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Add a *Ketchup+ to your hand. NL Take an upgraded ${modID}:Sip of all your potions. NL Exhaust."
+  },
+  "${modID}:HiddenDeep": {
+    "NAME": "Hidden Deep",
+    "DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable or ${modID}:Trapped card from your draw or discard pile into your hand.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable or ${modID}:Trapped cards from your draw or discard pile into your hand.",
+    "EXTENDED_DESCRIPTION": [
+      "Select a card to move to your hand.",
+      "Select cards to move to your hand."
+    ]
   },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
@@ -305,7 +314,10 @@
       "Get Serious",
       "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP increases Attack damage for this card while you have ${modID}:Mercied."
     ]
-
+  },
+  "${modID}:Slash": {
+    "NAME": "Slash",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Fallen_Down."
   },
   "${modID}:Sleep": {
     "NAME": "Sleep",
@@ -322,8 +334,8 @@
     "UPGRADE_DESCRIPTION": "${modID}:Spare the enemy, and gain gold rewards if you flee. NL They gain ${modID}:Spared. NL Exhaust."
   },
   "${modID}:SpecialDeal": {
-    "NAME": "[[Specil Deal]]",
-    "DESCRIPTION": "Ethereal. NL Gain !M! ${modID}:Mercied. NL ALL enemies gain !M! Artifact. NL Gain ${modID}:1997 gold."
+    "NAME": "Specil Deal",
+    "DESCRIPTION": "Ethereal. NL EVERYONE gains !M! ${modID}:NEO. NL EVERYONE gains !M! Artifact. NL Gain ${modID}:1997 gold."
   },
   "${modID}:Steal": {
     "NAME": "Steal",
@@ -359,7 +371,7 @@
   },
   "${modID}:WakeUp": {
     "NAME": "Wake Up",
-    "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable cards discarded. NL Gain !B! Block for each Unplayable card exhausted."
+    "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable or ${modID}:Trapped cards discarded. NL Gain !B! Block for each card exhausted."
   },
   "${modID}:WebSlash": {
     "NAME": "Web Slash",

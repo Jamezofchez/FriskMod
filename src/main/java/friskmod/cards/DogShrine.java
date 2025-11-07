@@ -1,8 +1,10 @@
 package friskmod.cards;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -59,8 +61,8 @@ public class DogShrine extends AbstractEasyCard {
             for (AbstractCard c: cardList) {
                 AbstractPlayer p = AbstractDungeon.player;
                 int xp = CardXPFields.getCardXP(c);
+                addToBot((AbstractGameAction)new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand));
                 addToBot(new DrawCardAction(p, xp));
-                p.hand.moveToExhaustPile(c);
             }
         };
     }

@@ -364,14 +364,14 @@ public class PerseverancePatch {
     }
 
 
-    public static boolean isUnplayable(AbstractPlayer p, AbstractCard c) {
+    public static boolean isUnplayable(AbstractCard c) {
+        AbstractPlayer p = AbstractDungeon.player;
         if (alwaysUnplayable.contains(c.getClass().getName())) //unplayable.
             return true;
 
         if (sometimesUnplayable.contains(c.getClass().getName()) && c.cost == -2 && c.costForTurn == -2 && //might be unplayable, cost says it is
                 (!c.canUse(p, null) || PerseveranceFields.perseverePlayed.get(c))) //it's not playable or only playable because perseverance
             return true;
-
         return false;
     }
     private static Set<String> alwaysUnplayable = new HashSet<>();
