@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
 import friskmod.powers.FallenDown;
 import friskmod.util.CardStats;
@@ -37,8 +38,9 @@ public class Slash extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot((AbstractGameAction)new DamageAction((AbstractCreature)m, new DamageInfo((AbstractCreature)p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        addToBot((AbstractGameAction)new ApplyPowerAction((AbstractCreature)m, (AbstractCreature)p, (AbstractPower)new FallenDown((AbstractCreature)m, this.magicNumber, false), this.magicNumber));
+        addToBot(new CustomSFXAction("snd_laz"));
+        addToBot((AbstractGameAction)new DamageAction(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+        addToBot((AbstractGameAction)new ApplyPowerAction(m, p, (AbstractPower)new FallenDown(m, this.magicNumber), this.magicNumber));
     }
 
     @Override

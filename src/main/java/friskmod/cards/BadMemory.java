@@ -25,17 +25,20 @@ public class BadMemory extends AbstractEasyCard{
     public BadMemory() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = HP_LOSS;
-        cardsToPreview = new FreakBullet();
+//        cardsToPreview = new FreakBullet();
         tags.add(FriskTags.YOU);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new LoseHPAction(p, p, magicNumber));
-        addToBot(new MakeTempCardInHandAction(cardsToPreview.makeStatEquivalentCopy()));
+        AbstractCard card = new FreakBullet();
+        if (upgraded) {
+            card.upgrade();
+        }
+        addToBot(new MakeTempCardInHandAction(card));
     }
     @Override
     public void upp() {
-        cardsToPreview.upgrade();
         initializeDescription();
     }
 }

@@ -34,7 +34,6 @@ public class Strike_Frisk extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-//        addToBot(new CustomSFXAction("snd_laz"));
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
     }
 

@@ -57,32 +57,32 @@ public class TrappedPatch {
             }
         }
     }
-//    @SpirePatch(
-//            clz = AbstractCard.class,
-//            method = "canUse"
-//    )
-//    public static class AbstractCardCanUsePatch {
-//        @SpirePostfixPatch
-//        public static boolean Postfix(boolean __result, AbstractCard __instance) {
-//            if (PerseveranceFields.trapped.get(__instance)) {
-//                __instance.cantUseMessage = Trapped[2];
-//                return false;
-//            }
-//            return __result;
-//        }
-//    }
-//    @SpirePatch(
-//            clz = AbstractCard.class,
-//            method = "hasEnoughEnergy"
-//    )
-//    public static class AbstractCardHasEnoughEnergyPatch {
-//        @SpirePostfixPatch
-//        public static boolean Postfix(boolean __result, AbstractCard __instance) {
-//            if (PerseveranceFields.trapped.get(__instance) && !PerseveranceFields.isPerseverable.get(__instance)) {
-//                __instance.cantUseMessage = Trapped[2];
-//                return false;
-//            }
-//            return __result;
-//        }
-//    }
+    @SpirePatch(
+            clz = AbstractCard.class,
+            method = "canUse"
+    )
+    public static class AbstractCardCanUsePatch {
+        @SpirePostfixPatch
+        public static boolean Postfix(boolean __result, AbstractCard __instance) {
+            if (PerseveranceFields.trapped.get(__instance)) {
+                __instance.cantUseMessage = Trapped[2];
+                return false;
+            }
+            return __result;
+        }
+    }
+    @SpirePatch(
+            clz = AbstractCard.class,
+            method = "hasEnoughEnergy"
+    )
+    public static class AbstractCardHasEnoughEnergyPatch {
+        @SpirePostfixPatch
+        public static boolean Postfix(boolean __result, AbstractCard __instance) {
+            if (PerseveranceFields.trapped.get(__instance) && !PerseveranceFields.isPerseverable.get(__instance)) {
+                __instance.cantUseMessage = Trapped[2];
+                return false;
+            }
+            return __result;
+        }
+    }
 }

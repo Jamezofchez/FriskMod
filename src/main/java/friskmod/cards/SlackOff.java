@@ -38,10 +38,12 @@ public class SlackOff extends AbstractEasyCard{
 
     public void setSeriousDescription() {
         serious = true;
+        initializeDescription();
     }
 
     public void setNormalDescription() {
         serious = false;
+        initializeDescription();
     }
 
     public void initializeTitle() {

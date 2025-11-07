@@ -31,6 +31,8 @@ public class GrillbysHelper {
                 return new FairyCocktail(potion);
             case "DuplicationPotion":
                 return new DuplicationCocktail(potion);
+            case "AncientPotion":
+                return new AncientCocktail(potion);
             default:
                 return null;
         }
@@ -76,14 +78,10 @@ public class GrillbysHelper {
         }
         switch (potion.ID){
             case "AttackPotion":
-            case "GamblersBrew":
             case "PowerPotion":
             case "SkillPotion":
-            case "ElixirPotion":
-            case "DistilledChaos":
             case "LiquidMemories":
             case "ColorlessPotion":
-            case "BlessingOfTheForge":
                 return true;
             default:
                 return false;
@@ -99,17 +97,10 @@ public class GrillbysHelper {
             case "SmokeBomb":
             case "Ambrosia":
             case "StancePotion":
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    public boolean checkUnique(AbstractPotion potion) {
-        switch (potion.ID){
-            case "EntropicBrew":
-            case "FairyPotion":
-            case "DuplicationPotion":
+            case "GamblersBrew":
+            case "ElixirPotion":
+            case "DistilledChaos":
+            case "BlessingOfTheForge":
                 return true;
             default:
                 return false;
