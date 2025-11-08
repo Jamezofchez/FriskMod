@@ -55,10 +55,8 @@
   "${modID}:TrappedPatch": {
     "TEXT": [
       "${modID}:Trapped. NL ",
-      "NL ${modID}:Trapped. NL",
-      "I cannot play trapped cards!"
-    ],
-    "NOTE_FOR_TRANSLATORS": "TEXT[2] is hard-coded, sorry!"
+      "NL ${modID}:Trapped. NL"
+    ]
   },
   "${modID}:BalletShoes": {
     "TEXT": [

@@ -2,6 +2,7 @@ package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ReduceCostForTurnAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -27,13 +28,14 @@ public class BreakFree extends AbstractEasyCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 8;
-    private static final int UPG_DAMAGE = 4;
+    private static final int DAMAGE = 10;
+    private static final int REDUCE_COST = 1;
+    private static final int UPG_REDUCE_COST = 1;
     public BreakFree() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
+        baseMagicNumber = magicNumber = REDUCE_COST;
         tags.add(FriskTags.PERSEVERANCE);
-        PerseveranceFields.isPerseverable.set(this, true);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -45,12 +47,13 @@ public class BreakFree extends AbstractEasyCard {
     private void unsealCard(AbstractCard c) {
         if (PerseveranceFields.trapped.get(c)){
             PerseveranceFields.trapped.set(c, false);
+            this.addToTop( new ReduceCostForTurnAction(c,magicNumber));
             c.initializeDescription();
         }
     }
 
     @Override
     public void upp() {
-        upgradeDamage(UPG_DAMAGE);
+        upgradeMagicNumber(UPG_REDUCE_COST);
     }
 }

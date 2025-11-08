@@ -33,21 +33,21 @@
     "NAMES": [
       "XP"
     ],
-    "DESCRIPTION": "Increases attack damage of this card. NL Whenever unblocked damage is dealt, transfer one less #y${modID}:LV to the target and set this card's XP to one less the target's #y${modID}:XP."
+    "DESCRIPTION": "Increases attack damage of this card. NL Whenever unblocked damage is dealt, transfer one less #yLV to the target and set this card's XP to one less the target's #yXP."
   },
   {
     "PROPER_NAME": "LV",
     "NAMES": [
       "LV"
     ],
-    "DESCRIPTION": "Your next #yAttack will gain equivalent #y${modID}:XP. NL Enemies deal equivalent extra damage. NL Stolen #yStrength is converted into #y${modID}:LV."
+    "DESCRIPTION": "Your next Attack will gain equivalent #yXP. NL Enemies deal equivalent extra damage."
   },
   {
     "PROPER_NAME": "KR",
     "NAMES": [
       "KR"
     ],
-    "DESCRIPTION": "KR-inflected creatures take damage whenever you lose more than 1 HP. NL KR cannot kill on its own."
+    "DESCRIPTION": "#yKR-inflected creatures take damage whenever you lose more than 1 HP. NL #yKR cannot kill on its own."
   },
   {
     "PROPER_NAME": "Countdown",
@@ -82,14 +82,14 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "If a card is unplayable, play it anyway. NL If a card is #ypersevered, add an #y${modID}:Trapped copy of the card to your hand. NL If a curse, status or #y${modID}:Trapped card is #ypersevered, exhaust it instead."
+    "DESCRIPTION": "Only if a card is normally Unplayable, play it anyway. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand. NL If a curse, status or #yTrapped card is #ypersevered, exhaust it instead."
   },
   {
     "PROPER_NAME": "Perseverable",
     "NAMES": [
       "Perseverable"
     ],
-    "DESCRIPTION": "This card can always be #y${modID}:Persevered."
+    "DESCRIPTION": "This card can always be #yPersevered."
   },
   {
     "PROPER_NAME": "Critical",
@@ -97,7 +97,7 @@
       "Critical",
       "Critical:"
     ],
-    "DESCRIPTION": "'#yCritical cards have a bonus effect when in the middle of your hand or #y${modID}:Persevered"
+    "DESCRIPTION": "'#yCritical cards have a bonus effect when in the middle of your hand or #yPersevered"
   },
   {
     "PROPER_NAME": "Determination",
@@ -120,14 +120,14 @@
       "Temp HP",
       "Temp_HP"
     ],
-    "DESCRIPTION": "Until end of combat, prevents damage to HP. NL Frisk cards treat Temp HP loss as HP loss."
+    "DESCRIPTION": "Until end of combat, prevents damage to HP."
   },
   {
     "PROPER_NAME": "Copy",
     "NAMES": [
       "Copy"
     ],
-    "DESCRIPTION": "Any buffs can only be copied if enemy didn't start with them. NL Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL The card will glow if anything can be copied."
+    "DESCRIPTION": "Any buffs can only be copied if enemy didn't start with them. NL Strength and enemy #yLV is converted into player #yLV. NL The card will glow if anything can be copied."
   },
   {
     "PROPER_NAME": "Inherent",
@@ -135,7 +135,7 @@
       "Inherent",
       "inherent"
     ],
-    "DESCRIPTION": "#y${modID}:XP which cannot be lost."
+    "DESCRIPTION": "#yXP which cannot be lost."
   },
   {
     "PROPER_NAME": "Added",
@@ -143,7 +143,7 @@
       "Added",
       "added"
     ],
-    "DESCRIPTION": "#y${modID}:XP which is transferred upon dealing unblocked attack damage."
+    "DESCRIPTION": "#yXP which is transferred upon dealing unblocked attack damage."
   },
   {
     "PROPER_NAME": "Trapped",
@@ -152,7 +152,7 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards are unplayable, and have no effect when played. NL #yTrapped cards cause you to lose 1 energy when drawn."
+    "DESCRIPTION": "#yTrapped cards are Unplayable, and have no effect when played. NL #yTrapped cards cause you to lose 1 energy when drawn."
   },
   {
     "PROPER_NAME": "Strike",
@@ -182,21 +182,21 @@
     "NAMES": [
       "Spared"
     ],
-    "DESCRIPTION": "If this enemy is attacked, they will instead gain #y${modID}:Betrayed."
+    "DESCRIPTION": "If this enemy is attacked, they will instead gain #yBetrayed."
   },
   {
   "PROPER_NAME": "Betrayed",
   "NAMES": [
     "Betrayed"
   ],
-  "DESCRIPTION": "This enemy gains twice as much #y${modID}:LV when attacked."
+  "DESCRIPTION": "This enemy gains twice as much #yLV when attacked."
   },
   {
     "PROPER_NAME": "Ghostly",
     "NAMES": [
       "Ghostly"
     ],
-    "DESCRIPTION": "This card deals non-attack damage, is uneffected by Block modifiers, and isn't treated as a card played."
+    "DESCRIPTION": "This card deals non-attack damage, is unaffected by Block modifiers, and isn't treated as a card played."
   },
   {
     "PROPER_NAME": "Threatened",
@@ -217,14 +217,14 @@
     "NAMES": [
       "Mercied"
     ],
-    "DESCRIPTION": "Attacks will deal 1 less damage for their #y${modID}:LV or #y${modID}:XP this turn."
+    "DESCRIPTION": "Attacks will deal 1 less damage for their #yLV or #yXP this turn."
   },
   {
   "PROPER_NAME": "Vitality",
   "NAMES": [
     "Vitality"
   ],
-  "DESCRIPTION": "Vitality improves #y${modID}:Temp_HP gained from ALL sources."
+  "DESCRIPTION": "Vitality improves Temp HP gained from ALL sources."
 },
   {
     "PROPER_NAME": "Demonify",
@@ -232,7 +232,7 @@
       "Demonify",
       "Demonified"
     ],
-    "DESCRIPTION": "Your next Attack will end in 9 NL (You will gain #y${modID}:LV until it does)."
+    "DESCRIPTION": "Your next Attack will end in 9 NL (You will gain #yLV until it does)."
   },
   {
     "PROPER_NAME": "Unseal",
@@ -240,7 +240,7 @@
       "Unseal",
       "Unseal"
     ],
-    "DESCRIPTION": "Makes a #y${modID}:Trapped card untrapped."
+    "DESCRIPTION": "Makes a #yTrapped card untrapped."
   },
   {
     "PROPER_NAME": "Detonate",
@@ -248,7 +248,7 @@
       "Detonate",
       "Detonate"
     ],
-    "DESCRIPTION": "#y${modID}:KR deals damage as if you had lost HP."
+    "DESCRIPTION": "#yKR deals damage as if you had lost HP."
   },
   {
     "PROPER_NAME": "Steal",
@@ -258,7 +258,7 @@
       "steals",
       "steal"
     ],
-    "DESCRIPTION": "Any buffs can only be stolen if enemy didn't start with them. NL Strength and enemy #y${modID}:LV is converted into player #y${modID}:LV. NL Enemy HP is converted into ${modID}:Temp_HP. NL The card will glow if anything can be stolen."
+    "DESCRIPTION": "Any buffs can only be stolen if enemy didn't start with them. NL Strength and enemy #yLV is converted into player #yLV. NL Enemy HP is converted into Temp HP. NL The card will glow if anything can be stolen."
   },
   {
     "PROPER_NAME": "Draft",
@@ -293,14 +293,14 @@
     "NAMES": [
       "matching"
     ],
-    "DESCRIPTION": "Both you and the enemy must have the same #yBuff or #yDebuff."
+    "DESCRIPTION": "Both you and the enemy must have the same Buff or Debuff."
   },
   {
     "PROPER_NAME": "Barrier",
     "NAMES": [
       "Barrier"
     ],
-    "DESCRIPTION": "Prevent the next !M! times you would lose HP or ${modID}:Temp_HP."
+    "DESCRIPTION": "Prevent the next !M! times you would lose HP or Temp HP."
   },
   {
     "PROPER_NAME": "Sip",
@@ -318,9 +318,9 @@
     "COLOR": "ffff00"
   },
   {
-    "PROPER_NAME": "SoulBound",
+    "PROPER_NAME": "Soulbound",
     "NAMES": [
-      "SoulBound"
+      "Soulbound"
     ],
     "DESCRIPTION": "Targets the enemy attacked. NL Dies whenever the target dies."
   },
@@ -330,7 +330,7 @@
       "Mad Dummy",
       "Mad_Dummy"
     ],
-    "DESCRIPTION": "Deals 3 damage to you on its turn. NL Whenever the dummy takes damage, so does its ${modID}:SoulBound target."
+    "DESCRIPTION": "Deals 3 damage to you on its turn. NL Whenever the dummy takes damage, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Glad Dummy",
@@ -338,13 +338,13 @@
       "Glad Dummy",
       "Glad_Dummy"
     ],
-    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its ${modID}:SoulBound target."
+    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Overcome",
     "NAMES": [
       "Overcome"
     ],
-    "DESCRIPTION": "When a card fails to play, #y${modID}:Persevere it and reduce by 1. Reduced by 1 on turn end."
+    "DESCRIPTION": "When a card fails to play, #yPersevere it and reduce by 1. NL Reduced by 1 on turn end."
   }
 ]

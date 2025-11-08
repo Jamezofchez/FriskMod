@@ -96,11 +96,11 @@ public class DummyPowerPatch {
 
     @SpirePatch(clz = AbstractMonster.class, method = "damage")
     public static class OnLoseHPMonsterPatch {
-        @SpireInsertPatch(locator = Locator.class)
-        public static void Insert(AbstractMonster m, DamageInfo info) {
+        @SpireInsertPatch(locator = Locator.class, localvars={"damageAmount"})
+        public static void Insert(AbstractMonster m, DamageInfo info, int damageAmount) {
             for (AbstractPower p : m.powers) {
                 if (p instanceof MadDummy)
-                    ((MadDummy) p).onLoseHpMonster(m.lastDamageTaken);
+                    ((MadDummy) p).onLoseHpMonster(damageAmount);
             }
         }
 

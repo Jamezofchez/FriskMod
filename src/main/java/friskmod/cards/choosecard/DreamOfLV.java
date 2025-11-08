@@ -2,7 +2,6 @@ package friskmod.cards.choosecard;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import friskmod.cards.AncientStrike;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
 

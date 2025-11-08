@@ -11,13 +11,17 @@
   },
   "${modID}:AbsolutePower": {
     "NAME": "Absolute Power",
-    "DESCRIPTION": "Gain [E]  every time an attack's damage ends in a 9."
+    "DESCRIPTION": "Gain [E] every time an attack's damage ends in a 9."
   },
   "${modID}:Agami": {
     "NAME": "Agami",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR.",
     "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, give the enemy #b%s ${modID}:LV and convert the enemy's ${modID}:LV into ${modID}:KR. "
-
+  },
+  "${modID}:Allegro": {
+    "NAME": "Allegro",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: NL Gain [E] and draw a card.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: NL Gain [E] and draw two cards."
   },
   "${modID}:AncientStrike": {
     "NAME": "Ancient Strike",
@@ -52,7 +56,7 @@
   },
   "${modID}:BreakFree": {
     "NAME": "Break Free",
-    "DESCRIPTION": "${modID}:Unseal all cards in your hand. NL Deal !D! damage. NL ${modID}:Perseverable."
+    "DESCRIPTION": "${modID}:Unseal all cards in your hand. NL They cost !M! less this turn. NL Deal !D! damage."
   },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
@@ -168,7 +172,7 @@
   },
   "${modID}:GladDummy": {
     "NAME": "Glad Dummy",
-    "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:SoulBound ${modID}:Glad_Dummy. NL It has !M! HP."
+    "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:Soulbound ${modID}:Glad_Dummy. NL It has !M! HP."
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
@@ -221,7 +225,7 @@
   },
   "${modID}:MadDummy": {
     "NAME": "Mad Dummy",
-    "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:SoulBound ${modID}:Mad_Dummy. NL It has !M! HP."
+    "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:Soulbound ${modID}:Mad_Dummy. NL It has !M! HP."
   },
   "${modID}:Mallet": {
     "NAME": "Mallet",

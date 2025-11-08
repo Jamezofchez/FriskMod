@@ -2,11 +2,14 @@ package friskmod.cards.choosecard;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.FriskMod;
 import friskmod.cards.AbstractEasyCard;
 import friskmod.cards.AnnoyingDog;
 import friskmod.character.Frisk;
+import friskmod.helper.DraftManager;
 import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
 
@@ -39,4 +42,14 @@ public abstract class AbstractChooseCard extends AbstractEasyCard {
     }
 
     public abstract void chooseOption();
+
+    protected AbstractCreature getTarget() {
+        AbstractCreature possTarget = DraftManager.currentTarget;
+        if (possTarget != null) {
+            return possTarget;
+        }
+        FriskMod.logger.warn("{}: Couldn't find a target for the choice", FriskMod.modID);
+        return null;
+    }
+
 }

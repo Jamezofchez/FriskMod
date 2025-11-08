@@ -64,7 +64,7 @@ public class TrappedPatch {
     public static class AbstractCardCanUsePatch {
         @SpirePostfixPatch
         public static boolean Postfix(boolean __result, AbstractCard __instance) {
-            if (PerseveranceFields.trapped.get(__instance) && !PerseveranceFields.perseverePlayed.get(__instance)) {
+            if (PerseveranceFields.trapped.get(__instance)) {
                 __instance.cantUseMessage = Trapped[2];
                 return false;
             }
@@ -78,7 +78,7 @@ public class TrappedPatch {
     public static class AbstractCardHasEnoughEnergyPatch {
         @SpirePostfixPatch
         public static boolean Postfix(boolean __result, AbstractCard __instance) {
-            if (PerseveranceFields.trapped.get(__instance) && !PerseveranceFields.perseverePlayed.get(__instance)) {
+            if (PerseveranceFields.trapped.get(__instance)) {
                 __instance.cantUseMessage = Trapped[2];
                 return false;
             }

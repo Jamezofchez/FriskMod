@@ -39,15 +39,6 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         addToTop(new ApplyPowerAction(getTarget(), AbstractDungeon.player, getPower()));
     }
 
-    protected AbstractCreature getTarget() {
-        AbstractCreature possTarget = DraftManager.currentTarget;
-        if (possTarget != null) {
-            return possTarget;
-        }
-        FriskMod.logger.warn("{}: Couldn't find a target for the choice", FriskMod.modID);
-        return null;
-    }
-
     @Override
     public void initializeDescription(){
         String basename = TEXT[0];
