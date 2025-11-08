@@ -25,7 +25,7 @@ public class BadMemory extends AbstractEasyCard{
     public BadMemory() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = HP_LOSS;
-//        cardsToPreview = new FreakBullet();
+        cardsToPreview = new FreakBullet();
         tags.add(FriskTags.YOU);
     }
     @Override
@@ -39,6 +39,7 @@ public class BadMemory extends AbstractEasyCard{
     }
     @Override
     public void upp() {
+        this.cardsToPreview.upgrade();
         initializeDescription();
     }
 }

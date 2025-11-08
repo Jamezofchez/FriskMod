@@ -20,7 +20,7 @@ public class PersevereCardAction extends AbstractGameAction {
         this.isDone = true;
         if ((!card.canUse(AbstractDungeon.player, (AbstractMonster) target) || !card.hasEnoughEnergy())) {
             PerseveranceFields.setIsPerseverable(card, true);
-            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this.card, (AbstractMonster) this.target, EnergyPanel.getCurrentEnergy(), true, true));
+            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this.card, (AbstractMonster) this.target, EnergyPanel.getCurrentEnergy(), false, false));
         }
     }
 }

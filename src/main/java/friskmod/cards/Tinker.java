@@ -3,7 +3,9 @@ package friskmod.cards;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.FrailPower;
 import friskmod.character.Frisk;
@@ -43,6 +45,14 @@ public class Tinker extends AbstractEasyCard {
             m.applyPowers();
             addToBot(new GainBlockAction(m, p, block));
         }));
+    }
+
+    public void applyPowersToBlock() {
+        int oldBaseBlock = this.baseBlock;
+        this.baseBlock = (int) (this.baseBlock * 0.75F);
+        super.applyPowersToBlock();
+        this.baseBlock = oldBaseBlock;
+        this.isBlockModified = true;
     }
 
     @Override

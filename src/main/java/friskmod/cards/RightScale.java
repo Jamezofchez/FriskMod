@@ -63,10 +63,12 @@ public class RightScale extends AbstractEasyCard {
 
     public void applyPowers() {
         this.baseDamage = getBaseDamage();
+        this.baseDamage += magicNumber;
         super.applyPowers();
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         this.initializeDescription();
+        this.baseDamage -= magicNumber;
     }
 
     public void onMoveToDiscard() {
@@ -75,10 +77,12 @@ public class RightScale extends AbstractEasyCard {
 
     public void calculateCardDamage(AbstractMonster mo) {
         this.baseDamage = getBaseDamage();
+        this.baseDamage += magicNumber;
         super.calculateCardDamage(mo);
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         initializeDescription();
+        this.baseDamage -= magicNumber;
     }
 
     private int effectScale() {

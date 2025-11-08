@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PersevereCostAndParticles {
-    private static final Color perseveranceCostColor = new Color(0.7f, 0.3f, 1.0f, 1.0f);
+    private static final Color PERSEVERANCE_COLOR = new Color(0.7f, 0.3f, 1.0f, 1.0f);
 
     //change number color to purple. rune particles emanate off of energy orb.
 
@@ -30,20 +30,28 @@ public class PersevereCostAndParticles {
     }
 
     //Patch into the methods updateGlow and postfix renderEnergy
-    @SpirePatch(
-            clz = AbstractCard.class,
-            method = "triggerOnGlowCheck"
-    )
-    public static class AbstractCardTriggerOnGlowCheckPatch {
-        @SpirePrefixPatch
-        public static void Prefix(AbstractCard __instance)
-        {
-            if (PerseveranceFields.isPerseverable.get(__instance))
-            {
-                __instance.glowColor = Color.VIOLET.cpy();
-            }
-        }
-    }
+//    @SpirePatch(
+//            clz = AbstractCard.class,
+//            method = "update"
+//    )
+//    public static class AbstractCardTriggerOnGlowCheckPatch {
+//        @SpirePrefixPatch
+//        public static void Prefix(AbstractCard __instance)
+//        {
+//            final Color BLUE_BORDER_GLOW_COLOR = new Color(0.2F, 0.9F, 1.0F, 0.25F);
+//            if (PerseveranceFields.overcomePlayed.get(__instance))
+//            {
+//                if (__instance.glowColor.equals(BLUE_BORDER_GLOW_COLOR)) {
+//                    __instance.glowColor = PERSEVERANCE_COLOR.cpy();
+//                }
+//            } else{
+//                if (__instance.glowColor.equals(PERSEVERANCE_COLOR)) {
+//                    __instance.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+//                }
+//            }
+//        }
+//    }
+
     @SpirePatch(
             clz = AbstractCard.class,
             method = "updateGlow"
@@ -52,7 +60,7 @@ public class PersevereCostAndParticles {
         @SpirePrefixPatch
         public static void updateRunes(AbstractCard __instance)
         {
-            if (__instance.isGlowing && PerseveranceFields.isPerseverable.get(__instance))
+            if (__instance.isGlowing && PerseveranceFields.perseverePlayed.get(__instance))
             {
                 Iterator<AbstractGameEffect> runeIterator = Fields.runeEffects.get(__instance).iterator();
 
@@ -94,9 +102,9 @@ public class PersevereCostAndParticles {
         )
         public static void adjustColor(AbstractCard __instance, SpriteBatch sb, @ByRef Color[] costColor)
         {
-            if (PerseveranceFields.isPerseverable.get(__instance))
+            if (PerseveranceFields.perseverePlayed.get(__instance))
             {
-                costColor[0] = perseveranceCostColor;
+                costColor[0] = PERSEVERANCE_COLOR;
             }
 
             for (AbstractGameEffect e : Fields.runeEffects.get(__instance))

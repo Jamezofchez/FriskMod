@@ -33,6 +33,8 @@ public class GrillbysHelper {
                 return new DuplicationCocktail(potion);
             case "AncientPotion":
                 return new AncientCocktail(potion);
+            case "DistilledChaos":
+                return new ChaoticCocktail(potion);
             default:
                 return null;
         }
@@ -82,6 +84,10 @@ public class GrillbysHelper {
             case "SkillPotion":
             case "LiquidMemories":
             case "ColorlessPotion":
+            case "GamblersBrew":
+            case "ElixirPotion":
+            case "DistilledChaos":
+            case "BlessingOfTheForge":
                 return true;
             default:
                 return false;
@@ -97,23 +103,9 @@ public class GrillbysHelper {
             case "SmokeBomb":
             case "Ambrosia":
             case "StancePotion":
-            case "GamblersBrew":
-            case "ElixirPotion":
-            case "DistilledChaos":
-            case "BlessingOfTheForge":
                 return true;
             default:
                 return false;
         }
-    }
-
-    public static boolean checkLesserDuplication(AbstractCard card, int maxCost){
-        if (Wiz.getLogicalCardCost(card) > maxCost){
-            return false;
-        }
-        if (card.purgeOnUse || card.dontTriggerOnUseCard){
-            return false;
-        }
-        return true;
     }
 }

@@ -48,11 +48,7 @@ public class DogShrine extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         String selectionText;
-        if (magicNumber == 1) {
-            selectionText = String.format(TEXT[0], magicNumber);
-        } else{
-            selectionText = String.format(TEXT[1], magicNumber);
-        }
+        selectionText = String.format(TEXT[0], magicNumber);
         addToTop(new SelectCardsInHandAction(magicNumber, selectionText, true, true, (x -> true), SacrificeCard()));
     }
 
@@ -61,7 +57,7 @@ public class DogShrine extends AbstractEasyCard {
             for (AbstractCard c: cardList) {
                 AbstractPlayer p = AbstractDungeon.player;
                 int xp = CardXPFields.getCardXP(c);
-                addToBot((AbstractGameAction)new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand));
+                addToBot(new ExhaustSpecificCardAction(c, p.hand));
                 addToBot(new DrawCardAction(p, xp));
             }
         };

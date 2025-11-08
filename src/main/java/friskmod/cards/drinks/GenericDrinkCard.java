@@ -1,33 +1,42 @@
 package friskmod.cards.drinks;
 
 import basemod.ReflectionHacks;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+import friskmod.actions.LowCostExhaustAction;
+import friskmod.actions.LowCostGambleAction;
+import friskmod.actions.LowCostUpgradeAction;
 import friskmod.actions.ResetCardCostLimit;
 import friskmod.helper.GrillbysHelper;
+import friskmod.patches.CardXPFields;
+import friskmod.powers.LesserDuplication;
 import friskmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static friskmod.FriskMod.makeID;
+import static friskmod.helper.GrillbysHelper.isCardCostAllowed;
 
 public class GenericDrinkCard extends AbstractDrinkCard {
     public static final String ID = makeID(GenericDrinkCard.class.getSimpleName());
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID(GenericDrinkCard.class.getSimpleName()));
     private static final String[] TEXT = uiStrings.TEXT;
-
-    private static final int PROBABILITY = 50;
-    private static final int UPG_PROBABILITY = 75;
-
-    private static final int HIGHEST_COST = 1;
-    private static final int UPG_HIGHEST_COST = 2;
 
     public GenericDrinkCard(){
         this(null);
@@ -180,36 +189,32 @@ public class GenericDrinkCard extends AbstractDrinkCard {
 
     private void tryUsePotion(AbstractPotion tmpPotion, AbstractMonster m) {
         try{
+            if (specialCases(tmpPotion)){
+                return;
+            }
             tmpPotion.use(m);
         } catch (Exception ignored) {
             FriskMod.logger.warn("{}: Failed to sip potion {}", FriskMod.modID, tmpPotion.name);
         }
     }
 
-    private int getNewHighestCost() {
-        if (upgraded) {
-            return UPG_HIGHEST_COST;
+    private boolean specialCases(AbstractPotion tmpPotion) {
+        switch (tmpPotion.ID) {
+            case "DuplicationPotion":
+                duplicationPotionUse();
+                return true;
+            case "ElixirPotion":
+                elixirPotionUse();
+                return true;
+            case "BlessingOfTheForge":
+                blessingPotionUse();
+                return true;
+            case "GamblersBrew":
+                gamblersBrewUse();
+                return true;
+            default:
+                return false;
         }
-        return HIGHEST_COST;
-    }
-
-    private int getNewChance() {
-        if (upgraded) {
-            return UPG_PROBABILITY;
-        }
-        return PROBABILITY;
-    }
-
-    private int getNewPotency() {
-        if (potion == null){
-            return 0;
-        }
-        int potency = potion.getPotency();
-        int newPotency = potency / 2;
-        if (upgraded) {
-            newPotency = (int) (newPotency * 1.5F);
-        }
-        return newPotency;
     }
 
     @Override
@@ -226,4 +231,26 @@ public class GenericDrinkCard extends AbstractDrinkCard {
                 return;
         }
     }
+
+    private void duplicationPotionUse() {
+        AbstractPlayer p = AbstractDungeon.player;
+        AbstractPower posspow = p.getPower(LesserDuplication.POWER_ID);
+        if (posspow != null) {
+            ((LesserDuplication) posspow).amount2 = Math.min(((LesserDuplication) posspow).amount2, secondMagic);
+        }
+        addToBot(new ApplyPowerAction(p, p, new LesserDuplication(p, magicNumber, secondMagic), magicNumber));
+    }
+
+    private void elixirPotionUse() {
+        addToBot(new LowCostExhaustAction());
+    }
+
+    private void blessingPotionUse() {
+        addToBot(new LowCostUpgradeAction());
+    }
+    private void gamblersBrewUse() {
+        addToBot(new LowCostGambleAction());
+    }
+
+
 }

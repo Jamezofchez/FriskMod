@@ -34,8 +34,7 @@
   },
   "${modID}:DogShrine": {
       "TEXT": [
-        "Choose %s card to sacrifice.",
-        "Choose %s cards to sacrifice."
+        "Sacrifice."
       ]
   },
   "${ModID}:Overcome": {

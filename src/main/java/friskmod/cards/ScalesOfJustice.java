@@ -42,9 +42,8 @@ public class ScalesOfJustice extends AbstractEasyCard {
         if (!upgraded) {
             addToBot(new SelectCardsCenteredAction(cardsList, 1, CardRewardScreen.TEXT[6], (cards) -> addToTop(new MakeTempCardInHandAction(cards.get(0).makeCopy(), true))));
         } else{
-            for (AbstractCard c: cardsList) {
-                addToBot(new MakeTempCardInHandAction(c.makeStatEquivalentCopy()));
-            }
+            addToBot(new MakeTempCardInHandAction(new LeftScale()));
+            addToBot(new MakeTempCardInHandAction(new RightScale()));
         }
     }
 

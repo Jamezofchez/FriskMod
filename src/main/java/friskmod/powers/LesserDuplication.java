@@ -49,7 +49,7 @@ public class LesserDuplication extends BasePower {
   }
   
   public void onUseCard(AbstractCard card, UseCardAction action) {
-    if (!GrillbysHelper.checkLesserDuplication(card, amount2))
+    if (!checkLesserDuplication(card, amount2))
       return; 
     if (this.amount > 0) {
       flash();
@@ -59,6 +59,15 @@ public class LesserDuplication extends BasePower {
         addToBot((AbstractGameAction)new RemoveSpecificPowerAction(this.owner, this.owner, this.ID)); 
     } 
   }
+    public static boolean checkLesserDuplication(AbstractCard card, int maxCost){
+        if (Wiz.getLogicalCardCost(card) > maxCost){
+            return false;
+        }
+        if (card.purgeOnUse || card.dontTriggerOnUseCard){
+            return false;
+        }
+        return true;
+    }
   
   public void atEndOfRound() {
     if (this.amount == 0) {

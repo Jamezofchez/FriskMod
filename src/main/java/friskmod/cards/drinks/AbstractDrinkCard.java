@@ -18,6 +18,13 @@ import static friskmod.FriskMod.makeID;
 public abstract class AbstractDrinkCard extends AbstractEasyCard {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID(AbstractDrinkCard.class.getSimpleName()));
     private static final String[] TEXT = uiStrings.TEXT;
+
+    private static final int PROBABILITY = 50;
+    private static final int UPG_PROBABILITY = 75;
+
+    private static final int HIGHEST_COST = 1;
+    private static final int UPG_HIGHEST_COST = 2;
+
     protected AbstractPotion potion;
     public AbstractDrinkCard(String ID, AbstractPotion potion){
         super(
@@ -50,6 +57,37 @@ public abstract class AbstractDrinkCard extends AbstractEasyCard {
                 setDisplayRarity(CardRarity.COMMON);
                 break;
         }
+    }
+
+    protected int getNewPotency() {
+        if (potion == null){
+            return 0;
+        }
+        int potency = potion.getPotency();
+        if (potency <= 0){
+            return potency;
+        }
+        int newPotency = potency / 2;
+        newPotency = Math.max(1, newPotency);
+        if (upgraded) {
+            newPotency = (int) (newPotency * 1.5F);
+            newPotency = Math.max(2, newPotency);
+        }
+        return newPotency;
+    }
+
+    protected int getNewHighestCost() {
+        if (upgraded) {
+            return UPG_HIGHEST_COST;
+        }
+        return HIGHEST_COST;
+    }
+
+    protected int getNewChance() {
+        if (upgraded) {
+            return UPG_PROBABILITY;
+        }
+        return PROBABILITY;
     }
 
     private String getCardName() {

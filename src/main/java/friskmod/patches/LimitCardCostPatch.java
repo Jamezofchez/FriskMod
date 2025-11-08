@@ -24,8 +24,11 @@ import static friskmod.helper.GrillbysHelper.isCardCostAllowed;
 public class LimitCardCostPatch {
     @SpirePatch2(clz = AbstractCard.class, method = "hasTag")
     public static class AvoidAddingHighCostPatch {
-        public static boolean Postfix(AbstractCard __instance, boolean __result){
-            return __result && isCardCostAllowed(__instance);
+        public static boolean Postfix(AbstractCard __instance, boolean __result, AbstractCard.CardTags ___tagToCheck){
+            if (___tagToCheck == AbstractCard.CardTags.HEALING) {
+                return __result && isCardCostAllowed(__instance);
+            }
+            return __result;
         }
     }
     @SpirePatch2(clz = CardGroup.class, method = SpirePatch.CONSTRUCTOR, paramtypez = {CardGroup.CardGroupType.class})

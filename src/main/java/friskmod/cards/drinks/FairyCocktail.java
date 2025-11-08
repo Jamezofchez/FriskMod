@@ -19,16 +19,9 @@ public class FairyCocktail extends AbstractDrinkCard{
     }
     public FairyCocktail(AbstractPotion potion) {
         super(ID, potion);
-        baseMagicNumber = magicNumber = potion.getPotency();
+        baseMagicNumber = magicNumber = getNewPotency();
     }
 
-    private int getNewPotency(int potency) {
-        int newPotency = potency / 2;
-        if (upgraded) {
-            newPotency = (int) (newPotency * 1.5F);
-        }
-        return newPotency;
-    }
 
     @Override
     public void usePotion(AbstractMonster m) {
@@ -46,6 +39,6 @@ public class FairyCocktail extends AbstractDrinkCard{
 
     @Override
     public void upp() {
-        setUpgradeMagicNumber(getNewPotency(potion.getPotency()));
+        setUpgradeMagicNumber(getNewPotency());
     }
 }

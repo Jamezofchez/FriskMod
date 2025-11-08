@@ -286,7 +286,7 @@
     "NAMES": [
       "NEO"
     ],
-    "DESCRIPTION": "Whenever the target gains Block, it takes #b%s damage. NL Didn't you know NEO is famous for its high defense?"
+    "DESCRIPTION": "Whenever the target gains Block, it takes 1 damage. NL Didn't you know NEO is famous for its high defense?"
   },
   {
     "PROPER_NAME": "Matching",

@@ -36,6 +36,7 @@ public class FistsFirst extends AbstractEasyCard {
         baseDamage = DAMAGE;
         baseMagicNumber = magicNumber = DRAW_CARDS;
         tags.add(FriskTags.PERSEVERANCE);
+        this.cardsToPreview = new VoidCard();
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

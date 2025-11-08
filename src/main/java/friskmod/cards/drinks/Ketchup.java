@@ -13,23 +13,39 @@ public class Ketchup extends AbstractDrinkCard{
     public static final int UNCOMMON_TEMP_HP = 3;
     public static final int RARE_TEMP_HP = 4;
 
-    public static final int UPG_TEMP_HP = 2;
+    @Override
+    protected int getNewPotency() {
+        if (potion == null){
+            return 0;
+        }
+        int newPotency = ketchupPotency();
+        if (upgraded) {
+            newPotency = (int) (newPotency * 1.5F);
+        }
+        return newPotency;
+    }
+
+    private int ketchupPotency() {
+        switch (potion.rarity) {
+            case UNCOMMON:
+                return UNCOMMON_TEMP_HP;
+            case RARE:
+                return RARE_TEMP_HP;
+            default:
+                return COMMON_TEMP_HP;
+        }
+    }
 
     public Ketchup() {
         this(null);
     }
     public Ketchup(AbstractPotion startpotion) {
         super(ID, startpotion);
-            switch (potion.rarity) {
-            case UNCOMMON:
-                baseMagicNumber = magicNumber = UNCOMMON_TEMP_HP;
-                break;
-            case RARE:
-                baseMagicNumber = magicNumber = RARE_TEMP_HP;
-                break;
-            default:
-                baseMagicNumber = magicNumber = COMMON_TEMP_HP;
-                break;
+        baseMagicNumber = magicNumber = getNewPotency();
+        if (AbstractDungeon.player != null){
+            if (AbstractDungeon.player.hasRelic("SacredBark")){
+                setUpgradeMagicNumber(magicNumber*2);
+            }
         }
     }
 
@@ -40,6 +56,6 @@ public class Ketchup extends AbstractDrinkCard{
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_TEMP_HP);
+        setUpgradeMagicNumber(getNewPotency());
     }
 }

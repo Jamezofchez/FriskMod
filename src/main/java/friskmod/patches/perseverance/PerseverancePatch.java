@@ -19,6 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import friskmod.FriskMod;
 //import friskmod.cards.Exhaustion;
+import friskmod.actions.CustomSFXAction;
 import friskmod.powers.Overcome;
 import friskmod.util.Wiz;
 import javassist.*;
@@ -166,14 +167,8 @@ public class PerseverancePatch {
         setPerserveable(c, normallyUsable);
         if (PerseveranceFields.isPerseverable.get(c))
         {
-            if (!PerseveranceFields.perseverePlayed.get(c)) { //think its patching itself?
-                PerseveranceFields.perseverePlayed.set(c, !normallyUsable || PerseveranceFields.insufficientEnergy.get(c));
-            }
+            PerseveranceFields.perseverePlayed.set(c, !normallyUsable || PerseveranceFields.insufficientEnergy.get(c));
             return true;
-        } else{
-            if (PerseveranceFields.trapped.get(c)) {
-                c.cantUseMessage = "I cannot play trapped cards!";
-            }
         }
         return normallyUsable;
     }
@@ -184,19 +179,10 @@ public class PerseverancePatch {
 
         if (PerseveranceFields.isPerseverable.get(c)) {
             PerseveranceFields.insufficientEnergy.set(c, !normallyEnoughEnergy);
-            if (PerseveranceFields.trapped.get(c)) {
-                PerseveranceFields.cardEnergy.set(c, 0);
-            } else {
-                if (PerseveranceFields.insufficientEnergy.get(c)) {
-                    PerseveranceFields.cardEnergy.set(c, EnergyPanel.totalCount);
-                }
+            if (PerseveranceFields.insufficientEnergy.get(c)) {
+                PerseveranceFields.cardEnergy.set(c, EnergyPanel.totalCount);
             }
             return true;
-        } else{
-            if (PerseveranceFields.trapped.get(c)) {
-                c.cantUseMessage = "I cannot play trapped cards!";
-            }
-            PerseveranceFields.cardEnergy.set(c, 0);
         }
         return normallyEnoughEnergy;
     }
@@ -434,13 +420,14 @@ public class PerseverancePatch {
             if (card == null || !PerseveranceFields.perseverePlayed.get(card)) {
                 return;
             }
+            Wiz.att(new CustomSFXAction("mus_sfx_eyeflash"));
             if (PerseveranceFields.insufficientEnergy.get(card)) {
                 int refundEnergy = PerseveranceFields.cardEnergy.get(card);
                 Wiz.atb(new GainEnergyAction(refundEnergy));
             }
             PerseveranceFields.setIsPerseverable(card, false);
             __instance.exhaustCard = true;
-            if (!PerseveranceFields.trapped.get(card)) {
+            if (!isTrapped(card) && !isCurseOrStatus(card)) {
                 AbstractCard tmp = card.makeStatEquivalentCopy();
                 PerseveranceFields.trapped.set(tmp, true);
                 Wiz.atb(new MakeTempCardInHandAction(tmp));
@@ -451,6 +438,25 @@ public class PerseverancePatch {
         @SpirePostfixPatch
         public static void Postfix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
             PerseveranceFields.perseverePlayed.set(card, false);
+        }
+
+        public static boolean isTrapped(AbstractCard c) {
+            if (c == null) {
+                return false;
+            }
+            if (PerseveranceFields.trapped.get(c)) {
+                return true;
+            }
+            return false;
+        }
+        public static boolean isCurseOrStatus(AbstractCard c){
+            if (c == null) {
+                return false;
+            }
+            if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
+                return true;
+            }
+            return false;
         }
 
         @SpirePatch(
@@ -467,10 +473,10 @@ public class PerseverancePatch {
                         if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
                             m.replace(
                                     "{" +
-                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.isTrapped($0)") + "||" + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.isCurseOrStatus($0)") + ") {" +
+                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isTrapped($0)") + "||" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isCurseOrStatus($0)") + ") {" +
                                             "    " + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.handleExhaust($0)") + ";" +
                                             "  } " +
-                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.isTrapped($0)") + ") {" +
+                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isTrapped($0)") + ") {" +
 
                                             "  } else {" +
                                             "    $_ = $proceed($$);" +
@@ -481,31 +487,12 @@ public class PerseverancePatch {
                     }
                 };
             }
-            public static boolean isTrapped(AbstractCard c) {
-                if (c == null) {
-                    return false;
-                }
-                if (PerseveranceFields.perseverePlayed.get(c)) {
-                    if (PerseveranceFields.trapped.get(c)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            public static boolean isCurseOrStatus(AbstractCard c){
-                if (c == null) {
-                    return false;
-                }
-                if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
-                    return true;
-                }
-                return false;
-            }
             public static void handleExhaust(AbstractCard c) {
                 if (c == null) {
                     return;
                 }
                 c.exhaustOnUseOnce = true;
+                c.freeToPlayOnce = true;
             }
         }
     }

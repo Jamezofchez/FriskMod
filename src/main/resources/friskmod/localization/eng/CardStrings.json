@@ -32,6 +32,10 @@
     "DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet to your hand.",
     "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Add a *Freak *Bullet+ to your hand."
   },
+  "${modID}:BakeSale": {
+    "NAME": "Bake Sale",
+    "DESCRIPTION": "You and an enemy gain !B! Block. ${modID}:Persevere your leftmost card."
+  },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
     "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and ${modID}:Trap it once."
@@ -173,8 +177,8 @@
   },
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
-    "DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable or ${modID}:Trapped card from your draw or discard pile into your hand.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable or ${modID}:Trapped cards from your draw or discard pile into your hand.",
+    "DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable card from your draw or discard pile into your hand.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable cards from your draw or discard pile into your hand.",
     "EXTENDED_DESCRIPTION": [
       "Select a card to move to your hand.",
       "Select cards to move to your hand."
@@ -371,7 +375,7 @@
   },
   "${modID}:WakeUp": {
     "NAME": "Wake Up",
-    "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable or ${modID}:Trapped cards discarded. NL Gain !B! Block for each card exhausted."
+    "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable cards discarded. NL Gain !B! Block for each card exhausted."
   },
   "${modID}:WebSlash": {
     "NAME": "Web Slash",
@@ -381,10 +385,6 @@
     "NAME": "Ancient Cocktail",
     "DESCRIPTION": "EVERYONE gains !M! Artifact. NL Exhaust."
   },
-  "${modID}:DuplicationCocktail": {
-    "NAME": "Duplication Cocktail",
-    "DESCRIPTION": "Your next card that costs !${modID}:M2! or less is played twice. NL Exhaust."
-  },
   "${modID}:EntropicCocktail": {
     "NAME": "Entropic Cocktail",
     "DESCRIPTION": "A random one of your potions turns into a new potion. NL Exhaust.",
@@ -393,6 +393,11 @@
   "${modID}:FairyCocktail": {
     "NAME": "Fairy Cocktail",
     "DESCRIPTION": "Heal to !M!% of your Max HP and discard your Fairy Potion. NL Exhaust."
+  },
+  "${modID}:ChaoticCocktail": {
+    "NAME": "Chaotic Cocktail",
+    "DESCRIPTION": "If the top card of your draw pile is a 0 or 1 cost card, play it. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "If the top card of your draw pile is a 0, 1 or 2 cost card, play it. NL Exhaust."
   },
   "${modID}:Ketchup": {
     "NAME": "Ketchup",
