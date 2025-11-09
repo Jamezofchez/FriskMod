@@ -13,7 +13,7 @@ Create **Countdowns** that trigger effects after a certain amount of cards have 
 
 *“The more you kill ... The more you distance yourself ... The more easily you can bring yourself to hurt others”.*
 
-Cards can gain **XP**, which increases their Attack. Upon dealing damage to an enemy with a card with **XP**, the enemy will gain one less **LV**, which similarly increases their attack. You can also gain **LV**, which will give equivalent XP to the next Attack you play.
+Cards can gain **XP**, which increases their Attack. Upon dealing damage to an enemy with a card with **XP**, the enemy will gain one less **LV**, which similarly increases their attack. You can also gain **LV**, which will give equivalent **XP** to the next Attack you play.
 
 ### Kindness
 
@@ -41,3 +41,4 @@ Inflict your enemies with **KARMA**, which causes them to lose HP whenever you l
 
 *“Despite everything, it’s still you”*
 
+Summon Dummies, take a break at Grillby's, rewind the enemy's turn and more! Sometimes sticking to yourself is best.
