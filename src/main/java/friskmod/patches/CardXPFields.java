@@ -22,7 +22,26 @@ public class CardXPFields {
     public static class XPFields {
         public static SpireField<Integer> inherentXP = new SpireField<>(() -> 0);
         public static SpireField<Integer> addedXP = new SpireField<>(() -> 0);
+        public static SpireField<Integer> previewDMG = new SpireField<>(() -> 0);
     }
+
+    static boolean previewLocked = false;
+
+    public static int getPreview(AbstractCard card) {
+        return XPFields.previewDMG.get(card);
+    }
+
+    public static void setPreview(AbstractCard card, int amount) {
+        if (!previewLocked){
+            XPFields.previewDMG.set(card, amount);
+        }
+    }
+
+    public static void setPreviewLock(AbstractCard card, boolean val) {
+        previewLocked = val;
+    }
+
+
 
 
     public static int getCardXP(AbstractCard card) {

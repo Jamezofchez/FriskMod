@@ -17,7 +17,7 @@ public class DreamOfEvolve extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new EvolvePower(getTarget(), POWER_AMOUNT);
     }
 

@@ -30,7 +30,7 @@ public class ToAsh extends AbstractEasyCard {
             0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int KARMA = 7;
-    private static final int UPG_KARMA = 2;
+    private static final int UPG_KARMA = 3;
 
     public ToAsh() {
         super(ID, info); //Pass the required information to the BaseCard constructor.

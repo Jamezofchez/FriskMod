@@ -18,7 +18,7 @@ public class DreamOfLV extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         if (getTarget() instanceof AbstractPlayer){
             return new LV_Hero(getTarget(), POWER_AMOUNT);
         } else {

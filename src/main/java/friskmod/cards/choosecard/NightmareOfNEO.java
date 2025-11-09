@@ -18,7 +18,7 @@ public class NightmareOfNEO extends AbstractNightmareCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new NEO(getTarget(), POWER_AMOUNT);
     }
 

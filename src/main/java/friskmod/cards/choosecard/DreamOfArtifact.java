@@ -17,7 +17,7 @@ public class DreamOfArtifact extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new ArtifactPower(getTarget(), POWER_AMOUNT);
     }
 

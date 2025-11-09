@@ -24,25 +24,33 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
     }
 
     protected String getCardName() {
-        String basename = TEXT[3];
-        String descriptor = TEXT[4];
-        if (this instanceof AbstractNightmareCard){
-            descriptor = TEXT[5];
-        }
         String powerName = getPowerName();
-        return String.format(basename, descriptor, powerName);
+        if (this instanceof AbstractDreamCard){
+            String basename = TEXT[3];
+            String descriptor = TEXT[4];
+            return String.format(basename, descriptor, powerName);
+        } else{
+            String basename = TEXT[5];
+            return String.format(basename, powerName);
+        }
     }
 
     private String getPowerName() {
         AbstractPower tmp = getPower();
-        String powerName = tmp.name;
+        String powerName;
         if (tmp instanceof CountdownAttack){
             powerName = TEXT[6];
+        } else if (tmp == null){
+            powerName = TEXT[7];
+        } else{
+            powerName = tmp.name;
         }
         return powerName;
     }
 
-    abstract AbstractPower getPower();
+    protected AbstractPower getPower(){
+        return null;
+    };
 
     @Override
     public void chooseOption() {
@@ -53,10 +61,7 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
     public void initializeDescription(){
         String basename = TEXT[0];
         AbstractPower tmp = getPower();
-        String powerName = tmp.name;
-        if (tmp instanceof CountdownAttack){
-            powerName = TEXT[6];
-        }
+        String powerName = getPowerName();
         AbstractCreature tmpTarget = getTarget();
         String targetName;
         if (tmpTarget instanceof AbstractPlayer){
@@ -64,7 +69,13 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         } else{
             targetName = TEXT[2];
         }
-        this.rawDescription = String.format(basename, tmp.amount, powerName, targetName);
+        String powerAmount;
+        if (tmp != null){
+            powerAmount = tmp.amount + "";
+        } else{
+            powerAmount = TEXT[8];
+        }
+        this.rawDescription = String.format(basename, powerAmount, powerName, targetName);
         super.initializeDescription();
     }
 

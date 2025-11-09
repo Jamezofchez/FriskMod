@@ -37,7 +37,7 @@ public class Karma extends BasePower implements HealthBarRenderPower, LosePlayer
         if (tempHP && overflow){
             return;
         }
-        if (dmgamount > 1) {
+        if (dmgamount > 0) {
             triggerKarma();
         }
     }

@@ -17,7 +17,7 @@ public class NightmareOfVulnerable extends AbstractNightmareCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new VulnerablePower(getTarget(), POWER_AMOUNT, false);
     }
 

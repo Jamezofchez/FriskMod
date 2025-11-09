@@ -17,7 +17,7 @@ public class NightmareOfAttack extends AbstractNightmareCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         CountdownAttack attack = new CountdownAttack(getTarget(), ToughBranch.DAMAGE, ToughBranch.WAIT_TIMER, ToughBranch.UPG_DAMAGE);
         attack.upgrade();
         return attack;

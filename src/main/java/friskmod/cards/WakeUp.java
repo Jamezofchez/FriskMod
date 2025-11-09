@@ -48,7 +48,7 @@ public class WakeUp extends AbstractEasyCard implements AfterCardPlayedInterface
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ScryBlockExhaustAction(magicNumber, block));
+        addToBot(new ScryBlockExhaustAction(secondMagic, block));
     }
 
     @Override

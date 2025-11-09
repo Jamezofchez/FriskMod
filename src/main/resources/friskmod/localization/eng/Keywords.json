@@ -47,7 +47,7 @@
     "NAMES": [
       "KR"
     ],
-    "DESCRIPTION": "#yKR-inflected creatures take damage whenever you lose more than 1 HP or Temp HP. NL #yKR cannot kill on its own."
+    "DESCRIPTION": "#yKR-inflected creatures take damage whenever you lose HP or Temp HP. NL #yKR cannot kill on its own."
   },
   {
     "PROPER_NAME": "Countdown",
@@ -361,5 +361,12 @@
       "Unplayable"
     ],
     "DESCRIPTION": "Unplayable cards or cards that lack the conditions to be played."
+  },
+  {
+    "PROPER_NAME": "Hurt",
+    "NAMES": [
+      "Hurt"
+    ],
+    "DESCRIPTION": "This turn, target takes 1 more attack damage."
   }
 ]

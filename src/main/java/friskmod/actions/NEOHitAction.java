@@ -27,7 +27,7 @@ public class NEOHitAction extends AbstractGameAction {
         }
         int damage = this.amount*blockAmount;
         Wiz.att(new DamageAction(this.target, new DamageInfo(this.target, damage, DamageInfo.DamageType.HP_LOSS), AbstractGameAction.AttackEffect.NONE, true));
-        float speedTime = 0.1F;
+        final float speedTime = 0.1F;
         Wiz.att(new VFXAction(new LightningEffect(this.target.drawX, this.target.drawY), speedTime));
         Wiz.att(new CustomSFXAction("snd_shock"));
     }

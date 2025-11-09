@@ -23,6 +23,8 @@ import friskmod.powers.*;
 import friskmod.util.Wiz;
 import basemod.ReflectionHacks;
 
+import java.util.ArrayList;
+
 import static friskmod.helper.SharedFunctions.consumeLVHeroForXP;
 
 
@@ -85,6 +87,8 @@ public class XPModifierAll extends AbstractDamageModifier {
         public static SpireField<Integer> originalCardXP = new SpireField<>(() -> -1);
         public static SpireField<Integer> enemiesProcessed = new SpireField<>(() -> 0);
         public static SpireField<Integer> totalEnemies = new SpireField<>(() -> -1);
+        public static SpireField<ArrayList<Integer>> enemyLV = new SpireField<>(() -> null);
+
     }
 
     public final AbstractCard sourceCard;
@@ -97,6 +101,9 @@ public class XPModifierAll extends AbstractDamageModifier {
 
     @Override
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCreature target, AbstractCard card) {
+        if (CardXPFields.XPFields.previewDMG.get(sourceCard) != 0){
+            damage += CardXPFields.XPFields.previewDMG.get(sourceCard);
+        }
         if (sourceCard == null) {
             return damage;
         }
@@ -210,31 +217,40 @@ public class XPModifierAll extends AbstractDamageModifier {
             ExtraXPInfo.originalCardXP.set(sourceCard, originalCardXP);
         }
         if (ExtraXPInfo.totalEnemies.get(sourceCard) == -1) {
-            int total = (int) AbstractDungeon.getMonsters().monsters.stream()
-                    .filter(m -> !m.isDeadOrEscaped())
-                    .count();
+            int total = AbstractDungeon.getMonsters().monsters.size();
             ExtraXPInfo.totalEnemies.set(sourceCard, total);
         }
-
+        if (ExtraXPInfo.enemyLV.get(sourceCard) == null) {
+            ArrayList<Integer> enemyLV = new ArrayList<>();
+            for (AbstractMonster m: AbstractDungeon.getMonsters().monsters){
+                enemyLV.add(getLVFromTarget(m));
+            }
+            ExtraXPInfo.enemyLV.set(sourceCard, enemyLV);
+        }
         int processed = ExtraXPInfo.enemiesProcessed.get(sourceCard) + 1;
         ExtraXPInfo.enemiesProcessed.set(sourceCard, processed);
         if (processed >= ExtraXPInfo.totalEnemies.get(sourceCard)) {
             finalizeAOEXPSwap();
         }
+
     }
 
     private void finalizeAOEXPSwap() {
         int originalCardXP = ExtraXPInfo.originalCardXP.get(sourceCard);
-
+        CardXPFields.XPFields.addedXP.set(sourceCard, 0); //clear stale
+        int monsterIndex = 0;
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+//            if (!m.isDeadOrEscaped()) {
+                Wiz.att(new SwapXPAction(sourceCard, p, m, Math.max(0,originalCardXP-1), ExtraXPInfo.enemyLV.get(sourceCard).get(monsterIndex), false));
+//            }
+            ++monsterIndex;
+        }
         ExtraXPInfo.originalCardXP.set(sourceCard, -1);
         ExtraXPInfo.enemiesProcessed.set(sourceCard, 0);
         ExtraXPInfo.totalEnemies.set(sourceCard, -1);
-        CardXPFields.XPFields.addedXP.set(sourceCard, 0); //clear stale
-        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-//            if (!m.isDeadOrEscaped()) {
-                Wiz.att(new SwapXPAction(sourceCard, p, m, Math.max(0,originalCardXP-1), getLVFromTarget(m), false));
-//            }
-        }
+        ExtraXPInfo.enemyLV.set(sourceCard, null);
+
+
     }
 
     public void handleSingleTargetDamage(AbstractCreature target, int LV_transfer_to, int final_LV_transfer_from) {

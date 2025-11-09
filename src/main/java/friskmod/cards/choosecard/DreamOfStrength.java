@@ -19,7 +19,7 @@ public class DreamOfStrength extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new StrengthPower(getTarget(), POWER_AMOUNT);
     }
 

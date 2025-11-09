@@ -1,17 +1,14 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.actions.StealAllBlockAction;
+import friskmod.actions.OpenDraftAction;
+import friskmod.actions.PlayerEnemyDraftAction;
 import friskmod.actions.StealEnemyHP;
-import friskmod.actions.StealPowerAction;
 import friskmod.character.Frisk;
-import friskmod.helper.StealableWhitelist;
 import friskmod.helper.ThreatenedCheck;
 import friskmod.powers.Karma;
 import friskmod.powers.LV_Enemy;
@@ -19,14 +16,10 @@ import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
 
-import java.util.ArrayList;
-
 import static friskmod.FriskMod.makeID;
 
-public class Prarabdha extends AbstractEasyCard {
-    public static final String ID = makeID(Prarabdha.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
-    public static final String[] TEXT = uiStrings.TEXT;
+public class Doomed extends AbstractEasyCard {
+    public static final String ID = makeID(Doomed.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -35,23 +28,22 @@ public class Prarabdha extends AbstractEasyCard {
             CardType.SKILL, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
             CardRarity.UNCOMMON, //Rarity. BASIC is for starting cards, then there's COMMON/UNCOMMON/RARE, and then SPECIAL and CURSE. SPECIAL is for cards you only get from events. Curse is for curses, except for special curses like Curse of the Bell and Necronomicurse.
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
-            2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
+            1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int KARMA_AND_LV_AMOUNT = 6;
-    private static final int UPG_KARMA_AND_LV_AMOUNT = 2;
+    private static final int HP_STEAL_AMOUNT = 10;
+    private static final int DRAFT_AMOUNT = 2;
+    private static final int UPG_DRAFT_AMOUNT = 1;
 
-    public Prarabdha() {
+
+    public Doomed() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseMagicNumber = magicNumber = KARMA_AND_LV_AMOUNT;
+        baseMagicNumber = magicNumber = HP_STEAL_AMOUNT;
+        baseSecondMagic = secondMagic = DRAFT_AMOUNT;
         tags.add(FriskTags.JUSTICE);
-//        AbstractCard steal = new Steal();
-//        steal.upgrade();
-//        cardsToPreview = steal;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(m, p, new LV_Enemy(m, magicNumber), magicNumber));
-        addToBot(new ApplyPowerAction(m, p, new Karma(m, magicNumber), magicNumber));
+        addToBot(new PlayerEnemyDraftAction(p, m, OpenDraftAction.DreamType.NIGHTMARE, DRAFT_AMOUNT));
         addToBot(Wiz.actionify(() -> {
             if (ThreatenedCheck.isThreatened()) {
                 for (AbstractMonster monster : Wiz.getMonsters()) {
@@ -61,30 +53,8 @@ public class Prarabdha extends AbstractEasyCard {
         }));
     }
 
-//    @Override
-//    public void triggerOnGlowCheck() {
-//        glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-//        if (extraEffectCheck()) {
-//            glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-//
-//        }
-//    }
-//
-//    private boolean extraEffectCheck(){
-//        if (!ThreatenedCheck.isThreatened()){
-//            return false;
-//        }
-//        for (AbstractMonster m : Wiz.getMonsters()) {
-//            if ((m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_KARMA_AND_LV_AMOUNT);
+        upgradeSecondMagic(UPG_DRAFT_AMOUNT);
     }
 }

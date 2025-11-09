@@ -10,30 +10,24 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import friskmod.powers.Overcome;
+import friskmod.util.Wiz;
 
 public class ThunderingRageAction extends AbstractGameAction {
     private int persevereAmt;
+    private int aliveAmount;
 
-    private DamageInfo info;
-
-    public ThunderingRageAction(AbstractCreature target, DamageInfo info, int energyAmt) {
-        this.info = info;
-        setValues(target, info);
+    public ThunderingRageAction(int aliveAmount, int energyAmt) {
         this.persevereAmt = energyAmt;
-        this.actionType = AbstractGameAction.ActionType.DAMAGE;
-        this.duration = Settings.ACTION_DUR_FASTER;
+        this.aliveAmount = aliveAmount;
+        this.duration = this.startDuration = Settings.ACTION_DUR_FASTER;
     }
 
     public void update() {
-        if (this.duration == Settings.ACTION_DUR_FASTER &&
-                this.target != null) {
-            AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-            this.target.damage(this.info);
-            if (((AbstractMonster) this.target).isDying || this.target.currentHealth <= 0) {
-                addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new Overcome(AbstractDungeon.player, persevereAmt), persevereAmt));
+        if (this.duration == this.startDuration) {
+            int newAliveAmount = Wiz.getMonsters().size();
+            for (int i = 0; i < (aliveAmount-newAliveAmount); ++i) {
+                Wiz.att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new Overcome(AbstractDungeon.player, this.persevereAmt), this.persevereAmt));
             }
-            if ((AbstractDungeon.getCurrRoom()).monsters.areMonstersBasicallyDead())
-                AbstractDungeon.actionManager.clearPostCombatActions();
         }
         tickDuration();
     }

@@ -18,7 +18,7 @@ public class NightmareOfWeak extends AbstractNightmareCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new WeakPower(getTarget(), POWER_AMOUNT, false);
     }
 

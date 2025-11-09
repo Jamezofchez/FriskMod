@@ -33,17 +33,17 @@ public class ScalesOfJustice extends AbstractEasyCard {
     public ScalesOfJustice() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.JUSTICE);
-        cardsList.add(new LeftScale());
-        cardsList.add(new RightScale());
-        MultiCardPreview.add(this, new LeftScale(), new RightScale());
+        cardsList.add(new PostLeftScale());
+        cardsList.add(new PostRightScale());
+        MultiCardPreview.add(this, new PostLeftScale(), new PostRightScale());
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (!upgraded) {
             addToBot(new SelectCardsCenteredAction(cardsList, 1, CardRewardScreen.TEXT[6], (cards) -> addToTop(new MakeTempCardInHandAction(cards.get(0).makeCopy(), true))));
         } else{
-            addToBot(new MakeTempCardInHandAction(new LeftScale()));
-            addToBot(new MakeTempCardInHandAction(new RightScale()));
+            addToBot(new MakeTempCardInHandAction(new PostLeftScale()));
+            addToBot(new MakeTempCardInHandAction(new PostRightScale()));
         }
     }
 

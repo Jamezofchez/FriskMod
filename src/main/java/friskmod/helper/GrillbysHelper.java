@@ -31,7 +31,7 @@ public class GrillbysHelper {
                 return new FairyCocktail(potion);
             case "DuplicationPotion":
                 return new DuplicationCocktail(potion);
-            case "AncientPotion":
+            case "Ancient Potion": //why??
                 return new AncientCocktail(potion);
             case "DistilledChaos":
                 return new ChaoticCocktail(potion);

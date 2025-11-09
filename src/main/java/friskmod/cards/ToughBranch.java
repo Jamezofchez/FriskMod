@@ -70,6 +70,5 @@ public class ToughBranch extends AbstractEasyCard {
         q2.upgrade();
         MultiCardPreview.clear(this);
         MultiCardPreview.add(this, q, q2);
-        uDesc();
     }
 }

@@ -20,7 +20,7 @@ public class NightmareOfMercied extends AbstractNightmareCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new Mercied(getTarget(), POWER_AMOUNT);
     }
 

@@ -33,6 +33,8 @@ public class Mallet extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
         baseMagicNumber = magicNumber = WEAK_AMOUNT;
+        tags.add(CardTags.STRIKE);
+
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

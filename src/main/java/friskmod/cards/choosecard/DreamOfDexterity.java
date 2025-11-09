@@ -17,7 +17,7 @@ public class DreamOfDexterity extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new DexterityPower(getTarget(), POWER_AMOUNT);
     }
 

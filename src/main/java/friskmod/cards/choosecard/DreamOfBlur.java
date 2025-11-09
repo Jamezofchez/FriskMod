@@ -17,7 +17,7 @@ public class DreamOfBlur extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new BlurPower(getTarget(), POWER_AMOUNT);
     }
 

@@ -21,7 +21,7 @@ public class DreamOfDetermination extends AbstractDreamCard{
     }
 
     @Override
-    AbstractPower getPower() {
+    protected AbstractPower getPower() {
         return new Determination(getTarget(), POWER_AMOUNT);
     }
 

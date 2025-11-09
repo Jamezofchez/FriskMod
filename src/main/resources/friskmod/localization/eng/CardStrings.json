@@ -51,7 +51,7 @@
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",
-    "DESCRIPTION": "${modID}:Critical: Gain !M! ${modID}:Temp_HP. NL ${modID}:Pickup: Heal !${modID}:M2! HP."
+    "DESCRIPTION": "${modID}:Pickup: Heal !${modID}:M2! HP. NL ${modID}:Critical: Gain !M! ${modID}:Temp_HP."
   },
   "${modID}:Blooky": {
     "NAME": "Blooky",
@@ -62,6 +62,10 @@
   "${modID}:BreakFree": {
     "NAME": "Break Free",
     "DESCRIPTION": "${modID}:Unseal all cards in your hand. NL They cost !M! less this turn. NL Deal !D! damage."
+  },
+  "${modID}:BurnInHell": {
+    "NAME": "Burn In Hell",
+    "DESCRIPTION": "Apply !M! ${modID}:KR to a random enemy X times."
   },
   "${modID}:BurntPan": {
     "NAME": "Burnt Pan",
@@ -116,6 +120,10 @@
   "${modID}:DontNeedFriends": {
     "NAME": "Don't Need Friends",
     "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Add a *I'm... to your hand."
+  },
+  "${modID}:Doomed": {
+    "NAME": "Doomed",
+    "DESCRIPTION": "${modID}:Draft !${modID}:M2! ${modID}:Nightmare. NL If ${modID}:Threatened, ${modID}:Steal !M! HP from ALL enemies."
   },
   "${modID}:Dream": {
     "NAME": "Dream",
@@ -185,8 +193,11 @@
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
-    "DESCRIPTION": "Add a *Ketchup to your hand. NL Take a ${modID}:Sip of all your potions. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Add a *Ketchup+ to your hand. NL Take an upgraded ${modID}:Sip of all your potions. NL Exhaust."
+    "DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a ${modID}:Sip of all your potions. NL Exhaust."
+  },
+  "${modID}:HeartBleed": {
+    "NAME": "Heartbleed",
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
   },
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
@@ -223,9 +234,9 @@
     "NAME": "Kill With Kindness",
     "DESCRIPTION": "Whenever you buff an enemy, it gains !M! Vulnerable."
   },
-  "${modID}:Kriyamana": {
-    "NAME": "Kriyamana",
-    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
+  "${modID}:KnuckleStrike": {
+    "NAME": "Knuckle Strike",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Hurt."
   },
   "${modID}:LevelUp": {
     "NAME": "Level Up",
@@ -237,7 +248,7 @@
     "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:Soulbound ${modID}:Mad_Dummy. NL It has !M! HP."
   },
   "${modID}:Mallet": {
-    "NAME": "Mallet",
+    "NAME": "Mallet Strike",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
   },
   "${modID}:NiceCream": {
@@ -261,10 +272,6 @@
     "NAME": "OLDPrarabdha",
     "DESCRIPTION": "Apply !M! ${modID}:KR. If ${modID}:Threatened, apply !M! ${modID}:KR again."
   },
-  "${modID}:Prarabdha": {
-    "NAME": "Prarabdha",
-    "DESCRIPTION": "Apply !M! ${modID}:LV. NL Apply !M! ${modID}:KR. NL If ${modID}:Threatened, ${modID}:Steal !M! HP from ALL enemies."
-  },
   "${modID}:RememberBravery": {
     "NAME": "Remember Bravery",
     "DESCRIPTION": "Whenever you would lose ${modID}:LV, a random card in your hand gains equivalent ${modID}:XP.",
@@ -278,14 +285,18 @@
     "NAME": "Remember Patience",
     "DESCRIPTION": "Whenever you have !${modID}:M2! or more cards in your hand, Retain !M! cards this turn."
   },
+  "${modID}:Repress": {
+    "NAME": "Repress",
+    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! ${modID}:Temp_HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
+  },
   "${modID}:Reverence": {
     "NAME": "Reverence",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Deal double damage."
   },
   "${modID}:RewindStrike": {
     "NAME": "Rewind Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Retain. Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn.",
+    "UPGRADE_DESCRIPTION": "Retain. Deal !D! damage. NL Revert the enemy to their previous turn."
   },
   "${modID}:Rock": {
     "NAME": "Rock",
@@ -304,24 +315,30 @@
     "NAME": "Ruins",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry and on the start of turn deal !M! damage and increase this damage by 5."
   },
-  "${modID}:Sanchita": {
-    "NAME": "Sanchita",
-    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! ${modID}:Temp_HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
-  },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",
     "DESCRIPTION": "Gain a *Left *Scale or NL Gain a *Right *Scale. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Gain a *Left *Scale and NL Gain a *Right *Scale. NL Exhaust."
 
   },
-  "${modID}:LeftScale": {
+  "${modID}:OLDLeftScale": {
     "NAME": "Left Scale",
     "DESCRIPTION": "Lose !M! HP. Deal damage equal to your missing HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
   },
-  "${modID}:RightScale": {
+  "${modID}:OLDRightScale": {
     "NAME": "Right Scale",
     "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. Deal damage equal to your ${modID}:Temp_HP. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:PostLeftScale": {
+    "NAME": "Left Scale",
+    "DESCRIPTION": "Deal damage equal to your missing HP. NL Lose !M! HP. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
+  },
+  "${modID}:PostRightScale": {
+    "NAME": "Right Scale",
+    "DESCRIPTION": "Deal damage equal to your ${modID}:Temp_HP. NL Gain !M! ${modID}:Temp_HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
   },
   "${modID}:SelfReflection": {
@@ -368,7 +385,7 @@
   },
   "${modID}:ThunderingRage": {
     "NAME": "Thundering Rage",
-    "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, gain !M! ${modID}:Overcome."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL For each enemy this kills, gain !M! ${modID}:Overcome."
   },
   "${modID}:Tinker": {
     "NAME": "Tinker",
