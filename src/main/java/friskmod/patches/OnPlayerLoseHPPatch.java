@@ -26,8 +26,10 @@ public class OnPlayerLoseHPPatch {
     public static void Prefix(AbstractPlayer __instance, @ByRef DamageInfo[] info) {
         AbstractPower posspow = __instance.getPower(BarrierPower.POWER_ID);
         if (posspow != null) {
-            posspow.onSpecificTrigger();
-            info[0].output = 0;
+            if (info[0].output > 0) {
+                posspow.onSpecificTrigger();
+                info[0].output = 0;
+            }
         }
     }
     @SpireInsertPatch(

@@ -13,10 +13,15 @@
     "NAME": "Absolute Power",
     "DESCRIPTION": "Gain [E] every time an attack's damage ends in a 9."
   },
+  "${modID}:Adagio": {
+    "NAME": "Adagio",
+    "DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Retain one card this turn, NL and upgrade it for the rest of combat.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Retain two cards this turn, NL and upgrade them for the rest of combat."
+  },
   "${modID}:Agami": {
     "NAME": "Agami",
     "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR.",
-    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, give the enemy #b%s ${modID}:LV and convert the enemy's ${modID}:LV into ${modID}:KR. "
+    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR and ${modID}:Detonate it."
   },
   "${modID}:Allegro": {
     "NAME": "Allegro",
@@ -38,7 +43,7 @@
   },
   "${modID}:BakeSale": {
     "NAME": "Bake Sale",
-    "DESCRIPTION": "You and an enemy gain !B! Block. ${modID}:Persevere your leftmost card."
+    "DESCRIPTION": "${modID}:Persevere your leftmost card. NL You and an enemy gain !B! Block."
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
@@ -105,8 +110,8 @@
   },
   "${modID}:DogShrine": {
     "NAME": "Dog Shrine",
-    "DESCRIPTION": "Exhaust !M! card. NL Draw cards equal to its ${modID}:XP.",
-    "UPGRADE_DESCRIPTION": "Exhaust !M! cards. NL Draw cards equal to their ${modID}:XP."
+    "DESCRIPTION": "Exhaust a card. NL Draw cards equal to its ${modID}:XP.",
+    "UPGRADE_DESCRIPTION": "Exhaust two cards. NL Draw cards equal to their ${modID}:XP."
   },
   "${modID}:DontNeedFriends": {
     "NAME": "Don't Need Friends",
@@ -114,11 +119,11 @@
   },
   "${modID}:Dream": {
     "NAME": "Dream",
-    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Nightmare. NL ${modID}:Draft !M! ${modID}:Dream for each unique debuff the enemy has."
+    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Dream for each unique debuff the enemy has."
   },
   "${modID}:Duel": {
     "NAME": "Dual!",
-    "DESCRIPTION": "Put ALL ${modID}:Strikes from your draw pile to your hand. NL Exhaust."
+    "DESCRIPTION": "Put ALL ${modID}:Strikes and ${modID}:Defends from your draw pile to your hand. NL Exhaust."
   },
   "${modID}:EchoFlower": {
     "NAME": "Echo Flower",
@@ -132,7 +137,7 @@
     "NAME": "Evolve",
     "DESCRIPTION": "Gain !M! ${modID}:LV whenever you play a card."
   },
-  "${modID}:Execute": {
+  "${modID}:OLDExecute": {
     "NAME": "Execute",
     "DESCRIPTION": "Deal !D! damage twice. NL Choose 1 card to give !M! ${modID}:inherent ${modID}:XP."
   },
@@ -170,6 +175,10 @@
     "NAME": "Garbage Dump",
     "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted *Energy spent."
   },
+  "${modID}:GatherSoul": {
+    "NAME": "Gather SOUL",
+    "DESCRIPTION": "Exhaust all non-Attack cards in your hand. NL Your remaining cards gain !M! ${modID}:XP for each."
+  },
   "${modID}:GladDummy": {
     "NAME": "Glad Dummy",
     "DESCRIPTION": "Deal !D! damage. NL Summon an ${modID}:Soulbound ${modID}:Glad_Dummy. NL It has !M! HP."
@@ -181,8 +190,8 @@
   },
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
-    "DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable card from your draw or discard pile into your hand.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Put !M! Unplayable cards from your draw or discard pile into your hand.",
+    "DESCRIPTION": "Gain !B! Block. NL Put !M! ${modID}:Unplayable card from your discard pile into your hand.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Put !M! ${modID}:Unplayable cards from your discard pile into your hand.",
     "EXTENDED_DESCRIPTION": [
       "Select a card to move to your hand.",
       "Select cards to move to your hand."
@@ -190,8 +199,8 @@
   },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
-    "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! card.",
-    "UPGRADE_DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw !M! cards."
+    "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw a card.",
+    "UPGRADE_DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw two cards."
   },
   "${modID}:Im": {
     "NAME": "I'm...",
@@ -237,7 +246,7 @@
   },
   "${modID}:Overcome": {
     "NAME": "Overcome",
-    "DESCRIPTION": "Gain !M! ${modID}:Overcome"
+    "DESCRIPTION": "Lose !${modID}:M2! HP. Gain !M! ${modID}:Overcome."
   },
   "${modID}:Plead": {
     "NAME": "Plead",
@@ -269,6 +278,10 @@
     "NAME": "Remember Patience",
     "DESCRIPTION": "Whenever you have !${modID}:M2! or more cards in your hand, Retain !M! cards this turn."
   },
+  "${modID}:Reverence": {
+    "NAME": "Reverence",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Deal double damage."
+  },
   "${modID}:RewindStrike": {
     "NAME": "Rewind Strike",
     "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn. NL Exhaust.",
@@ -289,7 +302,7 @@
   },
   "${modID}:Ruins": {
     "NAME": "Ruins",
-    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, deal !M! damage. NL At the start of turn increase damage dealt by 5."
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry and on the start of turn deal !M! damage and increase this damage by 5."
   },
   "${modID}:Sanchita": {
     "NAME": "Sanchita",
@@ -367,11 +380,19 @@
   },
   "${modID}:TornNotebook": {
     "NAME": "Torn Notebook",
-    "DESCRIPTION": "The next !M! times you lose HP, gain 1 Buffer. NL ${modID}:Critical: Gain !${modID}:M2! Buffer."
+    "DESCRIPTION": "The next !M! times you lose HP or Temp HP, gain 1 Barrier. NL ${modID}:Critical: Gain !${modID}:M2! Barrier."
   },
-  "${modID}:Twirl": {
-    "NAME": "Twirl",
-    "DESCRIPTION": "Gain !B! Block. NL ${modID}:Critical: Retain !M! card this turn, NL and upgrade it for the rest of combat."
+  "${modID}:ToughBranch": {
+    "NAME": "Tough Branch",
+    "DESCRIPTION": "Deal !D! damage or gain !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, do the other."
+  },
+  "${modID}:ToughBranchAttack": {
+    "NAME": "Attack",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "${modID}:ToughBranchDefend": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
   },
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",
@@ -379,11 +400,11 @@
   },
   "${modID}:WakeUp": {
     "NAME": "Wake Up",
-    "DESCRIPTION": "Scry !M!. NL Exhaust all Unplayable cards discarded. NL Gain !B! Block for each card exhausted."
+    "DESCRIPTION": "Exhausts itself if another card is played. NL Scry !${modID}:M2!. NL Exhaust all ${modID}:Unplayable cards discarded and gain !B! Block for each."
   },
   "${modID}:WebSlash": {
     "NAME": "Web Slash",
-    "DESCRIPTION": "Deal !D! damage. ${modID}:Persevere your rightmost card."
+    "DESCRIPTION": "${modID}:Persevere your rightmost card. NL Deal !D! damage."
   },
   "${modID}:AncientCocktail": {
     "NAME": "Ancient Cocktail",

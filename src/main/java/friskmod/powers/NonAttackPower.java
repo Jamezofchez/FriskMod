@@ -76,5 +76,6 @@ public class NonAttackPower extends BasePower implements AfterCardPlayedInterfac
     public void afterCardPlayed(AbstractCard card) {
         this.flash();
         addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+
     }
 }

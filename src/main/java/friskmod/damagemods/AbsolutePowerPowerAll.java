@@ -40,7 +40,7 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
                     LV_power = -possMercied.amount;
                 }
                 newDamageAmount = determineFavouriteNumberLV(damageAmount, LV_power, target);
-                possFavourite.onSpecificTrigger();
+                ((FavouriteNumberPower )possFavourite).LVGained();
             }
             AbstractPower possAbsolute = AbstractDungeon.player.getPower(AbsolutePowerPower.POWER_ID);
             if (possAbsolute != null) {

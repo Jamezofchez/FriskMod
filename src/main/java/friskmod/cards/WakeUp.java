@@ -1,17 +1,21 @@
 package friskmod.cards;
 
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.actions.ScryBlockExhaustAction;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 
 
 import static friskmod.FriskMod.makeID;
 
-public class WakeUp extends AbstractEasyCard {
+public class WakeUp extends AbstractEasyCard implements AfterCardPlayedInterface {
     public static final String ID = makeID(WakeUp.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
@@ -26,12 +30,21 @@ public class WakeUp extends AbstractEasyCard {
     private static final int SCRY_AMOUNT = 5;
     private static final int BLOCK = 5;
     private static final int UPG_SCRY_AMOUNT = 2;
+    private static final int CARDS_PLAYED = 1;
+    private static final int UPG_CARDS_PLAYED = 1;
+
+
+
+
+//    private int cardsPlayedThisTurn;
 
     public WakeUp() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseBlock = BLOCK;
-        baseMagicNumber = magicNumber = SCRY_AMOUNT;
+        baseMagicNumber = magicNumber = CARDS_PLAYED;
+        baseSecondMagic = secondMagic = SCRY_AMOUNT;
         tags.add(FriskTags.PERSEVERANCE);
+//        this.cardsPlayedThisTurn = 0;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -40,6 +53,21 @@ public class WakeUp extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_SCRY_AMOUNT);
+//        upgradeMagicNumber(UPG_CARDS_PLAYED);
+        upgradeSecondMagic(UPG_SCRY_AMOUNT);
     }
+
+    public void afterCardPlayed(AbstractCard card) {
+//        ++this.cardsPlayedThisTurn;
+//        if (this.cardsPlayedThisTurn < magicNumber){
+//            addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
+//        }
+        addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
+    }
+    public void triggerOnEndOfPlayerTurn() {
+//        this.cardsPlayedThisTurn = 0;
+    }
+
+
+
 }

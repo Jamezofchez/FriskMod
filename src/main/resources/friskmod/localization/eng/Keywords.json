@@ -47,7 +47,7 @@
     "NAMES": [
       "KR"
     ],
-    "DESCRIPTION": "#yKR-inflected creatures take damage whenever you lose more than 1 HP. NL #yKR cannot kill on its own."
+    "DESCRIPTION": "#yKR-inflected creatures take damage whenever you lose more than 1 HP or Temp HP. NL #yKR cannot kill on its own."
   },
   {
     "PROPER_NAME": "Countdown",
@@ -163,6 +163,14 @@
     "DESCRIPTION": "Any card containing \"Strike\" in their name."
   },
   {
+    "PROPER_NAME": "Defend",
+    "NAMES": [
+      "Defend",
+      "Defends"
+    ],
+    "DESCRIPTION": "A basic Defend card."
+  },
+  {
     "PROPER_NAME": "Wasted",
     "NAMES": [
       "Wasted",
@@ -248,7 +256,7 @@
       "Detonate",
       "Detonate"
     ],
-    "DESCRIPTION": "#yKR deals damage as if you had lost HP."
+    "DESCRIPTION": "#yKR deals damage as if you had lost HP or Temp HP."
   },
   {
     "PROPER_NAME": "Steal",
@@ -322,7 +330,7 @@
     "NAMES": [
       "Soulbound"
     ],
-    "DESCRIPTION": "Targets the enemy attacked. NL Dies whenever the target dies."
+    "DESCRIPTION": "Soulbound to the enemy attacked. NL Dies whenever the target dies."
   },
   {
     "PROPER_NAME": "Mad Dummy",
@@ -330,7 +338,7 @@
       "Mad Dummy",
       "Mad_Dummy"
     ],
-    "DESCRIPTION": "Deals 3 damage to you on its turn. NL Whenever the dummy takes damage, so does its #ySoulbound target."
+    "DESCRIPTION": "Deals 2 damage to you on its turn. NL Whenever the dummy takes damage, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Glad Dummy",
@@ -346,5 +354,12 @@
       "Overcome"
     ],
     "DESCRIPTION": "When a card fails to play, #yPersevere it and reduce by 1. NL Reduced by 1 on turn end."
+  },
+  {
+    "PROPER_NAME": "Unplayable",
+    "NAMES": [
+      "Unplayable"
+    ],
+    "DESCRIPTION": "Unplayable cards or cards that lack the conditions to be played."
   }
 ]

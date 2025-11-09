@@ -23,7 +23,7 @@ public class MadDummy extends AbstractDummy {
         this.amount = amount;
         this.boundTarget = boundTarget;
         this.animation = new BetterSpriterAnimation(FriskMod.monsterPath("MadDummy/Spriter/MadDummy.scml"));
-        addMove((byte)0, Intent.ATTACK, 3);
+        addMove((byte)0, Intent.ATTACK, 2);
     }
 
     public void usePreBattleAction() {

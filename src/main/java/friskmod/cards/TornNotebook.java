@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BufferPower;
 import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
+import friskmod.powers.BarrierPower;
 import friskmod.powers.TornNotebookPower;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
@@ -52,6 +53,6 @@ public class TornNotebook extends AbstractCriticalCard {
 
     @Override
     public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new BufferPower(p, secondMagic), secondMagic));
+        addToBot(new ApplyPowerAction(p, p, new BarrierPower(p, secondMagic), secondMagic));
     }
 }

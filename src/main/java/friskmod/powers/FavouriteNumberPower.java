@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.util.interfaces.AfterCardPlayedInterface;
 
-public class FavouriteNumberPower extends BasePower implements AfterCardPlayedInterface {
+public class FavouriteNumberPower extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(FavouriteNumberPower.class.getSimpleName());
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
@@ -40,9 +40,7 @@ public class FavouriteNumberPower extends BasePower implements AfterCardPlayedIn
         this.description = String.format(DESCRIPTIONS[0], amount);
     }
 
-
-    @Override
-    public void afterCardPlayed(AbstractCard card) {
+    public void LVGained() {
         this.flash();
         addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
     }

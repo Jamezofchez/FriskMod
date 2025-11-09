@@ -13,8 +13,10 @@ import friskmod.util.Wiz;
 
 public class ConsumeLVEnemyAgami extends AbstractGameAction {
     AbstractCreature c;
-    public ConsumeLVEnemyAgami(AbstractCreature c){
+    private int detAmount;
+    public ConsumeLVEnemyAgami(AbstractCreature c, int detAmount){
         this.c = c;
+        this.detAmount = detAmount;
     }
     @Override
     public void update() {
@@ -25,6 +27,9 @@ public class ConsumeLVEnemyAgami extends AbstractGameAction {
             KR_Amount = posspow.amount;
         }
         AbstractPlayer p = AbstractDungeon.player;
+        for (int i = 0; i < detAmount; i++){
+            Wiz.att(new DetonateKarmaAction(c));
+        }
         Wiz.att(new ApplyPowerAction(c, p, new Karma(c, KR_Amount), KR_Amount));
         Wiz.att(new RemoveSpecificPowerAction(c, p, LV_Enemy.POWER_ID));
     }

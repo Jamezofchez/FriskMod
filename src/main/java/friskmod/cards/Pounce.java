@@ -37,10 +37,10 @@ public class Pounce extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractCountdownPower countdown = new CountdownPounce(m, DAMAGE, secondMagic, UPG_DAMAGE);
-        addToBot(new ApplyPowerAction(m, p, countdown, DAMAGE));
         if (upgraded) {
             countdown.upgrade();
         }
+        addToBot(new ApplyPowerAction(m, p, countdown, DAMAGE));
     }
 
     @Override

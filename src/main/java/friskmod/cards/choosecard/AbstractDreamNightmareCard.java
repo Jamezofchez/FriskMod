@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.helper.DraftManager;
+import friskmod.powers.CountdownAttack;
 
 import java.util.ArrayList;
 
@@ -28,8 +29,17 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         if (this instanceof AbstractNightmareCard){
             descriptor = TEXT[5];
         }
+        String powerName = getPowerName();
+        return String.format(basename, descriptor, powerName);
+    }
+
+    private String getPowerName() {
         AbstractPower tmp = getPower();
-        return String.format(basename, descriptor, tmp.name);
+        String powerName = tmp.name;
+        if (tmp instanceof CountdownAttack){
+            powerName = TEXT[6];
+        }
+        return powerName;
     }
 
     abstract AbstractPower getPower();
@@ -43,6 +53,10 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
     public void initializeDescription(){
         String basename = TEXT[0];
         AbstractPower tmp = getPower();
+        String powerName = tmp.name;
+        if (tmp instanceof CountdownAttack){
+            powerName = TEXT[6];
+        }
         AbstractCreature tmpTarget = getTarget();
         String targetName;
         if (tmpTarget instanceof AbstractPlayer){
@@ -50,7 +64,7 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         } else{
             targetName = TEXT[2];
         }
-        this.rawDescription = String.format(basename, tmp.amount, tmp.name, targetName);
+        this.rawDescription = String.format(basename, tmp.amount, powerName, targetName);
         super.initializeDescription();
     }
 

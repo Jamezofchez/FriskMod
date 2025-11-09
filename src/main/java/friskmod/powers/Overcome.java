@@ -45,6 +45,7 @@ public class Overcome extends BasePower {
         if( PerseveranceFields.overcomePlayed.get(c)) {
             PerseveranceFields.overcomePlayed.set(c, false);
             PerseveranceFields.setIsPerseverable(c, false);
+            PerseveranceFields.perseverePlayed.set(c, false);
         }
     }
 

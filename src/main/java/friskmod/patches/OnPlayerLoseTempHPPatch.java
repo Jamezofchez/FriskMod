@@ -21,20 +21,25 @@ import java.util.ArrayList;
         //AbstractCreature __instance, DamageInfo info, @ByRef int[] damageAmount, @ByRef boolean[] hadBlock
 )
 public class OnPlayerLoseTempHPPatch {
-    @SpirePrefixPatch
-    public static SpireReturn<Void> Prefix(Object[] __args) {
+    @SpireInsertPatch(
+            locator= OnPlayerLoseTempHPPatch.BeforeTempHPLocator.class,
+            localvars={"damageAmount"}
+    )
+    public static SpireReturn<Void> Insert(Object[] __args, int[] damageAmount){
         AbstractCreature creature = (AbstractCreature) __args[0];
         if (creature instanceof AbstractPlayer) {
             AbstractPower posspow = creature.getPower(BarrierPower.POWER_ID);
             if (posspow != null) {
-                posspow.onSpecificTrigger();
-                return SpireReturn.Return();
+                if (damageAmount[0] > 0) {
+                    posspow.onSpecificTrigger();
+                    return SpireReturn.Return();
+                }
             }
         }
         return SpireReturn.Continue();
     }
     @SpireInsertPatch(
-            locator= OnPlayerLoseTempHPPatch.TempHPLocator.class,
+            locator= OnPlayerLoseTempHPPatch.AfterTempHPDamageLocator.class,
             localvars={"damageAmount", "temporaryHealth"}
     )
     public static void Insert(Object[] __args, int[] damageAmount, int temporaryHealth, DamageInfo info) {
@@ -45,7 +50,7 @@ public class OnPlayerLoseTempHPPatch {
             Wiz.att(new PlayerLoseHPAction(tempHPLost, info, true, overflow));
         }
     }
-    private static class TempHPLocator extends SpireInsertLocator {
+    private static class AfterTempHPDamageLocator extends SpireInsertLocator {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
             Matcher matcher = new Matcher.FieldAccessMatcher(PlayerDamage.class, "hadTempHP");
@@ -56,6 +61,19 @@ public class OnPlayerLoseTempHPPatch {
             }
             // We want just before the second one (the one setting it to true)
             return new int[] { allMatches[1] };
+        }
+    }
+    private static class BeforeTempHPLocator extends SpireInsertLocator {
+        @Override
+        public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
+            Matcher matcher = new Matcher.FieldAccessMatcher(PlayerDamage.class, "hadTempHP");
+            int[] allMatches = LineFinder.findAllInOrder(ctMethodToPatch, new ArrayList<>(), matcher);
+            // Safety check — make sure at least two matches exist
+            if (allMatches.length < 2) {
+                throw new RuntimeException("Expected at least two hadTempHP accesses in PlayerDamage.Insert()");
+            }
+            // We want just before the first one (the one setting it to true)
+            return new int[] { allMatches[0] };
         }
     }
 }

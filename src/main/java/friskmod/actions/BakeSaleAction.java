@@ -22,7 +22,7 @@ public class BakeSaleAction extends AbstractGameAction {
         List<AbstractCard> afterHand = p.hand.group;
         if (!afterHand.isEmpty()) {
             AbstractCard leftmost = afterHand.get(0);
-            addToBot(new PersevereCardAction(leftmost, m));
+            addToTop(new PersevereCardAction(leftmost, m));
         }
     }
 }

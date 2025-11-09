@@ -25,23 +25,27 @@ public class Agami extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int WAIT_TIMER = 5;
-    private static final int LV_GAIN = 0;
-    private static final int UPG_LV_GAIN = 3;
+//    private static final int LV_GAIN = 0;
+//    private static final int UPG_LV_GAIN = 3;
+    private static final int DETONATION_AMOUNT = 0;
+    private static final int UPG_DETONATION_AMOUNT = 1;
+
+
 
 
     public Agami() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseMagicNumber = magicNumber = LV_GAIN;
+        baseMagicNumber = magicNumber = DETONATION_AMOUNT;
         baseSecondMagic = secondMagic = WAIT_TIMER;
         tags.add(FriskTags.JUSTICE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractCountdownPower countdown = new CountdownAgami(m, LV_GAIN, secondMagic, UPG_LV_GAIN);
-        addToBot(new ApplyPowerAction(m, p, countdown, LV_GAIN));
+        AbstractCountdownPower countdown = new CountdownAgami(m, DETONATION_AMOUNT, secondMagic, UPG_DETONATION_AMOUNT);
         if (upgraded) {
             countdown.upgrade();
         }
+        addToBot(new ApplyPowerAction(m, p, countdown, DETONATION_AMOUNT));
     }
 
     @Override

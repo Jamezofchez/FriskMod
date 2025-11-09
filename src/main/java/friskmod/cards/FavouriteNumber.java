@@ -43,6 +43,7 @@ public class FavouriteNumber extends AbstractEasyCard {
 
     @Override
     public void upp() {
+
         upgradeMagicNumber(UPG_POWER_AMOUNT);
     }
 }

@@ -14,12 +14,28 @@
   "${modID}:CountdownAgami": {
     "NAME": "Agami",
     "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR",
-      "On #yExpiry after playing #b%s card, give the enemy #b%s ${modID}:LV and convert this enemy's #y${modID}:LV to #y${modID}:KR."
+      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR.",
+      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR.",
+      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR and #y${modID}:Detonate it #b%s times.",
+      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR and #y${modID}:Detonate it #b%s times."
+    ]
+  },
+  "${modID}:CountdownAttack": {
+    "NAME": "Attack",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, deal #b%s damage.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage."
+    ]
+  },
+  "${modID}:CountdownDefend": {
+    "NAME": "Defend",
+    "DESCRIPTIONS": [
+      "On #yExpiry after playing #b%s cards, gain #b%s Block.",
+      "On #yExpiry after playing #b%s card, gain #b%s Block."
     ]
   },
   "${modID}:CountdownDraw": {
-    "NAME": "Hug It Off",
+    "NAME": "Draw",
     "DESCRIPTIONS": [
       "On #yExpiry after playing #b%s cards, draw #b%s cards.",
       "On #yExpiry after playing #b%s cards, draw #b%s card.",
@@ -150,7 +166,7 @@
   "${modID}:TornNotebookPower": {
     "NAME": "Torn Notebook",
     "DESCRIPTIONS": [
-      "The next #b%s times you lose HP, gain 1 ${modID}:Barrier."
+      "The next #b%s times you lose HP or Temp HP, gain 1 ${modID}:Barrier."
     ]
   },
   "${modID}:SoulBound": {

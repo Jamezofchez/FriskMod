@@ -8,11 +8,11 @@
 //import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 //import com.megacrit.cardcrawl.powers.AbstractPower;
 //import friskmod.FriskMod;
-//import friskmod.actions.DecreaseNonAttackPower;
 //import friskmod.cards.AbstractCriticalCard;
 //import friskmod.cards.AnnoyingDog;
 //import friskmod.cards.BreakFree;
 //import friskmod.patches.perseverance.PerseveranceFields;
+//import friskmod.powers.FavouriteNumberPower;
 //import friskmod.powers.NonAttackPower;
 //import friskmod.util.Wiz;
 //
@@ -29,12 +29,12 @@
 //    public static class OnCardUsed {
 //        @SpirePostfixPatch
 //        public static void Postfix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
-////            if (!card.dontTriggerOnUseCard) {
-////                AbstractPower possFavouriteNumber = AbstractDungeon.player.getPower(FavouriteNumberPower.POWER_ID);
-////                if (possFavouriteNumber != null) {
-////                    possFavouriteNumber.onSpecificTrigger();
-////                }
-////            }
+//            if (!card.dontTriggerOnUseCard) {
+//                AbstractPower possFavouriteNumber = AbstractDungeon.player.getPower(FavouriteNumberPower.POWER_ID);
+//                if (possFavouriteNumber != null) {
+//                    ((FavouriteNumberPower) possFavouriteNumber).beforeCardPlayed(card);
+//                }
+//            }
 //        }
 //    }
 //}

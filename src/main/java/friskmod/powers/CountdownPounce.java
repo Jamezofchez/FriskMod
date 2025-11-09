@@ -28,8 +28,6 @@ public class CountdownPounce extends AbstractCountdownPower {
 
     private final int UPG_DAMAGE;
 
-    public boolean doPlayerNormalDamage = false;
-
     public CountdownPounce(AbstractCreature owner, int amount, int countdown, int upg_amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
         this.name = NAME;
@@ -39,7 +37,7 @@ public class CountdownPounce extends AbstractCountdownPower {
 
     @Override
     public void onCountdownTrigger(boolean expire) {
-        if (owner != null && (owner instanceof AbstractMonster)) {
+        if (owner != null) {
             if (doNormalDamage()) {
                 //AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
                 addToBot(new DamageAction(owner, new DamageInfo(AbstractDungeon.player, amount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
@@ -75,30 +73,19 @@ public class CountdownPounce extends AbstractCountdownPower {
     }
 
     private boolean doNormalDamage() {
-        if ((owner instanceof AbstractPlayer)) {
-            return doPlayerNormalDamage;
-        } else{
-            if (owner == null){
-                return false;
-            }
-            return ((AbstractMonster) owner).getIntentBaseDmg() >= 0;
-
+        if (owner == null){
+            return true;
         }
-    }
-
-    public void atStartOfTurn() {
-        setPlayerNormalDamage(false);
+        if (!(owner instanceof AbstractMonster)){
+            return true;
+        }
+        return ((AbstractMonster) owner).getIntentBaseDmg() >= 0;
     }
 
     @Override
     public void upgrade(){
         super.upgrade();
         this.amount += UPG_DAMAGE;
-        updateDescription();
-    }
-
-    public void setPlayerNormalDamage(boolean b) {
-        doPlayerNormalDamage = b;
         updateDescription();
     }
 }

@@ -1,8 +1,11 @@
 package friskmod.monsters;
 
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.actions.unique.GainBlockRandomMonsterAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.BetterSpriterAnimation;
 import friskmod.FriskMod;
 import friskmod.powers.SoulBound;
@@ -34,7 +37,11 @@ public class GladDummy extends AbstractDummy {
         switch (this.nextMove) {
             case 0:
                 attackAnimation((AbstractCreature) Wiz.adp());
-                addToBot(new GainBlockRandomMonsterAction(this, 3));
+                addToBot(new GainBlockAction(AbstractDungeon.player, this, 3));
+//                addToBot(new GainBlockRandomMonsterAction(this, 3));
+                for (AbstractMonster m : Wiz.getMonsters()) {
+                    addToBot(new GainBlockAction(m, this, 3));
+                }
                 resetIdle(0.25F);
                 waitAnimation(0.25F);
                 break;

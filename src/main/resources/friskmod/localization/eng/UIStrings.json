@@ -55,7 +55,8 @@
   "${modID}:TrappedPatch": {
     "TEXT": [
       "${modID}:Trapped. NL ",
-      "NL ${modID}:Trapped. NL"
+      "NL ${modID}:Trapped. NL",
+      "I cannot play trapped cards!"
     ]
   },
   "${modID}:BalletShoes": {
@@ -107,7 +108,8 @@
       "the enemy",
       "%s of %s",
       "Dream",
-      "Nightmare"
+      "Nightmare",
+      "Attack+"
     ]
   },
   "${modID}:OpenDraftAction": {

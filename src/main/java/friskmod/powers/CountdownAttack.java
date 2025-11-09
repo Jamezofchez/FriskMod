@@ -40,7 +40,7 @@ public class CountdownAttack extends AbstractCountdownPower {
 
     @Override
     public AbstractPower makeCopy() {
-        return new CountdownAttack(owner, amount, amount2, UPG_CARD_DRAW);
+        return new CountdownAttack(owner, amount, amount2, UPG_ATTACK);
     }
 
     @Override
@@ -53,9 +53,6 @@ public class CountdownAttack extends AbstractCountdownPower {
     private int getDescNum() {
         int descNum = 0;
         if (amount2 == 1){
-            descNum += 2;
-        }
-        if (amount == 1){
             descNum += 1;
         }
         return descNum;
@@ -64,7 +61,7 @@ public class CountdownAttack extends AbstractCountdownPower {
     @Override
     public void upgrade(){
         super.upgrade();
-        this.amount += UPG_CARD_DRAW;
+        this.amount += UPG_ATTACK;
         updateDescription();
     }
 }

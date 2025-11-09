@@ -37,10 +37,10 @@ public class CountdownRuins extends AbstractCountdownPower {
 
     @Override
     public void onCountdownTrigger(boolean expire) {
-        addToBot(new DamageAllEnemiesAction(null,
-                DamageInfo.createDamageMatrix(this.amount, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        triggerRuinsEffect();
         super.onCountdownTrigger(expire);
     }
+
 
     @Override
     public AbstractPower makeCopy() {
@@ -63,6 +63,12 @@ public class CountdownRuins extends AbstractCountdownPower {
     }
 
     public void atStartOfTurn() {
+        triggerRuinsEffect();
+    }
+
+    private void triggerRuinsEffect() {
+        addToBot(new DamageAllEnemiesAction(null,
+                DamageInfo.createDamageMatrix(this.amount, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         upgrade();
     }
 

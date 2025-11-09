@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.relics.PureWater;
 import friskmod.FriskMod;
 import friskmod.character.Frisk;
 import friskmod.cards.ItsYou;
-import friskmod.powers.CountdownPounce;
 
 public class HeartShapedLocket extends BaseRelic {
     public static final String ID = FriskMod.makeID(HeartShapedLocket.class.getSimpleName());

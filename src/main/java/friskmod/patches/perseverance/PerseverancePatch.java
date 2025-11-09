@@ -35,10 +35,7 @@ import friskmod.annotations.Unplayable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static friskmod.FriskMod.makeID;
 
@@ -360,6 +357,20 @@ public class PerseverancePatch {
             return true;
         return false;
     }
+
+    public static boolean isRealUnplayable(AbstractCard c) {
+        List<AbstractMonster> monsters = Wiz.getMonsters();
+        if (PerseveranceFields.perseverePlayed.get(c)){
+            return true;
+        }
+        for (AbstractMonster m : monsters) {
+            if (!c.canUse(AbstractDungeon.player, m)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static Set<String> alwaysUnplayable = new HashSet<>();
     private static Set<String> sometimesUnplayable = new HashSet<>();
     private static boolean hasUnplayableAnnotation(Object o) {
@@ -421,9 +432,11 @@ public class PerseverancePatch {
                 return;
             }
             Wiz.att(new CustomSFXAction("mus_sfx_eyeflash"));
-            if (PerseveranceFields.insufficientEnergy.get(card)) {
-                int refundEnergy = PerseveranceFields.cardEnergy.get(card);
-                Wiz.atb(new GainEnergyAction(refundEnergy));
+            if (!isTrapped(card) && !isCurseOrStatus(card)) {
+                if (PerseveranceFields.insufficientEnergy.get(card)) {
+                    int refundEnergy = PerseveranceFields.cardEnergy.get(card);
+                    Wiz.atb(new GainEnergyAction(refundEnergy));
+                }
             }
             PerseveranceFields.setIsPerseverable(card, false);
             __instance.exhaustCard = true;
@@ -431,8 +444,6 @@ public class PerseverancePatch {
                 AbstractCard tmp = card.makeStatEquivalentCopy();
                 PerseveranceFields.trapped.set(tmp, true);
                 Wiz.atb(new MakeTempCardInHandAction(tmp));
-            } else{
-                PerseveranceFields.trapped.set(card, false);
             }
         }
         @SpirePostfixPatch

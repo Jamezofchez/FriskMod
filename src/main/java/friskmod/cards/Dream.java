@@ -43,7 +43,6 @@ public class Dream extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToTop(new PlayerEnemyDraftAction(p, m, OpenDraftAction.DreamType.NIGHTMARE, magicNumber));
         addToBot(new DraftDreamPerDebuff(p, m, OpenDraftAction.DreamType.DREAM, magicNumber));
     }
 

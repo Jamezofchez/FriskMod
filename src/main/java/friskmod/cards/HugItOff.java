@@ -45,10 +45,10 @@ public class HugItOff extends AbstractEasyCard {
             addToBot(new GainBlockAction(monster, p, block));
         }
         AbstractCountdownPower countdown = new CountdownDraw(p, DRAW_CARDS, secondMagic, UPG_DRAW_CARDS);
-        addToBot(new ApplyPowerAction(p, p, countdown, DRAW_CARDS));
-        if (upgraded){
-            countdown.upgrade(); //only for card rendering
+        if (upgraded) {
+            countdown.upgrade();
         }
+        addToBot(new ApplyPowerAction(p, p, countdown, DRAW_CARDS));
     }
 
     @Override

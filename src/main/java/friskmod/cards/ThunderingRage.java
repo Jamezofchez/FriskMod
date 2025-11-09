@@ -31,10 +31,10 @@ public class ThunderingRage extends AbstractEasyCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             3 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 24;
-    private static final int UPG_DAMAGE = 8;
+    private static final int DAMAGE = 26;
+//    private static final int UPG_DAMAGE = 8;
     private static final int PERSEVERE_AMOUNT = 1;
-//    private static final int UPG_DAMAGE_PERSEVERE_AMOUNT = 1;
+    private static final int UPG_DAMAGE_PERSEVERE_AMOUNT = 1;
 
     public ThunderingRage() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -53,6 +53,7 @@ public class ThunderingRage extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeDamage(UPG_DAMAGE);
+//        upgradeDamage(UPG_DAMAGE);
+        upgradeMagicNumber(UPG_DAMAGE_PERSEVERE_AMOUNT);
     }
 }

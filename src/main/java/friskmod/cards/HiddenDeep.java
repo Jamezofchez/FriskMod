@@ -61,7 +61,7 @@ public class HiddenDeep extends AbstractEasyCard {
                         }
                     }));
                 },
-                magicNumber, false, c -> PerseverancePatch.isUnplayable(c) || PerseveranceFields.trapped.get(c), CardGroup.CardGroupType.DRAW_PILE, CardGroup.CardGroupType.DISCARD_PILE
+                magicNumber, false, c -> PerseverancePatch.isRealUnplayable(c) || PerseveranceFields.trapped.get(c), CardGroup.CardGroupType.DISCARD_PILE
         ));
     }
 

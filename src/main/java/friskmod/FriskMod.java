@@ -7,6 +7,8 @@ import basemod.abstracts.DynamicVariable;
 import basemod.interfaces.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.actions.AfterCardUseAction;
 import friskmod.actions.OnBattleStartAction;
@@ -15,6 +17,7 @@ import friskmod.cards.cardvars.AbstractEasyDynamicVariable;
 import friskmod.character.Frisk;
 import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
+import friskmod.powers.NonAttackPower;
 import friskmod.relics.BaseRelic;
 import friskmod.util.*;
 import com.badlogic.gdx.Files;
@@ -30,6 +33,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.*;
+import friskmod.util.interfaces.AfterCardPlayedInterface;
 import org.scannotation.AnnotationDB;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -428,6 +432,10 @@ public class FriskMod implements
         //XPModifierAll.setActiveCard(abstractCard);
         if (!abstractCard.dontTriggerOnUseCard) {
             Wiz.atb(new AfterCardUseAction(abstractCard));
+        }
+        for (AbstractPower p : AbstractDungeon.player.powers) {
+            if (p instanceof NonAttackPower)
+                ((NonAttackPower) p).afterCardPlayed(abstractCard);
         }
     }
 

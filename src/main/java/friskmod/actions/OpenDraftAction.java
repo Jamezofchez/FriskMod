@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.cards.Dream;
 import friskmod.cards.choosecard.*;
 import friskmod.helper.DraftManager;
 
@@ -46,7 +45,7 @@ public class OpenDraftAction extends AbstractGameAction {
         possNightmareChoices.add(new NightmareOfNEO());
         possNightmareChoices.add(new NightmareOfKarma());
         possNightmareChoices.add(new NightmareOfMercied());
-        possNightmareChoices.add(new NightmareOfPounce());
+        possNightmareChoices.add(new NightmareOfAttack());
         possNightmareChoices.add(new NightmareOfVulnerable());
         possNightmareChoices.add(new NightmareOfWeak());
     }

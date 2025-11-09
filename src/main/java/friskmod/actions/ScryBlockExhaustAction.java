@@ -62,7 +62,7 @@ public class ScryBlockExhaustAction extends AbstractGameAction {
             } else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     AbstractDungeon.player.drawPile.moveToDiscardPile(c);
-                    if (PerseverancePatch.isUnplayable(c) || PerseveranceFields.trapped.get(c)) {
+                    if (PerseverancePatch.isRealUnplayable(c)) {
                         addToBot(new GainBlockAction(AbstractDungeon.player, blockPerCard));
                         addToBot(new ExhaustSpecificCardAction(c, AbstractDungeon.player.discardPile));
                     }

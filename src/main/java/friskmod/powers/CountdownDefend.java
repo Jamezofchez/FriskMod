@@ -1,18 +1,18 @@
 package friskmod.powers;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
-import friskmod.actions.ConvertLVKarmaAction;
 
-public class CountdownAgami extends AbstractCountdownPower {
-    public static final String POWER_ID = FriskMod.makeID(CountdownAgami.class.getSimpleName());
+public class CountdownDefend extends AbstractCountdownPower {
+    public static final String POWER_ID = FriskMod.makeID(CountdownDefend.class.getSimpleName());
 
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
@@ -23,42 +23,35 @@ public class CountdownAgami extends AbstractCountdownPower {
     private static final PowerType TYPE = PowerType.DEBUFF;
     private static final boolean TURN_BASED = false;
 
-    private final int DETONATION_AMOUNT;
+    private final int UPG_BLOCK;
 
-    public CountdownAgami(AbstractCreature owner, int amount, int countdown, int upg_amount) {
+    public CountdownDefend(AbstractCreature owner, int amount, int countdown, int upg_amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown);
         this.name = NAME;
-        this.DETONATION_AMOUNT = upg_amount;
+        this.UPG_BLOCK = upg_amount;
         updateDescription();
     }
 
     @Override
     public void onCountdownTrigger(boolean expire) {
-        addToBot(new ConvertLVKarmaAction(owner, amount));
+        addToBot(new GainBlockAction(owner, amount));
         super.onCountdownTrigger(expire);
     }
 
     @Override
     public AbstractPower makeCopy() {
-        return new CountdownAgami(owner, amount, amount2, DETONATION_AMOUNT);
+        return new CountdownDefend(owner, amount, amount2, UPG_BLOCK);
     }
 
     @Override
     public void updateDescription() {
         int descNum = getDescNum();
         String baseDescription = DESCRIPTIONS[descNum];
-        if (descNum < 2) {
-            this.description = String.format(baseDescription, amount2);
-        } else{
-            this.description = String.format(baseDescription, amount2, amount);
-        }
+        this.description = String.format(baseDescription, amount2, amount);
     }
 
     private int getDescNum() {
         int descNum = 0;
-        if (amount > 0){
-            descNum += 2;
-        }
         if (amount2 == 1){
             descNum += 1;
         }
@@ -68,7 +61,7 @@ public class CountdownAgami extends AbstractCountdownPower {
     @Override
     public void upgrade(){
         super.upgrade();
-        this.amount += DETONATION_AMOUNT;
+        this.amount += UPG_BLOCK;
         updateDescription();
     }
 }

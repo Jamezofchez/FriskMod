@@ -55,6 +55,21 @@ public class Duel extends AbstractEasyCard {
                 isDone = true;
             }
         });
+        Wiz.atb(new AbstractGameAction() {
+            @Override
+            public void update() {
+                CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+                tmp.group = (ArrayList<AbstractCard>) Wiz.p().drawPile.group.stream()
+                        .filter(c -> c.hasTag(CardTags.STARTER_DEFEND))
+                        .collect(Collectors.toList());
+                for (AbstractCard c : tmp.group) {
+                    if (!tmp.isEmpty() && Wiz.hand().size() < BaseMod.MAX_HAND_SIZE) {
+                        Wiz.att(new FetchAction(Wiz.p().drawPile, card -> card == c));
+                    }
+                }
+                isDone = true;
+            }
+        });
     }
 
     @Override

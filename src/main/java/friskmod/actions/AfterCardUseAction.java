@@ -10,7 +10,6 @@ import friskmod.cards.BalletShoes;
 import friskmod.powers.NonAttackPower;
 import friskmod.util.Wiz;
 import friskmod.util.interfaces.AfterCardPlayedInterface;
-import friskmod.powers.CountdownPounce;
 
 public class AfterCardUseAction extends AbstractGameAction {
     private final AbstractCard card;
@@ -33,13 +32,6 @@ public class AfterCardUseAction extends AbstractGameAction {
         }
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
             for (AbstractPower p : m.powers) {
-                if (p instanceof CountdownPounce){
-                    if (this.card != null){
-                        if (this.card.type == AbstractCard.CardType.ATTACK){
-                            ((CountdownPounce) p).setPlayerNormalDamage(true);
-                        }
-                    }
-                }
                 if (p instanceof AfterCardPlayedInterface) {
                     ((AfterCardPlayedInterface) p).afterCardPlayed(this.card);
                 }

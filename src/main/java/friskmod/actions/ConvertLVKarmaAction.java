@@ -16,20 +16,19 @@ public class ConvertLVKarmaAction extends AbstractGameAction
 
     private final AbstractPlayer p = AbstractDungeon.player;
 
-    private final int additionalLV;
+//    private final int additionalLV;
+    private final int detAmount;
 
-    public ConvertLVKarmaAction(AbstractCreature c, int additionalLV) {
+
+    public ConvertLVKarmaAction(AbstractCreature c, int detAmount) {
         this.c = c;
         this.actionType = ActionType.SPECIAL;
-        this.additionalLV = additionalLV;
+        this.detAmount = detAmount;
     }
 
     @Override
     public void update() {
-        if (additionalLV > 0) {
-            Wiz.att(new ApplyPowerAction(c, p, new LV_Enemy(c, additionalLV), additionalLV));
-            Wiz.att(new ConsumeLVEnemyAgami(c));
-        }
+        Wiz.att(new ConsumeLVEnemyAgami(c, detAmount));
         this.isDone = true;
     }
 }
