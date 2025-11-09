@@ -71,6 +71,11 @@ public class Wiz {
         monsters.removeIf(AbstractCreature::isDeadOrEscaped);
         return monsters;
     }
+    public static ArrayList<AbstractMonster> getAliveOrDying() {
+        ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
+        monsters = (ArrayList<AbstractMonster>) monsters.stream().filter(x -> !x.isDead).collect(Collectors.toList());
+        return monsters;
+    }
 
     public static ArrayList<AbstractCard> getCardsMatchingPredicate(Predicate<AbstractCard> pred) {
         return getCardsMatchingPredicate(pred, false);

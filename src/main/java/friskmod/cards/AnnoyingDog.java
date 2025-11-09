@@ -2,6 +2,7 @@ package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -78,7 +79,16 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
     }
 
     public void triggerWhenDrawn() {
-        Wiz.actB(this::untrapOnCritical);
+        Wiz.actB(this::untrapOnCriticalDraw);
+    }
+
+    private void untrapOnCriticalDraw() {
+        PerseveranceFields.trapped.set(this, true);
+        if (isCritical()) {
+            PerseveranceFields.trapped.set(this, false);
+        } else{
+            Wiz.atb(new LoseEnergyAction(1));
+        }
     }
 
     private void untrapOnCritical() {

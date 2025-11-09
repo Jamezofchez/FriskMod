@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
+import friskmod.cards.AnnoyingDog;
 import friskmod.util.Wiz;
 
 import java.util.regex.Matcher;
@@ -44,8 +45,8 @@ public class TrappedPatch {
             method = "triggerWhenDrawn"
     )
     public static class AbstractCardTriggerWhenDrawnPatch {
-        @SpirePrefixPatch
-        public static void Prefix(AbstractCard __instance) {
+        @SpirePostfixPatch
+        public static void Postfix(AbstractCard __instance) {
             if (PerseveranceFields.trapped.get(__instance)) {
 //                int cardCost = __instance.costForTurn;
 //                if (cardCost == -1) {
@@ -53,7 +54,9 @@ public class TrappedPatch {
 //                } else if (cardCost > 0) {
 //                    Wiz.atb(new LoseEnergyAction(cardCost));
 //                }
-                Wiz.atb(new LoseEnergyAction(1));
+                if (!(__instance instanceof AnnoyingDog)) {
+                    Wiz.atb(new LoseEnergyAction(1));
+                }
             }
         }
     }

@@ -484,7 +484,7 @@ public class PerseverancePatch {
                         if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
                             m.replace(
                                     "{" +
-                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isTrapped($0)") + "||" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isCurseOrStatus($0)") + ") {" +
+                                            "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isTrapped($0)") + ") {" +
                                             "    " + (PerseverancePatch.class.getName() + "$OnCardPersevered$BlockUseCardExhaustPatch.handleExhaust($0)") + ";" +
                                             "  } " +
                                             "  if (" + (PerseverancePatch.class.getName() + "$OnCardPersevered.isTrapped($0)") + ") {" +

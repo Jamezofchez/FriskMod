@@ -193,7 +193,8 @@
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
-    "DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a ${modID}:Sip of all your potions. NL Exhaust."
+    "DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a ${modID}:Sip of all your potions. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a upgraded ${modID}:Sip of all your potions. NL Exhaust."
   },
   "${modID}:HeartBleed": {
     "NAME": "Heartbleed",

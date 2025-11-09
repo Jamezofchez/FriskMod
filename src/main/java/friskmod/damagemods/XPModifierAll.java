@@ -217,12 +217,12 @@ public class XPModifierAll extends AbstractDamageModifier {
             ExtraXPInfo.originalCardXP.set(sourceCard, originalCardXP);
         }
         if (ExtraXPInfo.totalEnemies.get(sourceCard) == -1) {
-            int total = AbstractDungeon.getMonsters().monsters.size();
+            int total = Wiz.getAliveOrDying().size();
             ExtraXPInfo.totalEnemies.set(sourceCard, total);
         }
         if (ExtraXPInfo.enemyLV.get(sourceCard) == null) {
             ArrayList<Integer> enemyLV = new ArrayList<>();
-            for (AbstractMonster m: AbstractDungeon.getMonsters().monsters){
+            for (AbstractMonster m: Wiz.getAliveOrDying()){
                 enemyLV.add(getLVFromTarget(m));
             }
             ExtraXPInfo.enemyLV.set(sourceCard, enemyLV);
@@ -239,7 +239,7 @@ public class XPModifierAll extends AbstractDamageModifier {
         int originalCardXP = ExtraXPInfo.originalCardXP.get(sourceCard);
         CardXPFields.XPFields.addedXP.set(sourceCard, 0); //clear stale
         int monsterIndex = 0;
-        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+        for (AbstractMonster m : Wiz.getAliveOrDying()) {
 //            if (!m.isDeadOrEscaped()) {
                 Wiz.att(new SwapXPAction(sourceCard, p, m, Math.max(0,originalCardXP-1), ExtraXPInfo.enemyLV.get(sourceCard).get(monsterIndex), false));
 //            }
