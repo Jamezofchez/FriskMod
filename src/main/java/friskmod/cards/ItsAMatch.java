@@ -76,7 +76,7 @@ public class ItsAMatch extends AbstractEasyCard {
                             continue;
                         }
                         if (mpow.ID.equals(ppow.ID) &&
-                                StealPowerAction.stealablePows.contains(mpow.ID) && StealableWhitelist.getInstance().checkPreProcess(mpow)) {
+                                StealPowerAction.stealablePows.contains(mpow.ID) && StealableWhitelist.getInstance().checkPreProcess(mpow, true)) {
                             glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
                         }
                     }

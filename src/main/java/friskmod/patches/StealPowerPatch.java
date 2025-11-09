@@ -30,7 +30,7 @@ public class StealPowerPatch {
         @SpirePrefixPatch
         public static void Prefix(AbstractPower __instance, SpriteBatch sb, @ByRef float[] x, @ByRef float[] y, Color c) {
             if (StealPowerAction.activatedInstance != null && StealPowerAction.activatedInstance.affectedPowers.contains(__instance)) {
-                if(StealableWhitelist.getInstance().checkPreProcess(__instance)) {
+                if(StealableWhitelist.getInstance().checkPreProcess(__instance, false)) {
                     if (StealPowerAction.activatedInstance.steal){
                         origAlpha = c.a;
                     }

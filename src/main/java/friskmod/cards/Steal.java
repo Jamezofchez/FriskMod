@@ -71,7 +71,7 @@ public class Steal extends AbstractEasyCard {
     public void triggerOnGlowCheck() {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         for (AbstractMonster m : Wiz.getMonsters()) {
-            if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
+            if (!m.isDeadOrEscaped() && (m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p, true)))) {
                 glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
             }
         }

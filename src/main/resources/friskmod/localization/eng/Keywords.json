@@ -127,7 +127,7 @@
     "NAMES": [
       "Copy"
     ],
-    "DESCRIPTION": "Any buffs can only be copied if enemy didn't start with them. NL Strength and enemy #yLV is converted into player #yLV. NL The card will glow if anything can be copied."
+    "DESCRIPTION": "Copy any buffs the enemy has. NL Strength and enemy #yLV is converted into player #yLV. NL The card will glow if anything can be copied."
   },
   {
     "PROPER_NAME": "Inherent",

@@ -15,10 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
-import friskmod.actions.LowCostExhaustAction;
-import friskmod.actions.LowCostGambleAction;
-import friskmod.actions.LowCostUpgradeAction;
-import friskmod.actions.ResetCardCostLimit;
+import friskmod.actions.*;
 import friskmod.helper.GrillbysHelper;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.LesserDuplication;
@@ -212,6 +209,8 @@ public class GenericDrinkCard extends AbstractDrinkCard {
             case "GamblersBrew":
                 gamblersBrewUse();
                 return true;
+            case "LiquidMemories":
+                liquidMemoriesUse();
             default:
                 return false;
         }
@@ -250,6 +249,9 @@ public class GenericDrinkCard extends AbstractDrinkCard {
     }
     private void gamblersBrewUse() {
         addToBot(new LowCostGambleAction());
+    }
+    private void liquidMemoriesUse(){
+        addToBot(new LowCostMemoriesAction());
     }
 
 

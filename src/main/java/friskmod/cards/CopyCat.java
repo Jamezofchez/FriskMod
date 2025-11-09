@@ -37,7 +37,7 @@ public class CopyCat extends AbstractEasyCard {
     public void triggerOnGlowCheck() {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         for (AbstractMonster m : Wiz.getMonsters()) {
-            if ((m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p)))) {
+            if ((m.powers.stream().anyMatch(p -> StealPowerAction.stealablePows.contains(p.ID) && StealableWhitelist.getInstance().checkPreProcess(p, false)))) {
                 glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
             }
         }

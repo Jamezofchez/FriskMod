@@ -165,7 +165,7 @@ public class StealPowerAction extends AbstractGameAction {
 //                }
                 for (AbstractPower pow : m.powers) {
                     if (pow.type == AbstractPower.PowerType.BUFF) { //should handle e.g not stealing negative strength
-                        if (stealablePows.contains(pow.ID) && StealableWhitelist.getInstance().checkPreProcess(pow)){
+                        if (stealablePows.contains(pow.ID) && StealableWhitelist.getInstance().checkPreProcess(pow, steal)){
                             affectedPowers.add(pow);
                             affectedIDs.add(pow.ID);
                         } else{

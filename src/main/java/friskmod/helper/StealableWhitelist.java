@@ -97,7 +97,7 @@ public class StealableWhitelist {
         return true;
     }
 
-    private boolean inherentPreProcess(AbstractPower enemyPower, boolean tried, Predicate<AbstractPower> globalPostProcess) {
+    private boolean inherentPreProcess(AbstractPower enemyPower, boolean tried, Predicate<AbstractPower> globalPostProcess, boolean steal) {
         if (globalPostProcess != null){
             if (!globalPostProcess.test(enemyPower)) {
 //                if (tried) {
@@ -112,7 +112,7 @@ public class StealableWhitelist {
 //        if (enemyPower instanceof RegenerateMonsterPower){
 //            return true;
 //        }
-        if (InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower) && InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower) >= enemyPower.amount){
+        if (steal && InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower) && InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower) >= enemyPower.amount){
             if (tried){
                 AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, String.format(UI_STRINGS.TEXT[2], enemyPower.name), true));
             }
@@ -120,13 +120,13 @@ public class StealableWhitelist {
         }
         return true;
     }
-    public boolean checkPreProcess(AbstractPower enemyPower){
+    public boolean checkPreProcess(AbstractPower enemyPower, boolean steal){
         if (enemyPower instanceof StrengthPower){
             if (!strengthPreProcess()){
                 return false;
             }
         }
-        return inherentPreProcess(enemyPower, false, (pow) -> true);
+        return inherentPreProcess(enemyPower, false, (pow) -> true, steal);
     }
 
     private void initializeWhitelist() {
@@ -230,7 +230,7 @@ public class StealableWhitelist {
                     return false;
                 }
             }
-            if (!inherentPreProcess(enemyPower, true, globalPostProcess)){
+            if (!inherentPreProcess(enemyPower, true, globalPostProcess, steal)){
                 return false;
             }
             return true;
@@ -241,18 +241,20 @@ public class StealableWhitelist {
                 postProcess.accept(copy);
             }
             int inherentPowerAmount = inherentPostProcess(steal, enemyPower);
+            copy.owner = AbstractDungeon.player;
             if (inherentPowerAmount == 0) {
-                copy.owner = AbstractDungeon.player;
                 Wiz.att(new ApplyPowerAction(copy.owner, enemyPower.owner, copy, copy.amount));
                 if (steal) {
                     AbstractCreature enemy = enemyPower.owner;
                     Wiz.att(new RemoveSpecificPowerAction(enemy, copy.owner, enemyPower));
                 }
-            } else{ //steal must be true
+            } else{
                 copy.amount = copy.amount - inherentPowerAmount;
                 Wiz.att(new ApplyPowerAction(copy.owner, enemyPower.owner, copy, copy.amount));
-                AbstractCreature enemy = enemyPower.owner;
-                Wiz.att(new ReducePowerAction(enemy, copy.owner, enemyPower, inherentPowerAmount));
+                if (steal) {
+                    AbstractCreature enemy = enemyPower.owner;
+                    Wiz.att(new ReducePowerAction(enemy, copy.owner, enemyPower, inherentPowerAmount));
+                }
             }
             Wiz.att(Wiz.actionify(copy::updateDescription)); //incase desc depends on owner
         }

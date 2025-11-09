@@ -28,7 +28,7 @@ public class Tinker extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int BLOCK = 10;
-    private static final int UPG_BLOCK = 5;
+    private static final int UPG_BLOCK = 6;
     private static final int NEO_AND_FRAIL = 1;
 
     public Tinker() {

@@ -131,7 +131,8 @@
   },
   "${modID}:Duel": {
     "NAME": "Dual!",
-    "DESCRIPTION": "Put ALL ${modID}:Strikes and ${modID}:Defends from your draw pile to your hand. NL Exhaust."
+    "DESCRIPTION": "Put ALL ${modID}:Strikes and ${modID}:Defends from your draw pile to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Put ALL ${modID}:Strikes and ${modID}:Defends from your draw pile to your hand."
   },
   "${modID}:EchoFlower": {
     "NAME": "Echo Flower",
