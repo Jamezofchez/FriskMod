@@ -13,7 +13,7 @@ public class NightmareOfHurt extends AbstractDreamCard{
 
     public NightmareOfHurt() {
         super(ID);
-        setDisplayRarity(CardRarity.COMMON);
+        setDisplayRarity(CardRarity.UNCOMMON);
     }
 
     @Override

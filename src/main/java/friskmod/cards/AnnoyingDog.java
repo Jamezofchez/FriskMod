@@ -1,16 +1,14 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.FriskMod;
-import friskmod.actions.CustomSFXAction;
+import friskmod.actions.StealEnemyHP;
 import friskmod.character.Frisk;
+import friskmod.helper.ThreatenedCheck;
 import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
@@ -35,6 +33,10 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
     );
     private static final int DAMAGE_AND_BLOCK = 10;
     private static final int UPG_DAMAGE_AND_BLOCK = 3;
+    
+    private boolean breakFree = false;
+    private ArrayList<AbstractCard> currentHand = null;
+    
     public AnnoyingDog() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE_AND_BLOCK;
@@ -57,7 +59,14 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
         blck();
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
         //trig_critical = false;
-        PerseveranceFields.trapped.set(this, true);
+
+    }
+
+    @Override
+    public void resetAttributes() {
+        super.resetAttributes();
+        breakFree = false;
+        currentHand = null;
     }
 
     @Override
@@ -70,12 +79,25 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
     public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
 
     }
-
+    @Override
+    public void update() {
+        super.update();
+        if (Wiz.isInCombat()) {
+            if (AbstractDungeon.player.hand.group.contains(this)) {
+                untrapOnCritical();
+            } else {
+                if (!AbstractDungeon.player.limbo.group.contains(this) && !trig_critical) {
+                    PerseveranceFields.trapped.set(this, true);
+                }
+            }
+        }
+    }
     @Override
     public void afterCardPlayed(AbstractCard cardPlayed) {
         if (AbstractDungeon.player.hand.group.contains(this)) {
-            untrapOnCritical();
             if (cardPlayed.cardID.equals(BreakFree.ID)) {
+                breakFree = true;
+                currentHand = new ArrayList<>(AbstractDungeon.player.hand.group);
                 PerseveranceFields.trapped.set(this, false);
             }
             initializeDescription();
@@ -96,6 +118,18 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
     }
 
     private void untrapOnCritical() {
+        if (breakFree) {
+            if (!currentHand.equals(AbstractDungeon.player.hand.group)) {
+                breakFree = false;
+                currentHand = null;
+                untrapOnCriticalNormal();
+            }
+        } else {
+            untrapOnCriticalNormal();
+        }
+    }
+
+    private void untrapOnCriticalNormal() {
         PerseveranceFields.trapped.set(this, true);
         if (isCritical()) {
             PerseveranceFields.trapped.set(this, false);

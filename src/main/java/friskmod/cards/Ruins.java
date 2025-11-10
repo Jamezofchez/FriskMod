@@ -26,9 +26,10 @@ public class Ruins extends AbstractEasyCard {
             CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 7;
-    private static final int UPG_DAMAGE = 5; //hardcoded in desc
-    private static final int WAIT_TIMER = 5;
+    private static final int DAMAGE = 10;
+    private static final int UPG_DAMAGE = 10; //hardcoded in desc
+    private static final int WAIT_TIMER = 6;
+    private static final int UPG_WAIT_TIMER = 3;
 
     public Ruins() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -39,14 +40,11 @@ public class Ruins extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractCountdownPower countdown = new CountdownRuins(p, DAMAGE, secondMagic, UPG_DAMAGE);
-        if (upgraded) {
-            countdown.upgrade();
-        }
         addToBot(new ApplyPowerAction(p, p, countdown, DAMAGE));
     }
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_DAMAGE);
+        upgradeSecondMagic(UPG_WAIT_TIMER);
     }
 }

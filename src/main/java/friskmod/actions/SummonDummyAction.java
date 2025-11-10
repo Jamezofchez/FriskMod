@@ -50,7 +50,7 @@ public class SummonDummyAction extends AbstractGameAction {
             return;
         }
         AbstractDummy dummy;
-        float x = MathUtils.random(-350.0F, 150.0F);
+        float x = MathUtils.random(-450.0F, 50.0F);
         float y = MathUtils.random(150.0F, 250.0F);
         switch (this.myDummy) {
             case MAD:
@@ -102,7 +102,7 @@ public class SummonDummyAction extends AbstractGameAction {
         addToTop((AbstractGameAction) new SpawnMonsterAction(dummy, true));
     }
 
-    private static final float BORDER = 50.0F * Settings.scale;
+    private static final float BORDER = 75.0F * Settings.scale;
 
     private static boolean overlap(Hitbox a, Hitbox b) {
         if (a.x > b.x + b.width + BORDER || b.x > a.x + a.width + BORDER)

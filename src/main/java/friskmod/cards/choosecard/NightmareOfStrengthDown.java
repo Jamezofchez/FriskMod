@@ -15,18 +15,16 @@ import static friskmod.FriskMod.makeID;
 public class NightmareOfStrengthDown extends AbstractNightmareCard{
     public static final String ID = makeID(NightmareOfStrengthDown.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
 
-    private static final int POWER_AMOUNT = 2;
+    private static final int POWER_AMOUNT = -2;
 
     public NightmareOfStrengthDown() {
         super(ID);
-        setDisplayRarity(CardRarity.UNCOMMON);
+        setDisplayRarity(CardRarity.COMMON);
     }
 
     @Override
-    public void chooseOption() {
-        addToBot(new ApplyPowerAction(getTarget(), AbstractDungeon.player, new StrengthPower(getTarget(), -POWER_AMOUNT), -POWER_AMOUNT, true, AbstractGameAction.AttackEffect.NONE));
-        if (!getTarget().hasPower("Artifact"))
-            addToBot(new ApplyPowerAction(getTarget(), AbstractDungeon.player, new GainStrengthPower(getTarget(), POWER_AMOUNT), POWER_AMOUNT, true, AbstractGameAction.AttackEffect.NONE));
+    protected AbstractPower getPower() {
+        return new StrengthPower(getTarget(), POWER_AMOUNT);
     }
 
 }

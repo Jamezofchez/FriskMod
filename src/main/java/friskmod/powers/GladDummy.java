@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
@@ -15,7 +16,6 @@ public class GladDummy extends BasePower {
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
     private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(FriskMod.makeID(SoulBound.class.getSimpleName()));
-
 
 
     //The only thing TURN_BASED controls is the color of the number on the power icon.

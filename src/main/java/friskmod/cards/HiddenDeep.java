@@ -32,9 +32,9 @@ public class HiddenDeep extends AbstractEasyCard {
             0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int BLOCK = 3;
-    private static final int UPG_BLOCK = 1;
+    private static final int UPG_BLOCK = 2;
     private static final int NUM_CARDS = 1;
-    private static final int UPG_NUM_CARDS = 1;
+//    private static final int UPG_NUM_CARDS = 1;
 
     public HiddenDeep() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -68,6 +68,5 @@ public class HiddenDeep extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeBlock(UPG_BLOCK);
-        upgradeMagicNumber(UPG_NUM_CARDS);
     }
 }

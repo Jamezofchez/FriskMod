@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import friskmod.FriskMod;
 import friskmod.helper.DraftManager;
 import friskmod.powers.CountdownAttack;
@@ -40,17 +41,13 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         String powerName;
         if (tmp instanceof CountdownAttack){
             powerName = TEXT[6];
-        } else if (tmp == null){
-            powerName = TEXT[7];
         } else{
             powerName = tmp.name;
         }
         return powerName;
     }
 
-    protected AbstractPower getPower(){
-        return null;
-    };
+    protected abstract AbstractPower getPower();
 
     @Override
     public void chooseOption() {
@@ -69,12 +66,7 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         } else{
             targetName = TEXT[2];
         }
-        String powerAmount;
-        if (tmp != null){
-            powerAmount = tmp.amount + "";
-        } else{
-            powerAmount = TEXT[8];
-        }
+        String powerAmount = tmp.amount + "";
         this.rawDescription = String.format(basename, powerAmount, powerName, targetName);
         super.initializeDescription();
     }

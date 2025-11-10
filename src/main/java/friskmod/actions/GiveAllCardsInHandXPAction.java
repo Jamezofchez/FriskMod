@@ -30,18 +30,19 @@ public class GiveAllCardsInHandXPAction extends AbstractGameAction {
     }
 
     public void update() {
-        ArrayList<AbstractGameAction> actions = AbstractDungeon.actionManager.actions;
-        ++repeatCount;
-        if (repeatCount < MAX_REPEATS) {
-            if (!actions.isEmpty()) {
-                if (!(actions.get(0) instanceof GiveAllCardsInHandXPAction)) {
-                    AbstractDungeon.actionManager.addToBottom(new GiveAllCardsInHandXPAction(XPamount));
-                    this.isDone = true;
-                    return;
+
+        if (this.duration == this.startDuration) {
+            ArrayList<AbstractGameAction> actions = AbstractDungeon.actionManager.actions;
+            ++repeatCount;
+            if (repeatCount < MAX_REPEATS) {
+                if (!actions.isEmpty()) {
+                    if (!(actions.get(0) instanceof GiveAllCardsInHandXPAction)) {
+                        AbstractDungeon.actionManager.addToBottom(new GiveAllCardsInHandXPAction(XPamount));
+                        this.isDone = true;
+                        return;
+                    }
                 }
             }
-        }
-        if (this.duration == this.startDuration) {
             if (this.p.hand.isEmpty()) {
                 this.isDone = true;
                 return;
@@ -49,6 +50,7 @@ public class GiveAllCardsInHandXPAction extends AbstractGameAction {
             for (AbstractCard c : this.p.hand.group) {
                 CardXPFields.addXP(c, XPamount);
             }
+            repeatCount = 0;
         }
         tickDuration();
     }

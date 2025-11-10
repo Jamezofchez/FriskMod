@@ -23,7 +23,11 @@ public class RememberBraveryPower extends BasePower {
     }
 
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0];
+        if (amount == 1) {
+            this.description = DESCRIPTIONS[0];
+        } else{
+            this.description = String.format(DESCRIPTIONS[1], amount);
+        }
     }
 
 }

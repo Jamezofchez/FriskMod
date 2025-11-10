@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 
 import static friskmod.FriskMod.makeID;
 
-public class BalletShoes extends AbstractEasyCard implements AfterCardPlayedInterface {
+public class BalletShoes extends AbstractEasyCard {
     public static final String ID = makeID(BalletShoes.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
     public static final String[] TEXT = uiStrings.TEXT;
@@ -51,16 +51,24 @@ public class BalletShoes extends AbstractEasyCard implements AfterCardPlayedInte
         baseMagicNumber = magicNumber = TIMES_PLAY;
         tags.add(FriskTags.INTEGRITY);
     }
-
     @Override
-    public void triggerWhenDrawn() {
-        Wiz.actB(this::makeMiddleCardGlow);
+    public void update() {
+        super.update();
+        if (Wiz.isInCombat()) {
+            if (AbstractDungeon.player.hand.group.contains(this)) {
+                makeMiddleCardGlow();
+            }
+        }
     }
-
-    @Override
-    public void onRetained() {
-        Wiz.actB(this::makeMiddleCardGlow);
-    }
+//    @Override
+//    public void triggerWhenDrawn() {
+//        Wiz.actB(this::makeMiddleCardGlow);
+//    }
+//
+//    @Override
+//    public void onRetained() {
+//        Wiz.actB(this::makeMiddleCardGlow);
+//    }
 
     private void makeMiddleCardGlow() {
         try {
@@ -141,8 +149,8 @@ public class BalletShoes extends AbstractEasyCard implements AfterCardPlayedInte
         upgradeMagicNumber(UPG_TIMES_PLAY);
     }
 
-    @Override
-    public void afterCardPlayed(AbstractCard card) {
-        makeMiddleCardGlow();
-    }
+//    @Override
+//    public void afterCardPlayed(AbstractCard card) {
+//        makeMiddleCardGlow();
+//    }
 }

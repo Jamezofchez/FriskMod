@@ -52,7 +52,7 @@ public class CroquetRoll extends AbstractEasyCard {
     public void cutContent(){
         AbstractPlayer p = AbstractDungeon.player;
         addToBot(new AddTemporaryHPAction(p, p, magicNumber));
-        AbstractCard c = cardsToPreview.makeStatEquivalentCopy();
+        AbstractCard c = new Mallet();
         if (upgraded) {
             c.upgrade();
         }
@@ -61,6 +61,7 @@ public class CroquetRoll extends AbstractEasyCard {
 
     @Override
     public void upp() {
+        cardsToPreview.upgrade();
         upgradeMagicNumber(UPG_TEMP_HP);
     }
 }

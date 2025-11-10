@@ -4,7 +4,9 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.actions.unique.GainBlockRandomMonsterAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.BetterSpriterAnimation;
 import friskmod.FriskMod;
@@ -13,6 +15,14 @@ import friskmod.util.Wiz;
 
 public class GladDummy extends AbstractDummy {
     public static final String ID = FriskMod.makeID(GladDummy.class.getSimpleName());
+
+    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(FriskMod.makeID(GladDummy.class.getSimpleName()));
+
+    public static final String NAME = monsterStrings.NAME;
+
+    public static final String[] MOVES = monsterStrings.MOVES;
+
+    public static final String[] DIALOG = monsterStrings.DIALOG;
 
     public int amount;
 

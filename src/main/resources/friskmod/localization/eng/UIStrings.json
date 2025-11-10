@@ -104,9 +104,7 @@
       "%s of %s",
       "Dream",
       "%s Nightmare",
-      "Attack+",
-      "Strength",
-      "2"
+      "Attack+"
     ]
   },
   "${modID}:OpenDraftAction": {

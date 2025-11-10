@@ -36,6 +36,7 @@ public class ScalesOfJustice extends AbstractEasyCard {
         cardsList.add(new PostLeftScale());
         cardsList.add(new PostRightScale());
         MultiCardPreview.add(this, new PostLeftScale(), new PostRightScale());
+        this.exhaust = true;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

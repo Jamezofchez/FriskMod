@@ -32,7 +32,9 @@ public class GiveRandomCardXP extends AbstractGameAction {
             }
             AbstractCard c;
             c = this.p.hand.getRandomCard(true);
-            CardXPFields.addXP(c, XPamount);
+            if (XPamount > 0) {
+                CardXPFields.addXP(c, XPamount);
+            }
         }
         tickDuration();
     }

@@ -51,7 +51,7 @@ public class CountdownRuins extends AbstractCountdownPower {
     public void updateDescription() {
         int descNum = getDescNum();
         String baseDescription = DESCRIPTIONS[descNum];
-        this.description = String.format(baseDescription, amount2, amount, UPG_DAMAGE);
+        this.description = String.format(baseDescription, amount2, amount, amount, UPG_DAMAGE);
     }
 
     private int getDescNum() {

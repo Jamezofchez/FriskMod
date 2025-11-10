@@ -2,6 +2,8 @@ package friskmod.cards;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.OnObtainCard;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -37,6 +39,7 @@ public class Bandage extends AbstractCriticalCard implements OnObtainCard {
     @Override
     public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
         addToTop(new AddTemporaryHPAction(p, p, magicNumber));
+        addToBot(new ExhaustAction(1, true));
     }
 
     @Override

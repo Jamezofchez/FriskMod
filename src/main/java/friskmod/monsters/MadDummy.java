@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.MonsterStrings;
 import friskmod.BetterSpriterAnimation;
 import friskmod.FriskMod;
 import friskmod.powers.SoulBound;
@@ -14,9 +16,18 @@ import friskmod.util.Wiz;
 public class MadDummy extends AbstractDummy {
     public static final String ID = FriskMod.makeID(MadDummy.class.getSimpleName());
 
+    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(FriskMod.makeID(MadDummy.class.getSimpleName()));
+
+    public static final String NAME = monsterStrings.NAME;
+
+    public static final String[] MOVES = monsterStrings.MOVES;
+
+    public static final String[] DIALOG = monsterStrings.DIALOG;
+
     public int amount;
 
     AbstractCreature boundTarget;
+
 
     public MadDummy(float x, float y, int hp, int amount, AbstractCreature boundTarget) {
         super(ID, ID, x, y, hp);

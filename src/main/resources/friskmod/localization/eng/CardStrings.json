@@ -51,7 +51,7 @@
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",
-    "DESCRIPTION": "${modID}:Pickup: Heal !${modID}:M2! HP. NL ${modID}:Critical: Gain !M! ${modID}:Temp_HP."
+    "DESCRIPTION": "${modID}:Pickup: Heal !${modID}:M2! HP. NL ${modID}:Critical: Gain !M! ${modID}:Temp_HP and exhaust a card."
   },
   "${modID}:Blooky": {
     "NAME": "Blooky",
@@ -204,7 +204,6 @@
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
     "DESCRIPTION": "Gain !B! Block. NL Put !M! ${modID}:Unplayable card from your discard pile into your hand.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Put !M! ${modID}:Unplayable cards from your discard pile into your hand.",
     "EXTENDED_DESCRIPTION": [
       "Select a card to move to your hand.",
       "Select cards to move to your hand."
@@ -315,7 +314,7 @@
   },
   "${modID}:Ruins": {
     "NAME": "Ruins",
-    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry and on the start of turn deal !M! damage and increase this damage by 5."
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry and on the start of turn deal !M! damage and increase this damage by 10."
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",

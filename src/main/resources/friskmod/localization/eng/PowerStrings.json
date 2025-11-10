@@ -60,8 +60,8 @@
   "${modID}:CountdownRuins": {
     "NAME": "Ruins",
     "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, deal #b%s damage. At the start of turn increase this amount by #b%s.",
-      "On #yExpiry after playing #b%s card, deal #b%s damage. At the start of turn increase this amount by #b%s."
+      "On #yExpiry after playing #b%s cards, deal #b%s damage. At the start of turn deal #b%s damage and increase this amount by #b%s.",
+      "On #yExpiry after playing #b%s card, deal #b%s damage. At the start of turn deal #b%s damage and increase this amount by #b%s."
     ]
   },
   "${modID}:Determination": {
@@ -148,7 +148,8 @@
   "${modID}:RememberBraveryPower": {
     "NAME": "Bravery",
     "DESCRIPTIONS": [
-      "Whenever you would lose #y${modID}:LV, a random card in your hand gains equivalent #y${modID}:XP."
+      "Whenever you would lose #y${modID}:LV, a random card in your hand gains equivalent #y${modID}:XP.",
+      "Whenever you would lose #y${modID}:LV, #b%s random cards in your hand gain equivalent #y${modID}:XP."
     ]
   },
   "${modID}:RememberKindnessPower": {
