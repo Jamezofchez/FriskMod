@@ -338,7 +338,7 @@
       "Mad Dummy",
       "Mad_Dummy"
     ],
-    "DESCRIPTION": "Deals 2 damage to you on its turn. NL Whenever the dummy takes damage, so does its #ySoulbound target."
+    "DESCRIPTION": "Deals 3 damage to a random enemy on its turn. NL Whenever the dummy takes damage, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Glad Dummy",
@@ -346,7 +346,7 @@
       "Glad Dummy",
       "Glad_Dummy"
     ],
-    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
+    "DESCRIPTION": "Gives EVERYONE 4 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Overcome",

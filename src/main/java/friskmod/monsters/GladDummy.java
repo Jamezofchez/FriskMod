@@ -50,7 +50,7 @@ public class GladDummy extends AbstractDummy {
                 addToBot(new GainBlockAction(AbstractDungeon.player, this, 3));
 //                addToBot(new GainBlockRandomMonsterAction(this, 3));
                 for (AbstractMonster m : Wiz.getMonsters()) {
-                    addToBot(new GainBlockAction(m, this, 3));
+                    addToBot(new GainBlockAction(m, this, 4));
                 }
                 resetIdle(0.25F);
                 waitAnimation(0.25F);

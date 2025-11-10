@@ -7,11 +7,15 @@ import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.BetterSpriterAnimation;
 import friskmod.FriskMod;
 import friskmod.powers.SoulBound;
 import friskmod.util.Wiz;
+
+import java.util.ArrayList;
 
 public class MadDummy extends AbstractDummy {
     public static final String ID = FriskMod.makeID(MadDummy.class.getSimpleName());
@@ -34,7 +38,7 @@ public class MadDummy extends AbstractDummy {
         this.amount = amount;
         this.boundTarget = boundTarget;
         this.animation = new BetterSpriterAnimation(FriskMod.monsterPath("MadDummy/Spriter/MadDummy.scml"));
-        addMove((byte)0, Intent.ATTACK, 2);
+        addMove((byte)0, Intent.ATTACK, 3);
     }
 
     public void usePreBattleAction() {
@@ -47,14 +51,34 @@ public class MadDummy extends AbstractDummy {
         super.takeTurn();
         switch (this.nextMove) {
             case 0:
-                attackAnimation((AbstractCreature) Wiz.adp());
-                Wiz.atb(new DamageAction(Wiz.adp(), this.info));
-                resetIdle(0.25F);
-                waitAnimation(0.25F);
+                AbstractCreature randomEnemy = getRandomEnemy();
+                if (randomEnemy != null) {
+                    attackAnimation(randomEnemy);
+                    Wiz.atb(new DamageAction(randomEnemy, this.info));
+                    resetIdle(0.25F);
+                    waitAnimation(0.25F);
+                }
                 break;
         }
         Wiz.atb(new RollMoveAction(this));
     }
+
+    private AbstractCreature getRandomEnemy() {
+        ArrayList<AbstractMonster> tmp = new ArrayList();
+
+        for(AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            if (!m.halfDead && !m.isDying && !m.isEscaping && !(m instanceof AbstractDummy)) {
+                tmp.add(m);
+            }
+        }
+
+        if (tmp.size() == 0) {
+            return null;
+        } else {
+            return tmp.get(AbstractDungeon.cardRandomRng.random(0, tmp.size() - 1));
+        }
+    }
+
     @Override
     protected void getMove(int num) {
         setMoveShortcut((byte)0);
