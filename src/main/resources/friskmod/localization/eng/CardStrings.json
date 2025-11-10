@@ -182,7 +182,7 @@
   },
   "${modID}:GarbageDump": {
     "NAME": "Garbage Dump",
-    "DESCRIPTION": "Gain !M! Block for every ${modID}:Wasted *Energy spent."
+    "DESCRIPTION": "Gain !M! ${modID}:Vitality for every ${modID}:Wasted *Energy used."
   },
   "${modID}:GatherSoul": {
     "NAME": "Gather SOUL",
@@ -391,7 +391,7 @@
   },
   "${modID}:Tinker": {
     "NAME": "Tinker",
-    "DESCRIPTION": "Give the enemy !M! Frail. NL Give the enemy !M! ${modID}:NEO. NL Give the enemy !B! Block."
+    "DESCRIPTION": "Give the enemy !M! ${modID}:NEO. NL Give the enemy !B! Block."
   },
   "${modID}:ToAsh": {
     "NAME": "To Ash",

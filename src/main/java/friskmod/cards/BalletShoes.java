@@ -57,6 +57,11 @@ public class BalletShoes extends AbstractEasyCard implements AfterCardPlayedInte
         Wiz.actB(this::makeMiddleCardGlow);
     }
 
+    @Override
+    public void onRetained() {
+        Wiz.actB(this::makeMiddleCardGlow);
+    }
+
     private void makeMiddleCardGlow() {
         try {
             int card_pos;

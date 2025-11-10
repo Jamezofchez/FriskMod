@@ -58,9 +58,6 @@ public class KindnessPatch {
     public static class ApplyBlockActionUpdatePatch {
         @SpirePrefixPatch
         public static void Prefix(GainBlockAction __instance){
-            if (!FrailOnEnemiesPatch.FrailTrigger.triggeredFrail.get(__instance)) {
-                FrailOnEnemiesPatch.ApplyBlockActionUpdatePatch.Prefix(__instance);
-            }
             if (!RememberKindnessBlockTrigger.triggeredRememberKindness.get(__instance)){
                 RememberKindnessBlockTrigger.triggeredRememberKindness.set(__instance, true);
                 if (__instance.target instanceof AbstractMonster) {

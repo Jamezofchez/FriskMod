@@ -27,7 +27,7 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
     public AbstractCard makeStatEquivalentCopy() {
         AbstractCard original = super.makeStatEquivalentCopy();
 
-        ((AbstractCriticalCard)original).trig_critical = this.trig_critical;
+        ((AbstractCriticalCard)original).trig_critical = isCritical();
 
         return original;
     }
@@ -42,23 +42,22 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
 
     public boolean isCritical()
     {
+        if (trig_critical){
+            return true;
+        }
         if (isCriticalPos() || PerseveranceFields.perseverePlayed.get(this)){
-            this.trig_critical = true;
+            return true;
+        } else{
+            return false;
         }
-
-        return (trig_critical);
     }
-
     public boolean isCriticalPos(){
-        return isCriticalPos(-1);
-    }
-    public boolean isCriticalPos(int indexToRemove){
         List<AbstractCard> hand = AbstractDungeon.player.hand.group;
-        if (indexToRemove != -1){
-            hand.remove(indexToRemove);
-        }
         double hand_pos = hand.indexOf(this)+0.5;
         double hand_size = hand.size();
+        if (hand_size==0){
+            return false;
+        }
         double relative = Math.abs(hand_pos-hand_size/2);
 
         return (relative<1);

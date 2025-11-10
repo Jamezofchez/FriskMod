@@ -80,7 +80,7 @@
   "${modID}:GarbageDumpPower": {
     "NAME": "Garbage Dump",
     "DESCRIPTIONS": [
-      "Gain #b%s Block each time you spend #y${modID}:Wasted Energy."
+      "Gain #b%s #y${modID}:Vitality each time you #y${modID}:Waste Energy."
     ]
   },
   "${modID}:FallenDown": {

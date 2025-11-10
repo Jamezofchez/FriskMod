@@ -35,9 +35,6 @@ public class DummyPowerPatch {
     public static class ApplyBlockActionUpdatePatch {
         @SpirePrefixPatch
         public static void Prefix(GainBlockAction __instance) {
-            if (!FrailOnEnemiesPatch.FrailTrigger.triggeredFrail.get(__instance)) {
-                FrailOnEnemiesPatch.ApplyBlockActionUpdatePatch.Prefix(__instance);
-            }
             if (!GladDummyBlockTrigger.triggeredGladDummy.get(__instance)) {
                 GladDummyBlockTrigger.triggeredGladDummy.set(__instance, true);
                 if (__instance.target instanceof AbstractMonster) {

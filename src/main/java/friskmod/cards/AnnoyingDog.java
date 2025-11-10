@@ -56,6 +56,8 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
     public void use(AbstractPlayer p, AbstractMonster m) {
         blck();
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
+        //trig_critical = false;
+        PerseveranceFields.trapped.set(this, true);
     }
 
     @Override
@@ -71,11 +73,13 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
 
     @Override
     public void afterCardPlayed(AbstractCard cardPlayed) {
-        untrapOnCritical();
-        if (cardPlayed.cardID.equals(BreakFree.ID)){
-            PerseveranceFields.trapped.set(this, false);
+        if (AbstractDungeon.player.hand.group.contains(this)) {
+            untrapOnCritical();
+            if (cardPlayed.cardID.equals(BreakFree.ID)) {
+                PerseveranceFields.trapped.set(this, false);
+            }
+            initializeDescription();
         }
-        initializeDescription();
     }
 
     public void triggerWhenDrawn() {
@@ -96,5 +100,10 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
         if (isCritical()) {
             PerseveranceFields.trapped.set(this, false);
         }
+    }
+
+    @Override
+    public void triggerOnManualDiscard(){
+        PerseveranceFields.trapped.set(this, true);
     }
 }

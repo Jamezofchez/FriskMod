@@ -44,6 +44,7 @@ public class Bandage extends AbstractCriticalCard implements OnObtainCard {
         if (isCritical()){
             TriggerCriticalEffect(p, m);
         }
+        //trig_critical = false;
     }
 
     @Override

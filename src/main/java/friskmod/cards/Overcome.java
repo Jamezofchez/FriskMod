@@ -28,7 +28,7 @@ public class Overcome extends AbstractEasyCard {
     private static final int NUM_TO_PERSEVERE = 2;
     private static final int UPG_NUM_TO_PERSEVERE = 1;
 
-    private static final int LOSE_HP = 3;
+    private static final int LOSE_HP = 2;
 
 
     public Overcome() {

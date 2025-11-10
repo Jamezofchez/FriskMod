@@ -26,13 +26,15 @@ public class GarbageDump extends AbstractEasyCard {
     );
 //    private static final int TEMP_HP = 3;
 //    private static final int UPG_TEMP_HP = 1;
-    private static final int BLOCK = 4;
-    private static final int UPG_BLOCK = 2;
+//    private static final int BLOCK = 4;
+//    private static final int UPG_BLOCK = 2;
+    private static final int VITALITY = 1;
+    private static final int UPG_COST = 0;
 
 
     public GarbageDump() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseMagicNumber = magicNumber = BLOCK; //based on LikeWater
+        baseMagicNumber = magicNumber = VITALITY; //based on LikeWater (for block)
         tags.add(FriskTags.PATIENCE);
     }
     @Override
@@ -42,6 +44,6 @@ public class GarbageDump extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_BLOCK);
+        upgradeBaseCost(UPG_COST);
     }
 }

@@ -24,6 +24,7 @@ public class Determination extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DETERMINATION_AMOUNT = 1;
+    private static final int UPG_DETERMINATION_AMOUNT = 1;
     private static final int FALLENDOWN_AMOUNT = 3;
     private static final int UPG_FALLENDOWN_AMOUNT = 1;
 
@@ -43,6 +44,7 @@ public class Determination extends AbstractEasyCard {
     @Override
     public void upp() {
 //        this.exhaust = false;
+        upgradeMagicNumber(UPG_DETERMINATION_AMOUNT);
         upgradeSecondMagic(UPG_FALLENDOWN_AMOUNT);
     }
 }

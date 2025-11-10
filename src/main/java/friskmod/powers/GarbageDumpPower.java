@@ -1,5 +1,6 @@
 package friskmod.powers;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -57,7 +58,8 @@ public class GarbageDumpPower extends BasePower implements WastedEnergyInterface
 
     private void WastedEnergy() {
 //        Wiz.atb(new AddTemporaryHPAction(owner, owner, amount));
-        Wiz.atb(new GainBlockAction(owner, owner, amount));
+//        Wiz.atb(new GainBlockAction(owner, owner, amount));
+        Wiz.atb(new ApplyPowerAction(owner, owner, new Vitality(owner, amount), amount));
     }
 
 }

@@ -44,6 +44,7 @@ public class TornNotebook extends AbstractCriticalCard {
             TriggerCriticalEffect(p, m);
         }
         addToBot(new ApplyPowerAction(p, p, new TornNotebookPower(p, magicNumber), magicNumber));
+        //trig_critical = false;
     }
 
     @Override

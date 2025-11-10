@@ -35,6 +35,7 @@ public class Reverence extends AbstractCriticalCard {
         } else{
             dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
         }
+        //trig_critical = false;
     }
     @Override
     public void calculateCardDamage(AbstractMonster mo) {

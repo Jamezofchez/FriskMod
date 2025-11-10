@@ -50,6 +50,7 @@ public class BurntPan extends AbstractCriticalCard {
         }
 
         addToBot(new DamageAction(m, info, AbstractGameAction.AttackEffect.SMASH));
+        //trig_critical = false;
     }
 
     @Override

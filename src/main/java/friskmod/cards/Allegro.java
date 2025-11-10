@@ -44,6 +44,7 @@ public class Allegro extends AbstractCriticalCard {
         if (isCritical()){
             TriggerCriticalEffect(p, m);
         }
+        //trig_critical = false;
     }
 
     @Override
