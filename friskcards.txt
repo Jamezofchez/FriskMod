@@ -1,6 +1,6 @@
   friskmod.cards.AbsolutePower
   friskmod.cards.Agami
-  friskmod.cards.AncientStrike
+  friskmod.cards.ArtifactStrike
   friskmod.cards.BadMemory
   friskmod.cards.BakeSale
   friskmod.cards.BalletShoes
@@ -38,11 +38,11 @@
   friskmod.cards.ItsAMatch
   friskmod.cards.KarmicStrike
   friskmod.cards.KillWithKindness
-  friskmod.cards.KnuckleStrike
+  friskmod.cards.ToughStrike
   friskmod.cards.LevelUp
   friskmod.cards.MadDummy
   friskmod.cards.NiceCream
-  friskmod.cards.Overcome
+  friskmod.cards.SelfReflection
   friskmod.cards.Plead
   friskmod.cards.Pounce
   friskmod.cards.RememberBravery
@@ -50,7 +50,7 @@
   friskmod.cards.RememberPatience
   friskmod.cards.Repress
   friskmod.cards.RewindStrike
-  friskmod.cards.OLDRockPuzzle
+  friskmod.cards.RockPuzzle
   friskmod.cards.Ruins
   friskmod.cards.ScalesOfJustice
   friskmod.cards.SlackOff

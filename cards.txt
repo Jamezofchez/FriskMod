@@ -1,6 +1,6 @@
   friskmod.cards.AbsolutePower
   friskmod.cards.Agami *
-  friskmod.cards.AncientStrike *
+  friskmod.cards.ArtifactStrike
   friskmod.cards.BadMemory
   friskmod.cards.BakeSale
   friskmod.cards.BalletShoes
@@ -17,7 +17,7 @@
   friskmod.cards.Determination
   friskmod.cards.DogShrine
   friskmod.cards.DontNeedFriends
-  friskmod.cards.Doomed *
+  friskmod.cards.Doomed
   friskmod.cards.Dream
   friskmod.cards.Duel
   friskmod.cards.EchoFlower
@@ -38,9 +38,9 @@
   friskmod.cards.Im
   friskmod.cards.ItsAMatch
   friskmod.cards.ItsYou
-  friskmod.cards.KarmicStrike *
+  friskmod.cards.KarmicStrik
   friskmod.cards.KillWithKindness
-  friskmod.cards.KnuckleStrike *
+  friskmod.cards.ToughStrike
   friskmod.cards.LevelUp
   friskmod.cards.MadDummy
   friskmod.cards.Mallet
@@ -67,9 +67,9 @@
   friskmod.cards.SpecialDeal
   friskmod.cards.Steal
   friskmod.cards.Strike_Frisk
-  friskmod.cards.ThunderingRage *
+  friskmod.cards.ThunderingRage
   friskmod.cards.Tinker
-  friskmod.cards.ToAsh *
+  friskmod.cards.ToAsh
   friskmod.cards.ToughBranch
   friskmod.cards.VineBloom
   friskmod.cards.WakeUp

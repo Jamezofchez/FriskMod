@@ -28,8 +28,8 @@
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: NL Gain [E] and draw a card.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: NL Gain [E] and draw two cards."
   },
-  "${modID}:AncientStrike": {
-    "NAME": "Ancient Strike",
+  "${modID}:ArtifactStrike": {
+    "NAME": "Artifact Strike",
     "DESCRIPTION": "Give the enemy !M! Artifact. Deal !D! damage per Artifact stack."
   },
   "${modID}:AnnoyingDog": {
@@ -235,10 +235,6 @@
     "NAME": "Kill With Kindness",
     "DESCRIPTION": "Whenever you buff an enemy, it gains !M! Vulnerable."
   },
-  "${modID}:KnuckleStrike": {
-    "NAME": "Knuckle Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Hurt."
-  },
   "${modID}:LevelUp": {
     "NAME": "Level Up",
     "DESCRIPTION": "Gain !B! Block. NL Upgrade ALL your cards in your hand with ${modID}:XP for the rest of combat.",
@@ -407,6 +403,10 @@
   "${modID}:ToughBranchDefend": {
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
+  },
+  "${modID}:ToughStrike": {
+    "NAME": "Tuff Strike",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Hurt."
   },
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",

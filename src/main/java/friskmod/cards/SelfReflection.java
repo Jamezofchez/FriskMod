@@ -4,8 +4,6 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.actions.OpenDraftAction;
-import friskmod.actions.PlayerEnemyDraftAction;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
@@ -13,8 +11,8 @@ import friskmod.util.FriskTags;
 
 import static friskmod.FriskMod.makeID;
 
-public class Overcome extends AbstractEasyCard {
-    public static final String ID = makeID(Overcome.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class SelfReflection extends AbstractEasyCard {
+    public static final String ID = makeID(SelfReflection.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -31,7 +29,7 @@ public class Overcome extends AbstractEasyCard {
     private static final int LOSE_HP = 2;
 
 
-    public Overcome() {
+    public SelfReflection() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.PERSEVERANCE);
         baseMagicNumber = magicNumber = NUM_TO_PERSEVERE;

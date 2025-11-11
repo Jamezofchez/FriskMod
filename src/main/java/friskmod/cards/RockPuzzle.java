@@ -30,7 +30,7 @@ public class RockPuzzle extends AbstractEasyCard implements OnPyreCard {
     private static final int DAMAGE = 15;
     private static final int UPG_DAMAGE = 2;
 
-    private static final int ROCK = 0;
+    private static final int ROCK = 1;
     private static final int UPG_ROCK = 1;
     public RockPuzzle() {
         super(ID, info); //Pass the required information to the BaseCard constructor.

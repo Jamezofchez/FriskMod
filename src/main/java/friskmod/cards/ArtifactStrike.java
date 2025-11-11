@@ -1,23 +1,19 @@
 package friskmod.cards;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.actions.CustomSFXAction;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
+import friskmod.actions.AncientStrikeAction;
 import friskmod.character.Frisk;
-import friskmod.powers.Hurt;
-import friskmod.powers.Karma;
 import friskmod.util.CardStats;
-import friskmod.util.FriskTags;
 
 
 import static friskmod.FriskMod.makeID;
 
-public class KnuckleStrike extends AbstractEasyCard {
-    public static final String ID = makeID(KnuckleStrike.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class ArtifactStrike extends AbstractEasyCard {
+    public static final String ID = makeID(ArtifactStrike.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -29,19 +25,20 @@ public class KnuckleStrike extends AbstractEasyCard {
     );
     private static final int DAMAGE = 6;
     private static final int UPG_DAMAGE = 3;
-    private static final int HURT = 3;
+    private static final int ARTIFACT_AMOUNT = 1;
 
-    public KnuckleStrike() {
+    public ArtifactStrike() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
-        baseMagicNumber = magicNumber = HURT;
+        baseMagicNumber = magicNumber = ARTIFACT_AMOUNT;
         tags.add(CardTags.STRIKE);
-        tags.add(FriskTags.YOU);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
-        addToBot(new ApplyPowerAction(m, p, new Hurt(m, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(m, p, new ArtifactPower(m, magicNumber), magicNumber));
+        AncientStrikeAction action = new AncientStrikeAction(m, damage);
+        BindingHelper.bindAction(this, action);
+        addToBot(action);
     }
 
     @Override

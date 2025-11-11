@@ -30,7 +30,7 @@
 //    }
 //    @Override
 //    public void use(AbstractPlayer p, AbstractMonster m) {
-//        addToBot(new ApplyPowerAction(p, p, new friskmod.powers.Overcome(p, NUM_TO_PERSEVERE),NUM_TO_PERSEVERE));
+//        addToBot(new ApplyPowerAction(p, p, new friskmod.powers.SelfReflection(p, NUM_TO_PERSEVERE),NUM_TO_PERSEVERE));
 //    }
 //
 //    @Override
