@@ -2,7 +2,12 @@ package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import friskmod.cards.choosecard.AbstractDreamNightmareCard;
 import friskmod.character.Frisk;
 import friskmod.powers.RecyclePower;
 import friskmod.util.CardStats;
@@ -15,6 +20,8 @@ public class NiceCream extends AbstractEasyCard {
     public static final String ID = makeID(NiceCream.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(makeID(NiceCream.class.getSimpleName()));
+    private static final String[] TEXT = uiStrings.TEXT;
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
@@ -38,6 +45,9 @@ public class NiceCream extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new RecyclePower(p, magicNumber), magicNumber));
+        int randomIndex = AbstractDungeon.cardRng.random(TEXT.length - 1);
+        String nice = TEXT[randomIndex];
+        AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, nice, true));
     }
 
     @Override

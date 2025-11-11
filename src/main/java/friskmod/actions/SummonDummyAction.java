@@ -58,7 +58,6 @@ public class SummonDummyAction extends AbstractGameAction {
         float startX = MAX_X;
         float startY = MathUtils.random(MIN_Y, MAX_Y);
         AbstractDummy dummy;
-        float y = MathUtils.random(MIN_Y, MAX_Y);
         switch (this.myDummy) {
             case MAD:
                 dummy = new MadDummy(startX, startY, this.hp, this.magicNumber, this.target);
@@ -82,25 +81,14 @@ public class SummonDummyAction extends AbstractGameAction {
         testDummy.hb = new Hitbox(startX, startY, dummy.hb.width, dummy.hb.height);
         boolean success = false;
         int guard = 0;
-        float actualX = dummy.hb.x;
-        float actualY = dummy.hb.y;
-        float adjustDistance = 0.0F;
-        final float PI = (float) Math.PI;
-        float adjustAngle = PI;
-        float xOffset = 0.0F;
-        float yOffset = 0.0F;
         if (!aliveMonsters.isEmpty()) {
             while (!success && guard++ < 100) {
                 success = true;
                 for (AbstractMonster monster : aliveMonsters) {
                     if (overlap(monster.hb, testDummy.hb)) {
                         success = false;
-                        adjustAngle = (float) (adjustAngle + ((Math.random()*2)-1)*(PI/4));
-                        adjustDistance += 10.0F;
-                        xOffset = MathUtils.cos(adjustAngle) * adjustDistance;
-                        yOffset = MathUtils.sin(adjustAngle) * adjustDistance;
-                        testDummy.hb.x = actualX + xOffset;
-                        testDummy.hb.y = actualY + yOffset;
+                        // Shift further left by one dummy width plus a border until no overlap
+                        testDummy.hb.x -= (dummy.hb.width + BORDER);
                         break;
                     }
                 }

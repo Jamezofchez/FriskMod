@@ -142,6 +142,10 @@
       "I must play another card first."
     ]
   },
+  "${modID}:Enthusiasm": {
+    "NAME": "Enthusiasm",
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
+  },
   "${modID}:Evolve": {
     "NAME": "Evolve",
     "DESCRIPTION": "Gain !M! ${modID}:LV whenever you play a card."
@@ -186,7 +190,7 @@
   },
   "${modID}:GatherSoul": {
     "NAME": "Gather SOUL",
-    "DESCRIPTION": "Exhaust all non-Attack cards in your hand. NL Your remaining cards gain !M! ${modID}:XP for each."
+    "DESCRIPTION": "Deal !D! damage. Exhaust all non-Attack cards in your hand. NL Your remaining cards gain !M! ${modID}:XP for each."
   },
   "${modID}:GladDummy": {
     "NAME": "Glad Dummy",
@@ -196,10 +200,6 @@
     "NAME": "Grillby's",
     "DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a ${modID}:Sip of all your potions. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a upgraded ${modID}:Sip of all your potions. NL Exhaust."
-  },
-  "${modID}:HeartBleed": {
-    "NAME": "Heartbleed",
-    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
   },
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
@@ -256,10 +256,6 @@
     "NAME": "Nice Cream",
     "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. NL Gain !M! ${modID}:LV per ${modID}:Wasted *Energy saved."
   },
-  "${modID}:Overcome": {
-    "NAME": "Overcome",
-    "DESCRIPTION": "Lose !${modID}:M2! HP. Gain !M! ${modID}:Overcome."
-  },
   "${modID}:Plead": {
     "NAME": "Plead",
     "DESCRIPTION": "If you have Block, give your Block to the enemy. NL That enemy deals less damage for their ${modID}:LV this turn.",
@@ -305,7 +301,7 @@
   },
   "${modID}:RockPuzzle": {
     "NAME": "Rock Puzzle",
-    "DESCRIPTION": "Add !M! *Rocks into your hand."
+    "DESCRIPTION": "Exhaust a card to play this. NL Deal !D! damage. NL Gain *Rocks equal to the exhausted card's cost + !M!."
   },
   "${modID}:OLDSanchita": {
     "NAME": "OLDSanchita",
@@ -344,7 +340,7 @@
   },
   "${modID}:SelfReflection": {
     "NAME": "Self Reflection",
-    "DESCRIPTION": "Gain !M! Strength. NL Gain !M! ${modID}:Vitality. NL Gain !M! ${modID}:Mercied."
+    "DESCRIPTION": "Lose !${modID}:M2! HP. Gain !M! ${modID}:Overcome."
   },
   "${modID}:SlackOff": {
     "NAME": "Slack Off",

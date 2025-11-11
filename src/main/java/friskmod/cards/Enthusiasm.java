@@ -15,8 +15,8 @@ import friskmod.util.FriskTags;
 
 import static friskmod.FriskMod.makeID;
 
-public class HeartBleed extends AbstractEasyCard {
-    public static final String ID = makeID(HeartBleed.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class Enthusiasm extends AbstractEasyCard {
+    public static final String ID = makeID(Enthusiasm.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -29,7 +29,7 @@ public class HeartBleed extends AbstractEasyCard {
     private static final int DAMAGE = 15;
     private static final int UPG_DAMAGE = 5;
     private static final int HP_LOSS = 2;
-    public HeartBleed() {
+    public Enthusiasm() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
         baseMagicNumber = magicNumber = HP_LOSS;

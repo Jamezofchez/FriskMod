@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -18,21 +19,24 @@ public class GatherSoul extends AbstractEasyCard {
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
-            CardType.SKILL, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
+            CardType.ATTACK, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
             CardRarity.UNCOMMON, //Rarity. BASIC is for starting cards, then there's COMMON/UNCOMMON/RARE, and then SPECIAL and CURSE. SPECIAL is for cards you only get from events. Curse is for curses, except for special curses like Curse of the Bell and Necronomicurse.
-            CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
+            CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
+    private static final int DAMAGE = 7;
     private static final int XP_AMOUNT = 2;
     private static final int UPG_XP_AMOUNT = 1;
 
     public GatherSoul() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = XP_AMOUNT;
+        baseDamage = DAMAGE;
         tags.add(FriskTags.PERSEVERANCE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
         addToBot(new ExhaustAllNonAttackForXPAction(magicNumber));
     }
 

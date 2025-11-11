@@ -159,5 +159,27 @@
     "TEXT": [
       "target"
     ]
+  },
+  "${modID}:NiceCream": {
+    "TEXT": [
+      "* You're just great!",
+      "* You look nice today!",
+      "* Are those claws natural?",
+      "* You're super spiffy!",
+      "* Have a wonderful day!",
+      "* Is this as sweet as you?",
+      "* (An illustration of a hug.)",
+      "* Love yourself! I love you!"
+    ]
+  },
+  "${modID}:PyreMod": {
+    "TEXT": [
+      "I don't have a card to Exhaust!"
+    ]
+  },
+  "${modID}:PyreAdditionalCostPatch": {
+    "TEXT": [
+      "Exhaust for Pyre."
+    ]
   }
 }

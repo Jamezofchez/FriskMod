@@ -1,3 +1,10 @@
+/*
+  "${modID}:SelfReflection": {
+    "NAME": "Self Reflection",
+    "DESCRIPTION": "Gain !M! Strength. NL Gain !M! ${modID}:Vitality. NL Gain !M! ${modID}:Mercied."
+  },
+ */
+
 //package friskmod.cards;
 //
 //import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
