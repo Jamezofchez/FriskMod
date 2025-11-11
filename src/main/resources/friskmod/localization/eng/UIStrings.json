@@ -59,6 +59,12 @@
       "I cannot play trapped cards!"
     ]
   },
+  "${modID}:CopyPatch": {
+    "TEXT": [
+      "${modID}:Copy. NL ",
+      "NL ${modID}:Copy. NL"
+    ]
+  },
   "${modID}:BalletShoes": {
     "TEXT": [
       "There will be an even number of cards in my hand!"
@@ -179,7 +185,7 @@
   },
   "${modID}:PyreAdditionalCostPatch": {
     "TEXT": [
-      "Exhaust for Pyre."
+      "Exhaust for Rock Puzzle."
     ]
   }
 }
