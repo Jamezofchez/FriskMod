@@ -1,12 +1,18 @@
 package friskmod.powers;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import friskmod.FriskMod;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 
+import static friskmod.FriskMod.makeID;
+
 public class LV_Enemy extends BasePower {
-    public static final String POWER_ID = FriskMod.makeID(LV_Enemy.class.getSimpleName());
+    public static final String POWER_ID = makeID(LV_Enemy.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
     //The only thing TURN_BASED controls is the color of the number on the power icon.
@@ -35,6 +41,15 @@ public class LV_Enemy extends BasePower {
 
     public void updateDescription() {
         this.description = String.format(DESCRIPTIONS[0], amount);
+    }
+
+    public void stackPower(int stackAmount) {
+        this.fontScale = 8.0F;
+        this.amount += stackAmount;
+        if (this.amount == 0)
+            addToTop( new RemoveSpecificPowerAction(this.owner, this.owner, makeID(LV_Enemy.class.getSimpleName())));
+        if (this.amount >= 999)
+            this.amount = 999;
     }
 
 }

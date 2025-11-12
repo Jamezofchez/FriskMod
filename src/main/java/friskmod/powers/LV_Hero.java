@@ -1,9 +1,12 @@
 package friskmod.powers;
 
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+
+import static friskmod.FriskMod.makeID;
 
 public class LV_Hero extends BasePower{
     public static final String POWER_ID = FriskMod.makeID(LV_Hero.class.getSimpleName());
@@ -93,5 +96,13 @@ public class LV_Hero extends BasePower{
 //            refreshAllCardXPPreview(amount);
 //        }
 //    }
+    public void stackPower(int stackAmount) {
+        this.fontScale = 8.0F;
+        this.amount += stackAmount;
+        if (this.amount == 0)
+            addToTop( new RemoveSpecificPowerAction(this.owner, this.owner, makeID(LV_Hero.class.getSimpleName())));
+        if (this.amount >= 999)
+            this.amount = 999;
+    }
 
 }
