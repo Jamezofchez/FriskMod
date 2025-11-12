@@ -1,6 +1,8 @@
 package friskmod.patches;
 
 import basemod.helpers.CardModifierManager;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,8 +11,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import friskmod.cardmods.MonochromeMod;
 import friskmod.cardmods.CriticalCheckerMod;
-import friskmod.patches.perseverance.PerseveranceFields;
+import friskmod.util.CardArtRoller;
 import friskmod.util.Wiz;
+import friskmod.util.WizArt;
 
 import java.util.regex.Pattern;
 
@@ -70,7 +73,7 @@ public class MonochromePatch {
             if (Monochrome[1] == null){
                 return;
             }
-            if (PerseveranceFields.trapped.get(__instance)) {
+            if (MonochromeFields.isMonochrome.get(__instance)) {
                 if ((!__instance.rawDescription.startsWith(Monochrome[0]) && !__instance.rawDescription.contains(Monochrome[1]))) {
                     __instance.rawDescription = Monochrome[0] + __instance.rawDescription;
                 }
@@ -88,9 +91,49 @@ public class MonochromePatch {
         AbstractCard c = card.makeStatEquivalentCopy();
         CardModifierManager.addModifier(c, new MonochromeMod());
         MonochromeFields.isMonochrome.set(c, true);
-        c.exhaust = true;
-        c.isEthereal = true;
         Wiz.atb(new MakeTempCardInHandAction(c));
+    }
+
+    @SpirePatch(
+            clz = AbstractCard.class,
+            method = "makeStatEquivalentCopy"
+    )
+    public static class CopyMonochrome {
+        @SpirePostfixPatch
+        public static AbstractCard transferIt(AbstractCard __result, AbstractCard __instance)
+        {
+            MonochromeFields.isMonochrome.set(__result, MonochromeFields.isMonochrome.get(__instance));
+            __result.initializeDescription();
+            return __result;
+        }
+    }
+
+
+    // Render card portraits in black and white when isMonochrome is set
+    @SpirePatch2(
+            clz = AbstractCard.class,
+            method = "renderPortrait"
+    )
+    public static class MonochromeRenderPortrait {
+        private static final ThreadLocal<Boolean> applied = ThreadLocal.withInitial(() -> false);
+        @SpirePrefixPatch
+        public static void Prefix(AbstractCard __instance, SpriteBatch sb) {
+            if (__instance != null && MonochromeFields.isMonochrome.get(__instance)) {
+                applied.set(true);
+                WizArt.saveState(sb);
+                sb.setShader(CardArtRoller.getGrayscaleShader());
+                sb.setColor(Color.WHITE);
+            } else {
+                applied.set(false);
+            }
+        }
+        @SpirePostfixPatch
+        public static void Postfix(AbstractCard __instance, SpriteBatch sb) {
+            if (applied.get()) {
+                WizArt.loadState(sb);
+                applied.set(false);
+            }
+        }
     }
 //    @SpirePatch(
 //            clz = AbstractPlayer.class,

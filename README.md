@@ -13,7 +13,8 @@ Create **Countdowns** that trigger effects after a certain amount of cards have 
 
 *“The more you kill ... The more you distance yourself ... The more easily you can bring yourself to hurt others”.*
 
-Cards can gain **XP**, which increases their Attack. Upon dealing damage to an enemy with a card with **XP**, the enemy will gain one less **LV**, which similarly increases their attack. You can also gain **LV**, which will give equivalent **XP** to the next Attack you play.
+Enemies can gain **LV**, which increases their Attack. When you have **LV**, your next Attack played will gain **XP**, which increases the damage of the card its bound to. Upon dealing unblocked damage to an enemy, the card will lose its XP and transfer one less **LV** to the enemy, while gaining **XP** equal to one less **LV** the enemy had.
+Simply put, cards with experience deal more damage. When dealing damage to an enemy, greater killing intent will increase their desire to hurt you, and attacking a stronger enemy will increase your card's experience.
 
 ### Kindness
 

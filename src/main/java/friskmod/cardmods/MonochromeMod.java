@@ -19,4 +19,17 @@ public class MonochromeMod extends AbstractCardModifier {
     public AbstractCardModifier makeCopy() {
         return new MonochromeMod();
     }
+    public boolean shouldApply(AbstractCard card) {
+        return !card.isEthereal;
+    }
+
+    public void onInitialApplication(AbstractCard card) {
+        card.exhaust = true;
+        card.isEthereal = true;
+    }
+
+    public void onRemove(AbstractCard card) {
+        card.exhaust = false;
+        card.isEthereal = false;
+    }
 }

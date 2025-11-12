@@ -22,6 +22,9 @@ public class NewHomePower extends BasePower {
     private static final PowerType TYPE = PowerType.BUFF;
     private static final boolean TURN_BASED = false;
 
+    static final Color BLUE_BORDER_GLOW_COLOR = new Color(0.2F, 0.9F, 1.0F, 0.25F);
+    static final Color GOLD_BORDER_GLOW_COLOR = Color.GOLD.cpy();
+
     private int copiedThisTurn = 0;
 
 
@@ -77,18 +80,17 @@ public class NewHomePower extends BasePower {
 
     private void makeMiddleCardGlow() {
         try {
-            final Color BLUE_BORDER_GLOW_COLOR = new Color(0.2F, 0.9F, 1.0F, 0.25F);
-            final Color GOLD_BORDER_GLOW_COLOR = Color.GOLD.cpy();
             int card_pos;
             List<AbstractCard> hand = AbstractDungeon.player.hand.group;
+            for (AbstractCard c : hand) {
+                if (ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.get(c)) {
+                    ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.set(c, false);
+                    c.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+                }
+            }
             boolean reset = this.copiedThisTurn >= this.amount;
             if (reset) {
-                for (AbstractCard c : hand) {
-                    if (ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.get(c)) {
-                        ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.set(c, true);
-                        c.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-                    }
-                }
+                return;
             }
             double hand_size = (hand.size());
             card_pos = (int) (hand_size - 1) / 2;
@@ -106,23 +108,10 @@ public class NewHomePower extends BasePower {
 
             for (i = 0; i < cycle; i++) {
                 AbstractCard chosenCard = hand.get(card_pos+i);
-                    if (canCopy(chosenCard)) {
-                        if (chosenCard.glowColor.equals(BLUE_BORDER_GLOW_COLOR)) {
-                            chosenCard.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-                            ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.set(chosenCard, true);
-                        }
-                    }
-            }
-            i = 0;
-            for (AbstractCard c : hand) {
-                if (i == card_pos || (evenNumCards && i == card_pos + 1)) {
-                    continue;
+                if (canCopy(chosenCard)) {
+                    chosenCard.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+                    ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.set(chosenCard, true);
                 }
-                if (ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.get(c)) {
-                    ExternalGlowPatch.NewHomeGlowFields.glowingBecauseNewHome.set(c, true);
-                    c.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-                }
-                ++i;
             }
         } catch (Exception ignored) {
             FriskMod.logger.warn("{}: BalletShoes set middle glow failed",FriskMod.modID);

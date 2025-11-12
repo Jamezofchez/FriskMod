@@ -157,6 +157,27 @@ public class CardArtRoller {
     public static HashMap<String, ReskinInfo> infos = new HashMap<>();
     private static ShaderProgram shade = new ShaderProgram(vertexShaderHSLC, fragmentShaderHSLC);
     private static ShaderProgram bicolorShader = new ShaderProgram(vertexBicolorShader,fragmentBicolorShader);
+    
+    // Simple grayscale fragment shader to truly desaturate without hue or brightness shifts
+    private static final String fragmentShaderGrayscale =
+            "#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#endif\n" +
+            "varying vec2 v_texCoords;\n" +
+            "varying LOWP vec4 v_color;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "void main()\n" +
+            "{\n" +
+            "    vec4 c = texture2D(u_texture, v_texCoords);\n" +
+            "    float gray = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n" +
+            "    gl_FragColor = vec4(gray, gray, gray, c.a);\n" +
+            "}";
+    private static ShaderProgram grayscaleShader = new ShaderProgram(vertexShaderHSLC, fragmentShaderGrayscale);
+
+    public static ShaderProgram getGrayscaleShader() { return grayscaleShader; }
     private static String[] strikes = {
             Strike_Red.ID,
             Strike_Blue.ID,

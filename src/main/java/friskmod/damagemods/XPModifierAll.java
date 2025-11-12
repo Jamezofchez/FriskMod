@@ -148,12 +148,14 @@ public class XPModifierAll extends AbstractDamageModifier {
             return damageAmount;
         }
         //RECOMPUTE DAMAGE BASED ON CURRENT XP - MAY HAVE CHANGED ON MULTI-HIT
-        sourceCard.applyPowers();
-        if (target instanceof AbstractMonster) {
-            sourceCard.calculateCardDamage((AbstractMonster) target);
-        }
-        sourceCard.initializeDescription();
-        int newDamageAmount = sourceCard.damage;
+
+//        sourceCard.applyPowers();
+//        if (target instanceof AbstractMonster) {
+//            sourceCard.calculateCardDamage((AbstractMonster) target);
+//        }
+//        sourceCard.initializeDescription();
+//        int newDamageAmount = sourceCard.damage;
+        int newDamageAmount = damageAmount;
         int LV_transfer_from = getLVFromTarget(target);
         Wiz.att(new AfterLVHeroConsumedAction(this, target, LV_transfer_from));
         // Add XP to the card
