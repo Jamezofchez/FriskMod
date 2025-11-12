@@ -38,11 +38,11 @@ public class XPModifierAll extends AbstractDamageModifier {
 //            ExtraXPInfo.totalEnemies.set(__instance, 0);
 //        }
 //    }
-    public static AbstractCard activeCard = null;
-
-    public static void setActiveCard(AbstractCard card) {
-//        activeCard = card;
-    }
+//    public static AbstractCard activeCard = null;
+//
+//    public static void setActiveCard(AbstractCard card) {
+////        activeCard = card;
+//    }
 
 //    // Patch DamageAction constructor
 //    @SpirePatch2(clz = DamageAction.class,
@@ -90,6 +90,8 @@ public class XPModifierAll extends AbstractDamageModifier {
         public static SpireField<ArrayList<Integer>> enemyLV = new SpireField<>(() -> null);
 
     }
+
+
 
     public final AbstractCard sourceCard;
     private final AbstractCreature p = AbstractDungeon.player;
