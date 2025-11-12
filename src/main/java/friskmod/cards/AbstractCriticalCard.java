@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.patches.perseverance.PerseveranceFields;
 import friskmod.util.CardStats;
+import friskmod.util.Wiz;
 
 import java.util.List;
 
@@ -26,16 +27,16 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
     @Override
     public AbstractCard makeStatEquivalentCopy() {
         AbstractCard original = super.makeStatEquivalentCopy();
-
-        ((AbstractCriticalCard)original).trig_critical = isCritical();
-
+        if (Wiz.isInCombat()){
+            ((AbstractCriticalCard) original).trig_critical = isCritical();
+        }
         return original;
     }
 
     @Override
     public void triggerOnGlowCheck() {
         glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (isCriticalPos() || PerseveranceFields.isPerseverable.get(this)) {
+        if (isCriticalPos(this) || PerseveranceFields.isPerseverable.get(this)) {
             glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         }
     }
@@ -45,15 +46,15 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
         if (trig_critical){
             return true;
         }
-        if (isCriticalPos() || PerseveranceFields.perseverePlayed.get(this)){
+        if (isCriticalPos(this) || PerseveranceFields.perseverePlayed.get(this)){
             return true;
         } else{
             return false;
         }
     }
-    public boolean isCriticalPos(){
+    public static boolean isCriticalPos(AbstractCard c){
         List<AbstractCard> hand = AbstractDungeon.player.hand.group;
-        double hand_pos = hand.indexOf(this)+0.5;
+        double hand_pos = hand.indexOf(c)+0.5;
         double hand_size = hand.size();
         if (hand_size==0){
             return false;

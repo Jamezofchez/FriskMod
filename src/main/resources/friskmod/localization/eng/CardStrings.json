@@ -248,6 +248,11 @@
     "NAME": "Mallet Strike",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak."
   },
+  "${modID}:NewHome": {
+    "NAME": "New Home",
+    "DESCRIPTION": "The first ${modID}:Critical card you play each turn is ${modID}:Monochromed.",
+    "UPGRADE_DESCRIPTION": "The first two ${modID}:Critical cards you play each turn are ${modID}:Monochromed."
+  },
   "${modID}:NiceCream": {
     "NAME": "Nice Cream",
     "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. NL Gain !M! ${modID}:LV per ${modID}:Wasted *Energy saved."
@@ -406,7 +411,7 @@
   },
   "${modID}:ToughStrike": {
     "NAME": "Tuff Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Hurt."
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Hurt to the enemy."
   },
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",

@@ -82,7 +82,7 @@ public class XPModifierAll extends AbstractDamageModifier {
 //        }
 //    }
 
-    @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS, paramtypez = {AbstractPlayer.class, AbstractMonster.class})
+    @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS)
     public static class ExtraXPInfo {
         public static SpireField<Integer> originalCardXP = new SpireField<>(() -> -1);
         public static SpireField<Integer> enemiesProcessed = new SpireField<>(() -> 0);

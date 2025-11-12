@@ -59,10 +59,10 @@
       "I cannot play trapped cards!"
     ]
   },
-  "${modID}:CopyPatch": {
+  "${modID}:MonochromePatch": {
     "TEXT": [
-      "${modID}:Copy. NL ",
-      "NL ${modID}:Copy. NL"
+      "${modID}:Monochrome. NL ",
+      "NL ${modID}:Monochrome. NL"
     ]
   },
   "${modID}:BalletShoes": {

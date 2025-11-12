@@ -38,7 +38,7 @@
   friskmod.cards.Im
   friskmod.cards.ItsAMatch
   friskmod.cards.ItsYou
-  friskmod.cards.KarmicStrik
+  friskmod.cards.KarmicStrike
   friskmod.cards.KillWithKindness
   friskmod.cards.ToughStrike
   friskmod.cards.LevelUp
@@ -74,10 +74,10 @@
   friskmod.cards.VineBloom
   friskmod.cards.WakeUp
   friskmod.cards.WebSlash *
-  friskmod.cards.Adagio *
-  friskmod.cards.Allegro *
+  friskmod.cards.Adagio
+  friskmod.cards.Allegro
   friskmod.cards.AnnoyingDog
   friskmod.cards.Bandage
   friskmod.cards.BurntPan
-  friskmod.cards.Reverence *
+  friskmod.cards.Reverence
   friskmod.cards.TornNotebook

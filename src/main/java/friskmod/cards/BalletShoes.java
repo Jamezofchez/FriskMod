@@ -1,30 +1,21 @@
 package friskmod.cards;
 
-import basemod.helpers.CardBorderGlowManager;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.FriskMod;
 import friskmod.actions.BalletShoesAction;
-import friskmod.actions.CardPlayAction;
-import friskmod.actions.CustomSFXAction;
 import friskmod.character.Frisk;
-import friskmod.patches.BalletShoesGlowFieldsPatch;
+import friskmod.patches.ExternalGlowPatch;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 import friskmod.util.Wiz;
-import friskmod.util.interfaces.AfterCardPlayedInterface;
 
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import static friskmod.FriskMod.makeID;
 
@@ -84,15 +75,15 @@ public class BalletShoes extends AbstractEasyCard {
             if (validFlag) {
                 if (chosenCard.glowColor.equals(AbstractCard.BLUE_BORDER_GLOW_COLOR)) {
                     chosenCard.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-                    BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(chosenCard, true);
+                    ExternalGlowPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(chosenCard, true);
                 }
             }
             for (AbstractCard c : afterHand) {
                 if (validFlag && c == chosenCard) {
                     continue;
                 }
-                if (BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c) == true) {
-                    BalletShoesGlowFieldsPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(c, false);
+                if (ExternalGlowPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c) == true) {
+                    ExternalGlowPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(c, false);
                     //                    if (CardBorderGlowManager.getCustomGlowColors(chosenCard).isEmpty()) { //if it's not glowing??
                     c.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
                 }

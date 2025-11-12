@@ -26,6 +26,22 @@ public class TrappedPatch {
     public static class TrappedDescription {
         @SpirePrefixPatch
         public static void Prefix(AbstractCard __instance) {
+            //???
+            if (__instance == null){
+                return;
+            }
+            if (__instance.rawDescription == null){
+                return;
+            }
+            if (Trapped == null){
+                return;
+            }
+            if (Trapped[0] == null){
+                return;
+            }
+            if (Trapped[1] == null){
+                return;
+            }
             if (PerseveranceFields.trapped.get(__instance)) {
                 if ((!__instance.rawDescription.startsWith(Trapped[0]) && !__instance.rawDescription.contains(Trapped[1]))) {
                     __instance.rawDescription = Trapped[0] + __instance.rawDescription;

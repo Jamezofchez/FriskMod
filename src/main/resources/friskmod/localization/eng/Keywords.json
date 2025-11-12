@@ -82,7 +82,7 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "Only if a card is normally Unplayable, play it anyway. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand. NL If a curse, status or #yTrapped card is #ypersevered, exhaust it instead."
+    "DESCRIPTION": "Only if a card is normally Unplayable, play it anyway. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand."
   },
   {
     "PROPER_NAME": "Perseverable",
@@ -97,7 +97,7 @@
       "Critical",
       "Critical:"
     ],
-    "DESCRIPTION": "'#yCritical cards have a bonus effect when in the middle of your hand or #yPersevered"
+    "DESCRIPTION": "Cards are #yCritical if in the middle of your hand or #yPersevered. Some cards have a bonus effect when #yCritical. "
   },
   {
     "PROPER_NAME": "Determination",
@@ -152,7 +152,15 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards are Unplayable, and have no effect when played. NL #yTrapped cards cause you to lose 1 energy when drawn."
+    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn."
+  },
+  {
+    "PROPER_NAME": "Monochrome",
+    "NAMES": [
+      "Monochrome",
+      "Monochromed"
+    ],
+    "DESCRIPTION": "#Monochrome cards are have Ethereal and Exhaust. NL They give you one energy when played."
   },
   {
     "PROPER_NAME": "Strike",

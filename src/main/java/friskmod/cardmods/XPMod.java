@@ -1,5 +1,8 @@
 package friskmod.cardmods;
 
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import friskmod.FriskMod;
 import friskmod.patches.CardXPFields;
 import friskmod.util.TexLoader;
@@ -11,6 +14,7 @@ import com.evacipated.cardcrawl.mod.stslib.util.extraicons.ExtraIcons;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.imagePath;
 
@@ -106,6 +110,7 @@ public class XPMod
     public AbstractCardModifier makeCopy() {
         return new XPMod();
     }
+
 }
 
 

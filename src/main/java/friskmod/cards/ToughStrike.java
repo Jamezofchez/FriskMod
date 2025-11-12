@@ -6,8 +6,10 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.character.Frisk;
 import friskmod.powers.Hurt;
+import friskmod.powers.Karma;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
 
 
 import static friskmod.FriskMod.makeID;
@@ -37,6 +39,9 @@ public class ToughStrike extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
+//        for(AbstractMonster monster : Wiz.getMonsters()) { //while hurt isn't working for AOE
+//            addToBot(new ApplyPowerAction(monster, p, new Hurt(m, magicNumber), magicNumber));
+//        }
         addToBot(new ApplyPowerAction(m, p, new Hurt(m, magicNumber), magicNumber));
     }
 

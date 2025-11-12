@@ -88,11 +88,11 @@ Count-Substrings -substrings $TagSubstrings
 
 $CardSubstrings = @("CardType.ATTACK", "CardType.POWER", "CardType.SKILL")
 Write-Host "===Card types==="
-Count-Substrings -substrings $CardSubstrings -display 1
+Count-Substrings -substrings $CardSubstrings
 
 $CardSubstrings = @("CardRarity.BASIC", "CardRarity.COMMON", "CardRarity.UNCOMMON", "CardRarity.RARE")
 Write-Host "===Card rarities==="
-Count-Substrings -substrings $CardSubstrings
+Count-Substrings -substrings $CardSubstrings -display 1
 
 $CostSubstrings = @("0 //The card's base cost", "1 //The card's base cost", "2 //The card's base cost", "3 //The card's base cost", "4 //The card's base cost", "-1 //The card's base cost", "-2 //The card's base cost")
 Write-Host "===Card Costs==="
