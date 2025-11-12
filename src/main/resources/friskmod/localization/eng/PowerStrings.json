@@ -80,7 +80,7 @@
   "${modID}:GarbageDumpPower": {
     "NAME": "Garbage Dump",
     "DESCRIPTIONS": [
-      "Gain #b%s #y${modID}:Vitality each time you #y${modID}:Waste Energy."
+      "When you ${modID}:Waste #yEnergy, lose #b%s HP and deal #b%s damage to ALL enemies."
     ]
   },
   "${modID}:FallenDown": {

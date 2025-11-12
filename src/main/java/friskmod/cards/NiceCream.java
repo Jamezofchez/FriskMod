@@ -31,15 +31,15 @@ public class NiceCream extends AbstractEasyCard {
             0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
 
-//    private static final int TEMP_HP = 2;
-//    private static final int UPG_TEMP_HP = 1;
-    private static final int LV = 2;
-    private static final int UPG_LV = 1;
+    private static final int TEMP_HP = 2;
+    private static final int UPG_TEMP_HP = 1;
+//    private static final int LV = 2;
+//    private static final int UPG_LV = 1;
 
 
     public NiceCream() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseMagicNumber = magicNumber = LV;
+        baseMagicNumber = magicNumber = TEMP_HP;
         tags.add(FriskTags.PERSEVERANCE);
     }
     @Override
@@ -52,6 +52,6 @@ public class NiceCream extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_LV);
+        upgradeMagicNumber(UPG_TEMP_HP);
     }
 }

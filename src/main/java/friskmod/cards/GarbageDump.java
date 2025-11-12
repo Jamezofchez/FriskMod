@@ -28,22 +28,28 @@ public class GarbageDump extends AbstractEasyCard {
 //    private static final int UPG_TEMP_HP = 1;
 //    private static final int BLOCK = 4;
 //    private static final int UPG_BLOCK = 2;
-    private static final int VITALITY = 1;
-    private static final int UPG_COST = 0;
+//    private static final int VITALITY = 1;
+//    private static final int UPG_COST = 0;
+
+    private static final int DAMAGE = 7;
+    private static final int UPG_DAMAGE = 2;
+
+    private static final int HP_LOSS = 1;
 
 
     public GarbageDump() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseMagicNumber = magicNumber = VITALITY; //based on LikeWater (for block)
+        baseMagicNumber = magicNumber = DAMAGE; //based on LikeWater (for block)
+        baseSecondMagic = secondMagic = HP_LOSS;
         tags.add(FriskTags.PATIENCE);
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new GarbageDumpPower(p, magicNumber), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new GarbageDumpPower(p, magicNumber, secondMagic), magicNumber));
     }
 
     @Override
     public void upp() {
-        upgradeBaseCost(UPG_COST);
+        upgradeMagicNumber(UPG_DAMAGE);
     }
 }

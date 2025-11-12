@@ -186,7 +186,7 @@
   },
   "${modID}:GarbageDump": {
     "NAME": "Garbage Dump",
-    "DESCRIPTION": "Gain !M! ${modID}:Vitality for every ${modID}:Wasted *Energy used."
+    "DESCRIPTION": "Every time you ${modID}:Waste *Energy, lose !${modID}:M2! HP and deal !M! damage to ALL enemies."
   },
   "${modID}:GatherSoul": {
     "NAME": "Gather SOUL",
@@ -255,7 +255,7 @@
   },
   "${modID}:NiceCream": {
     "NAME": "Nice Cream",
-    "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. NL Gain !M! ${modID}:LV per ${modID}:Wasted *Energy saved."
+    "DESCRIPTION": "Prevent the next time you would ${modID}:Waste *Energy. NL Gain !M! ${modID}:Temp_HP per ${modID}:Wasted *Energy saved."
   },
   "${modID}:Plead": {
     "NAME": "Plead",
@@ -395,7 +395,7 @@
   },
   "${modID}:TornNotebook": {
     "NAME": "Torn Notebook",
-    "DESCRIPTION": "The next !M! times you lose HP or Temp HP, gain 1 Barrier. NL ${modID}:Critical: Gain !${modID}:M2! Barrier."
+    "DESCRIPTION": "The next !M! times you lose HP or ${modID}:Temp_HP, gain 1 Barrier. NL ${modID}:Critical: Gain !${modID}:M2! Barrier."
   },
   "${modID}:ToughBranch": {
     "NAME": "Tough Branch",
@@ -419,7 +419,7 @@
   },
   "${modID}:WakeUp": {
     "NAME": "Wake Up",
-    "DESCRIPTION": "Exhausts itself if another card is played. NL Scry !${modID}:M2!. NL Exhaust all ${modID}:Unplayable cards discarded and gain !B! Block for each."
+    "DESCRIPTION": "Increases in cost if another card is played. NL Scry !${modID}:M2!. NL Exhaust all ${modID}:Unplayable cards discarded and gain !B! Block for each."
   },
   "${modID}:WebSlash": {
     "NAME": "Web Slash",

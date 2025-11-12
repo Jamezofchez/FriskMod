@@ -20,7 +20,7 @@
   friskmod.cards.Doomed
   friskmod.cards.Dream
   friskmod.cards.Duel
-  friskmod.cards.EchoFlower ?
+  friskmod.cards.NewHome
   friskmod.cards.Evolve
   friskmod.cards.FavouriteNumber
   friskmod.cards.FistsFirst

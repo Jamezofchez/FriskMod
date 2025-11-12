@@ -1,5 +1,6 @@
 package friskmod.powers;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -33,9 +34,12 @@ public class RecyclePower extends BasePower implements WastedEnergyInterface {
 
     @Override
     public void WasteEnergyAction(int wasted) {
-        int LVGain = wasted * amount;
         this.flash();
-        addToBot(new ApplyPowerAction(this.owner, this.owner, new LV_Hero(this.owner, LVGain), LVGain));
+        for (int i = 0; i < wasted; i++) {
+//            addToBot(new ApplyPowerAction(this.owner, this.owner, new LV_Hero(this.owner, LVGain), LVGain));
+            addToBot(new AddTemporaryHPAction(this.owner, this.owner, amount));
+        }
+
         addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
     }
 }

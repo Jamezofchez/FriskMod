@@ -62,7 +62,8 @@ public class WakeUp extends AbstractEasyCard implements AfterCardPlayedInterface
 //        if (this.cardsPlayedThisTurn < magicNumber){
 //            addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
 //        }
-        addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
+//        addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
+        this.setCostForTurn(this.costForTurn + 1);
     }
     public void triggerOnEndOfPlayerTurn() {
 //        this.cardsPlayedThisTurn = 0;
