@@ -19,10 +19,6 @@ public abstract class AbstractCountdownPower extends BasePower implements AfterC
         super(powerID, "_" + System.nanoTime(), type, isTurnBased, owner, amount);
         this.amount2 = countdown;
     }
-    public AbstractCountdownPower(String powerID, PowerType type, boolean isTurnBased, AbstractCreature owner, int countdown) {
-        super(powerID, type, isTurnBased, owner, -1);
-        this.amount2 += countdown;
-    }
 
     @Override
     public void afterCardPlayed(AbstractCard card) {

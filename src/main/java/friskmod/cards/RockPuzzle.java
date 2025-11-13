@@ -4,7 +4,6 @@ import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.cardmods.PyreMod;
@@ -38,13 +37,14 @@ public class RockPuzzle extends AbstractEasyCard implements OnPyreCard {
         baseMagicNumber = magicNumber = ROCK;
         tags.add(FriskTags.PERSEVERANCE);
         CardModifierManager.addModifier(this, new PyreMod());
+        cardsToPreview = new Rock();
     }
 
     private int toAdd = -1;
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.FIRE);
-        AbstractCard q = new Shiv();
+        AbstractCard q = new Rock();
         Wiz.makeInHand(q, magicNumber);
         Wiz.atb(new AbstractGameAction() {
             @Override

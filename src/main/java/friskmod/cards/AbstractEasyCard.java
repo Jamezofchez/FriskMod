@@ -79,10 +79,49 @@ public abstract class AbstractEasyCard extends CustomCard {
         switch (cardName) {
             case "GenericDrinkCard":
             case "AncientCocktail":
+            case "ChaoticCocktail":
+            case "DuplicationCocktail":
             case "EntropicCocktail":
             case "FairyCocktail":
             case "Ketchup":
                 textureString = imagePath("cards/Cocktail.png");
+                break;
+            /*
+                possDreamChoices = new ArrayList<>();
+                possDreamChoices.add(new DreamOfArtifact());
+                possDreamChoices.add(new DreamOfBlur());
+                possDreamChoices.add(new DreamOfDetermination());
+                possDreamChoices.add(new DreamOfDexterity());
+                possDreamChoices.add(new DreamOfEvolve());
+                possDreamChoices.add(new DreamOfLV());
+                possDreamChoices.add(new DreamOfStrength());
+
+                possNightmareChoices = new ArrayList<>();
+                possNightmareChoices.add(new NightmareOfNEO());
+                possNightmareChoices.add(new NightmareOfHurt());
+                possNightmareChoices.add(new NightmareOfMercied());
+                possNightmareChoices.add(new NightmareOfAttack());
+                possNightmareChoices.add(new NightmareOfStrengthDown());
+                possNightmareChoices.add(new NightmareOfVulnerable());
+                possNightmareChoices.add(new NightmareOfWeak());
+             */
+            case "DreamOfArtifact":
+            case "DreamOfBlur":
+            case "DreamOfDetermination":
+            case "DreamOfDexterity":
+            case "DreamOfEvolve":
+            case "DreamOfLV":
+            case "DreamOfStrength":
+                textureString = imagePath("cards/DreamCard.png");
+                break;
+            case "NightmareOfNEO":
+            case "NightmareOfHurt":
+            case "NightmareOfMercied":
+            case "NightmareOfAttack":
+            case "NightmareOfStrengthDown":
+            case "NightmareOfVulnerable":
+            case "NightmareOfWeak":
+                textureString = imagePath("cards/NightmareCard.png");
                 break;
             default:
                 switch (cardType) {

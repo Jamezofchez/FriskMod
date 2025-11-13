@@ -16,12 +16,14 @@ public class FallenDownPatch {
     @SpirePatch(clz = AbstractMonster.class, method = "damage")
     public static class AbstractMonsterDamagePatch {
         public static void Prefix(AbstractMonster m, DamageInfo info) {
-            if (AbstractDungeon.player != null && (info.owner == null || info.owner == AbstractDungeon.player) &&
-                    !m.hasPower("Intangible") && !m.hasPower("IntangiblePlayer") &&
-                    info.type != DamageInfo.DamageType.NORMAL) {
-                AbstractPower fallenDown = m.getPower(FallenDown.POWER_ID);
-                if (fallenDown != null)
-                    info.output = (int)(info.output * ((FallenDown)fallenDown).mult());
+            if (!GhostlyPatch.GhostlyDamageTypeFields.isGhostly.get(info.type)) {
+                if (AbstractDungeon.player != null && (info.owner == null || info.owner == AbstractDungeon.player) &&
+                        !m.hasPower("Intangible") && !m.hasPower("IntangiblePlayer") &&
+                        info.type != DamageInfo.DamageType.NORMAL) {
+                    AbstractPower fallenDown = m.getPower(FallenDown.POWER_ID);
+                    if (fallenDown != null)
+                        info.output = (int) (info.output * ((FallenDown) fallenDown).mult());
+                }
             }
         }
     }

@@ -25,7 +25,7 @@
   friskmod.cards.FavouriteNumber
   friskmod.cards.FistsFirst
   friskmod.cards.Flex
-  friskmod.cards.FlurryOfKnives
+  friskmod.cards.EXTRAFlurryOfKnives
   friskmod.cards.FreakBullet
   friskmod.cards.FriendsForever
   friskmod.cards.GarbageDump
@@ -48,7 +48,7 @@
   friskmod.cards.RememberBravery
   friskmod.cards.RememberKindness
   friskmod.cards.RememberPatience
-  friskmod.cards.Repress
+  friskmod.cards.Soulless
   friskmod.cards.RewindStrike
   friskmod.cards.RockPuzzle
   friskmod.cards.Ruins

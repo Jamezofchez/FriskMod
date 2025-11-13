@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.*;
 import friskmod.cards.SlackOff;
+import friskmod.cards.VineBloom;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.*;
 import friskmod.util.Wiz;
@@ -118,6 +119,9 @@ public class XPModifierAll extends AbstractDamageModifier {
         int modifier = getResultantXP();
         if (card.cardID.equals(SlackOff.ID)){
             modifier = -modifier;
+        }
+        if (card.cardID.equals(VineBloom.ID)){
+            modifier = 0;
         }
         AbstractPower posspow = AbstractDungeon.player.getPower(Mercied.POWER_ID);
         if (posspow != null){

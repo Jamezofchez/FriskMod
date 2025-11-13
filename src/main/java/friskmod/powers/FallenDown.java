@@ -53,6 +53,7 @@ public class FallenDown extends BasePower {
         }
         return damage;
     }
+
     @Override
     public void atEndOfRound() {
        if (this.amount == 0) {

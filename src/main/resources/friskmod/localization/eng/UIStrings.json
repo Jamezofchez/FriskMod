@@ -185,7 +185,7 @@
   },
   "${modID}:PyreAdditionalCostPatch": {
     "TEXT": [
-      "Exhaust for Rock Puzzle."
+      "exhaust for Rock Puzzle."
     ]
   }
 }

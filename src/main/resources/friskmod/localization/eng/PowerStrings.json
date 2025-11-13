@@ -47,7 +47,9 @@
     "NAME": "Mercy",
     "DESCRIPTIONS": [
       "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way.",
-      "On #yExpiry after playing #b%s card, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way."
+      "On #yExpiry after playing #b%s card, escape from a non-boss combat and receive no rewards. NL Cannot be triggered another way.",
+      "On #yExpiry after playing #b%s cards, escape from a non-boss combat and receive only gold rewards. NL Cannot be triggered another way.",
+      "On #yExpiry after playing #b%s card, escape from a non-boss combat and receive only gold rewards. NL Cannot be triggered another way."
     ]
   },
   "${modID}:CountdownPounce": {
@@ -203,8 +205,8 @@
   "${modID}:NonAttackPower": {
     "NAME": "Powerless",
     "DESCRIPTIONS": [
-      "You next #b%s #yAttack this turn will deal non-attack damage.",
-      "You next #b%s #yAttacks this turn will deal non-attack damage."
+      "You next #b%s card this turn deals non-attack damage, is unaffected by Block modifiers, and isn't treated as a card played.",
+      "You next #b%s cards this turn deal non-attack damage, are unaffected by Block modifiers, and aren't treated as a card played."
     ]
   },
   "${modID}:Vitality": {

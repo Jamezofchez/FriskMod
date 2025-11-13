@@ -25,7 +25,7 @@ public class ArtifactStrike extends AbstractEasyCard {
     );
     private static final int DAMAGE = 6;
     private static final int UPG_DAMAGE = 3;
-    private static final int ARTIFACT_AMOUNT = 2;
+    private static final int ARTIFACT_AMOUNT = 1;
 
     public ArtifactStrike() {
         super(ID, info); //Pass the required information to the BaseCard constructor.

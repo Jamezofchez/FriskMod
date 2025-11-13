@@ -21,6 +21,7 @@ public class RememberPatiencePower extends BasePower {
     public RememberPatiencePower(AbstractCreature owner, int amount, int minCards) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
         this.amount2 = minCards;
+        updateDescription();
     }
 
     //    @Override

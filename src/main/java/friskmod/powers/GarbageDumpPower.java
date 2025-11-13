@@ -26,6 +26,7 @@ public class GarbageDumpPower extends BasePower implements WastedEnergyInterface
     public GarbageDumpPower(AbstractCreature owner, int amount, int hploss) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
         this.hpLoss = hploss;
+        updateDescription();
     }
 
 

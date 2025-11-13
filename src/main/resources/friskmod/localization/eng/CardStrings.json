@@ -171,7 +171,7 @@
     "NAME": "Flex",
     "DESCRIPTION": "Give EVERYONE !M! ${modID}:LV."
   },
-  "${modID}:FlurryOfKnives": {
+  "${modID}:EXTRAFlurryOfKnives": {
     "NAME": "Flurry Of Knives",
     "DESCRIPTION": "Deal !D! damage to a random enemy !M! times. NL Can be Upgraded any number of times."
   },
@@ -283,10 +283,6 @@
     "NAME": "Remember Patience",
     "DESCRIPTION": "Whenever you have !${modID}:M2! or more cards in your hand, Retain !M! cards this turn."
   },
-  "${modID}:Repress": {
-    "NAME": "Repress",
-    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! ${modID}:Temp_HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
-  },
   "${modID}:Reverence": {
     "NAME": "Reverence",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Deal double damage."
@@ -329,12 +325,12 @@
     "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. Deal damage equal to your ${modID}:Temp_HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
   },
-  "${modID}:PostLeftScale": {
+  "${modID}:LeftScale": {
     "NAME": "Left Scale",
     "DESCRIPTION": "Deal damage equal to your missing HP. NL Lose !M! HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
   },
-  "${modID}:PostRightScale": {
+  "${modID}:RightScale": {
     "NAME": "Right Scale",
     "DESCRIPTION": "Deal damage equal to your ${modID}:Temp_HP. NL Gain !M! ${modID}:Temp_HP. NL Exhaust.",
     "EXTENDED_DESCRIPTION": [" NL (Deals !D! damage.)"]
@@ -363,6 +359,10 @@
   "${modID}:SnowedInn": {
     "NAME": "Snowed Inn",
     "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Trigger ALL of your ${modID}:Countdowns."
+  },
+  "${modID}:Soulless": {
+    "NAME": "Soulless",
+    "DESCRIPTION": "EVERYONE gains !B! Block. NL EVERYONE gains !M! ${modID}:Temp_HP. NL EVERYONE gains !${modID}:M2! ${modID}:KR."
   },
   "${modID}:Spare": {
     "NAME": "Spare",
@@ -415,7 +415,7 @@
   },
   "${modID}:VineBloom": {
     "NAME": "Vine Bloom",
-    "DESCRIPTION": "Deal !D! damage twice. NL Give the enemy !M! Thorns."
+    "DESCRIPTION": "${modID}:Ghostly. NL Deal !D! damage twice. NL Give the enemy !M! Thorns."
   },
   "${modID}:WakeUp": {
     "NAME": "Wake Up",

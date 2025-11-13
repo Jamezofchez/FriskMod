@@ -1,9 +1,8 @@
 package friskmod.cards;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
-import com.evacipated.cardcrawl.mod.stslib.patches.core.AbstractCreature.TempHPField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -13,8 +12,8 @@ import friskmod.util.CardStats;
 
 import static friskmod.FriskMod.makeID;
 
-public class PostRightScale extends AbstractEasyCard {
-    public static final String ID = makeID(PostRightScale.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class LeftScale extends AbstractEasyCard {
+    public static final String ID = makeID(LeftScale.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -25,18 +24,18 @@ public class PostRightScale extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DAMAGE = 0;
-    private static final int TEMP_HP = 6;
-    private static final int UPG_TEMP_HP = 3;
+    private static final int LOSE_HP = 6;
+    private static final int UPG_LOSE_HP = -3;
 
 
     private int getBaseDamage() {
-        return TempHPField.tempHp.get(AbstractDungeon.player);
+        return (AbstractDungeon.player.maxHealth - AbstractDungeon.player.currentHealth);
     }
 
-    public PostRightScale() {
+    public LeftScale() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
-        magicNumber = baseMagicNumber = TEMP_HP;
+        magicNumber = baseMagicNumber = LOSE_HP;
         this.exhaust = true;
     }
     @Override
@@ -45,7 +44,7 @@ public class PostRightScale extends AbstractEasyCard {
             addToBot(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY, effectScale()), 0.2F));
         }
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
-        addToBot(new AddTemporaryHPAction(p, p, magicNumber));
+        addToBot(new LoseHPAction(p, p, magicNumber));
     }
 
     public void applyPowers() {
@@ -81,6 +80,6 @@ public class PostRightScale extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_TEMP_HP);
+        upgradeMagicNumber(UPG_LOSE_HP);
     }
 }

@@ -2,6 +2,7 @@ package friskmod.powers;
 
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -28,6 +29,11 @@ public class Betrayed extends BasePower {
 
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
+    }
+
+    @Override
+    public void onRemove(){
+        CardCrawlGame.music.fadeOutTempBGM();
     }
 
 }

@@ -32,8 +32,8 @@ public class CountdownFlee extends AbstractCountdownPower {
     public CountdownFlee(AbstractCreature owner, int amount, int countdown, boolean upgraded) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount, countdown); //not unique
         this.name = NAME;
-        updateDescription();
         this.upgraded = upgraded;
+        updateDescription();
     }
 
     @Override
@@ -69,12 +69,20 @@ public class CountdownFlee extends AbstractCountdownPower {
         this.amount2 += stackAmount;
     }
 
-    @Override
-    public void updateDescription() {
+    private int getDescNum() {
         int descNum = 0;
-        if (amount2 == 1){
+        if (upgraded){
+            descNum += 2;
+        }
+        if (amount == 1){
             descNum += 1;
         }
+        return descNum;
+    }
+
+    @Override
+    public void updateDescription() {
+        int descNum = getDescNum();
         String baseDescription = DESCRIPTIONS[descNum];
         this.description = String.format(baseDescription, amount2);
     }

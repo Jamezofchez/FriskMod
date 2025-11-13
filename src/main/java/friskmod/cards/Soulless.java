@@ -14,8 +14,8 @@ import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.makeID;
 
-public class Repress extends AbstractEasyCard {
-    public static final String ID = makeID(Repress.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class Soulless extends AbstractEasyCard {
+    public static final String ID = makeID(Soulless.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -33,7 +33,7 @@ public class Repress extends AbstractEasyCard {
     private static final int KARMA_AMOUNT = 2;
 
 
-    public Repress() {
+    public Soulless() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = magicNumber = TEMP_HP;
         baseSecondMagic = secondMagic = KARMA_AMOUNT;

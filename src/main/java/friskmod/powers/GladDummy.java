@@ -26,6 +26,7 @@ public class GladDummy extends BasePower {
     public GladDummy(AbstractCreature owner, AbstractCreature boundTarget) {
         super(POWER_ID, TYPE, TURN_BASED, owner, -1);
         this.boundTarget = boundTarget;
+        updateDescription();
     }
     @Override
     public AbstractPower makeCopy() {

@@ -33,6 +33,8 @@ public class LesserDuplication extends BasePower {
     public LesserDuplication(AbstractCreature owner, int amount, int maxCost) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
         this.amount2 = maxCost;
+        updateDescription();
+
     }
 
     @Override
