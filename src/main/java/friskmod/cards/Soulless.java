@@ -26,7 +26,7 @@ public class Soulless extends AbstractEasyCard {
             CardTarget.ALL, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or ReSanchita.
     );
-    private static final int BLOCK = 15;
+    private static final int BLOCK = 16;
     private static final int UPG_BLOCK = 2;
     private static final int TEMP_HP = 5;
     private static final int UPG_TEMP_HP = 2;

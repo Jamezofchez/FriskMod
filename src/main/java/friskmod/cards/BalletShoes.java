@@ -49,6 +49,16 @@ public class BalletShoes extends AbstractEasyCard {
         if (Wiz.isInCombat()) {
             if (AbstractDungeon.player.hand.group.contains(this)) {
                 makeMiddleCardGlow();
+            } else{
+                List<AbstractCard> hand = AbstractDungeon.player.hand.group;
+                if (hand.stream().noneMatch(x -> (x instanceof BalletShoes))) {
+                    for (AbstractCard c : hand) {
+                        if (ExternalGlowPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.get(c)) {
+                            ExternalGlowPatch.BalletShoesGlowFields.glowingBecauseBalletShoes.set(c, false);
+                            c.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+                        }
+                    }
+                }
             }
         }
     }

@@ -136,8 +136,8 @@
   },
   "${modID}:EchoFlower": {
     "NAME": "Echo Flower",
-    "DESCRIPTION": "While in your hand, this card is a copy of the previous card you played this turn.",
-    "UPGRADE_DESCRIPTION": "While in your hand, this card is an upgraded copy of the previous card you played this turn.",
+    "DESCRIPTION": "Ethereal. NL While in your hand, this card is a copy of the previous card you played this turn.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL While in your hand, this card is an upgraded copy of the previous card you played this turn.",
     "EXTENDED_DESCRIPTION": [
       "I must play another card first."
     ]
@@ -161,7 +161,8 @@
   },
   "${modID}:FavouriteNumber": {
     "NAME": "Favourite Number",
-    "DESCRIPTION": "Your next attack this turn is ${modID}:Demonified. Deal !D! damage."
+    "DESCRIPTION": "Your next attack this turn is ${modID}:Demonified. Deal !D! damage.",
+    "UPGRADE_DESCRIPTION": "Your next two attacks this turn are ${modID}:Demonified. Deal !D! damage."
   },
   "${modID}:FistsFirst": {
     "NAME": "Fists First",
@@ -220,8 +221,8 @@
   },
   "${modID}:ItsAMatch": {
     "NAME": "It's a match!",
-    "DESCRIPTION": "${modID}:Steal ${modID}:matching buffs. The enemy ${modID}:steals ${modID}:matching debuffs from you.",
-    "UPGRADE_DESCRIPTION": "${modID}:Steal ${modID}:matching buffs. ALL enemies ${modID}:steal ${modID}:matching debuffs from you."
+    "DESCRIPTION": "${modID}:Steal ${modID}:matching buffs from the enemy. NL The enemy ${modID}:steals ${modID}:matching debuffs from you.",
+    "UPGRADE_DESCRIPTION": "${modID}:Steal ${modID}:matching buffs from ALL enemies. NL ALL enemies ${modID}:steal ${modID}:matching debuffs from you."
   },
   "${modID}:ItsYou": {
     "NAME": "It's you!",
@@ -371,7 +372,7 @@
   },
   "${modID}:SpecialDeal": {
     "NAME": "Specil Deal",
-    "DESCRIPTION": "Ethereal. NL EVERYONE gains !M! ${modID}:NEO. NL EVERYONE gains !M! Artifact. NL Gain ${modID}:1997 gold."
+    "DESCRIPTION": "Ethereal. NL Gain !${modID}:M2! NEO. ALL enemies gain !M! ${modID}:NEO and !M! Artifact. NL Gain ${modID}:1997 gold."
   },
   "${modID}:Steal": {
     "NAME": "Steal",
@@ -419,7 +420,7 @@
   },
   "${modID}:WakeUp": {
     "NAME": "Wake Up",
-    "DESCRIPTION": "Increases in cost if another card is played. NL Scry !${modID}:M2!. NL Exhaust all ${modID}:Unplayable cards discarded and gain !B! Block for each."
+    "DESCRIPTION": "Increases in cost if another card is played. NL Scry !${modID}:M2!. NL Exhaust all ${modID}:Unplayable cards discarded and gain !M! Block for each."
   },
   "${modID}:WebSlash": {
     "NAME": "Web Slash",

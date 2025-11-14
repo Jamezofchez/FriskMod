@@ -34,8 +34,8 @@ public class Steal extends AbstractEasyCard {
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
 
-    private static final int HP_STEAL = 2;
-    private static final int UPG_HP_STEAL = 1;
+    private static final int HP_STEAL = 3;
+    private static final int UPG_HP_STEAL = 2;
 
 
     public Steal() {

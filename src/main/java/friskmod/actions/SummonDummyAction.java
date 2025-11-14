@@ -14,6 +14,7 @@ import friskmod.monsters.EmptyDummy;
 import friskmod.util.Wiz;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class SummonDummyAction extends AbstractGameAction {
     private static final float MAX_Y = 250.0F;
@@ -22,7 +23,7 @@ public class SummonDummyAction extends AbstractGameAction {
 
     private static final float MIN_X = -350.0F;
 
-    private static final float MAX_X = 150.0F;
+    private static final float MAX_X = 1500.0F;
 
     private static final float BORDER = 50.0F * Settings.scale;
 
@@ -57,6 +58,13 @@ public class SummonDummyAction extends AbstractGameAction {
         }
         float startX = MAX_X;
         float startY = MathUtils.random(MIN_Y, MAX_Y);
+        // If there are existing monsters, start to the left of the leftmost one
+        float leftMost = startX;
+        ArrayList<AbstractMonster> aliveMonsters = (ArrayList<AbstractMonster>) Wiz.getMonsters().stream().filter(x -> !(x instanceof AbstractDummy)).collect(Collectors.toList());
+        for (AbstractMonster m : aliveMonsters) {
+            leftMost = Math.min(leftMost, m.hb.x);
+        }
+        startX = leftMost;
         AbstractDummy dummy;
         switch (this.myDummy) {
             case MAD:
@@ -70,51 +78,36 @@ public class SummonDummyAction extends AbstractGameAction {
                 dummy = new EmptyDummy(startX, startY, this.hp);
                 break;
         }
-        // If there are existing monsters, start to the left of the leftmost one
-        float leftMost = startX;
-        ArrayList<AbstractMonster> aliveMonsters = Wiz.getMonsters();
-        for (AbstractMonster m : aliveMonsters) {
-            leftMost = Math.min(leftMost, m.hb.x);
-        }
-        startX = leftMost - dummy.hb.width - BORDER;
-        EmptyDummy testDummy = new EmptyDummy(startX, startY, 0);
-        testDummy.hb = new Hitbox(startX, startY, dummy.hb.width, dummy.hb.height);
         boolean success = false;
         int guard = 0;
+        float actualX = dummy.hb.x;
+        float actualY = dummy.hb.y;
+        float adjustDistance = 0.0F;
+        float adjustAngle = 0.0F;
+        float xOffset = 0.0F;
+        float yOffset = 0.0F;
+        final float PI = (float) Math.PI;
         if (!aliveMonsters.isEmpty()) {
             while (!success && guard++ < 100) {
                 success = true;
                 for (AbstractMonster monster : aliveMonsters) {
-                    if (overlap(monster.hb, testDummy.hb)) {
+                    if (overlap(monster.hb, dummy.hb)) {
                         success = false;
-                        // Shift further left by one dummy width plus a border until no overlap
-                        testDummy.hb.x -= (dummy.hb.width + BORDER);
-                        break;
+                        adjustAngle = PI + MathUtils.random(-PI / 2.0F, PI / 2.0F);
+                        adjustDistance += 10.0F;
+                        xOffset = MathUtils.cos(adjustAngle) * adjustDistance;
+                        yOffset = MathUtils.sin(adjustAngle) * adjustDistance;
+                        dummy.hb.x = actualX + xOffset;
+                        dummy.hb.y = actualY + yOffset;
                     }
                 }
             }
         }
-
         // Apply the resolved position to the real dummy's hitbox
-        dummy.hb.x = testDummy.hb.x;
-        dummy.hb.y = testDummy.hb.y;
         dummy.hb.move(dummy.hb.x + dummy.hb.width / 2.0F, dummy.hb.y + dummy.hb.height / 2.0F);
         dummy.hb_x = dummy.hb.cX - dummy.drawX + dummy.animX;
         dummy.hb_y = dummy.hb.cY - dummy.drawY + dummy.animY;
         dummy.healthHb.move(dummy.hb.cX, dummy.hb.cY - dummy.hb_h / 2.0F - dummy.healthHb.height / 2.0F);
-        // Ensure the spawned dummy is first in the enemy queue after spawning
-        addToTop(new AbstractGameAction() {
-            public void update() {
-                this.isDone = true;
-                if (AbstractDungeon.getMonsters() != null && AbstractDungeon.getMonsters().monsters != null) {
-                    java.util.ArrayList<AbstractMonster> list = AbstractDungeon.getMonsters().monsters;
-                    if (list.contains(dummy)) {
-                        list.remove(dummy);
-                        list.add(0, dummy);
-                    }
-                }
-            }
-        });
         // Run pre-battle powers
         addToTop(new AbstractGameAction() {
             public void update() {

@@ -16,7 +16,7 @@ import friskmod.util.Wiz;
 public class GladDummy extends AbstractDummy {
     public static final String ID = FriskMod.makeID(GladDummy.class.getSimpleName());
 
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(FriskMod.makeID(GladDummy.class.getSimpleName()));
+    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
 
     public static final String NAME = monsterStrings.NAME;
 

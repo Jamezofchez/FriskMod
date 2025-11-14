@@ -26,7 +26,7 @@ public class HugItOff extends AbstractEasyCard {
             CardTarget.ALL, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or ReHugItOff.
     );
-    private static final int BLOCK = 7;
+    private static final int BLOCK = 8;
     private static final int WAIT_TIMER = 3;
     private static final int DRAW_CARDS = 1;
     private static final int UPG_DRAW_CARDS = 1;

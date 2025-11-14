@@ -12,5 +12,13 @@
     "DESCRIPTIONS": [
       "At the start of each combat, add a #yIt's #yyou! into your hand."
     ]
-  }
+  },
+  "${modID}:EchoFlower": {
+  "NAME": "Echo Flower",
+  "FLAVOR": "Sorry, it's just funny... That's my wish, too.",
+  "DESCRIPTIONS": [
+    "Each turn, if you are ${modID}:Threatened add a #yEcho #yFlower into your hand."
+  ]
+}
+
 }

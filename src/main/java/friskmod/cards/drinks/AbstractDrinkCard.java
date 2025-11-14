@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.potions.FirePotion;
 import friskmod.cards.AbstractEasyCard;
 import friskmod.helper.GrillbysHelper;
 import friskmod.util.CardStats;
+import friskmod.util.Wiz;
 
 import java.util.*;
 
@@ -173,7 +174,7 @@ public abstract class AbstractDrinkCard extends AbstractEasyCard {
     @Override
     public AbstractCard makeCopy() {
         AbstractCard tmp;
-        if (this instanceof Ketchup){
+        if (this instanceof Ketchup || !Wiz.isInCombat()){
             tmp = new Ketchup();
         } else{
             tmp = GrillbysHelper.getPotionCard(potion);

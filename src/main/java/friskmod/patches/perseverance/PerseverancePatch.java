@@ -424,32 +424,35 @@ public class PerseverancePatch {
             }
             Wiz.att(new CustomSFXAction("mus_sfx_eyeflash"));
             PerseveranceFields.setIsPerseverable(card, false);
-            __instance.exhaustCard = true;
+
+            if (!PerseveranceFields.trapped.get(card)) {
+                __instance.exhaustCard = true;
+            }
 
             if (PerseveranceFields.insufficientEnergy.get(card)) {
                 int refundEnergy = PerseveranceFields.cardEnergy.get(card);
                 Wiz.atb(new GainEnergyAction(refundEnergy));
             }
-
-            AbstractCard tmp = card.makeStatEquivalentCopy();
-            PerseveranceFields.trapped.set(tmp, true);
-            Wiz.atb(new MakeTempCardInHandAction(tmp));
-
+            if (!isCurseOrStatus(card)) {
+                AbstractCard tmp = card.makeStatEquivalentCopy();
+                PerseveranceFields.trapped.set(tmp, true);
+                Wiz.atb(new MakeTempCardInHandAction(tmp));
+            }
         }
         @SpirePostfixPatch
         public static void Postfix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
             PerseveranceFields.perseverePlayed.set(card, false);
         }
 
-//        public static boolean isCurseOrStatus(AbstractCard c){
-//            if (c == null) {
-//                return false;
-//            }
-//            if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
-//                return true;
-//            }
-//            return false;
-//        }
+        public static boolean isCurseOrStatus(AbstractCard c){
+            if (c == null) {
+                return false;
+            }
+            if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
+                return true;
+            }
+            return false;
+        }
     }
 
 

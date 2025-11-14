@@ -24,7 +24,7 @@ public class Blooky extends AbstractEasyCard {
             CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int BLOCK = 8;
+    private static final int BLOCK = 10;
 //    private static final int UPG_BLOCK = 3;
     private static final int UPG_BLOCK = 1;
     private static final int POWER_AMOUNT = 1;

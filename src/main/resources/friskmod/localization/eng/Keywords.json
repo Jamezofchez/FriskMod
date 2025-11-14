@@ -82,7 +82,7 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "Only if a card is normally Unplayable, play it anyway. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand."
+    "DESCRIPTION": "Only if a card is normally ${modID}:Unplayable, play it anyway. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand. If it is a curse or status, exhaust it instead."
   },
   {
     "PROPER_NAME": "Perseverable",
@@ -152,7 +152,7 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn."
+    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn. #yTrapped cards are not exhausted when #Persevered."
   },
   {
     "PROPER_NAME": "Monochrome",
@@ -274,7 +274,7 @@
       "steals",
       "steal"
     ],
-    "DESCRIPTION": "Any buffs can only be stolen if enemy didn't start with them. NL Strength and enemy #yLV is converted into player #yLV. NL Enemy HP is converted into Temp HP. NL The card will glow if anything can be stolen."
+    "DESCRIPTION": "Any buffs can only be stolen if enemy didn't start with them or they are non-permanent. NL Strength and enemy #yLV is converted into player #yLV. NL Enemy HP is converted into Temp HP. NL The card will glow if anything can be stolen."
   },
   {
     "PROPER_NAME": "Draft",
@@ -361,14 +361,14 @@
     "NAMES": [
       "Overcome"
     ],
-    "DESCRIPTION": "When a card fails to play, #yPersevere it and reduce by 1. NL Reduced by 1 on turn end."
+    "DESCRIPTION": "When a card fails to play, #yPersevere it and reduce by 1. NL Removed on turn end."
   },
   {
     "PROPER_NAME": "Unplayable",
     "NAMES": [
       "Unplayable"
     ],
-    "DESCRIPTION": "Unplayable cards or cards that lack the conditions to be played."
+    "DESCRIPTION": "Unplayable cards or cards that lack the conditions to be played, such as having insufficient Energy."
   },
   {
     "PROPER_NAME": "Hurt",

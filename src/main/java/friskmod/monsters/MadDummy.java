@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MadDummy extends AbstractDummy {
     public static final String ID = FriskMod.makeID(MadDummy.class.getSimpleName());
 
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(FriskMod.makeID(MadDummy.class.getSimpleName()));
+    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
 
     public static final String NAME = monsterStrings.NAME;
 

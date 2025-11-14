@@ -28,10 +28,9 @@ public class WakeUp extends AbstractEasyCard implements AfterCardPlayedInterface
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int SCRY_AMOUNT = 5;
-    private static final int BLOCK = 5;
-    private static final int UPG_SCRY_AMOUNT = 2;
-    private static final int CARDS_PLAYED = 1;
-    private static final int UPG_CARDS_PLAYED = 1;
+    private static final int BLOCK = 3;
+//    private static final int UPG_SCRY_AMOUNT = 2;
+    private static final int UPG_BLOCK_AMOUNT = 2;
 
 
 
@@ -40,21 +39,19 @@ public class WakeUp extends AbstractEasyCard implements AfterCardPlayedInterface
 
     public WakeUp() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseBlock = BLOCK;
-        baseMagicNumber = magicNumber = CARDS_PLAYED;
+        baseMagicNumber = magicNumber = BLOCK;
         baseSecondMagic = secondMagic = SCRY_AMOUNT;
         tags.add(FriskTags.PERSEVERANCE);
 //        this.cardsPlayedThisTurn = 0;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ScryBlockExhaustAction(secondMagic, block));
+        addToBot(new ScryBlockExhaustAction(secondMagic, magicNumber));
     }
 
     @Override
     public void upp() {
-//        upgradeMagicNumber(UPG_CARDS_PLAYED);
-        upgradeSecondMagic(UPG_SCRY_AMOUNT);
+        upgradeMagicNumber(UPG_BLOCK_AMOUNT);
     }
 
     public void afterCardPlayed(AbstractCard card) {
@@ -64,9 +61,6 @@ public class WakeUp extends AbstractEasyCard implements AfterCardPlayedInterface
 //        }
 //        addToBot(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
         this.setCostForTurn(this.costForTurn + 1);
-    }
-    public void triggerOnEndOfPlayerTurn() {
-//        this.cardsPlayedThisTurn = 0;
     }
 
 

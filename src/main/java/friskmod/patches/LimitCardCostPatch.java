@@ -26,7 +26,7 @@ public class LimitCardCostPatch {
     public static class AvoidAddingHighCostPatch {
         public static boolean Postfix(AbstractCard __instance, boolean __result, AbstractCard.CardTags ___tagToCheck){
             if (___tagToCheck == AbstractCard.CardTags.HEALING) {
-                return __result && isCardCostAllowed(__instance);
+                return __result || !isCardCostAllowed(__instance);
             }
             return __result;
         }

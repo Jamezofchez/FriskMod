@@ -4,10 +4,15 @@ import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.cards.VineBloom;
 import friskmod.powers.NonAttackPower;
+import javassist.CannotCompileException;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 
 public class GhostlyPatch {
     @SpirePatch2(clz = AbstractCard.class, method = SpirePatch.CLASS)
@@ -68,5 +73,38 @@ public class GhostlyPatch {
         ReflectionHacks.setPrivate(__instance, AbstractCard.class, "damageType", DamageInfo.DamageType.THORNS);
         __instance.damageTypeForTurn = DamageInfo.DamageType.THORNS;
         __instance.dontTriggerOnUseCard = true;
+    }
+
+    @SpirePatch(
+            clz = AbstractPlayer.class,
+            method = "useCard",
+            paramtypez = { AbstractCard.class, AbstractMonster.class, int.class }
+    )
+    public static class UseGhostlyCardPatch {
+        // Replace the direct call to c.use(p, m) with a guarded call
+        public static ExprEditor Instrument() {
+            return new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException {
+                    if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
+                        m.replace(
+                                "{" +
+                                        "    " + (GhostlyPatch.class.getName() + "$UseGhostlyCardPatch.handleGhostly($0)") + ";" +
+                                        "    $proceed($$);" +
+                                        "}"
+                        );
+                    }
+                }
+            };
+        }
+
+        public static void handleGhostly(AbstractCard c) {
+            if (GhostlyCardFields.isGhostly.get(c)) {
+                for (AbstractPower p : AbstractDungeon.player.powers) {
+                    if (p instanceof NonAttackPower)
+                        ((NonAttackPower) p).ghostlyCardPlayed();
+                }
+            }
+        }
     }
 }

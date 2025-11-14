@@ -41,6 +41,7 @@ public class SeekHighestXPAction extends AbstractGameAction {
             this.isDone = true;
             return;
         }
+        tmp.shuffle();
         AbstractCard card = tmp.getTopCard();
         if (this.p.hand.size() == BaseMod.MAX_HAND_SIZE) {
             this.p.drawPile.moveToDiscardPile(card);

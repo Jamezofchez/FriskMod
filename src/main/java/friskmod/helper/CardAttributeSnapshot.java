@@ -45,10 +45,10 @@ public class CardAttributeSnapshot {
         if (storeCard != null){
             CardModifierManager.removeAllModifiers(restoreCard, true);
             CardModifierManager.copyModifiers(storeCard, restoreCard, true, false, false);
-            com.badlogic.gdx.graphics.Color BLUE_GLOW = ReflectionHacks.getPrivateStatic(AbstractCard.class, "BLUE_BORDER_GLOW_COLOR");
-            if (storeCard.glowColor.equals(BLUE_GLOW)){
-                storeCard.glowColor = Color.NAVY.cpy();
-            }
+            storeCard.glowColor = Color.NAVY.cpy();
+            storeCard.isGlowing = true;
+            storeCard.isEthereal = true;
+            storeCard.purgeOnUse = true;
         }
     }
 

@@ -30,11 +30,11 @@ public class Overcome extends BasePower {
 
     @Override
     public void atEndOfRound() {
-       if (this.amount == 0) {
+//       if (this.amount == 0) {
         addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-       } else {
-            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-       }
+//       } else {
+//            addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+//       }
     }
     @Override
     public void onRemove() {

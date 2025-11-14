@@ -75,19 +75,14 @@ public class StealPowerAction extends AbstractGameAction {
         this.steal = steal;
         this.stealMatching = stealMatching;
         if (stealMatching) {
-            this.globalPostProcess = stealPowerMatchingCheck(monsters);
+            this.globalPostProcess = stealMatchingCheck();
         } else {
             this.globalPostProcess = (pow) -> true;
         }
     }
-    private Predicate<AbstractPower> stealPowerMatchingCheck(List<AbstractMonster> monsters){
-        return (AbstractPower mpow) -> {
-            return stealMatchingCheck().test(monsters, mpow);
-        };
-    }
 
-    private BiPredicate<List<AbstractMonster>, AbstractPower> stealMatchingCheck(){
-        return (monsters, mpow) -> {
+    public static Predicate<AbstractPower> stealMatchingCheck(){
+        return (mpow) -> {
             AbstractPlayer p = AbstractDungeon.player;
             if (!(mpow.type == AbstractPower.PowerType.BUFF)){
                 return false;
@@ -97,6 +92,9 @@ public class StealPowerAction extends AbstractGameAction {
                     continue;
                 }
                 if (mpow.ID.equals(ppow.ID)){
+                    return true;
+                }
+                if (StealableWhitelist.getInstance().synonymDict.containsValue(mpow.ID, ppow.ID)){
                     return true;
                 }
             }

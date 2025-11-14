@@ -17,6 +17,7 @@ import friskmod.cards.cardvars.AbstractEasyDynamicVariable;
 import friskmod.character.Frisk;
 import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
+import friskmod.patches.GhostlyPatch;
 import friskmod.powers.NonAttackPower;
 import friskmod.relics.BaseRelic;
 import friskmod.util.*;
@@ -428,14 +429,16 @@ public class FriskMod implements
         });
     }
     @Override
-    public void receiveCardUsed(AbstractCard abstractCard) {
+    public void receiveCardUsed(AbstractCard card) {
         //XPModifierAll.setActiveCard(abstractCard);
-        if (!abstractCard.dontTriggerOnUseCard) {
-            Wiz.atb(new AfterCardUseAction(abstractCard));
+        if (!card.dontTriggerOnUseCard) {
+            Wiz.atb(new AfterCardUseAction(card));
         }
-        for (AbstractPower p : AbstractDungeon.player.powers) {
-            if (p instanceof NonAttackPower)
-                ((NonAttackPower) p).afterCardPlayed(abstractCard);
+        if (!GhostlyPatch.GhostlyCardFields.isGhostly.get(card)) {
+            for (AbstractPower p : AbstractDungeon.player.powers) {
+                if (p instanceof NonAttackPower)
+                    ((NonAttackPower) p).ghostlyCardPlayed();
+            }
         }
     }
 

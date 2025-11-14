@@ -12,6 +12,7 @@ import basemod.interfaces.CloneablePowerInterface;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -34,6 +35,27 @@ import static friskmod.FriskMod.makeID;
 import static friskmod.helper.SharedFunctions.isInvincible;
 
 public class StealableWhitelist {
+
+    public class StringDictionary {
+        private Map<String, ArrayList<String>> dictionary;
+
+        public StringDictionary() {
+            dictionary = new HashMap<>();
+        }
+
+        public void addValue(String key, String value) {
+            dictionary.putIfAbsent(key, new ArrayList<>());
+            dictionary.get(key).add(value);
+        }
+
+        public boolean containsValue(String key, String testValue) {
+            if (!dictionary.containsKey(key)) {
+                return false;
+            }
+            return dictionary.get(key).contains(testValue);
+        }
+    }
+
     private class StealSettings {
         public boolean steal;
         public Predicate<AbstractPower> globalPostProcess;
@@ -46,6 +68,8 @@ public class StealableWhitelist {
     private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
 
     public static StealableWhitelist INSTANCE = null;
+
+    public StringDictionary synonymDict = new StringDictionary();
 
     public static StealableWhitelist getInstance() {
         if (INSTANCE == null) {
@@ -133,7 +157,8 @@ public class StealableWhitelist {
         //Only steal powers that are in a sense "non-permanent?"
         //Normal enemy and player buffs
         //YAGNI... sigh
-        (new applyPowerBuilder(StrengthPower.POWER_ID)).addPreProcess(StealableWhitelist::strengthPreProcess).addSynonym(LV_Hero.class).build();
+
+        (new applyPowerBuilder(StrengthPower.POWER_ID)).addPreProcess(StealableWhitelist::strengthPreProcess).addSynonym(LV_Hero.class, LV_Hero.POWER_ID).build();
         (new applyPowerBuilder(DexterityPower.POWER_ID)).build();
         (new applyPowerBuilder(ArtifactPower.POWER_ID)).build();
         (new applyPowerBuilder(PlatedArmorPower.POWER_ID)).build();
@@ -149,13 +174,13 @@ public class StealableWhitelist {
         (new applyPowerBuilder(CurlUpPower.POWER_ID)).build();
         (new applyPowerBuilder(FlightPower.POWER_ID)).build(); //hopefully only on regain?
         //Other enemy powers
-        (new applyPowerBuilder(RitualPower.POWER_ID)).addSynonym(LVRitual.class).build();
+        (new applyPowerBuilder(RitualPower.POWER_ID)).addSynonym(LVRitual.class, LVRitual.POWER_ID).build();
 
         //Synonym powers
-        (new applyPowerBuilder(SharpHidePower.POWER_ID)).addSynonym(ThornsPower.class).build();
-        (new applyPowerBuilder(IntangiblePower.POWER_ID)).addPostProcess(StealableWhitelist::intangiblePostProcess).addSynonym(IntangiblePlayerPower.class).build();
-        (new applyPowerBuilder(LV_Enemy.POWER_ID)).addSynonym(LV_Hero.class).build();
-        (new applyPowerBuilder(RegenerateMonsterPower.POWER_ID)).addSynonym(RegenPower.class).build();
+        (new applyPowerBuilder(SharpHidePower.POWER_ID)).addSynonym(ThornsPower.class, ThornsPower.POWER_ID).build();
+        (new applyPowerBuilder(IntangiblePower.POWER_ID)).addPostProcess(StealableWhitelist::intangiblePostProcess).addSynonym(IntangiblePlayerPower.class, IntangiblePlayerPower.POWER_ID).build();
+        (new applyPowerBuilder(LV_Enemy.POWER_ID)).addSynonym(LV_Hero.class, LV_Hero.POWER_ID).build();
+        (new applyPowerBuilder(RegenerateMonsterPower.POWER_ID)).addSynonym(RegenPower.class, RegenPower.POWER_ID).build();
     }
 
     public Set<String> getWhitelist() {
@@ -178,8 +203,9 @@ public class StealableWhitelist {
             this.postProcess = postProcess;
             return this;
         }
-        applyPowerBuilder addSynonym(Class<? extends AbstractPower> playerSynonym){
+        applyPowerBuilder addSynonym(Class<? extends AbstractPower> playerSynonym, String playerSynonymID){
             this.playerSynonym = playerSynonym;
+            getInstance().synonymDict.addValue(this.enemyPowerID, playerSynonymID);
             return this;
         }
         public void build(){

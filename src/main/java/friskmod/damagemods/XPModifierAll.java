@@ -161,15 +161,17 @@ public class XPModifierAll extends AbstractDamageModifier {
 //        }
 //        sourceCard.initializeDescription();
 //        int newDamageAmount = sourceCard.damage;
-        int newDamageAmount = damageAmount;
         int LV_transfer_from = getLVFromTarget(target);
         Wiz.att(new AfterLVHeroConsumedAction(this, target, LV_transfer_from));
         // Add XP to the card
+        int LV_input = consumeLVHeroForXP();
         if (sourceCard != null) {
-            CardXPFields.addXP(sourceCard, consumeLVHeroForXP());
+            CardXPFields.addXP(sourceCard, LV_input);
         }
-        Wiz.atb(new AfterXPConsumedAction());
-        return newDamageAmount;
+        if (LV_input > 0) {
+            Wiz.atb(new AfterXPConsumedAction());
+        }
+        return damageAmount;
     }
 //    @Override
 //    public void onLastDamageTakenUpdate(DamageInfo info, int lastDamageTaken, int overkillAmount, AbstractCreature target) {

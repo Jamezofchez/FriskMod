@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.ExhaustiveField;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.FleetingField;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,6 +18,8 @@ import friskmod.character.Frisk;
 import friskmod.helper.CardAttributeSnapshot;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
+import friskmod.util.Wiz;
+import friskmod.vfx.EchoFlowerDisappearEffect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -53,6 +56,7 @@ public class EchoFlower extends AbstractEasyCard {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.INTEGRITY);
         this.glowColor = Color.NAVY.cpy();
+        this.isEthereal = true;
     }
     public void onPlayCard(AbstractCard c, AbstractMonster m) {
         if (c.purgeOnUse)
@@ -115,10 +119,14 @@ public class EchoFlower extends AbstractEasyCard {
         if (this.lastCard != null) {
 //            this.lastCard.purgeOnUse = true;
             this.lastCard.use(p, m);
-            this.lastCard = null;
         }
     }
     public void triggerOnEndOfPlayerTurn() {
+        if (this.isEthereal) {
+            if (!(this.retain || this.selfRetain)) {
+                this.addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
+            }
+        }
         this.lastCard = null;
     }
 

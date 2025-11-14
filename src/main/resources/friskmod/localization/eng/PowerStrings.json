@@ -124,8 +124,8 @@
   "${modID}:Overcome": {
     "NAME": "Overcome",
     "DESCRIPTIONS": [
-      "Your next #b%s card which fails to play is #y${modID}:Persevered. Reduced by 1 on turn end.",
-      "Your next #b%s cards which fail to play are #y${modID}:Persevered. Reduced by 1 on turn end."
+      "Your next #b%s card which fails to play is #y${modID}:Persevered. Removed on turn end.",
+      "Your next #b%s cards which fail to play are #y${modID}:Persevered. Removed 1 on turn end."
     ]
   },
   "${modID}:Mercied": {
@@ -144,7 +144,7 @@
   "${modID}:RecyclePower": {
     "NAME": "Recycle",
     "DESCRIPTIONS": [
-      "Prevent the next time you would #y${modID}:Waste Energy. Gain #b%s #y${modID}:LV per #y${modID}:Wasted energy saved."
+      "Prevent the next time you would #y${modID}:Waste Energy. Gain #b%s #y${modID}:Temp_HP per #y${modID}:Wasted energy saved."
     ]
   },
   "${modID}:RememberBraveryPower": {
@@ -251,8 +251,8 @@
   "${modID}:NewHomePower": {
     "NAME": "New Home",
     "DESCRIPTIONS": [
-      "The first card you play each turn is #y${modID}:Copied.",
-      "The first #b%s cards you play each turn are #y${modID}:Copied."
+      "The first card you play each turn is #y${modID}:Monochromed.",
+      "The first #b%s cards you play each turn are #y${modID}:Monochromed."
     ]
   }
 }

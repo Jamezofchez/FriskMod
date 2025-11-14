@@ -13,7 +13,7 @@ import friskmod.patches.GhostlyPatch;
 import friskmod.util.Wiz;
 import friskmod.util.interfaces.AfterCardPlayedInterface;
 
-public class NonAttackPower extends BasePower implements AfterCardPlayedInterface {
+public class NonAttackPower extends BasePower {
     public static final String POWER_ID = FriskMod.makeID(NonAttackPower.class.getSimpleName());
     private static final AbstractPower.PowerType TYPE = AbstractPower.PowerType.BUFF;
     private static final boolean TURN_BASED = false;
@@ -72,8 +72,7 @@ public class NonAttackPower extends BasePower implements AfterCardPlayedInterfac
         this.description = String.format(baseDescription, amount);
     }
 
-    @Override
-    public void afterCardPlayed(AbstractCard card) {
+    public void ghostlyCardPlayed() {
         this.flash();
         addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
 
