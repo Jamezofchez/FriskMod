@@ -30,16 +30,18 @@ public class StealAllBlockAction extends AbstractGameAction {
 
     public static StealAllBlockAction activatedInstance = null;
 
-    public boolean stealMatching;
+    private boolean stealMatching;
+    private boolean steal;
 
     // Primary constructor — for multiple monsters
     public StealAllBlockAction(List<AbstractMonster> monsters) {
-        this(monsters, false);
+        this(monsters, false, true);
     }
-    public StealAllBlockAction(List<AbstractMonster> monsters, boolean stealMatching) {
+    public StealAllBlockAction(List<AbstractMonster> monsters, boolean stealMatching, boolean steal) {
         this.amount = 0;
         this.duration = 0.5F;
         this.stealMatching = stealMatching;
+        this.steal = steal;
         actionType = ActionType.BLOCK;
         startDuration = duration = Settings.ACTION_DUR_MED;
         targetMonsters = monsters;
@@ -49,8 +51,8 @@ public class StealAllBlockAction extends AbstractGameAction {
     public StealAllBlockAction(AbstractMonster m) {
         this(toList(m));
     }
-    public StealAllBlockAction(AbstractMonster m, boolean stealMatching) {
-        this(toList(m), stealMatching);
+    public StealAllBlockAction(AbstractMonster m, boolean stealMatching, boolean steal) {
+        this(toList(m), stealMatching, steal);
     }
 
     // Helper method to create a list with a single monster (if non-null)
@@ -111,7 +113,9 @@ public class StealAllBlockAction extends AbstractGameAction {
                             }
                         }
                         Wiz.att(new AddTemporaryHPAction(source, source, tempHpAmount));
-                        Wiz.att(new RemoveAllTemporaryHPAction(target, source));
+                        if (steal) {
+                            Wiz.att(new RemoveAllTemporaryHPAction(target, source));
+                        }
                     }
                 }
             }
@@ -127,7 +131,9 @@ public class StealAllBlockAction extends AbstractGameAction {
                             }
                         }
                         Wiz.att(new GainBlockAction(source, source, blockAmount));
-                        Wiz.att(new LoseBlockAction(target, source, blockAmount));
+                        if (steal) {
+                            Wiz.att(new LoseBlockAction(target, source, blockAmount));
+                        }
                     }
                 }
             }

@@ -37,6 +37,7 @@ public class GladDummy extends AbstractDummy {
     }
 
     public void usePreBattleAction() {
+        super.usePreBattleAction();
         applyToSelf(new SoulBound(this, this.boundTarget));
         applyToSelf(new friskmod.powers.GladDummy(this, this.boundTarget));
     }
@@ -47,10 +48,12 @@ public class GladDummy extends AbstractDummy {
         switch (this.nextMove) {
             case 0:
                 attackAnimation((AbstractCreature) Wiz.adp());
+                this.info.applyPowers(this, AbstractDungeon.player);
                 addToBot(new GainBlockAction(AbstractDungeon.player, this, 3));
 //                addToBot(new GainBlockRandomMonsterAction(this, 3));
                 for (AbstractMonster m : Wiz.getMonsters()) {
-                    addToBot(new GainBlockAction(m, this, 4));
+                    this.info.applyPowers(this, m);
+                    addToBot(new GainBlockAction(m, this, 3));
                 }
                 resetIdle(0.25F);
                 waitAnimation(0.25F);

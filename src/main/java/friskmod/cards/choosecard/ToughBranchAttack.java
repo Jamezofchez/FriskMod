@@ -26,7 +26,7 @@ public class ToughBranchAttack extends AbstractChooseCard{
     @Override
     public void chooseOption() {
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new DamageAction(getTarget(), new DamageInfo(p, baseDamage, DamageInfo.DamageType.NORMAL)));
+//        addToBot(new DamageAction(getTarget(), new DamageInfo(p, baseDamage, DamageInfo.DamageType.NORMAL)));
         AbstractCountdownPower countdown = new CountdownDefend(p, ToughBranch.BLOCK, ToughBranch.WAIT_TIMER, ToughBranch.UPG_BLOCK);
         if (upgraded) {
             countdown.upgrade();

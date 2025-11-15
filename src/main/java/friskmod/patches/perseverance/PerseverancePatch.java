@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 //import friskmod.cards.Exhaustion;
 import friskmod.actions.CustomSFXAction;
+import friskmod.helper.SharedFunctions;
 import friskmod.powers.Overcome;
 import friskmod.util.Wiz;
 import javassist.*;
@@ -177,7 +178,7 @@ public class PerseverancePatch {
 
     private static void setPerserveable(AbstractCard c, boolean defaultBoolean) {
         if (!defaultBoolean) {
-            if (!PerseveranceFields.isPerseverable.get(c)) {
+            if (!PerseveranceFields.isPerseverable.get(c) && !PerseveranceFields.trapped.get(c)) {
                 AbstractPower posspow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
                 if (posspow != null) {
                     PerseveranceFields.setIsPerseverable(c, true, true);
@@ -433,7 +434,7 @@ public class PerseverancePatch {
                 int refundEnergy = PerseveranceFields.cardEnergy.get(card);
                 Wiz.atb(new GainEnergyAction(refundEnergy));
             }
-            if (!isCurseOrStatus(card)) {
+            if (!SharedFunctions.isCurseOrStatus(card)) {
                 AbstractCard tmp = card.makeStatEquivalentCopy();
                 PerseveranceFields.trapped.set(tmp, true);
                 Wiz.atb(new MakeTempCardInHandAction(tmp));
@@ -442,16 +443,6 @@ public class PerseverancePatch {
         @SpirePostfixPatch
         public static void Postfix(UseCardAction __instance, AbstractCard card, AbstractCreature target) {
             PerseveranceFields.perseverePlayed.set(card, false);
-        }
-
-        public static boolean isCurseOrStatus(AbstractCard c){
-            if (c == null) {
-                return false;
-            }
-            if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
-                return true;
-            }
-            return false;
         }
     }
 

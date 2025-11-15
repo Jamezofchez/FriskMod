@@ -29,8 +29,8 @@ public class ToAsh extends AbstractEasyCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int KARMA = 7;
-    private static final int UPG_KARMA = 3;
+    private static final int KARMA = 8;
+    private static final int UPG_KARMA = 4;
 
     public ToAsh() {
         super(ID, info); //Pass the required information to the BaseCard constructor.

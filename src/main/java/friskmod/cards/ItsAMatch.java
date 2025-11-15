@@ -40,7 +40,7 @@ public class ItsAMatch extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (!upgraded) {
             if (p.currentBlock > 0) {
-                addToBot(new StealAllBlockAction(m));
+                addToBot(new StealAllBlockAction(m, true, true));
             }
             addToBot(new StealPowerAction(m, true, true));
             addToBot(new EnemyStealMatchingDebuffsAction(m));
@@ -48,7 +48,7 @@ public class ItsAMatch extends AbstractEasyCard {
         else{
             List<AbstractMonster> monsters = Wiz.getMonsters();
             if (p.currentBlock > 0) {
-                addToBot(new StealAllBlockAction(monsters));
+                addToBot(new StealAllBlockAction(monsters, true, true));
             }
             addToBot(new StealPowerAction(monsters, true, true));
             addToBot(new EnemyStealMatchingDebuffsAction(monsters));

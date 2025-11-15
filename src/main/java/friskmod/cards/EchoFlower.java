@@ -57,6 +57,7 @@ public class EchoFlower extends AbstractEasyCard {
         tags.add(FriskTags.INTEGRITY);
         this.glowColor = Color.NAVY.cpy();
         this.isEthereal = true;
+        this.exhaust = true;
     }
     public void onPlayCard(AbstractCard c, AbstractMonster m) {
         if (c.purgeOnUse)

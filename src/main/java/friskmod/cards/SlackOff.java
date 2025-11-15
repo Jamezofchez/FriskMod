@@ -21,10 +21,10 @@ public class SlackOff extends AbstractEasyCard{
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 22;
-    private static final int UPG_DAMAGE = 3;
-    private static final int ADDED_XP = 8;
-    private static final int UPG_ADDED_XP = 3;
+    private static final int DAMAGE = 24;
+    private static final int UPG_DAMAGE = 4;
+    private static final int ADDED_XP = 10;
+    private static final int UPG_ADDED_XP = 4;
 
     private boolean serious = false;
 

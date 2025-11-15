@@ -152,7 +152,7 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn. #yTrapped cards are not exhausted when #Persevered."
+    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn. #yTrapped cards are not exhausted when #yPersevered."
   },
   {
     "PROPER_NAME": "Monochrome",
@@ -354,14 +354,14 @@
       "Glad Dummy",
       "Glad_Dummy"
     ],
-    "DESCRIPTION": "Gives EVERYONE 4 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
+    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Overcome",
     "NAMES": [
       "Overcome"
     ],
-    "DESCRIPTION": "When a card fails to play, #yPersevere it and reduce by 1. NL Removed on turn end."
+    "DESCRIPTION": "When a #ynon-${modID}:Trapped card fails to play, #yPersevere it and reduce by 1. NL Removed on turn end."
   },
   {
     "PROPER_NAME": "Unplayable",

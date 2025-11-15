@@ -87,9 +87,14 @@
       "I cannot play Attacks right now!"
     ]
   },
-  "${modID}:AbstractMonsterSnapshotHistory": {
+  "${modID}:MonsterSnapshotHistory": {
     "TEXT": [
       "This is the monster's first turn!"
+    ]
+  },
+  "${modID}:RewindStrike": {
+    "TEXT": [
+      "Something went wrong :("
     ]
   },
   "${modID}:SmokeBombAction": {

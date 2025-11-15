@@ -28,8 +28,9 @@ public class LV_Enemy extends BasePower {
         if (type != DamageInfo.DamageType.NORMAL) {
             return damage;
         }
-        if(this.owner.hasPower(Mercied.POWER_ID)){
-            return damage - this.amount;
+        AbstractPower posspow = this.owner.getPower(Mercied.POWER_ID);
+        if(posspow != null){
+            return damage - (this.amount * posspow.amount);
         }
         return damage + this.amount;
     }

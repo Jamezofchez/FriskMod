@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.cardmods.MonochromeMod;
+import friskmod.helper.SharedFunctions;
 import friskmod.patches.MonochromePatch;
 import friskmod.patches.ExternalGlowPatch;
 import friskmod.util.Wiz;
@@ -58,9 +59,11 @@ public class NewHomePower extends BasePower {
         if (canCopy(card)) {
              Wiz.atb(Wiz.actionify( () -> {
                  if (MonochromePatch.MonochromeFields.wasCriticalPlayed.get(card)) {
-                     this.copiedThisTurn++;
-                     flash();
-                     makeMonochromeCard(card);
+                     if (!SharedFunctions.isCurseOrStatus(card)) {
+                         this.copiedThisTurn++;
+                         flash();
+                         makeMonochromeCard(card);
+                     }
                  }
              }));
         }

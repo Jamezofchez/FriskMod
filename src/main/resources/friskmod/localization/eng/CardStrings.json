@@ -30,7 +30,7 @@
   },
   "${modID}:ArtifactStrike": {
     "NAME": "Artifact Strike",
-    "DESCRIPTION": "Give the enemy !M! Artifact. Deal !D! damage per Artifact stack."
+    "DESCRIPTION": "Give the enemy !M! Artifact. NL Deal !D! damage per Artifact stack."
   },
   "${modID}:AnnoyingDog": {
     "NAME": "Annoying Dog",
@@ -73,7 +73,7 @@
   },
   "${modID}:ButterscotchPie": {
     "NAME": "Butterscotch Pie",
-    "DESCRIPTION": "Convert your Block into ${modID}:Temp_HP. Keep up to !M! Block. NL Exhaust."
+    "DESCRIPTION": "Convert your Block into ${modID}:Temp_HP. NL Keep up to !M! Block. NL Exhaust."
   },
   "${modID}:Chill": {
     "NAME": "Chill",
@@ -85,7 +85,7 @@
   },
   "${modID}:CopyCat": {
     "NAME": "Copy Cat",
-    "DESCRIPTION": "${modID}:Copy the enemy's buffs. Deal !D! damage. "
+    "DESCRIPTION": "${modID}:Copy the enemy's Block and buffs. Deal !D! damage. "
   },
   "${modID}:CroquetRoll": {
     "NAME": "Croquet Roll",
@@ -123,7 +123,7 @@
   },
   "${modID}:Doomed": {
     "NAME": "Doomed",
-    "DESCRIPTION": "${modID}:Draft !${modID}:M2! ${modID}:Nightmare. NL If ${modID}:Threatened, ${modID}:Steal !M! HP from ALL enemies."
+    "DESCRIPTION": "${modID}:Draft !${modID}:M2! ${modID}:Nightmare. NL If ${modID}:Threatened before or after, ${modID}:Steal !M! HP from ALL enemies."
   },
   "${modID}:Dream": {
     "NAME": "Dream",
@@ -191,7 +191,7 @@
   },
   "${modID}:GatherSoul": {
     "NAME": "Gather SOUL",
-    "DESCRIPTION": "Deal !D! damage. Exhaust all non-Attack cards in your hand. NL Your remaining cards gain !M! ${modID}:XP for each."
+    "DESCRIPTION": "Gain !B! Block. Exhaust all non-Attack cards in your hand. NL Your remaining cards gain !M! ${modID}:XP for each."
   },
   "${modID}:GladDummy": {
     "NAME": "Glad Dummy",
@@ -291,15 +291,15 @@
   "${modID}:RewindStrike": {
     "NAME": "Rewind Strike",
     "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn.",
-    "UPGRADE_DESCRIPTION": "Retain. Deal !D! damage. NL Revert the enemy to their previous turn."
+    "UPGRADE_DESCRIPTION": "Retain. NL Deal !D! damage. NL Revert the enemy to their previous turn."
   },
   "${modID}:Rock": {
     "NAME": "Rock",
-    "DESCRIPTION": "Deal !D! damage. NL This card always has at least !M! ${modID}:inherent ${modID}:XP. NL Exhaust."
+    "DESCRIPTION": "Deal !D! damage. NL Exhaust."
   },
   "${modID}:RockPuzzle": {
     "NAME": "Rock Puzzle",
-    "DESCRIPTION": "Exhaust a card to play this. NL Deal !D! damage. NL Gain *Rocks equal to the exhausted card's cost + !M!."
+    "DESCRIPTION": "Exhaust a card to play this. NL Deal !D! damage. NL Gain !M! Rocks with the exhausted card's ${modID}:XP."
   },
   "${modID}:OLDSanchita": {
     "NAME": "OLDSanchita",
@@ -342,10 +342,10 @@
   },
   "${modID}:SlackOff": {
     "NAME": "Slack Off",
-    "DESCRIPTION": "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP decreases Attack damage for this card.",
+    "DESCRIPTION": "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. NL ${modID}:XP decreases Attack damage for this card.",
     "EXTENDED_DESCRIPTION": [
       "Get Serious",
-      "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. ${modID}:XP increases Attack damage for this card while you have ${modID}:Mercied."
+      "Deal !D! damage. NL This card starts with !M! ${modID}:added ${modID}:XP. NL ${modID}:XP increases Attack damage for this card while you have ${modID}:Mercied."
     ]
   },
   "${modID}:Slash": {
@@ -396,7 +396,7 @@
   },
   "${modID}:TornNotebook": {
     "NAME": "Torn Notebook",
-    "DESCRIPTION": "The next !M! times you lose HP or ${modID}:Temp_HP, gain 1 Barrier. NL ${modID}:Critical: Gain !${modID}:M2! Barrier."
+    "DESCRIPTION": "The next !M! times you lose HP or ${modID}:Temp_HP, gain 1 Barrier. NL ${modID}:Critical: NL Gain !${modID}:M2! Barrier."
   },
   "${modID}:ToughBranch": {
     "NAME": "Tough Branch",
@@ -404,11 +404,11 @@
   },
   "${modID}:ToughBranchAttack": {
     "NAME": "Attack",
-    "DESCRIPTION": "Deal !D! damage."
+    "DESCRIPTION": "Deal damage."
   },
   "${modID}:ToughBranchDefend": {
     "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block."
+    "DESCRIPTION": "Gain Block."
   },
   "${modID}:ToughStrike": {
     "NAME": "Tuff Strike",

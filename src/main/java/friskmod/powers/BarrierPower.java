@@ -1,6 +1,6 @@
 package friskmod.powers;
 
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
@@ -21,7 +21,7 @@ public class BarrierPower extends BasePower {
 
     public void onSpecificTrigger(){
         this.flash();
-        addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+        addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
     }
 
     @Override

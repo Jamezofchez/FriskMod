@@ -9,7 +9,7 @@ import static friskmod.FriskMod.makeID;
 public class NightmareOfHurt extends AbstractDreamCard{
     public static final String ID = makeID(NightmareOfHurt.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
 
-    private static final int POWER_AMOUNT = 3;
+    private static final int POWER_AMOUNT = 5;
 
     public NightmareOfHurt() {
         super(ID);

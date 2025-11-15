@@ -42,6 +42,7 @@ public class MadDummy extends AbstractDummy {
     }
 
     public void usePreBattleAction() {
+        super.usePreBattleAction();
         applyToSelf(new SoulBound(this, this.boundTarget));
         applyToSelf(new friskmod.powers.MadDummy(this, this.boundTarget));
     }
@@ -54,6 +55,7 @@ public class MadDummy extends AbstractDummy {
                 AbstractCreature randomEnemy = getRandomEnemy();
                 if (randomEnemy != null) {
                     attackAnimation(randomEnemy);
+                    this.info.applyPowers(this, randomEnemy);
                     Wiz.atb(new DamageAction(randomEnemy, this.info));
                     resetIdle(0.25F);
                     waitAnimation(0.25F);

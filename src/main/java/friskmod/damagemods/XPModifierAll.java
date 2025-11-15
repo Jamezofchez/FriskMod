@@ -1,17 +1,9 @@
 package friskmod.damagemods;
 
 import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
-import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
-import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModContainer;
-import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -22,7 +14,6 @@ import friskmod.cards.VineBloom;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.*;
 import friskmod.util.Wiz;
-import basemod.ReflectionHacks;
 
 import java.util.ArrayList;
 
@@ -89,7 +80,7 @@ public class XPModifierAll extends AbstractDamageModifier {
         public static SpireField<Integer> enemiesProcessed = new SpireField<>(() -> 0);
         public static SpireField<Integer> totalEnemies = new SpireField<>(() -> -1);
         public static SpireField<ArrayList<Integer>> enemyLV = new SpireField<>(() -> null);
-
+        public static SpireField<ArrayList<Boolean>> enemyWasBlocked = new SpireField<>(() -> null);
     }
 
 
@@ -140,17 +131,19 @@ public class XPModifierAll extends AbstractDamageModifier {
         return xp + XP_from_LV_Hero;
     }
     public int onAttackToChangeDamage(DamageInfo info, int damageAmount, AbstractCreature target) {
-        if (target != null) {
-            if (target.isDying || target.isDead) {
-                return damageAmount;
-            }
-        } else{
-            return damageAmount;
-        }
-        if (damageAmount <= 0){ //blocked damage
-            return damageAmount;
-        }
         if (info.type != DamageInfo.DamageType.NORMAL){
+            return damageAmount;
+        }
+        if (target == null) {
+            return damageAmount;
+        }
+        boolean wasBlocked = false;
+        if (damageAmount <= 0){ //blocked damage
+            wasBlocked = true;
+        }
+        int LV_transfer_from = getLVFromTarget(target);
+        Wiz.att(new AfterLVHeroConsumedAction(this, target, LV_transfer_from, wasBlocked));
+        if (wasBlocked || target.isDying || target.isDead) {
             return damageAmount;
         }
         //RECOMPUTE DAMAGE BASED ON CURRENT XP - MAY HAVE CHANGED ON MULTI-HIT
@@ -161,8 +154,6 @@ public class XPModifierAll extends AbstractDamageModifier {
 //        }
 //        sourceCard.initializeDescription();
 //        int newDamageAmount = sourceCard.damage;
-        int LV_transfer_from = getLVFromTarget(target);
-        Wiz.att(new AfterLVHeroConsumedAction(this, target, LV_transfer_from));
         // Add XP to the card
         int LV_input = consumeLVHeroForXP();
         if (sourceCard != null) {
@@ -221,7 +212,7 @@ public class XPModifierAll extends AbstractDamageModifier {
 //        }
 //    }
 
-    public void handleAOEDamage(AbstractCreature target, int LV_transfer_to, int final_LV_transfer_from) {
+    public void handleAOEDamage(AbstractCreature target, int LV_transfer_to, int final_LV_transfer_from, boolean wasBlocked) {
         if (ExtraXPInfo.originalCardXP.get(sourceCard) == -1) {
             int originalCardXP = CardXPFields.getCardXP(sourceCard);
             ExtraXPInfo.originalCardXP.set(sourceCard, originalCardXP);
@@ -230,6 +221,14 @@ public class XPModifierAll extends AbstractDamageModifier {
             int total = Wiz.getAliveOrDying().size();
             ExtraXPInfo.totalEnemies.set(sourceCard, total);
         }
+        if (ExtraXPInfo.enemyWasBlocked.get(sourceCard) == null) {
+            ArrayList<Boolean> enemyWasBlocked = new ArrayList<>();
+            ExtraXPInfo.enemyWasBlocked.set(sourceCard, enemyWasBlocked);
+        }
+        if (!target.isDead){
+            ExtraXPInfo.enemyWasBlocked.get(sourceCard).add(wasBlocked);
+        }
+        ExtraXPInfo.enemyWasBlocked.get(sourceCard).add(wasBlocked);
         if (ExtraXPInfo.enemyLV.get(sourceCard) == null) {
             ArrayList<Integer> enemyLV = new ArrayList<>();
             for (AbstractMonster m: Wiz.getAliveOrDying()){
@@ -251,6 +250,9 @@ public class XPModifierAll extends AbstractDamageModifier {
         int monsterIndex = 0;
         for (AbstractMonster m : Wiz.getAliveOrDying()) {
 //            if (!m.isDeadOrEscaped()) {
+                if (ExtraXPInfo.enemyWasBlocked.get(sourceCard).get(monsterIndex)) {
+                    continue;
+                }
                 Wiz.att(new SwapXPAction(sourceCard, p, m, Math.max(0,originalCardXP-1), ExtraXPInfo.enemyLV.get(sourceCard).get(monsterIndex), false));
 //            }
             ++monsterIndex;
@@ -259,6 +261,7 @@ public class XPModifierAll extends AbstractDamageModifier {
         ExtraXPInfo.enemiesProcessed.set(sourceCard, 0);
         ExtraXPInfo.totalEnemies.set(sourceCard, -1);
         ExtraXPInfo.enemyLV.set(sourceCard, null);
+        ExtraXPInfo.enemyWasBlocked.set(sourceCard, null);
 
 
     }

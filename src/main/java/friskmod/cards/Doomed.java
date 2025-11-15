@@ -43,9 +43,10 @@ public class Doomed extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new PlayerEnemyDraftAction(p, m, OpenDraftAction.DreamType.NIGHTMARE, DRAFT_AMOUNT));
+        final boolean beforeThreatened = ThreatenedCheck.isThreatened();
+        addToBot(new PlayerEnemyDraftAction(p, m, OpenDraftAction.DreamType.NIGHTMARE, secondMagic));
         addToBot(Wiz.actionify(() -> {
-            if (ThreatenedCheck.isThreatened()) {
+            if (ThreatenedCheck.isThreatened() || beforeThreatened) {
                 for (AbstractMonster monster : Wiz.getMonsters()) {
                     addToBot(new StealEnemyHP(magicNumber, monster));
                 }

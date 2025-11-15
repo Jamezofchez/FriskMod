@@ -48,6 +48,7 @@ public class CardAttributeSnapshot {
             storeCard.glowColor = Color.NAVY.cpy();
             storeCard.isGlowing = true;
             storeCard.isEthereal = true;
+            storeCard.exhaust = true;
             storeCard.purgeOnUse = true;
         }
     }
@@ -97,7 +98,7 @@ public class CardAttributeSnapshot {
                 try {
                     field.setAccessible(true);
                     field.set(restoreCard, savedValue);
-                } catch (IllegalAccessException e) {
+                } catch (Exception e) {
                     FriskMod.logger.warn("{}: failed to restore CardSnapshot", FriskMod.modID);
                 }
             }

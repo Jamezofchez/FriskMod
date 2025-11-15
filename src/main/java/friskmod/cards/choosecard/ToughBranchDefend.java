@@ -1,11 +1,13 @@
 package friskmod.cards.choosecard;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import friskmod.cards.ToughBranch;
+import friskmod.patches.HackyToughBranchPatch;
 import friskmod.powers.AbstractCountdownPower;
 import friskmod.powers.CountdownAttack;
 
@@ -24,6 +26,7 @@ public class ToughBranchDefend extends AbstractChooseCard{
     public void chooseOption() {
         AbstractPlayer p = AbstractDungeon.player;
         addToBot(new GainBlockAction(p, p, baseBlock));
+        AbstractDungeon.actionManager.actions.removeIf(a -> (a instanceof DamageAction) && HackyToughBranchPatch.damageActionFields.fromToughBranch.get(a));
         AbstractCountdownPower countdown = new CountdownAttack(getTarget(), ToughBranch.DAMAGE, ToughBranch.WAIT_TIMER, ToughBranch.UPG_DAMAGE);
         if (upgraded) {
             countdown.upgrade();

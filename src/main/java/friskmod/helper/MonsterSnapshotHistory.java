@@ -1,10 +1,12 @@
 package friskmod.helper;
 
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
+import com.megacrit.cardcrawl.monsters.exordium.Hexaghost;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.FriskMod;
 
@@ -93,6 +95,13 @@ public class MonsterSnapshotHistory {
             boolean isMultiDamage = currentMove.isMultiDamage;
             String moveName = snapshot.moveName;
             m.setMove(moveName, nextMove, intent, baseDamage, multiplier, isMultiDamage);
+            //hooray for shitty code
+            if (m instanceof Hexaghost){
+                if (nextMove == 1){
+                    int d = AbstractDungeon.player.currentHealth / 12 + 1;
+                    ((DamageInfo)m.damage.get(2)).base = d;
+                }
+            }
             m.applyPowers();
             m.createIntent();
             //Maybe reset tint??

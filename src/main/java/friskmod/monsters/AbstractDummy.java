@@ -16,10 +16,12 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.MinionPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.combat.FireballEffect;
 import friskmod.FriskMod;
+import friskmod.powers.SoulBound;
 import friskmod.util.Wiz;
 
 public abstract class AbstractDummy extends AbstractFriskmodEnemy {
@@ -27,6 +29,10 @@ public abstract class AbstractDummy extends AbstractFriskmodEnemy {
     public AbstractDummy(String name, String id, float x, float y, int hp) {
         super(name, id, hp, 0.0F, 0.0F, 110.0F, 110.0F, null, x, y);
         this.currentHealth = this.maxHealth = hp; //shouldnt be effected
+    }
+
+    public void usePreBattleAction() {
+//        applyToSelf(new MinionPower(this));
     }
 }
 

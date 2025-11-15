@@ -14,12 +14,14 @@ public class AfterLVHeroConsumedAction extends AbstractGameAction {
     AbstractCard sourceCard;
     AbstractCreature target;
     int LV_transfer_from;
-    public AfterLVHeroConsumedAction(XPModifierAll XPModifierAll, AbstractCreature target, int LV_transfer_from){
+    boolean wasBlocked;
+    public AfterLVHeroConsumedAction(XPModifierAll XPModifierAll, AbstractCreature target, int LV_transfer_from, boolean wasBlocked){
         this.XPModifierAll = XPModifierAll;
         this.sourceCard = XPModifierAll.sourceCard;
         this.target = target;
         this.LV_transfer_from = LV_transfer_from;
         this.duration = Settings.ACTION_DUR_FAST;
+        this.wasBlocked = wasBlocked;
     }
     public void update() {
         this.isDone = true;
@@ -33,10 +35,12 @@ public class AfterLVHeroConsumedAction extends AbstractGameAction {
         }
         boolean isMultiDamage = ReflectionHacks.getPrivate(sourceCard, AbstractCard.class, "isMultiDamage");
         if (isMultiDamage){
-            XPModifierAll.handleAOEDamage(target, LV_transfer_to, LV_transfer_from);
+            XPModifierAll.handleAOEDamage(target, LV_transfer_to, LV_transfer_from, wasBlocked);
         } else{
 //            if (LV_transfer_to == 0 && LV_transfer_from == 0) return; //still may need to handle removal
-            XPModifierAll.handleSingleTargetDamage(target, LV_transfer_to, LV_transfer_from);
+            if (!wasBlocked) {
+                XPModifierAll.handleSingleTargetDamage(target, LV_transfer_to, LV_transfer_from);
+            }
         }
 
     }

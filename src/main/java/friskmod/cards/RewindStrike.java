@@ -1,8 +1,15 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.character.Frisk;
 import friskmod.helper.MonsterSnapshotHistory;
 import friskmod.patches.MonsterLastMovePatch;
@@ -14,6 +21,8 @@ import static friskmod.FriskMod.makeID;
 
 public class RewindStrike extends AbstractEasyCard {
     public static final String ID = makeID(RewindStrike.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+    private static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
+
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
     private static final CardStats info = new CardStats(
@@ -34,12 +43,21 @@ public class RewindStrike extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
         MonsterSnapshotHistory snapshot = MonsterLastMovePatch.AbstractMonsterSnapshotFields.snapshot.get(m);
-        if (snapshot != null){
+        boolean flawlessCode = true;
+        try {
             snapshot.restore(m);
-
+        } catch (Exception e) {
+            flawlessCode = false;
         }
+        if (flawlessCode){
+            dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
+        } else{
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, (UI_STRINGS.TEXT[0]), true));
+            addToBot(new GainEnergyAction(this.costForTurn));
+            addToBot(new DrawCardAction(p, 1));
+        }
+
     }
 
     @Override

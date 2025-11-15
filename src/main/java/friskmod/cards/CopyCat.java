@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import friskmod.actions.StealAllBlockAction;
 import friskmod.actions.StealPowerAction;
 import friskmod.character.Frisk;
 import friskmod.helper.StealableWhitelist;
@@ -45,7 +46,8 @@ public class CopyCat extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new StealPowerAction(m, false));
+        addToBot(new StealAllBlockAction(m, false, false));
+        addToBot(new StealPowerAction(m, false, true));
         dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
     }
 

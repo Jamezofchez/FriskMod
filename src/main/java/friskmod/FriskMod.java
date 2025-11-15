@@ -18,6 +18,8 @@ import friskmod.character.Frisk;
 import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
 import friskmod.patches.GhostlyPatch;
+import friskmod.potions.AbstractEasyPotion;
+import friskmod.potions.MercyPotion;
 import friskmod.powers.NonAttackPower;
 import friskmod.relics.BaseRelic;
 import friskmod.util.*;
@@ -92,6 +94,7 @@ public class FriskMod implements
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
 //        CustomIntent.add((CustomIntent)new MassAttackIntent());
         initializeSavedData();
+
     }
 
     /*----------Localization----------*/
@@ -373,6 +376,14 @@ public class FriskMod implements
     @Override
     public void receiveEditCharacters() {
         Frisk.Meta.registerCharacter();
+        new AutoAdd(modID)
+                .packageFilter(AbstractEasyPotion.class)
+                .any(AbstractEasyPotion.class, (info, potion) -> {
+                    if (potion.pool == null)
+                        BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID);
+                    else
+                        BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID, potion.pool);
+                });
     }
 
 

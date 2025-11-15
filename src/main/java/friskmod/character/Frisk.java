@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -20,7 +19,10 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import friskmod.cards.*;
+import friskmod.potions.MercyPotion;
 import friskmod.relics.HeartShapedLocket;
+import hermit.characters.hermit;
+import hermit.potions.Tonic;
 
 import java.util.ArrayList;
 
@@ -72,12 +74,12 @@ public class Frisk extends CustomPlayer {
 
         //This is used to color *some* images, but NOT the actual cards. For that, edit the images in the cardback folder!
 //        private static final Color cardColor = new Color(128f/255f, 128f/255f, 128f/255f, 1f);
-        private static final Color cardColor = new Color(1.0F, 0.0F, 0.0F, 1.0F);
+        public static final Color characterColor = new Color(1.0F, 0.0F, 0.0F, 1.0F);
 
 
         //Methods that will be used in the main mod file
         public static void registerColor() {
-            BaseMod.addColor(Enums.CARD_COLOR, cardColor,
+            BaseMod.addColor(Enums.CARD_COLOR, characterColor,
                     BG_ATTACK, BG_SKILL, BG_POWER, ENERGY_ORB,
                     BG_ATTACK_P, BG_SKILL_P, BG_POWER_P, ENERGY_ORB_P,
                     SMALL_ORB);

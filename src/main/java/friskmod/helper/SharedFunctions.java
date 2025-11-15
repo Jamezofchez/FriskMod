@@ -4,6 +4,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -22,6 +23,16 @@ import java.util.List;
 import static friskmod.cards.SpecialDeal.NUM_CYCLES;
 
 public class SharedFunctions {
+
+    public static boolean isCurseOrStatus(AbstractCard c){
+        if (c == null) {
+            return false;
+        }
+        if (c.type == AbstractCard.CardType.CURSE || c.type == AbstractCard.CardType.STATUS) {
+            return true;
+        }
+        return false;
+    }
 
     private static int SPECIAL_DEAL_BONUS;
 

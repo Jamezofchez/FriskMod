@@ -107,10 +107,6 @@ public class StealPowerAction extends AbstractGameAction {
         this(SharedFunctions.toList(m));
     }
 
-    public StealPowerAction(AbstractMonster m, boolean steal) {
-        this(SharedFunctions.toList(m), steal);
-    }
-
     public StealPowerAction(AbstractMonster m, boolean steal, boolean stealMatching) {
         this(SharedFunctions.toList(m), steal, stealMatching);
     }

@@ -14,6 +14,8 @@ import friskmod.actions.CustomSFXAction;
 import friskmod.cards.choosecard.ToughBranchAttack;
 import friskmod.cards.choosecard.ToughBranchDefend;
 import friskmod.character.Frisk;
+import friskmod.patches.CardXPFields;
+import friskmod.patches.HackyToughBranchPatch;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
@@ -53,11 +55,21 @@ public class ToughBranch extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         ArrayList<AbstractCard> cards = new ArrayList<>();
-        cards.add(new ToughBranchAttack());
-        cards.add(new ToughBranchDefend());
+        AbstractCard attack = new ToughBranchAttack();
+        AbstractCard defend = new ToughBranchDefend();
+        cards.add(attack);
+        cards.add(defend);
         if (upgraded) for (AbstractCard c : cards) c.upgrade();
+//        int currentXP = CardXPFields.getCardAddedXP(this);
+//        if (currentXP > 0) {
+//            CardXPFields.setAddedXP(attack, currentXP);
+//            attack.applyPowers();
+//        }
         setDraftTarget(m);
+        DamageAction damageAction = new DamageAction(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
+        HackyToughBranchPatch.damageActionFields.fromToughBranch.set(damageAction, true);
         AbstractDungeon.cardRewardScreen.chooseOneOpen(cards);
+        addToBot(damageAction);
     }
 
     @Override
