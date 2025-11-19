@@ -26,7 +26,7 @@ Simply put, cards with experience deal more damage. When dealing damage to an en
 
 *“Critical pet\! Dog excitement increased.”*
 
-Deal **Critical** effects when cards are played from the middle of your hand. Some of the more power cards are here, if only you can trigger them.
+Deal **Critical** effects when cards are played from the middle of your hand. Some of the more powerful cards are here, if only you can trigger them.
 
 ### Justice:
 
@@ -39,6 +39,8 @@ Inflict your enemies with **KARMA**, which causes them to lose HP whenever you l
 *“(You're filled with determination.)"*
 
 **Persevere** cards, allowing yourself to play them for just 1 HP while bypassing any conditions for playability. However, cards persevered will become **Trapped**, becoming normally Unplayable and causing you to lose one energy when drawn.
+
+### DETERMINATION:
 
 *“Despite everything, it’s still you”*
 
