@@ -29,7 +29,7 @@ public class KarmicStrike extends AbstractEasyCard {
     private static final int DAMAGE = 6;
     private static final int UPG_DAMAGE = 3;
     private static final int KARMA = 3;
-    private static final int UPG_KARMA = 1;
+    private static final int UPG_KARMA = 2;
 
     public KarmicStrike() {
         super(ID, info); //Pass the required information to the BaseCard constructor.

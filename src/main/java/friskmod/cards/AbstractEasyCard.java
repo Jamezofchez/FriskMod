@@ -107,6 +107,7 @@ public abstract class AbstractEasyCard extends CustomCard {
              */
             case "DreamOfArtifact":
             case "DreamOfBlur":
+            case "DreamOfDefend":
             case "DreamOfDetermination":
             case "DreamOfDexterity":
             case "DreamOfEvolve":
@@ -116,6 +117,7 @@ public abstract class AbstractEasyCard extends CustomCard {
                 break;
             case "NightmareOfNEO":
             case "NightmareOfHurt":
+            case "NightmareOfKarma":
             case "NightmareOfMercied":
             case "NightmareOfAttack":
             case "NightmareOfStrengthDown":

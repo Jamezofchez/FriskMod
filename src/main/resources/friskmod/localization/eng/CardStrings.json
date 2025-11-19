@@ -61,7 +61,7 @@
   },
   "${modID}:BreakFree": {
     "NAME": "Break Free",
-    "DESCRIPTION": "${modID}:Unseal all cards in your hand. NL They cost !M! less this turn. NL Deal !D! damage."
+    "DESCRIPTION": "${modID}:Unseal all ${modID}:Trapped cards in your hand. NL They cost !M! less this turn. NL Deal !D! damage."
   },
   "${modID}:BurnInHell": {
     "NAME": "Burn In Hell",
@@ -291,6 +291,10 @@
   },
   "${modID}:Reverence": {
     "NAME": "Reverence",
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Apply ${modID}:KR equal to the unblocked damage dealt"
+  },
+  "${modID}:OLDReverence": {
+    "NAME": "Reverence",
     "DESCRIPTION": "Deal !D! damage. NL ${modID}:Critical: Deal double damage."
   },
   "${modID}:RewindStrike": {
@@ -376,7 +380,7 @@
   },
   "${modID}:SpecialDeal": {
     "NAME": "Specil Deal",
-    "DESCRIPTION": "Ethereal. NL Gain !${modID}:M2! NEO. ALL enemies gain !M! ${modID}:NEO and !M! Artifact. NL Gain ${modID}:1997 gold."
+    "DESCRIPTION": "Ethereal. NL Gain !${modID}:M2! ${modID}:NEO. ALL enemies gain !M! ${modID}:NEO and !M! Artifact. NL Gain ${modID}:1997 gold."
   },
   "${modID}:Steal": {
     "NAME": "Steal",
@@ -408,7 +412,7 @@
   },
   "${modID}:ToughBranchAttack": {
     "NAME": "Attack",
-    "DESCRIPTION": "Deal damage."
+    "DESCRIPTION": "Deal Damage."
   },
   "${modID}:ToughBranchDefend": {
     "NAME": "Defend",

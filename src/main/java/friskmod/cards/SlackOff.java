@@ -10,6 +10,7 @@ import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.patches.CardXPFields;
 
+import static friskmod.FriskMod.imagePath;
 import static friskmod.FriskMod.makeID;
 
 public class SlackOff extends AbstractEasyCard{
@@ -26,6 +27,10 @@ public class SlackOff extends AbstractEasyCard{
     private static final int ADDED_XP = 10;
     private static final int UPG_ADDED_XP = 4;
 
+    public static final String IMG_SLACK = imagePath("cards/SlackOff.png");
+
+    public static final String IMG_SERIOUS = imagePath("cards/GetSerious.png");
+
     private boolean serious = false;
 
     public SlackOff() {
@@ -38,11 +43,13 @@ public class SlackOff extends AbstractEasyCard{
 
     public void setSeriousDescription() {
         serious = true;
+        loadCardImage(IMG_SERIOUS);
         initializeDescription();
     }
 
     public void setNormalDescription() {
         serious = false;
+        loadCardImage(IMG_SLACK);
         initializeDescription();
     }
 
