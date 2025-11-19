@@ -1,8 +1,10 @@
 package friskmod.cards.drinks;
 
+import basemod.patches.com.megacrit.cardcrawl.dungeons.AbstractDungeon.CustomBosses;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
@@ -64,17 +66,30 @@ public abstract class AbstractDrinkCard extends AbstractEasyCard {
         if (potion == null){
             return 0;
         }
-        int potency = potion.getPotency();
-        if (potency <= 0){
-            return potency;
+        int originalPotency = potion.getPotency(AbstractDungeon.ascensionLevel);
+        if (originalPotency == 0){
+            return 0;
         }
-        int newPotency = potency / 2;
-        newPotency = Math.max(1, newPotency);
+        int potency;
+        if ((originalPotency == -1) || (originalPotency == 1)){
+            potency = potion.getPotency();
+        } else {
+            potency = potion.getPotency() / 2;
+        }
+        if (originalPotency < 0){
+            potency = Math.min(-1, potency);
+        } else {
+            potency = Math.max(1, potency);
+        }
         if (upgraded) {
-            newPotency = (int) (newPotency * 1.5F);
-            newPotency = Math.max(2, newPotency);
+            potency = (int) (potency * 1.5F);
+            if (originalPotency < 0){
+                potency = Math.min(-2, potency);
+            } else {
+                potency = Math.max(2, potency);
+            }
         }
-        return newPotency;
+        return potency;
     }
 
     protected int getNewHighestCost() {

@@ -123,6 +123,14 @@
     "DESCRIPTION": "Until end of combat, prevents damage to HP."
   },
   {
+    "PROPER_NAME": "LV Ritual",
+    "NAMES": [
+      "LV Ritual",
+      "LV_Ritual"
+    ],
+    "DESCRIPTION": "At the end of your turn, gain 1 ${modID}:LV."
+  },
+  {
     "PROPER_NAME": "Copy",
     "NAMES": [
       "Copy"

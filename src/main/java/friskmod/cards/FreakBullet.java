@@ -23,7 +23,7 @@ public class FreakBullet extends AbstractEasyCard{
     );
     private static final int DAMAGE = 4;
     private static final int INHERENT_XP = 5;
-    private static final int UPG_DAMAGE = 3;
+    private static final int UPG_XP = 2;
     public FreakBullet() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseMagicNumber = INHERENT_XP;
@@ -40,6 +40,7 @@ public class FreakBullet extends AbstractEasyCard{
 
     @Override
     public void upp() {
-        upgradeDamage(UPG_DAMAGE);
+        upgradeMagicNumber(UPG_XP);
+        CardXPFields.setInherentXP(this, magicNumber);
     }
 }

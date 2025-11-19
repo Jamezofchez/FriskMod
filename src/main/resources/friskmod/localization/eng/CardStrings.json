@@ -127,7 +127,7 @@
   },
   "${modID}:Dream": {
     "NAME": "Dream",
-    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Dream for each debuff the enemy has."
+    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Dream for each debuff ALL enemies have."
   },
   "${modID}:Duel": {
     "NAME": "Dual!",
@@ -453,6 +453,10 @@
     "NAME": "Chaotic Cocktail",
     "DESCRIPTION": "If the top card of your draw pile is a 0 or 1 cost card, play it. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "If the top card of your draw pile is a 0, 1 or 2 cost card, play it. NL Exhaust."
+  },
+  "${modID}:CultistCocktail": {
+    "NAME": "Cultist Cocktail",
+    "DESCRIPTION": "Gain !M! ${modID}:LV_Ritual. NL Exhaust."
   },
   "${modID}:Ketchup": {
     "NAME": "Ketchup",

@@ -67,14 +67,11 @@ public class CardXPFields {
         if (amount <= 0) {
             amount = 0;
         }
-        try {
-            Wiz.att(new SetInherentXPAction(card, amount));
-        } catch (Exception e) {
+
 //            FriskMod.logger.warn("{}: queue setting inherentXP failed", FriskMod.modID);
-            XPFields.inherentXP.set(card, amount);
-            CardModifierManager.addModifier(card, new XPMod());
-            card.initializeDescription();
-        }
+        XPFields.inherentXP.set(card, amount);
+        CardModifierManager.addModifier(card, new XPMod());
+        card.initializeDescription();
     }
     public static void setAddedXP(AbstractCard card, int amount) {
         int resultXP = getCardXP(card) + amount;
