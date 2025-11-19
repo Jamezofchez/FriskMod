@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.character.Frisk;
 import friskmod.powers.CountdownFlee;
 import friskmod.powers.FallenDown;
@@ -36,8 +37,9 @@ public class Spare extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new CountdownFlee(p, FLEE_AFTER_CARD_AMOUNT, FLEE_AFTER_CARD_AMOUNT, upgraded), FLEE_AFTER_CARD_AMOUNT));
-        addToBot(new ApplyPowerAction(m, p, new Spared(m)));
+        CountdownFlee fleePower = new CountdownFlee(p, FLEE_AFTER_CARD_AMOUNT, FLEE_AFTER_CARD_AMOUNT, upgraded);
+        addToBot(new ApplyPowerAction(p, p, fleePower, FLEE_AFTER_CARD_AMOUNT));
+        addToBot(new ApplyPowerAction(m, p, new Spared(m, fleePower)));
     }
 
     @Override

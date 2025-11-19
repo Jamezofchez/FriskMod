@@ -71,10 +71,13 @@ public abstract class AbstractCountdownPower extends BasePower implements AfterC
     }
     public void onCountdownTrigger(boolean expire){
         if (expire){
-            addToBot(new RemoveSpecificPowerAction(owner, owner, this));
+            hackyRemove();
         }
     }
     public void upgrade(){
+    }
+    public void hackyRemove(){
+        addToTop(new RemoveSpecificPowerAction(owner, owner, this));
     }
 }
 

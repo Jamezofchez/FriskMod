@@ -55,8 +55,8 @@
   friskmod.cards.ScalesOfJustice
   friskmod.cards.SlackOff
   friskmod.cards.Slash
-  friskmod.cards.Sleep
   friskmod.cards.SnowedInn
+  friskmod.cards.InstantNoodles
   friskmod.cards.Spare
   friskmod.cards.SpecialDeal
   friskmod.cards.Steal

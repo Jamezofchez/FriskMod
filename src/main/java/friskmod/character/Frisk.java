@@ -92,6 +92,8 @@ public class Frisk extends CustomPlayer {
 
 
     //In-game images
+    private static final String CHARACTER = characterPath("character.png");
+
     private static final String SHOULDER_1 = characterPath("shoulder.png"); //Shoulder 1 and 2 are used at rest sites.
     private static final String SHOULDER_2 = characterPath("shoulder2.png");
     private static final String CORPSE = characterPath("corpse.png"); //Corpse is when you die.
@@ -126,9 +128,9 @@ public class Frisk extends CustomPlayer {
     public Frisk() {
         super(getNames()[0], Meta.Enums.THE_FALLEN_HUMAN,
                 new CustomEnergyOrb(orbTextures, characterPath("energyorb/vfx.png"), layerSpeeds), //Energy Orb
-                new SpriterAnimation(characterPath("animation/default.scml"))); //Animation
+                null, null); //Animation
 
-        initializeClass(null,
+        initializeClass(CHARACTER,
                 SHOULDER_2,
                 SHOULDER_1,
                 CORPSE,

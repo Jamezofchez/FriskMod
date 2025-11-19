@@ -214,7 +214,7 @@
   "NAMES": [
     "Betrayed"
   ],
-  "DESCRIPTION": "This enemy gains twice as much #yLV when attacked."
+  "DESCRIPTION": "This enemy gains twice as much #yLV when attacked. If this enemy dies, you will no longer escape."
   },
   {
     "PROPER_NAME": "Ghostly",

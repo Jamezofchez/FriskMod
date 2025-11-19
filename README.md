@@ -38,7 +38,7 @@ Inflict your enemies with **KARMA**, which causes them to lose HP whenever you l
 
 *“(You're filled with determination.)"*
 
-**Persevere** cards, allowing yourself to play them while bypassing any conditions for playability. However, cards persevered will become **Trapped**, becoming useless and causing you to lose one energy when drawn.
+**Persevere** cards, allowing yourself to play them for just 1 HP while bypassing any conditions for playability. However, cards persevered will become **Trapped**, becoming normally Unplayable and causing you to lose one energy when drawn.
 
 *“Despite everything, it’s still you”*
 

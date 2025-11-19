@@ -79,6 +79,7 @@ public abstract class AbstractEasyCard extends CustomCard {
         switch (cardName) {
             case "GenericDrinkCard":
             case "AncientCocktail":
+            case "CultistCocktail":
             case "ChaoticCocktail":
             case "DuplicationCocktail":
             case "EntropicCocktail":

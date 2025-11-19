@@ -360,13 +360,13 @@
     "NAME": "Slash",
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! ${modID}:Fallen_Down."
   },
-  "${modID}:Sleep": {
-    "NAME": "Sleep",
-    "DESCRIPTION": "Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns."
-  },
   "${modID}:SnowedInn": {
     "NAME": "Snowed Inn",
+    "DESCRIPTION": "Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns",
+    "UPGRADE_DESCRIPTION": "Increase the time of ALL ${modID}:Countdowns by !M!. NL Upgrade ALL ${modID}:Countdowns twice."
+  },
+  "${modID}:InstantNoodles": {
+    "NAME": "Instant Noodles",
     "DESCRIPTION": "Gain !M! ${modID}:Temp_HP. NL Trigger ALL of your ${modID}:Countdowns."
   },
   "${modID}:Soulless": {
