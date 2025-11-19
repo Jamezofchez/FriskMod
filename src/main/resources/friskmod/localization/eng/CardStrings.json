@@ -307,7 +307,7 @@
   },
   "${modID}:RockPuzzle": {
     "NAME": "Rock Puzzle",
-    "DESCRIPTION": "Exhaust a card to play this. NL Deal !D! damage. NL Gain !M! Rocks with the exhausted card's ${modID}:XP."
+    "DESCRIPTION": "Exhaust a card to play this. NL Deal !D! damage. NL Gain !M! *Rocks with the exhausted card's ${modID}:XP."
   },
   "${modID}:OLDSanchita": {
     "NAME": "OLDSanchita",
