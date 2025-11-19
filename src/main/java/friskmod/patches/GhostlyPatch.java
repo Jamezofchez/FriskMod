@@ -53,18 +53,15 @@ public class GhostlyPatch {
     private static void SetDamageTypeThorns(AbstractCard __instance) {
         if (AbstractDungeon.player != null && __instance.type == AbstractCard.CardType.ATTACK){
             if(ReflectionHacks.getPrivate(__instance, AbstractCard.class, "damageType") == DamageInfo.DamageType.NORMAL || __instance.damageTypeForTurn == DamageInfo.DamageType.NORMAL) {
-                if (__instance instanceof VineBloom){
-                    makeGhostly(__instance);
-                } else {
+//                if (__instance instanceof VineBloom){
+//                    makeGhostly(__instance);
+//                } else {
                     AbstractPower posspow = AbstractDungeon.player.getPower(NonAttackPower.POWER_ID);
                     if (posspow != null) {
-                        if (!__instance.dontTriggerOnUseCard) {
-                            makeGhostly(__instance);
-                            GhostlyDamageTypeFields.isGhostly.set(__instance.damageTypeForTurn, true);
-                            GhostlyCardFields.isGhostly.set(__instance, true);
-                        }
+                        makeGhostly(__instance);
+                        GhostlyDamageTypeFields.isGhostly.set(__instance.damageTypeForTurn, true);
                     }
-                }
+//                }
             }
         }
     }
@@ -72,7 +69,6 @@ public class GhostlyPatch {
     private static void makeGhostly(AbstractCard __instance) {
         ReflectionHacks.setPrivate(__instance, AbstractCard.class, "damageType", DamageInfo.DamageType.THORNS);
         __instance.damageTypeForTurn = DamageInfo.DamageType.THORNS;
-        __instance.dontTriggerOnUseCard = true;
     }
 
     @SpirePatch(

@@ -37,10 +37,12 @@ public class RememberPatience extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractPower posspow = p.getPower(RememberPatiencePower.POWER_ID);
+        int upgAmount = secondMagic;
         if (posspow != null) {
-            ((RememberPatiencePower) posspow).amount2 = Math.min(((RememberPatiencePower) posspow).amount2, secondMagic);
+            upgAmount = Math.min(((RememberPatiencePower) posspow).amount2, upgAmount);
+            ((RememberPatiencePower) posspow).amount2 = upgAmount;
         }
-        addToBot(new ApplyPowerAction(p, p, new RememberPatiencePower(p, magicNumber, secondMagic), magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new RememberPatiencePower(p, magicNumber, upgAmount), magicNumber));
     }
 
     @Override

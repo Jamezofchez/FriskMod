@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import basemod.AutoAdd;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -16,6 +17,8 @@ import friskmod.util.FriskTags;
 
 import static friskmod.FriskMod.makeID;
 @SuppressWarnings("unused")
+
+@AutoAdd.Ignore
 public class LevelUp extends AbstractEasyCard {
     public static final String ID = makeID(LevelUp.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,

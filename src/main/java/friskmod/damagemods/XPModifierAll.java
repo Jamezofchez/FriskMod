@@ -81,7 +81,8 @@ public class XPModifierAll extends AbstractDamageModifier {
         public static SpireField<Integer> totalEnemies = new SpireField<>(() -> -1);
         public static SpireField<ArrayList<Integer>> enemyLV = new SpireField<>(() -> null);
         public static SpireField<ArrayList<Boolean>> enemyWasBlocked = new SpireField<>(() -> null);
-    }
+        public static SpireField<ArrayList<AbstractCreature>> enemies = new SpireField<ArrayList<AbstractCreature>>(() -> null);
+}
 
 
 
@@ -228,13 +229,19 @@ public class XPModifierAll extends AbstractDamageModifier {
         if (!target.isDead){
             ExtraXPInfo.enemyWasBlocked.get(sourceCard).add(wasBlocked);
         }
-        ExtraXPInfo.enemyWasBlocked.get(sourceCard).add(wasBlocked);
         if (ExtraXPInfo.enemyLV.get(sourceCard) == null) {
             ArrayList<Integer> enemyLV = new ArrayList<>();
-            for (AbstractMonster m: Wiz.getAliveOrDying()){
-                enemyLV.add(getLVFromTarget(m));
-            }
             ExtraXPInfo.enemyLV.set(sourceCard, enemyLV);
+        }
+        if (!target.isDead){
+            ExtraXPInfo.enemyLV.get(sourceCard).add(getLVFromTarget(target));
+        }
+        if (ExtraXPInfo.enemies.get(sourceCard) == null) {
+            ArrayList<AbstractCreature> enemies = new ArrayList<>();
+            ExtraXPInfo.enemies.set(sourceCard, enemies);
+        }
+        if (!target.isDead){
+            ExtraXPInfo.enemies.get(sourceCard).add(target);
         }
         int processed = ExtraXPInfo.enemiesProcessed.get(sourceCard) + 1;
         ExtraXPInfo.enemiesProcessed.set(sourceCard, processed);
@@ -248,7 +255,7 @@ public class XPModifierAll extends AbstractDamageModifier {
         int originalCardXP = ExtraXPInfo.originalCardXP.get(sourceCard);
         CardXPFields.XPFields.addedXP.set(sourceCard, 0); //clear stale
         int monsterIndex = 0;
-        for (AbstractMonster m : Wiz.getAliveOrDying()) {
+        for (AbstractCreature m : ExtraXPInfo.enemies.get(sourceCard)) {
 //            if (!m.isDeadOrEscaped()) {
                 if (ExtraXPInfo.enemyWasBlocked.get(sourceCard).get(monsterIndex)) {
                     continue;
@@ -262,6 +269,8 @@ public class XPModifierAll extends AbstractDamageModifier {
         ExtraXPInfo.totalEnemies.set(sourceCard, -1);
         ExtraXPInfo.enemyLV.set(sourceCard, null);
         ExtraXPInfo.enemyWasBlocked.set(sourceCard, null);
+        ExtraXPInfo.enemies.set(sourceCard, null);
+
 
 
     }

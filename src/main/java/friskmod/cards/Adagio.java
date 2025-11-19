@@ -38,7 +38,7 @@ public class Adagio extends AbstractCriticalCard {
         if (isCritical()){
             TriggerCriticalEffect(p, m);
         }
-        //trig_critical = false;
+        super.use(p, m);
     }
 
     @Override

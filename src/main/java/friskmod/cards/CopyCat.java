@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import com.evacipated.cardcrawl.mod.stslib.damagemods.BindingHelper;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -47,8 +48,14 @@ public class CopyCat extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new StealAllBlockAction(m, false, false));
-        addToBot(new StealPowerAction(m, false, true));
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
+        addToBot(new StealPowerAction(m, false, false));
+        AbstractGameAction delayedAttack = Wiz.actionify(() -> {
+            applyPowers();
+            calculateCardDamage(m);
+            dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
+        });
+        BindingHelper.bindAction(this, delayedAttack);
+        Wiz.atb(delayedAttack);
     }
 
     @Override

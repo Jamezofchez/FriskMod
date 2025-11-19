@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import friskmod.cards.Grillbys;
+
 import java.util.ArrayList;
 
 import static friskmod.helper.GrillbysHelper.isCardCostAllowed;
@@ -16,30 +18,33 @@ public class LowCostMemoriesAction extends AbstractGameAction {
 
     private AbstractPlayer player;
 
-    private int numberOfCards = 1;
+    private int numberOfCards;
 
     private int newCost = 0;
 
     private boolean setCost;
 
-    public LowCostMemoriesAction() {
+    public LowCostMemoriesAction(int potency) {
         this.actionType = AbstractGameAction.ActionType.CARD_MANIPULATION;
         this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
         this.player = AbstractDungeon.player;
         this.setCost = true;
+        this.numberOfCards = potency;
     }
 
     public void update() {
         if (this.duration == this.startDuration) {
-            if (this.player.discardPile.isEmpty() || this.numberOfCards <= 0) {
+            CardGroup filteredDiscardPile = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+            for (AbstractCard c : this.player.discardPile.group)
+                if (!(c instanceof Grillbys)) {
+                    filteredDiscardPile.addToTop(c);
+                }
+            if (filteredDiscardPile.isEmpty() || this.numberOfCards <= 0) {
                 this.isDone = true;
                 return;
             }
-            if (this.player.discardPile.size() <= this.numberOfCards) {
-                ArrayList<AbstractCard> cardsToMove = new ArrayList<>();
-                for (AbstractCard c : this.player.discardPile.group)
-                    cardsToMove.add(c);
-                for (AbstractCard c : cardsToMove) {
+            if (filteredDiscardPile.size() <= this.numberOfCards) {
+                for (AbstractCard c : filteredDiscardPile.group) {
                     if (isCardCostAllowed(c)) {
                         if (this.player.hand.size() < 10) {
                             this.player.hand.addToHand(c);
@@ -55,9 +60,9 @@ public class LowCostMemoriesAction extends AbstractGameAction {
                 return;
             }
             if (this.numberOfCards == 1) {
-                AbstractDungeon.gridSelectScreen.open(this.player.discardPile, this.numberOfCards, TEXT[0], false);
+                AbstractDungeon.gridSelectScreen.open(filteredDiscardPile, this.numberOfCards, TEXT[0], false);
             } else {
-                AbstractDungeon.gridSelectScreen.open(this.player.discardPile, this.numberOfCards, TEXT[1] + this.numberOfCards + TEXT[2], false);
+                AbstractDungeon.gridSelectScreen.open(filteredDiscardPile, this.numberOfCards, TEXT[1] + this.numberOfCards + TEXT[2], false);
             }
             tickDuration();
             return;

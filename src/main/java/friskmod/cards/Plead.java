@@ -26,6 +26,7 @@ public class Plead extends AbstractEasyCard {
     //but constants at the top of the file are easy to adjust.
 
     static final int POWER_AMOUNT = 1;
+    static final int UPG_POWER_AMOUNT = 1;
 
     private static final CardStats info = new CardStats(
             Frisk.Meta.Enums.CARD_COLOR, //The card color. If you're making your own character, it'll look something like this. Otherwise, it'll be CardColor.RED or similar for a basegame character color.
@@ -37,6 +38,7 @@ public class Plead extends AbstractEasyCard {
 
     public Plead() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
+        baseMagicNumber = magicNumber = POWER_AMOUNT;
         tags.add(FriskTags.KINDNESS);
     }
     @Override
@@ -59,25 +61,24 @@ public class Plead extends AbstractEasyCard {
         if (upgraded) {
             List<AbstractMonster> enemies = Wiz.getMonsters();
             useEnemies(p, enemies, playerBlock);
-        } else {
-            // Wrap single target into a list
-            ArrayList<AbstractMonster> single = new ArrayList<>();
-            if (m != null && !m.isDeadOrEscaped()) {
-                single.add(m);
-            }
-            useEnemies(p, single, playerBlock);
         }
+//            // Wrap single target into a list
+//            ArrayList<AbstractMonster> single = new ArrayList<>();
+//            if (m != null && !m.isDeadOrEscaped()) {
+//                single.add(m);
+//            }
+//            useEnemies(p, single, playerBlock);
     }
 
     private void useEnemies(AbstractPlayer p, List<AbstractMonster> enemies, int playerBlock) {
         for (AbstractMonster mo : enemies) {
             addToBot(new GainBlockAction(mo, p, playerBlock));
-            addToBot(new ApplyPowerAction(mo, p, new Mercied(mo, POWER_AMOUNT), POWER_AMOUNT));
+            addToBot(new ApplyPowerAction(mo, p, new Mercied(mo, magicNumber), magicNumber));
         }
     }
 
     @Override
     public void upp() {
-
+        upgradeMagicNumber(UPG_POWER_AMOUNT);
     }
 }

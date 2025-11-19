@@ -20,14 +20,6 @@ import java.util.ArrayList;
 public class MadDummy extends AbstractDummy {
     public static final String ID = FriskMod.makeID(MadDummy.class.getSimpleName());
 
-    private static final MonsterStrings monsterStrings = CardCrawlGame.languagePack.getMonsterStrings(ID);
-
-    public static final String NAME = monsterStrings.NAME;
-
-    public static final String[] MOVES = monsterStrings.MOVES;
-
-    public static final String[] DIALOG = monsterStrings.DIALOG;
-
     public int amount;
 
     AbstractCreature boundTarget;
@@ -52,6 +44,10 @@ public class MadDummy extends AbstractDummy {
         super.takeTurn();
         switch (this.nextMove) {
             case 0:
+                if (Wiz.getMonsters().stream().allMatch(m -> m instanceof AbstractDummy)){
+                    die();
+                    return;
+                }
                 AbstractCreature randomEnemy = getRandomEnemy();
                 if (randomEnemy != null) {
                     attackAnimation(randomEnemy);

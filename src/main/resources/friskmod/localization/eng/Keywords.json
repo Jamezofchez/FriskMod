@@ -82,7 +82,7 @@
       "Persevere",
       "Persevered"
     ],
-    "DESCRIPTION": "Only if a card is normally ${modID}:Unplayable, play it anyway. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand. If it is a curse or status, exhaust it instead."
+    "DESCRIPTION": "Only if a card is normally ${modID}:Unplayable, play it anyway at the cost of 1 HP. NL If a card is #ypersevered, add an #yTrapped copy of the card to your hand. If the card is always Unplayable, exhaust it instead."
   },
   {
     "PROPER_NAME": "Perseverable",
@@ -127,7 +127,7 @@
     "NAMES": [
       "Copy"
     ],
-    "DESCRIPTION": "Copy any buffs the enemy has. NL Strength and enemy #yLV is converted into player #yLV. NL The card will glow if anything can be copied."
+    "DESCRIPTION": "Any buffs can only be stolen if enemy didn't start with them or they are non-permanent. NL Strength and enemy #yLV is converted into player #yLV. NL The card will glow if anything can be copied."
   },
   {
     "PROPER_NAME": "Inherent",
@@ -152,7 +152,7 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn. #yTrapped cards are not exhausted when #yPersevered."
+    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn. #yTrapped cards cause you to lose 7 HP when #yPersevered."
   },
   {
     "PROPER_NAME": "Monochrome",
@@ -354,7 +354,7 @@
       "Glad Dummy",
       "Glad_Dummy"
     ],
-    "DESCRIPTION": "Gives EVERYONE 3 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
+    "DESCRIPTION": "Gives you 2 block on its turn. NL Whenever the dummy gains a power or gains Block, so does its #ySoulbound target."
   },
   {
     "PROPER_NAME": "Overcome",
@@ -376,5 +376,77 @@
       "Hurt"
     ],
     "DESCRIPTION": "This turn, target takes 1 more attack damage."
+  },
+  {
+    "PROPER_NAME": "Rewind",
+    "NAMES": [
+      "Rewind"
+    ],
+    "DESCRIPTION": "The enemy's intent will be the one it was last turn. The enemy's powers will be reverted to the amount they were at at the end of the last turn, if they were greater."
+  },
+  {
+    "PROPER_NAME": "Artifact",
+    "NAMES": [
+      "Artifact"
+    ],
+    "DESCRIPTION": "Negates the next debuff."
+  },
+  {
+    "PROPER_NAME": "Blur",
+    "NAMES": [
+      "Blur"
+    ],
+    "DESCRIPTION": "Block is not removed at the start of your turn."
+  },
+  {
+    "PROPER_NAME": "Dexterity",
+    "NAMES": [
+      "Dexterity"
+    ],
+    "DESCRIPTION": "Dexterity improves Block gained from cards."
+  },
+  {
+    "PROPER_NAME": "Evolve",
+    "NAMES": [
+      "Evolve"
+    ],
+    "DESCRIPTION": "Gain ${modID}:LV whenever you play a card."
+  },
+  {
+    "PROPER_NAME": "Strength",
+    "NAMES": [
+      "Strength"
+    ],
+    "DESCRIPTION": "Strength adds additional damage to attacks."
+  },
+  {
+    "PROPER_NAME": "Attack",
+    "NAMES": [
+      "Attack"
+    ],
+    "DESCRIPTION": "Take 9 damage after playing four cards."
+  },
+  {
+    "PROPER_NAME": "Defend",
+    "NAMES": [
+      "Defend"
+    ],
+    "DESCRIPTION": "Gain 8 Block after playing four cards."
+  },
+  {
+    "PROPER_NAME": "Vulnerable",
+    "NAMES": [
+      "Vulnerable"
+    ],
+    "DESCRIPTION": "Vulnerable creatures take 50% more damage from Attacks."
+  },
+  {
+    "PROPER_NAME": "Weakened",
+    "NAMES": [
+      "Weakened"
+    ],
+    "DESCRIPTION": "Weakened creatures deal 25% less damage with Attacks."
   }
+
+
 ]

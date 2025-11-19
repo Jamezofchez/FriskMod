@@ -34,6 +34,7 @@ public class OpenDraftAction extends AbstractGameAction {
         possDreamChoices = new ArrayList<>();
         possDreamChoices.add(new DreamOfArtifact());
         possDreamChoices.add(new DreamOfBlur());
+        possDreamChoices.add(new DreamOfDefend());
         possDreamChoices.add(new DreamOfDetermination());
         possDreamChoices.add(new DreamOfDexterity());
         possDreamChoices.add(new DreamOfEvolve());
@@ -41,6 +42,7 @@ public class OpenDraftAction extends AbstractGameAction {
         possDreamChoices.add(new DreamOfStrength());
 
         possNightmareChoices = new ArrayList<>();
+        possNightmareChoices.add(new NightmareOfKarma());
         possNightmareChoices.add(new NightmareOfNEO());
         possNightmareChoices.add(new NightmareOfHurt());
         possNightmareChoices.add(new NightmareOfMercied());

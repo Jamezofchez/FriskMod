@@ -56,7 +56,7 @@ public class CountdownAgami extends AbstractCountdownPower {
 
     private int getDescNum() {
         int descNum = 0;
-        if (amount > 0){
+        if (amount > 1){
             descNum += 2;
         }
         if (amount2 == 1){

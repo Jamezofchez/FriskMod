@@ -27,7 +27,7 @@ public class RockPuzzle extends AbstractEasyCard implements OnPyreCard {
             CardTarget.ENEMY, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             3 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int DAMAGE = 15;
+    private static final int DAMAGE = 16;
 
     private static final int ROCK = 2;
     private static final int UPG_ROCK = 1;

@@ -29,9 +29,8 @@ public class BreakFree extends AbstractEasyCard {
             1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
     private static final int DAMAGE = 10;
-    private static final int UPG_DAMAGE = 2;
+    private static final int UPG_DAMAGE = 4;
     private static final int REDUCE_COST = 1;
-    private static final int UPG_REDUCE_COST = 1;
     public BreakFree() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         baseDamage = DAMAGE;
@@ -56,6 +55,6 @@ public class BreakFree extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeDamage(UPG_DAMAGE);
-        upgradeMagicNumber(UPG_REDUCE_COST);
+//        upgradeMagicNumber(UPG_REDUCE_COST);
     }
 }

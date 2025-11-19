@@ -14,8 +14,8 @@
   "${modID}:CountdownAgami": {
     "NAME": "Agami",
     "DESCRIPTIONS": [
-      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR.",
-      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR.",
+      "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR and #y${modID}:Detonate it.",
+      "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR and #y${modID}:Detonate it.",
       "On #yExpiry after playing #b%s cards, convert this enemy's #y${modID}:LV to #y${modID}:KR and #y${modID}:Detonate it #b%s times.",
       "On #yExpiry after playing #b%s card, convert this enemy's #y${modID}:LV to #y${modID}:KR and #y${modID}:Detonate it #b%s times."
     ]
@@ -94,7 +94,7 @@
   "${modID}:GladDummy": {
     "NAME": "Glad Dummy",
     "DESCRIPTIONS": [
-      "Gives EVERYONE 3 block on its turn. Whenever the dummy gains a power or gains Block, so does its #y${modID}:SoulBound %s."
+      "Gives you 2 block on its turn. Whenever the dummy gains a power or gains Block, so does its #y${modID}:SoulBound %s."
     ]
   },
   "${modID}:Karma": {

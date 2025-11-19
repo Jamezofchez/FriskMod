@@ -21,20 +21,37 @@ public class DuplicationCocktail extends AbstractDrinkCard{
     public DuplicationCocktail(AbstractPotion potion) {
         super(ID, potion);
         baseMagicNumber = magicNumber = getNewHighestCost();
+        baseSecondMagic = secondMagic = potion.getPotency();
     }
 
     @Override
     public void usePotion(AbstractMonster m) {
         AbstractPlayer p = AbstractDungeon.player;
         AbstractPower posspow = p.getPower(LesserDuplication.POWER_ID);
+        int upgAmount = secondMagic;
         if (posspow != null) {
-            ((LesserDuplication) posspow).amount2 = Math.min(((LesserDuplication) posspow).amount2, magicNumber);
+            upgAmount = Math.min(((LesserDuplication) posspow).amount2, upgAmount);
+            ((LesserDuplication) posspow).amount2 = upgAmount;
         }
-        addToBot(new ApplyPowerAction(p, p, new LesserDuplication(p, 1, magicNumber), 1));
+        addToBot(new ApplyPowerAction(p, p, new LesserDuplication(p, upgAmount, magicNumber), upgAmount));
     }
 
     @Override
     public void upp() {
         setUpgradeMagicNumber(getNewHighestCost());
+    }
+
+    public void applyPowers() {
+        super.applyPowers();
+        this.rawDescription = cardStrings.DESCRIPTION;
+        if (upgraded){
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        }
+        secondMagic = potion.getPotency();
+        if (secondMagic > 1) {
+            this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
+        }
+        this.initializeDescription();
+
     }
 }

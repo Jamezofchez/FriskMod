@@ -13,7 +13,7 @@ public class DreamOfArtifact extends AbstractDreamCard{
 
     public DreamOfArtifact() {
         super(ID);
-        setDisplayRarity(CardRarity.UNCOMMON);
+        setDisplayRarity(CardRarity.COMMON);
     }
 
     @Override

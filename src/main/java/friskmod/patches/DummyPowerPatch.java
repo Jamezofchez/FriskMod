@@ -80,12 +80,12 @@ public class DummyPowerPatch {
             if (!GladDummyPowerTrigger.triggeredGladDummy.get(__instance)){
                 GladDummyPowerTrigger.triggeredGladDummy.set(__instance, true);
                 if (__instance.target instanceof AbstractMonster) {
-                    if (__instance.source == AbstractDungeon.player){
-                        for (AbstractPower p : __instance.target.powers) {
-                            if (p instanceof GladDummy)
-                                ((GladDummy) p).onPlayerApplyPower(___powerToApply);
-                        }
+
+                    for (AbstractPower p : __instance.target.powers) {
+                        if (p instanceof GladDummy)
+                            ((GladDummy) p).onPlayerApplyPower(___powerToApply);
                     }
+
                 }
             }
         }

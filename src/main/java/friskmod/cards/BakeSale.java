@@ -33,9 +33,9 @@ public class BakeSale extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new BakeSaleAction(m));
         blck();
         addToBot(new GainBlockAction(m, p, block));
+        addToBot(new BakeSaleAction(m));
     }
 
     @Override

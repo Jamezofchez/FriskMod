@@ -44,10 +44,10 @@ public class BalletShoesAction extends AbstractGameAction {
             if (numTimes == 3){
                 Wiz.atb(new CustomSFXAction("mus_sfx_voice_triple"));
             }
-            AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
-            PerseveranceFields.trapped.set(tmp, true);
-            Wiz.atb(new MakeTempCardInHandAction(tmp));
-            p.hand.moveToExhaustPile(chosenCard);
+//            AbstractCard tmp = chosenCard.makeStatEquivalentCopy();
+//            PerseveranceFields.trapped.set(tmp, true);
+//            Wiz.atb(new MakeTempCardInHandAction(tmp));
+//            p.hand.moveToExhaustPile(chosenCard);
         }
     }
 }

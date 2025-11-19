@@ -58,7 +58,7 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
     public void use(AbstractPlayer p, AbstractMonster m) {
         blck();
         dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
-        //trig_critical = false;
+        super.use(p, m);
 
     }
 
@@ -110,7 +110,7 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
 
     private void untrapOnCriticalDraw() {
         PerseveranceFields.trapped.set(this, true);
-        if (isCritical()) {
+        if (isCriticalPos(this)) {
             PerseveranceFields.trapped.set(this, false);
         } else{
             Wiz.atb(new LoseEnergyAction(1));
@@ -131,7 +131,7 @@ public class AnnoyingDog extends AbstractCriticalCard implements AfterCardPlayed
 
     private void untrapOnCriticalNormal() {
         PerseveranceFields.trapped.set(this, true);
-        if (isCritical()) {
+        if (isCriticalPos(this)) {
             PerseveranceFields.trapped.set(this, false);
         }
     }

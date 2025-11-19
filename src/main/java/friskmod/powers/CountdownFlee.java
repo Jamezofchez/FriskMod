@@ -38,6 +38,7 @@ public class CountdownFlee extends AbstractCountdownPower {
 
     @Override
     public void onCountdownTrigger(boolean expire) {
+        super.onCountdownTrigger(expire);
         if (expire) {
             if (this.upgraded) {
                 int increaseGold = 0;
@@ -55,7 +56,6 @@ public class CountdownFlee extends AbstractCountdownPower {
             AbstractDungeon.actionManager.addToBottom(new WaitAction(0.5F));
             AbstractDungeon.actionManager.addToBottom(new SmokeBombAction(this.upgraded));
         }
-        super.onCountdownTrigger(expire);
     }
 
     @Override

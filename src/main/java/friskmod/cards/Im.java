@@ -20,6 +20,7 @@ public class Im extends AbstractEasyCard {
     public static final String ID = makeID(Im.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
     public static final String[] TEXT = uiStrings.TEXT;
+    private int cardsPlayed = 0;
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -35,8 +36,20 @@ public class Im extends AbstractEasyCard {
         this.isEthereal = true;
     }
     @Override
+    public void resetAttributes() {
+        super.resetAttributes();
+        cardsPlayed = 0;
+    }
+
+    @Override
+    public void onPlayCard(AbstractCard card, AbstractMonster m) {
+        ++cardsPlayed;
+    }
+
+
+    @Override
     public boolean canPlay(AbstractCard card) {
-        if (card.type == CardType.ATTACK) {
+        if (cardsPlayed >= 1) {
             card.cantUseMessage = TEXT[0];
             return false;
         }
@@ -48,5 +61,6 @@ public class Im extends AbstractEasyCard {
 
     @Override
     public void upp() {
+        --cardsPlayed;
     }
 }

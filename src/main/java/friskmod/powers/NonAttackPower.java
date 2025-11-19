@@ -36,6 +36,15 @@ public class NonAttackPower extends BasePower {
     }
 
     @Override
+    public void onInitialApplication() {
+        if (AbstractDungeon.player == null) return;
+        for (AbstractCard c : Wiz.getAllCardsInCardGroups()) {
+            c.dontTriggerOnUseCard = true;
+            GhostlyPatch.GhostlyCardFields.isGhostly.set(c, true);
+        }
+    }
+
+    @Override
     public void onRemove() {
         resetCardsGhostly();
     }

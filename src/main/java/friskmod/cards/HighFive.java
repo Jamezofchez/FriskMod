@@ -1,16 +1,18 @@
 package friskmod.cards;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.actions.UpgradeAndRetainAction;
+import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import friskmod.character.Frisk;
+import friskmod.powers.NEO;
 import friskmod.util.CardStats;
-
+import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.makeID;
 
-public class Adagio extends AbstractCriticalCard {
-    public static final String ID = makeID(Adagio.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
+public class HighFive extends AbstractCriticalCard {
+    public static final String ID = makeID(HighFive.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     //These will be used in the constructor. Technically you can just use the values directly,
     //but constants at the top of the file are easy to adjust.
 
@@ -19,35 +21,44 @@ public class Adagio extends AbstractCriticalCard {
             CardType.SKILL, //The type. ATTACK/SKILL/POWER/CURSE/STATUS
             CardRarity.COMMON, //Rarity. BASIC is for starting cards, then there's COMMON/UNCOMMON/RARE, and then SPECIAL and CURSE. SPECIAL is for cards you only get from events. Curse is for curses, except for special curses like Curse of the Bell and Necronomicurse.
             CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
-            1 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
+            0 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int BLOCK = 7;
-    private static final int CARD_AMOUNT = 1;
-    private static final int UPG_CARD_AMOUNT = 1;
+//    private static final int BLOCK = 7;
+    private static final int NEO = 1;
+    private static final int PLATED_ARMOR = 1;
+    private static final int UPG_PLATED_ARMOR = 1;
 
 
-    public Adagio() {
+
+    public HighFive() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
-        baseBlock = BLOCK;
-        baseMagicNumber = magicNumber = CARD_AMOUNT;
+//        baseBlock = BLOCK;
+        baseMagicNumber = magicNumber = NEO;
+        baseSecondMagic = secondMagic = PLATED_ARMOR;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        blck();
+//        blck();
+        for (AbstractMonster monster : Wiz.getMonsters()) {
+            addToBot(new ApplyPowerAction(monster, p, new NEO(monster, magicNumber), magicNumber));
+        }
         if (isCritical()){
             TriggerCriticalEffect(p, m);
         }
-        //trig_critical = false;
+        super.use(p, m);
     }
 
     @Override
     public void upp() {
-        upgradeMagicNumber(UPG_CARD_AMOUNT);
+        upgradeSecondMagic(UPG_PLATED_ARMOR);
     }
 
     @Override
     public void CriticalEffect(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new UpgradeAndRetainAction(magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new PlatedArmorPower(p, secondMagic), secondMagic));
+        for (AbstractMonster monster : Wiz.getMonsters()) {
+            addToBot(new ApplyPowerAction(monster, p, new PlatedArmorPower(monster, secondMagic), secondMagic));
+        }
     }
 }

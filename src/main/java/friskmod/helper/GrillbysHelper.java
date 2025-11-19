@@ -35,6 +35,8 @@ public class GrillbysHelper {
                 return new AncientCocktail(potion);
             case "DistilledChaos":
                 return new ChaoticCocktail(potion);
+            case "CultistPotion":
+                return new CultistPotion(potion);
             default:
                 return null;
         }

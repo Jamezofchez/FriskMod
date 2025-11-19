@@ -84,7 +84,7 @@
   },
   "${modID}:Im": {
     "TEXT": [
-      "I cannot play Attacks right now!"
+      "I cannot play more than one card!"
     ]
   },
   "${modID}:MonsterSnapshotHistory": {
@@ -115,7 +115,8 @@
       "%s of %s",
       "Dream",
       "%s Nightmare",
-      "Attack+"
+      "Attack+",
+      "Defend+"
     ]
   },
   "${modID}:OpenDraftAction": {

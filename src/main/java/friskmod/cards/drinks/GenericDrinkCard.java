@@ -1,12 +1,7 @@
 package friskmod.cards.drinks;
 
 import basemod.ReflectionHacks;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,18 +12,15 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
 import friskmod.actions.*;
 import friskmod.helper.GrillbysHelper;
-import friskmod.patches.CardXPFields;
 import friskmod.powers.LesserDuplication;
 import friskmod.util.Wiz;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static friskmod.FriskMod.makeID;
-import static friskmod.helper.GrillbysHelper.isCardCostAllowed;
 
 public class GenericDrinkCard extends AbstractDrinkCard {
     public static final String ID = makeID(GenericDrinkCard.class.getSimpleName());
@@ -197,9 +189,6 @@ public class GenericDrinkCard extends AbstractDrinkCard {
 
     private boolean specialCases(AbstractPotion tmpPotion) {
         switch (tmpPotion.ID) {
-            case "DuplicationPotion":
-                duplicationPotionUse();
-                return true;
             case "ElixirPotion":
                 elixirPotionUse();
                 return true;
@@ -210,7 +199,8 @@ public class GenericDrinkCard extends AbstractDrinkCard {
                 gamblersBrewUse();
                 return true;
             case "LiquidMemories":
-                liquidMemoriesUse();
+                liquidMemoriesUse(tmpPotion.getPotency());
+                return true;
             default:
                 return false;
         }
@@ -231,14 +221,16 @@ public class GenericDrinkCard extends AbstractDrinkCard {
         }
     }
 
-    private void duplicationPotionUse() {
-        AbstractPlayer p = AbstractDungeon.player;
-        AbstractPower posspow = p.getPower(LesserDuplication.POWER_ID);
-        if (posspow != null) {
-            ((LesserDuplication) posspow).amount2 = Math.min(((LesserDuplication) posspow).amount2, secondMagic);
-        }
-        addToBot(new ApplyPowerAction(p, p, new LesserDuplication(p, magicNumber, secondMagic), magicNumber));
-    }
+//    private void duplicationPotionUse() {
+//        AbstractPlayer p = AbstractDungeon.player;
+//        AbstractPower posspow = p.getPower(LesserDuplication.POWER_ID);
+//        int upgAmount = secondMagic;
+//        if (posspow != null) {
+//            upgAmount = Math.min(((LesserDuplication) posspow).amount2, upgAmount);
+//            ((LesserDuplication) posspow).amount2 = upgAmount;
+//        }
+//        addToBot(new ApplyPowerAction(p, p, new LesserDuplication(p, magicNumber, upgAmount), magicNumber));
+//    }
 
     private void elixirPotionUse() {
         addToBot(new LowCostExhaustAction());
@@ -250,8 +242,8 @@ public class GenericDrinkCard extends AbstractDrinkCard {
     private void gamblersBrewUse() {
         addToBot(new LowCostGambleAction());
     }
-    private void liquidMemoriesUse(){
-        addToBot(new LowCostMemoriesAction());
+    private void liquidMemoriesUse(int potency){
+        addToBot(new LowCostMemoriesAction(potency));
     }
 
 

@@ -1,9 +1,11 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,6 +15,7 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.character.Frisk;
 import friskmod.helper.MonsterSnapshotHistory;
 import friskmod.patches.MonsterLastMovePatch;
+import friskmod.patches.RewindPower;
 import friskmod.util.CardStats;
 import friskmod.util.FriskTags;
 
@@ -40,6 +43,7 @@ public class RewindStrike extends AbstractEasyCard {
         baseDamage = DAMAGE;
         tags.add(FriskTags.INTEGRITY);
         tags.add(CardTags.STRIKE);
+        this.selfRetain = true;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -47,11 +51,13 @@ public class RewindStrike extends AbstractEasyCard {
         boolean flawlessCode = true;
         try {
             snapshot.restore(m);
+            RewindPower.turnCounter = RewindPower.turnCounter-1;
+            snapshot.restorePowers(m, RewindPower.turnCounter);
         } catch (Exception e) {
             flawlessCode = false;
         }
         if (flawlessCode){
-            dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
+            addToTop((new DamageAction(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.SLASH_VERTICAL)));
         } else{
             AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, (UI_STRINGS.TEXT[0]), true));
             addToBot(new GainEnergyAction(this.costForTurn));
@@ -63,6 +69,5 @@ public class RewindStrike extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeDamage(UPG_DAMAGE);
-        this.selfRetain = true;
     }
 }

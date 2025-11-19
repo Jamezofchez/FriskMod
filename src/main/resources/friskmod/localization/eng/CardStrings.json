@@ -20,8 +20,8 @@
   },
   "${modID}:Agami": {
     "NAME": "Agami",
-    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR.",
-    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR and ${modID}:Detonate it."
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR and ${modID}:Detonate it.",
+    "UPGRADE_DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, convert the enemy's ${modID}:LV into ${modID}:KR and ${modID}:Detonate it twice."
   },
   "${modID}:Allegro": {
     "NAME": "Allegro",
@@ -43,11 +43,11 @@
   },
   "${modID}:BakeSale": {
     "NAME": "Bake Sale",
-    "DESCRIPTION": "${modID}:Persevere your leftmost card. NL You and an enemy gain !B! Block."
+    "DESCRIPTION": "You and an enemy gain !B! Block. NL ${modID}:Persevere your leftmost card."
   },
   "${modID}:BalletShoes": {
     "NAME": "Ballet Shoes",
-    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times and ${modID}:Trap it once."
+    "DESCRIPTION": "On odd hand size, NL play the middle card in your hand !M! times."
   },
   "${modID}:Bandage": {
     "NAME": "Bandage",
@@ -101,8 +101,8 @@
   },
   "${modID}:DateGoneWrong": {
     "NAME": "Date Gone Wrong",
-    "DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your draw pile. NL Exhaust."
+    "DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E]. NL Put the card with the highest ${modID}:XP into your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "If ${modID}:Threatened, NL gain [E] [E] [E]. NL Put the card with the highest ${modID}:XP into your hand. NL Exhaust."
   },
   "${modID}:Defend_Frisk": {
     "NAME": "Defend",
@@ -115,7 +115,7 @@
   "${modID}:DogShrine": {
     "NAME": "Dog Shrine",
     "DESCRIPTION": "Exhaust a card. NL Draw cards equal to its ${modID}:XP.",
-    "UPGRADE_DESCRIPTION": "Exhaust two cards. NL Draw cards equal to their ${modID}:XP."
+    "UPGRADE_DESCRIPTION": "Exhaust two cards. NL Draw cards equal to their combined ${modID}:XP."
   },
   "${modID}:DontNeedFriends": {
     "NAME": "Don't Need Friends",
@@ -127,7 +127,7 @@
   },
   "${modID}:Dream": {
     "NAME": "Dream",
-    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Dream for each unique debuff the enemy has."
+    "DESCRIPTION": "${modID}:Draft !M! ${modID}:Dream for each debuff the enemy has."
   },
   "${modID}:Duel": {
     "NAME": "Dual!",
@@ -144,7 +144,7 @@
   },
   "${modID}:Enthusiasm": {
     "NAME": "Enthusiasm",
-    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage."
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage to ALL enemies."
   },
   "${modID}:Evolve": {
     "NAME": "Evolve",
@@ -199,8 +199,8 @@
   },
   "${modID}:Grillbys": {
     "NAME": "Grillby's",
-    "DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a ${modID}:Sip of all your potions. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a upgraded ${modID}:Sip of all your potions. NL Exhaust."
+    "DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a ${modID}:Sip of all your potions.",
+    "UPGRADE_DESCRIPTION": "${modID}:Pickup: Obtain a random potion. NL Take a upgraded ${modID}:Sip of all your potions."
   },
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
@@ -210,6 +210,10 @@
       "Select cards to move to your hand."
     ]
   },
+  "${modID}:HighFive": {
+    "NAME": "High Five!",
+    "DESCRIPTION": "ALL enemies gain !M! ${modID}:NEO. NL ${modID}:Critical: NL EVERYONE gains !${modID}:M2! Plated Armour."
+  },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
     "DESCRIPTION": "Give EVERYONE !B! Block. NL ${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry, draw a card.",
@@ -217,7 +221,8 @@
   },
   "${modID}:Im": {
     "NAME": "I'm...",
-    "DESCRIPTION": "Ethereal. NL While in hand, you cannot play Attacks."
+    "DESCRIPTION": "Ethereal. NL While in hand, you can only play one more card.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL While in hand, you can only play two more cards."
   },
   "${modID}:ItsAMatch": {
     "NAME": "It's a match!",
@@ -260,8 +265,8 @@
   },
   "${modID}:Plead": {
     "NAME": "Plead",
-    "DESCRIPTION": "If you have Block, give your Block to the enemy. NL That enemy deals less damage for their ${modID}:LV this turn.",
-    "UPGRADE_DESCRIPTION": "If you have Block, give your Block to ALL enemies. NL ALL enemies deal less damage for their ${modID}:LV this turn."
+    "DESCRIPTION": "If you have Block, give your Block to ALL enemies. NL ALL enemies deal less damage for their ${modID}:LV this turn.",
+    "UPGRADE_DESCRIPTION": "If you have Block, give your Block to ALL enemies. NL ALL enemies deal twice as less damage for their ${modID}:LV this turn."
   },
   "${modID}:Pounce": {
     "NAME": "Pounce",
@@ -290,8 +295,7 @@
   },
   "${modID}:RewindStrike": {
     "NAME": "Rewind Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Revert the enemy to their previous turn.",
-    "UPGRADE_DESCRIPTION": "Retain. NL Deal !D! damage. NL Revert the enemy to their previous turn."
+    "DESCRIPTION": "Retain. NL Deal !D! damage. NL ${modID}:Rewind the enemy to their previous turn. "
   },
   "${modID}:Rock": {
     "NAME": "Rock",
@@ -308,7 +312,7 @@
   },
   "${modID}:Ruins": {
     "NAME": "Ruins",
-    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry and on the start of turn deal !M! damage and increase this damage by 10."
+    "DESCRIPTION": "${modID}:Wait !${modID}:M2!. NL On ${modID}:expiry and at the start of turn deal !M! damage and increase this damage by 10."
   },
   "${modID}:ScalesOfJustice": {
     "NAME": "Scales Of Justice",
@@ -338,7 +342,7 @@
   },
   "${modID}:SelfReflection": {
     "NAME": "Self Reflection",
-    "DESCRIPTION": "Lose !${modID}:M2! HP. Gain !M! ${modID}:Overcome."
+    "DESCRIPTION": "Gain !${modID}:M2! ${modID}:Temp_HP. NL Gain !M! ${modID}:Overcome."
   },
   "${modID}:SlackOff": {
     "NAME": "Slack Off",
@@ -424,11 +428,17 @@
   },
   "${modID}:WebSlash": {
     "NAME": "Web Slash",
-    "DESCRIPTION": "${modID}:Persevere your rightmost card. NL Deal !D! damage."
+    "DESCRIPTION": "Deal !D! damage. NL ${modID}:Persevere your rightmost card."
   },
   "${modID}:AncientCocktail": {
     "NAME": "Ancient Cocktail",
     "DESCRIPTION": "EVERYONE gains !M! Artifact. NL Exhaust."
+  },
+  "${modID}:DuplicationCocktail": {
+    "NAME": "Duplication Cocktail",
+    "DESCRIPTION": "This turn, your next 0 or 1 cost card is played twice.",
+    "UPGRADE_DESCRIPTION": "This turn, your next 0, 1 or 2 cost card is played twice.",
+    "EXTENDED_DESCRIPTION": [" NL (!${modID}:M2! times in total)"]
   },
   "${modID}:EntropicCocktail": {
     "NAME": "Entropic Cocktail",

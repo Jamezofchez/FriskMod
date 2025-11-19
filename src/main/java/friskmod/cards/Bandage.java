@@ -27,8 +27,8 @@ public class Bandage extends AbstractCriticalCard implements OnObtainCard {
     );
     private static final int TEMP_HP = 4;
     private static final int UPG_TEMP_HP = 2;
-    private static final int PICKUP_HP = 6;
-    private static final int UPG_PICKUP_HP = 3;
+    private static final int PICKUP_HP = 4;
+    private static final int UPG_PICKUP_HP = 2;
 
     public Bandage() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -47,7 +47,7 @@ public class Bandage extends AbstractCriticalCard implements OnObtainCard {
         if (isCritical()){
             TriggerCriticalEffect(p, m);
         }
-        //trig_critical = false;
+        super.use(p, m);
     }
 
     @Override

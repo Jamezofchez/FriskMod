@@ -12,42 +12,63 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
+import friskmod.monsters.AbstractDummy;
+import friskmod.util.Wiz;
+
+import java.util.ArrayList;
 
 import static friskmod.FriskMod.makeID;
 
 public class SmokeBombAction extends AbstractGameAction {
-  private AbstractPlayer p;
+    private AbstractPlayer p;
 
-  private boolean upgraded = false;
+    private boolean upgraded = false;
+
+    private static final int MAX_REPEATS = 40;
+    private static int repeatCount = 0;
 
     public static final String ID = makeID(SmokeBombAction.class.getSimpleName()); //makeID adds the mod ID, so the final ID will be something like "modID:MyCard"
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ID);
     public static final String[] TEXT = uiStrings.TEXT;
-  
-  public SmokeBombAction(boolean upgraded) {
-    this.upgraded = upgraded;
-    this.p = AbstractDungeon.player;
-    this.actionType = ActionType.SPECIAL; //this is so shit, but to make sure it doesnt happens
-  }
-  
-  public void update() {
-    for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-      if (m.type == AbstractMonster.EnemyType.BOSS) {
-        AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
+
+    public SmokeBombAction(boolean upgraded) {
+        this.upgraded = upgraded;
+        this.p = AbstractDungeon.player;
+        this.actionType = ActionType.SPECIAL; //this is so shit, but to make sure it doesnt happens
+    }
+
+    public void update() {
         this.isDone = true;
-        return;
-      } 
-    } 
-    if ((AbstractDungeon.getCurrRoom()).phase == AbstractRoom.RoomPhase.COMBAT) {
-      this.target = (AbstractCreature)AbstractDungeon.player;
-      (AbstractDungeon.getCurrRoom()).smoked = true;
-      AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new VFXAction((AbstractGameEffect)new SmokeBombEffect(this.target.hb.cX, this.target.hb.cY)));
-      this.target.hideHealthBar();
-      this.target.isEscaping = true;
-      this.target.escapeTimer = 2.5F;
-    } 
-    this.isDone = true;
-  }
+        if (!Wiz.isInCombat()) {
+            return;
+        }
+        if (Wiz.getMonsters().stream().allMatch(m -> m instanceof AbstractDummy)) {
+            return;
+        }
+        for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
+            if (m.type == AbstractMonster.EnemyType.BOSS) {
+                AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[0], true));
+                return;
+            }
+        }
+        ArrayList<AbstractGameAction> actions = AbstractDungeon.actionManager.actions;
+        ++repeatCount;
+        if (repeatCount < MAX_REPEATS) {
+            if (!actions.isEmpty()) {
+                if (!(actions.get(0) instanceof SmokeBombAction)) {
+                    AbstractDungeon.actionManager.addToBottom(new SmokeBombAction(upgraded));
+                    return;
+                }
+            }
+        }
+        repeatCount = 0;
+        this.target = (AbstractCreature) AbstractDungeon.player;
+        (AbstractDungeon.getCurrRoom()).smoked = true;
+        AbstractDungeon.actionManager.addToBottom((AbstractGameAction) new VFXAction((AbstractGameEffect) new SmokeBombEffect(this.target.hb.cX, this.target.hb.cY)));
+        this.target.hideHealthBar();
+        this.target.isEscaping = true;
+        this.target.escapeTimer = 2.5F;
+    }
 }
 
 

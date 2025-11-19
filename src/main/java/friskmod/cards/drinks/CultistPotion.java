@@ -5,23 +5,20 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
-import com.megacrit.cardcrawl.potions.AncientPotion;
 import com.megacrit.cardcrawl.potions.DuplicationPotion;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.ArtifactPower;
-import friskmod.powers.Karma;
+import friskmod.powers.LVRitual;
 import friskmod.powers.LesserDuplication;
-import friskmod.util.Wiz;
 
 import static friskmod.FriskMod.makeID;
 
-public class AncientCocktail extends AbstractDrinkCard{
-    public static final String ID = makeID(AncientCocktail.class.getSimpleName());
+public class CultistPotion extends AbstractDrinkCard{
+    public static final String ID = makeID(CultistPotion.class.getSimpleName());
 
-    public AncientCocktail() {
-        this(new AncientPotion());
+    public CultistPotion() {
+        this(new com.megacrit.cardcrawl.potions.CultistPotion());
     }
-    public AncientCocktail(AbstractPotion potion) {
+    public CultistPotion(AbstractPotion potion) {
         super(ID, potion);
         baseMagicNumber = magicNumber = getNewPotency();
     }
@@ -29,14 +26,11 @@ public class AncientCocktail extends AbstractDrinkCard{
     @Override
     public void usePotion(AbstractMonster m) {
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new ApplyPowerAction(p, p, new ArtifactPower(p, magicNumber), magicNumber));
-        for(AbstractMonster monster : Wiz.getMonsters()) {
-            addToBot(new ApplyPowerAction(monster, p, new ArtifactPower(monster, magicNumber), magicNumber));
-        }
+        addToBot(new ApplyPowerAction(p, p, new LVRitual(p, magicNumber), magicNumber));
     }
 
     @Override
     public void upp() {
-        setUpgradeMagicNumber(getNewPotency());;
+        setUpgradeMagicNumber(getNewPotency());
     }
 }

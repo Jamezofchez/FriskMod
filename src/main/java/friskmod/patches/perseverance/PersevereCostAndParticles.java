@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PersevereCostAndParticles {
-    private static final Color PERSEVERANCE_COLOR = new Color(0.7f, 0.3f, 1.0f, 1.0f);
+    public static final Color PERSEVERANCE_COLOR = new Color(0.7f, 0.3f, 1.0f, 1.0f);
 
     //change number color to purple. rune particles emanate off of energy orb.
 

@@ -26,6 +26,7 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.FriskMod;
 import friskmod.patches.InherentPowerTagFields;
 import friskmod.powers.Determination;
+import friskmod.powers.EvolvePower;
 import friskmod.powers.LVRitual;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
@@ -136,7 +137,7 @@ public class StealableWhitelist {
 //        if (enemyPower instanceof RegenerateMonsterPower){
 //            return true;
 //        }
-        if (steal && InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower) && InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower) >= enemyPower.amount){
+        if (InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower) && InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower) >= enemyPower.amount){
             if (tried){
                 AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, String.format(UI_STRINGS.TEXT[2], enemyPower.name), true));
             }

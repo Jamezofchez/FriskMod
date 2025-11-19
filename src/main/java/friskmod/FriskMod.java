@@ -4,10 +4,13 @@ import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
 import basemod.abstracts.DynamicVariable;
+import basemod.helpers.CardBorderGlowManager;
 import basemod.interfaces.*;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import friskmod.actions.AfterCardUseAction;
@@ -18,6 +21,8 @@ import friskmod.character.Frisk;
 import friskmod.helper.SharedFunctions;
 import friskmod.helper.StealableWhitelist;
 import friskmod.patches.GhostlyPatch;
+import friskmod.patches.perseverance.PerseveranceFields;
+import friskmod.patches.perseverance.PerseverancePatch;
 import friskmod.potions.AbstractEasyPotion;
 import friskmod.potions.MercyPotion;
 import friskmod.powers.NonAttackPower;
@@ -93,6 +98,25 @@ public class FriskMod implements
         //You can find information about this on the BaseMod wiki page "Mod Config and Panel".
         BaseMod.registerModBadge(badgeTexture, info.Name, GeneralUtils.arrToString(info.Authors), info.Description, null);
 //        CustomIntent.add((CustomIntent)new MassAttackIntent());
+        PerseverancePatch.testPlayability();
+
+        final Color perseveranceGlow = CardHelper.getColor(88.0f, 26.0f, 150.0f);
+        CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
+            @Override
+            public boolean test(AbstractCard card) {
+                return PerseveranceFields.overcomePlayed.get(card);
+            }
+
+            @Override
+            public Color getColor(AbstractCard card) {
+                return perseveranceGlow.cpy();
+            }
+
+            @Override
+            public String glowID() {
+                return makeID("PerseveranceGlow");
+            }
+        });
         initializeSavedData();
 
     }
@@ -136,6 +160,8 @@ public class FriskMod implements
                 localizationPath(lang, "CharacterStrings.json"));
         BaseMod.loadCustomStringsFile(EventStrings.class,
                 localizationPath(lang, "EventStrings.json"));
+        BaseMod.loadCustomStringsFile(MonsterStrings.class,
+                localizationPath(lang, "MonsterStrings.json"));
         BaseMod.loadCustomStringsFile(OrbStrings.class,
                 localizationPath(lang, "OrbStrings.json"));
         BaseMod.loadCustomStringsFile(PotionStrings.class,

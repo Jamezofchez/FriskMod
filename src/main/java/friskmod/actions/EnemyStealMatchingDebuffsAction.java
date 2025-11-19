@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.FriskMod;
+import friskmod.powers.CountdownAttack;
 import friskmod.util.Wiz;
 
 import java.util.List;
@@ -43,6 +44,17 @@ public class EnemyStealMatchingDebuffsAction extends AbstractGameAction {
                     continue;
                 }
                 for (AbstractPower mpow : m.powers) {
+                    if (mpow instanceof CountdownAttack){
+                        for (AbstractPower ppow : p.powers) {
+                            if (ppow instanceof CountdownAttack){
+                                AbstractPower copy = ((CloneablePowerInterface) ppow).makeCopy();
+                                copy.owner = m;
+                                Wiz.att(new ApplyPowerAction(m, p, copy));
+                                Wiz.att(new RemoveSpecificPowerAction(p, p, ppow));
+                            }
+                        }
+                        continue;
+                    }
                     if (!(mpow.type == AbstractPower.PowerType.DEBUFF)){
                         continue;
                     }
@@ -52,7 +64,8 @@ public class EnemyStealMatchingDebuffsAction extends AbstractGameAction {
                         }
                         if (mpow.ID.equals(ppow.ID)){
                             if (ppow instanceof CloneablePowerInterface) {
-                                AbstractPower copy = ((CloneablePowerInterface) mpow).makeCopy();
+                                AbstractPower copy = ((CloneablePowerInterface) ppow).makeCopy();
+                                copy.owner = m;
                                 // Allow caller to customize before applying
                                 Wiz.att(new ApplyPowerAction(m, p, copy));
                                 Wiz.att(new RemoveSpecificPowerAction(p, p, ppow));

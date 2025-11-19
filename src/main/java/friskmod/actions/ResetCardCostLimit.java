@@ -25,6 +25,7 @@ public class ResetCardCostLimit extends AbstractGameAction {
                 }
             }
         }
+        repeatCount = 0;
         setLimitCardCost(9999);
     }
 }

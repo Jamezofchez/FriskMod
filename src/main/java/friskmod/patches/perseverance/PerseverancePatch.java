@@ -2,6 +2,7 @@ package friskmod.patches.perseverance;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -178,7 +179,7 @@ public class PerseverancePatch {
 
     private static void setPerserveable(AbstractCard c, boolean defaultBoolean) {
         if (!defaultBoolean) {
-            if (!PerseveranceFields.isPerseverable.get(c) && !PerseveranceFields.trapped.get(c)) {
+            if (!PerseveranceFields.isPerseverable.get(c)) {
                 AbstractPower posspow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
                 if (posspow != null) {
                     PerseveranceFields.setIsPerseverable(c, true, true);
@@ -339,7 +340,7 @@ public class PerseverancePatch {
     }
 
 
-    public static boolean isUnplayable(AbstractCard c) {
+    public static boolean isAlwaysUnplayable(AbstractCard c) {
         AbstractPlayer p = AbstractDungeon.player;
         if (alwaysUnplayable.contains(c.getClass().getName())) //unplayable.
             return true;
@@ -425,16 +426,18 @@ public class PerseverancePatch {
             }
             Wiz.att(new CustomSFXAction("mus_sfx_eyeflash"));
             PerseveranceFields.setIsPerseverable(card, false);
-
+            __instance.exhaustCard = true;
             if (!PerseveranceFields.trapped.get(card)) {
-                __instance.exhaustCard = true;
+                Wiz.att(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 1));
+            } else{
+                Wiz.att(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 7));
             }
 
             if (PerseveranceFields.insufficientEnergy.get(card)) {
                 int refundEnergy = PerseveranceFields.cardEnergy.get(card);
                 Wiz.atb(new GainEnergyAction(refundEnergy));
             }
-            if (!SharedFunctions.isCurseOrStatus(card)) {
+            if (!isAlwaysUnplayable(card)) {
                 AbstractCard tmp = card.makeStatEquivalentCopy();
                 PerseveranceFields.trapped.set(tmp, true);
                 Wiz.atb(new MakeTempCardInHandAction(tmp));

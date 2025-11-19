@@ -1,5 +1,6 @@
 package friskmod.cards;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -23,21 +24,21 @@ public class SelfReflection extends AbstractEasyCard {
             CardTarget.SELF, //The target. Single target is ENEMY, all enemies is ALL_ENEMY. Look at cards similar to what you want to see what to use.
             2 //The card's base cost. -1 is X cost, -2 is no cost for unplayable cards like curses, or Reflex.
     );
-    private static final int NUM_TO_PERSEVERE = 2;
+    private static final int NUM_TO_PERSEVERE = 1;
     private static final int UPG_NUM_TO_PERSEVERE = 1;
 
-    private static final int LOSE_HP = 2;
+    private static final int TEMP_HP = 8;
 
 
     public SelfReflection() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
         tags.add(FriskTags.PERSEVERANCE);
         baseMagicNumber = magicNumber = NUM_TO_PERSEVERE;
-        baseSecondMagic = secondMagic = LOSE_HP;
+        baseSecondMagic = secondMagic = TEMP_HP;
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new LoseHPAction(p, p, secondMagic));
+        addToBot(new AddTemporaryHPAction(p, p, secondMagic));
         addToBot(new ApplyPowerAction(p, p, new friskmod.powers.Overcome(p, magicNumber), magicNumber));
     }
 

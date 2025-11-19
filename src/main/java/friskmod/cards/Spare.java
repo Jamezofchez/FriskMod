@@ -36,7 +36,7 @@ public class Spare extends AbstractEasyCard {
     }
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new CountdownFlee(m, FLEE_AFTER_CARD_AMOUNT, FLEE_AFTER_CARD_AMOUNT, upgraded), FLEE_AFTER_CARD_AMOUNT));
+        addToBot(new ApplyPowerAction(p, p, new CountdownFlee(p, FLEE_AFTER_CARD_AMOUNT, FLEE_AFTER_CARD_AMOUNT, upgraded), FLEE_AFTER_CARD_AMOUNT));
         addToBot(new ApplyPowerAction(m, p, new Spared(m)));
     }
 

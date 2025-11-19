@@ -28,6 +28,8 @@ public class ToughStrike extends AbstractEasyCard {
     private static final int DAMAGE = 6;
     private static final int UPG_DAMAGE = 3;
     private static final int HURT = 3;
+    private static final int UPG_HURT = 2;
+
 
     public ToughStrike() {
         super(ID, info); //Pass the required information to the BaseCard constructor.
@@ -48,5 +50,6 @@ public class ToughStrike extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeDamage(UPG_DAMAGE);
+        upgradeMagicNumber(UPG_HURT);
     }
 }

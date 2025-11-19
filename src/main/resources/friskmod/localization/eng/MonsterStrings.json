@@ -9,7 +9,7 @@
   },
   "${modID}:MadDummy": {
     "MOVES": [
-      "Attack"
+      "Headbutt"
     ],
     "NAME": "Mad Dummy",
     "DIALOG": [

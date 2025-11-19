@@ -31,9 +31,7 @@ public class StealPowerPatch {
         public static void Prefix(AbstractPower __instance, SpriteBatch sb, @ByRef float[] x, @ByRef float[] y, Color c) {
             if (StealPowerAction.activatedInstance != null && StealPowerAction.activatedInstance.affectedPowers.contains(__instance)) {
                 if(StealableWhitelist.getInstance().checkPreProcess(__instance, false)) {
-                    if (StealPowerAction.activatedInstance.steal){
-                        origAlpha = c.a;
-                    }
+                    origAlpha = c.a;
                     //                int mapAmount = StealPowerAction.activatedInstance.stealablePows.get(__instance.ID);
                     //                if (mapAmount > 0) {
                     //                    if (__instance.amount > mapAmount) {
