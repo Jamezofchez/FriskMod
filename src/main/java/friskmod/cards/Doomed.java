@@ -1,6 +1,7 @@
 package friskmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
@@ -41,6 +42,14 @@ public class Doomed extends AbstractEasyCard {
         baseSecondMagic = secondMagic = DRAFT_AMOUNT;
         tags.add(FriskTags.JUSTICE);
     }
+    @Override
+    public void triggerOnGlowCheck() {
+        glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        if (ThreatenedCheck.isThreatened()) {
+            glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        }
+    }
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         final boolean beforeThreatened = ThreatenedCheck.isThreatened();
