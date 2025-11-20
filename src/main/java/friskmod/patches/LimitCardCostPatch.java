@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.screens.*;
 import com.megacrit.cardcrawl.screens.select.GridCardSelectScreen;
 import com.megacrit.cardcrawl.screens.select.HandCardSelectScreen;
 import friskmod.helper.GrillbysHelper;
+import friskmod.util.Wiz;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
@@ -25,8 +26,10 @@ public class LimitCardCostPatch {
     @SpirePatch2(clz = AbstractCard.class, method = "hasTag")
     public static class AvoidAddingHighCostPatch {
         public static boolean Postfix(AbstractCard __instance, boolean __result, AbstractCard.CardTags ___tagToCheck){
-            if (___tagToCheck == AbstractCard.CardTags.HEALING) {
-                return __result || !isCardCostAllowed(__instance);
+            if (Wiz.isInCombat()) {
+                if (___tagToCheck == AbstractCard.CardTags.HEALING) {
+                    return __result || !isCardCostAllowed(__instance);
+                }
             }
             return __result;
         }

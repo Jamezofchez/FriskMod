@@ -47,4 +47,4 @@ Inflict your enemies with **KARMA**, which causes them to lose HP whenever you l
 Summon Dummies, take a break at Grillby's, rewind the enemy's turn and more! Sometimes sticking to yourself is best.
 
 Special thanks to the #modding-technical discord for helping bring this project to life.
-Also special thanks to Alchyr, Celicath, the Downfall team, Whebon and Vex, among many others, for providing such an invaluable codebase to work off of.
+Also special thanks to Alchyr, Celicath, the Downfall team, Ocean, Whebon and Vex, among many others, for providing such an invaluable codebase to work off of.

@@ -1,6 +1,7 @@
 package friskmod.powers;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -35,18 +36,22 @@ public class Mercied extends BasePower {
     }
     @Override
     public void onInitialApplication() {
-        for (AbstractCard c : Wiz.getAllCardsInCardGroups()){
-            if (c instanceof SlackOff){
-                ((SlackOff) c).setSeriousDescription();
+        if (owner instanceof AbstractPlayer) {
+            for (AbstractCard c : Wiz.getAllCardsInCardGroups()) {
+                if (c instanceof SlackOff) {
+                    ((SlackOff) c).setSeriousDescription();
+                }
             }
         }
         super.onInitialApplication();
     }
     @Override
     public void onRemove() {
-        for (AbstractCard c : Wiz.getAllCardsInCardGroups()){
-            if (c instanceof SlackOff){
-                ((SlackOff) c).setNormalDescription();
+        if (owner instanceof AbstractPlayer) {
+            for (AbstractCard c : Wiz.getAllCardsInCardGroups()) {
+                if (c instanceof SlackOff) {
+                    ((SlackOff) c).setNormalDescription();
+                }
             }
         }
         super.onRemove();

@@ -24,6 +24,8 @@ import java.util.function.Predicate;
 import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.FriskMod;
+import friskmod.external.Downfall;
+import friskmod.external.Ruina;
 import friskmod.patches.InherentPowerTagFields;
 import friskmod.powers.Determination;
 import friskmod.powers.EvolvePower;
@@ -31,6 +33,11 @@ import friskmod.powers.LVRitual;
 import friskmod.powers.LV_Enemy;
 import friskmod.powers.LV_Hero;
 import friskmod.util.Wiz;
+import hermit.powers.Rugged;
+import ruina.powers.Protection;
+import ruina.powers.RuinaIntangible;
+import ruina.powers.RuinaMetallicize;
+import ruina.powers.RuinaPlatedArmor;
 
 import static friskmod.FriskMod.makeID;
 import static friskmod.helper.SharedFunctions.isInvincible;
@@ -99,7 +106,7 @@ public class StealableWhitelist {
 //    }
     private static void intangiblePostProcess(AbstractPower pow) {
         pow.amount += 1;
-    }
+    } //was in the original code but doesn't seem necessary??
     private static int inherentPostProcess(boolean steal, AbstractPower enemyPower) {
         if (steal && InherentPowerTagFields.inherentPowerFields.inherentPower.get(enemyPower)){
             int inherentPowerAmount = InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.get(enemyPower);
@@ -166,6 +173,8 @@ public class StealableWhitelist {
         (new applyPowerBuilder(BlurPower.POWER_ID)).build();
         (new applyPowerBuilder(BufferPower.POWER_ID)).build();
         (new applyPowerBuilder(ThornsPower.POWER_ID)).build();
+        (new applyPowerBuilder(MetallicizePower.POWER_ID)).build();
+
 
         (new applyPowerBuilder(Determination.POWER_ID)).build();
         (new applyPowerBuilder(EvolvePower.POWER_ID)).build();
@@ -179,9 +188,21 @@ public class StealableWhitelist {
 
         //Synonym powers
         (new applyPowerBuilder(SharpHidePower.POWER_ID)).addSynonym(ThornsPower.class, ThornsPower.POWER_ID).build();
-        (new applyPowerBuilder(IntangiblePower.POWER_ID)).addPostProcess(StealableWhitelist::intangiblePostProcess).addSynonym(IntangiblePlayerPower.class, IntangiblePlayerPower.POWER_ID).build();
+        (new applyPowerBuilder(IntangiblePower.POWER_ID)).addSynonym(IntangiblePlayerPower.class, IntangiblePlayerPower.POWER_ID).build();
         (new applyPowerBuilder(LV_Enemy.POWER_ID)).addSynonym(LV_Hero.class, LV_Hero.POWER_ID).build();
         (new applyPowerBuilder(RegenerateMonsterPower.POWER_ID)).addSynonym(RegenPower.class, RegenPower.POWER_ID).build();
+
+        Downfall downfall = Downfall.getInstance();
+        if (downfall != null){
+            (new applyPowerBuilder(Rugged.POWER_ID)).build();
+        }
+        Ruina ruina = Ruina.getInstance();
+        if (ruina != null){
+            (new applyPowerBuilder(RuinaIntangible.POWER_ID)).addSynonym(IntangiblePlayerPower.class, IntangiblePlayerPower.POWER_ID).build();
+            (new applyPowerBuilder(RuinaMetallicize.POWER_ID)).addSynonym(MetallicizePower.class, MetallicizePower.POWER_ID).build();
+            (new applyPowerBuilder(RuinaPlatedArmor.POWER_ID)).addSynonym(PlatedArmorPower.class, PlatedArmorPower.POWER_ID).build();
+            (new applyPowerBuilder(Protection.POWER_ID)).build();
+        }
     }
 
     public Set<String> getWhitelist() {

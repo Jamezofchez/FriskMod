@@ -1,11 +1,13 @@
 package friskmod.cards;
 
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import friskmod.actions.CustomSFXAction;
+import friskmod.cardmods.XPMod;
 import friskmod.character.Frisk;
 import friskmod.util.CardStats;
 import friskmod.patches.CardXPFields;
@@ -85,6 +87,8 @@ public class SlackOff extends AbstractEasyCard{
     public void upp() {
         upgradeMagicNumber(UPG_ADDED_XP);
         upgradeDamage(UPG_DAMAGE);
-        CardXPFields.setAddedXP(this, magicNumber);
+        CardXPFields.XPFields.addedXP.set(this, magicNumber);
+        CardModifierManager.addModifier(this, new XPMod());
+        this.initializeDescription();
     }
 }

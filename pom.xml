@@ -74,6 +74,13 @@
             <scope>system</scope>
             <systemPath>${steam.path}/workshop/content/646570/1610056683/Downfall.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.evacipated.cardcrawl.mod</groupId>
+            <artifactId>Ruina</artifactId>
+            <version>4.1.0</version>
+            <scope>system</scope>
+            <systemPath>${steam.path}/workshop/content/646570/2396661789/Ruina.jar</systemPath>
+        </dependency>
     </dependencies>
 
 

@@ -117,6 +117,7 @@ public class FriskMod implements
                 return makeID("PerseveranceGlow");
             }
         });
+        StealableWhitelist.getInstance();
         initializeSavedData();
 
     }
@@ -442,7 +443,6 @@ public class FriskMod implements
     }
     @Override
     public void receiveStartGame() {
-        StealableWhitelist.getInstance();
         if (!CardCrawlGame.loadingSave) {
             SharedFunctions.setSpecialDealBonus(0);
         }
