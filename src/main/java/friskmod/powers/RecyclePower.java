@@ -20,6 +20,8 @@ public class RecyclePower extends BasePower implements WastedEnergyInterface {
     //Look at powers that do this like VulnerablePower and DoubleTapPower.
     public RecyclePower(AbstractCreature owner, int amount) {
         super(POWER_ID, TYPE, TURN_BASED, owner, amount);
+        this.priority = 0; //hopefully gives it a higher priority than the other powers
+        updateDescription();
     }
 
 

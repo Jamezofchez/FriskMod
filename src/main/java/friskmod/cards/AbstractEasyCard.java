@@ -108,7 +108,7 @@ public abstract class AbstractEasyCard extends CustomCard {
              */
             case "DreamOfArtifact":
             case "DreamOfBlur":
-            case "DreamOfDefend":
+            case "DreamOfPlatedArmour":
             case "DreamOfDetermination":
             case "DreamOfDexterity":
             case "DreamOfEvolve":

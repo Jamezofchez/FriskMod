@@ -26,7 +26,7 @@ Simply put, cards with experience deal more damage. When dealing damage to an en
 
 *“Critical pet\! Dog excitement increased.”*
 
-Deal **Critical** effects when cards are played from the middle of your hand. Some of the more powerful cards are here, if only you can trigger them.
+Deal **Critical** effects when cards are played from the middle of your hand or when **Persevered**. Some of the more powerful cards are here, if only you can trigger them.
 
 ### Justice:
 

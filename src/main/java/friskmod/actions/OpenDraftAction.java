@@ -34,7 +34,7 @@ public class OpenDraftAction extends AbstractGameAction {
         possDreamChoices = new ArrayList<>();
         possDreamChoices.add(new DreamOfArtifact());
         possDreamChoices.add(new DreamOfBlur());
-        possDreamChoices.add(new DreamOfDefend());
+        possDreamChoices.add(new DreamOfPlatedArmour());
         possDreamChoices.add(new DreamOfDetermination());
         possDreamChoices.add(new DreamOfDexterity());
         possDreamChoices.add(new DreamOfEvolve());

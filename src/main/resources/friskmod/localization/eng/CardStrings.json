@@ -404,7 +404,7 @@
   },
   "${modID}:TornNotebook": {
     "NAME": "Torn Notebook",
-    "DESCRIPTION": "The next !M! times you lose HP or ${modID}:Temp_HP, gain 1 Barrier. NL ${modID}:Critical: NL Gain !${modID}:M2! Barrier."
+    "DESCRIPTION": "The next !M! times you lose HP or ${modID}:Temp_HP, gain 1 ${modID}:Barrier. NL ${modID}:Critical: NL Gain !${modID}:M2! ${modID}:Barrier."
   },
   "${modID}:ToughBranch": {
     "NAME": "Tough Branch",
