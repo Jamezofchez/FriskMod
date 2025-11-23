@@ -1,5 +1,6 @@
 package friskmod.actions;
 
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.BarricadePower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
+import friskmod.external.Ruina;
 import friskmod.patches.InherentPowerTagFields;
 import friskmod.util.Wiz;
 
@@ -35,8 +37,8 @@ public class OnBattleStartAction extends AbstractGameAction {
     private void publishOnBattleStart() {
         Wiz.att(new ResetDraftAction());
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-            boolean haspow = m.hasPower(BarricadePower.POWER_ID);
-            if (haspow){
+            AbstractPower possPow = m.getPower(BarricadePower.POWER_ID);
+            if (possPow != null && !(possPow instanceof InvisiblePower)){
                 AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[0], true));
             }
             if (isInvincible(m)){

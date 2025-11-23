@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.FriskMod;
+import friskmod.actions.AfterLVHeroConsumedAction;
 import friskmod.actions.CustomSFXAction;
 import friskmod.helper.SharedFunctions;
 import friskmod.patches.GhostlyPatch;
@@ -37,7 +38,7 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
                 int LV_power = 1;
                 AbstractPower possMercied = AbstractDungeon.player.getPower(Mercied.POWER_ID);
                 if (possMercied != null){
-                    LV_power = -possMercied.amount;
+                    LV_power = -1;
                 }
                 newDamageAmount = determineFavouriteNumberLV(damageAmount, LV_power, target);
                 ((FavouriteNumberPower )possFavourite).LVGained();
@@ -60,26 +61,18 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
         }
         boolean healFlag = false;
         int remainder = damageAmount % 10;
-        int diff = 0;
+        int extraLV;
         if (LV_power > 0){
-            diff = 9-remainder;
-        } else if (LV_power < 0){
+            extraLV = 9-remainder;
+        } else {
             if (damageAmount >= 9) {
-                diff = (remainder + 1) % 10;
+                extraLV = (remainder + 1) % 10;
             }else{
-                diff = remainder + 9; //for "-9"
+                extraLV = remainder + 9; //for "-9"
                 healFlag = true;
             }
-
-        } else{
-            Wiz.att(new CustomSFXAction("snd_wrongvictory")); // can't use LV to change damage
-            return damageAmount;
         }
-        int extraLV = diff/LV_power;
-        int remainderLV = diff%LV_power;
-        if (remainderLV > 0){
-            extraLV++;
-        }
+        int newDamageAmount = damageAmount + (extraLV*LV_power);
         if (extraLV > 0) {
             LV_Hero LV = new LV_Hero(AbstractDungeon.player, extraLV);
             LV.setFromFavouriteNumber(extraLV);
@@ -91,6 +84,13 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
                         break;
                     }
                 }
+                if (action instanceof AfterLVHeroConsumedAction){
+                    if (((AfterLVHeroConsumedAction) action).target.equals(target)){
+                        if (newDamageAmount > target.currentBlock || healFlag){
+                            ((AfterLVHeroConsumedAction) action).wasBlocked = false;
+                        }
+                    }
+                }
                 ++index;
             }
             if (index == AbstractDungeon.actionManager.actions.size()){ //Couldn't find it??
@@ -100,18 +100,6 @@ public class AbsolutePowerPowerAll extends AbstractDamageModifier {
                 Wiz.att(new CustomSFXAction("snd_wrongvictory"));
                 Wiz.att(new HealAction(target, AbstractDungeon.player, 9));
                 return 0;
-            }
-        }
-        int newDamageAmount = damageAmount + (extraLV*LV_power);
-        if (newDamageAmount % 10 != 9) { //overshot
-            if (LV_power > 0) {
-                if (newDamageAmount < 9){
-                    logger.warn("{}: Small damage values did not exceed 9 for FavouriteNumber", FriskMod.modID);
-                } else {
-                    newDamageAmount = ((newDamageAmount / 10) * 10) - 1; //round down
-                }
-            } else{
-                newDamageAmount = ((newDamageAmount / 10) * 10) + 9 ; // round up
             }
         }
         return newDamageAmount;

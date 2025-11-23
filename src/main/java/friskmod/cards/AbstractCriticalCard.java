@@ -21,7 +21,7 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
     {
         super.resetAttributes();
 
-        this.trig_critical = false;
+        this.trig_critical = false; //downfall code i thought you were good :(
     }
 
     @Override
@@ -29,10 +29,10 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
         AbstractCard original = super.makeStatEquivalentCopy();
         if (Wiz.isInCombat()){
             ((AbstractCriticalCard) original).trig_critical = isCritical();
-            Wiz.atb(Wiz.actionify(() -> {
-                ((AbstractCriticalCard) original).trig_critical = false;
-                resetAttributes();
-            }));
+//            Wiz.atb(Wiz.actionify(() -> {
+//                ((AbstractCriticalCard) original).trig_critical = false;
+//                resetAttributes();
+//            }));
         }
         return original;
     }
@@ -81,7 +81,7 @@ public abstract class AbstractCriticalCard extends AbstractEasyCard{
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        trig_critical = false;
-        initializeDescription();
+//        trig_critical = false;
+//        initializeDescription();
     }
 }

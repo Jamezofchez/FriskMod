@@ -116,7 +116,7 @@
       "Dream",
       "%s Nightmare",
       "Attack+",
-      "Defend+"
+      "Plated_Armour"
     ]
   },
   "${modID}:OpenDraftAction": {

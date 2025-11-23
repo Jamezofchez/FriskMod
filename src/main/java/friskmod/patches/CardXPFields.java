@@ -22,27 +22,10 @@ public class CardXPFields {
     public static class XPFields {
         public static SpireField<Integer> inherentXP = new SpireField<>(() -> 0);
         public static SpireField<Integer> addedXP = new SpireField<>(() -> 0);
-        public static SpireField<Integer> previewDMG = new SpireField<>(() -> 0);
+        public static SpireField<Integer> triginherentXP = new SpireField<>(() -> 0);
+        public static SpireField<Integer> trigaddedXP = new SpireField<>(() -> 0);
+
     }
-
-    static boolean previewLocked = false;
-
-    public static int getPreview(AbstractCard card) {
-        return XPFields.previewDMG.get(card);
-    }
-
-    public static void setPreview(AbstractCard card, int amount) {
-        if (!previewLocked){
-            XPFields.previewDMG.set(card, amount);
-        }
-    }
-
-    public static void setPreviewLock(AbstractCard card, boolean val) {
-        previewLocked = val;
-    }
-
-
-
 
     public static int getCardXP(AbstractCard card) {
         return XPFields.inherentXP.get(card) + XPFields.addedXP.get(card);
@@ -120,8 +103,18 @@ public class CardXPFields {
         @SpirePostfixPatch
         public static AbstractCard transferIt(AbstractCard __result, AbstractCard __instance)
         {
-            XPFields.inherentXP.set(__result, XPFields.inherentXP.get(__instance));
-            XPFields.addedXP.set(__result, XPFields.addedXP.get(__instance));
+            int currentInherent = XPFields.inherentXP.get(__instance);
+            int currentTrigInherent = XPFields.triginherentXP.get(__instance);
+            if (currentTrigInherent == 0 && currentInherent > 0) {
+                XPFields.triginherentXP.set(__instance, currentInherent);
+            }
+            int currentAdded = XPFields.addedXP.get(__instance);
+            int currentTrigAdded = XPFields.trigaddedXP.get(__instance);
+            if (currentTrigAdded == 0 && currentAdded > 0){
+                XPFields.trigaddedXP.set(__instance, currentAdded);
+            }
+            XPFields.inherentXP.set(__result, XPFields.triginherentXP.get(__instance));
+            XPFields.addedXP.set(__result, XPFields.trigaddedXP.get(__instance));
             __result.initializeDescription();
             return __result;
         }

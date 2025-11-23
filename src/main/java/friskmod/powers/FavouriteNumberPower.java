@@ -37,7 +37,11 @@ public class FavouriteNumberPower extends BasePower {
     }
 
     public void updateDescription() {
-        this.description = String.format(DESCRIPTIONS[0], amount);
+        String baseDescription = DESCRIPTIONS[1];
+        if (amount == 1){
+            baseDescription = DESCRIPTIONS[0];
+        }
+        this.description = String.format(baseDescription, amount);
     }
 
     public void LVGained() {

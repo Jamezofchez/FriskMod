@@ -11,9 +11,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import friskmod.cardmods.MonochromeMod;
 import friskmod.cardmods.CriticalCheckerMod;
+import friskmod.external.Downfall;
 import friskmod.util.CardArtRoller;
 import friskmod.util.Wiz;
 import friskmod.util.WizArt;
+import hermit.cards.AbstractHermitCard;
 
 import java.util.regex.Pattern;
 
@@ -91,6 +93,13 @@ public class MonochromePatch {
         AbstractCard c = card.makeStatEquivalentCopy();
         CardModifierManager.addModifier(c, new MonochromeMod());
         MonochromeFields.isMonochrome.set(c, true);
+        Downfall bruh = Downfall.getInstance();
+        if (bruh != null){
+            if (c instanceof AbstractHermitCard){
+                ((AbstractHermitCard) c).trig_deadon = false;
+                ((AbstractHermitCard) c).trig_times = 1;
+            }
+        }
         Wiz.atb(new MakeTempCardInHandAction(c));
     }
 

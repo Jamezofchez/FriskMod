@@ -29,7 +29,7 @@ public class CustomSFXAction extends AbstractGameAction {
         this.adjust = 1.0F + MathUtils.random(-pitchVariance, pitchVariance);
 //        this.adjust = pitchAdjust;
         this.loudMultiplier = loudMultiplier;
-        this.actionType = AbstractGameAction.ActionType.WAIT;
+        this.actionType = ActionType.DAMAGE;
         this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
     }
 

@@ -7,11 +7,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import friskmod.FriskMod;
+import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import friskmod.helper.DraftManager;
 import friskmod.powers.CountdownAttack;
-import friskmod.powers.CountdownDefend;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,7 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
     }
 
     protected String getCardName() {
-        String powerName = getPowerName();
+        String powerName = getPowerName(false);
         if (this instanceof AbstractDreamCard){
             String basename = TEXT[3];
             String descriptor = TEXT[4];
@@ -37,12 +35,12 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
         }
     }
 
-    private String getPowerName() {
+    private String getPowerName(boolean forDesc) {
         AbstractPower tmp = getPower();
         String powerName;
         if (tmp instanceof CountdownAttack){
             powerName = TEXT[6];
-        } else if (tmp instanceof CountdownDefend) {
+        } else if (forDesc && tmp instanceof PlatedArmorPower){
             powerName = TEXT[7];
         } else{
             powerName = tmp.name;
@@ -61,13 +59,17 @@ public abstract class AbstractDreamNightmareCard extends AbstractChooseCard{
     public void initializeDescription(){
         String basename = TEXT[0];
         AbstractPower tmp = getPower();
-        String powerName = makeID(getPowerName());
+        String powerName = makeID(getPowerName(true));
         AbstractCreature tmpTarget = getTarget();
         String targetName;
         if (tmpTarget instanceof AbstractPlayer){
             targetName = TEXT[1];
         } else{
-            targetName = TEXT[2];
+            try {
+                targetName = tmpTarget.name;
+            } catch (Exception e){
+                targetName = TEXT[2];
+            }
         }
         String powerAmount = tmp.amount + "";
         this.rawDescription = String.format(basename, powerAmount, powerName, targetName);

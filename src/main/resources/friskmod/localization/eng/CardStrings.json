@@ -204,7 +204,7 @@
   },
   "${modID}:HiddenDeep": {
     "NAME": "Hidden Deep",
-    "DESCRIPTION": "Gain !B! Block. NL Put !M! ${modID}:Unplayable card from your draw pile into your hand.",
+    "DESCRIPTION": "Gain !B! Block. NL Put !M! currently ${modID}:Unplayable card from your draw pile into your hand.",
     "EXTENDED_DESCRIPTION": [
       "Select a card to move to your hand.",
       "Select cards to move to your hand."
@@ -212,7 +212,7 @@
   },
   "${modID}:HighFive": {
     "NAME": "High Five!",
-    "DESCRIPTION": "ALL enemies gain !M! ${modID}:NEO. NL ${modID}:Critical: NL EVERYONE gains !${modID}:M2! Plated Armour."
+    "DESCRIPTION": "ALL enemies gain !M! ${modID}:NEO. NL ${modID}:Critical: NL EVERYONE gains !${modID}:M2! ${modID}:Plated_Armour."
   },
   "${modID}:HugItOff": {
     "NAME": "Hug It Off",
@@ -412,7 +412,7 @@
   },
   "${modID}:ToughBranchAttack": {
     "NAME": "Attack",
-    "DESCRIPTION": "Deal Damage."
+    "DESCRIPTION": "Deal damage."
   },
   "${modID}:ToughBranchDefend": {
     "NAME": "Defend",

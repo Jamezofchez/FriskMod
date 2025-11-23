@@ -106,7 +106,7 @@
   "${modID}:KillWithKindnessPower": {
     "NAME": "Kindness",
     "DESCRIPTIONS": [
-      "Whenever you buff an enemy, it gains #b%s #Vulnerable."
+      "Whenever you buff an enemy, it gains #b%s #yVulnerable."
     ]
   },
   "${modID}:LV_Enemy": {
@@ -218,7 +218,8 @@
   "${modID}:FavouriteNumberPower": {
     "NAME": "Demonify",
     "DESCRIPTIONS": [
-      "Your next #b%s Attacks this turn are #y${modID}:Demonified"
+      "Your next #b%s Attack this turn will end in 9. NL (You will gain #yLV equal to the difference).",
+      "Your next #b%s Attacks this turn will end in 9. NL (You will gain #yLV equal to the difference)."
     ]
   },
   "${modID}:LVRitual": {

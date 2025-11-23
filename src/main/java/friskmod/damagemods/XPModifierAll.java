@@ -11,11 +11,15 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import friskmod.actions.*;
 import friskmod.cards.SlackOff;
 import friskmod.cards.VineBloom;
+import friskmod.external.Ruina;
 import friskmod.patches.CardXPFields;
 import friskmod.powers.*;
 import friskmod.util.Wiz;
+import ruina.monsters.AbstractAllyMonster;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import static friskmod.helper.SharedFunctions.consumeLVHeroForXP;
 
@@ -96,9 +100,6 @@ public class XPModifierAll extends AbstractDamageModifier {
 
     @Override
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCreature target, AbstractCard card) {
-        if (CardXPFields.XPFields.previewDMG.get(sourceCard) != 0){
-            damage += CardXPFields.XPFields.previewDMG.get(sourceCard);
-        }
         if (sourceCard == null) {
             return damage;
         }
@@ -219,7 +220,12 @@ public class XPModifierAll extends AbstractDamageModifier {
             ExtraXPInfo.originalCardXP.set(sourceCard, originalCardXP);
         }
         if (ExtraXPInfo.totalEnemies.get(sourceCard) == -1) {
-            int total = Wiz.getAliveOrDying().size();
+            ArrayList<AbstractMonster> enemies = Wiz.getAliveOrDying();
+            Ruina ruina = Ruina.getInstance();
+            if (ruina != null){
+                enemies = (ArrayList<AbstractMonster>) enemies.stream().filter(x -> !(x instanceof AbstractAllyMonster && !((AbstractAllyMonster) x).isTargetableByPlayer)).collect(Collectors.toList());
+            }
+            int total = enemies.size();
             ExtraXPInfo.totalEnemies.set(sourceCard, total);
         }
         if (ExtraXPInfo.enemyWasBlocked.get(sourceCard) == null) {

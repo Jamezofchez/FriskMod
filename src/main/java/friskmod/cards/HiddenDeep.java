@@ -46,8 +46,7 @@ public class HiddenDeep extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         blck();
-        addToBot(Wiz.actionify(() -> {
-            Wiz.atb(new MultiGroupSelectAction(
+        addToTop(new MultiGroupSelectAction(
                     cardStrings.EXTENDED_DESCRIPTION[magicNumber == 1 ? 0 : 1],
                     (cards, groups) -> {
                         Collections.reverse(cards);
@@ -65,7 +64,6 @@ public class HiddenDeep extends AbstractEasyCard {
                     },
                     magicNumber, false, c -> PerseverancePatch.isRealUnplayable(c) || PerseveranceFields.trapped.get(c), CardGroup.CardGroupType.DRAW_PILE
             ));
-        })); //hopefully after this card has been played?
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.RemoveAllTemporaryHPAction;
 import com.evacipated.cardcrawl.mod.stslib.patches.core.AbstractCreature.TempHPField;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.InvisiblePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.LoseBlockAction;
@@ -74,8 +75,8 @@ public class StealAllBlockAction extends AbstractGameAction {
         if (duration == startDuration) {
             boolean foundTarget = false;
             for (AbstractMonster target : targetMonsters){
-                boolean haspow = target.hasPower(BarricadePower.POWER_ID);
-                if (!target.isDying && !target.isDead && !haspow) {
+                AbstractPower possPow = target.getPower(BarricadePower.POWER_ID);
+                if (!target.isDying && !target.isDead && !(possPow != null && !(possPow instanceof InvisiblePower))) {
                     if (stealMatching){
                         if (!((target.currentBlock > 0 && AbstractDungeon.player.currentBlock > 0) || (TempHPField.tempHp.get(target) > 0 && TempHPField.tempHp.get(AbstractDungeon.player) > 0))){
                             continue;

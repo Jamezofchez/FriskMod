@@ -10,11 +10,11 @@ import friskmod.helper.SharedFunctions;
 import friskmod.patches.CardXPFields;
 
 public class AfterLVHeroConsumedAction extends AbstractGameAction {
-    XPModifierAll XPModifierAll;
-    AbstractCard sourceCard;
-    AbstractCreature target;
-    int LV_transfer_from;
-    boolean wasBlocked;
+    public XPModifierAll XPModifierAll;
+    public AbstractCard sourceCard;
+    public AbstractCreature target;
+    public int LV_transfer_from;
+    public boolean wasBlocked;
     public AfterLVHeroConsumedAction(XPModifierAll XPModifierAll, AbstractCreature target, int LV_transfer_from, boolean wasBlocked){
         this.XPModifierAll = XPModifierAll;
         this.sourceCard = XPModifierAll.sourceCard;
