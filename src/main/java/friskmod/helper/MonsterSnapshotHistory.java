@@ -130,6 +130,9 @@ public class MonsterSnapshotHistory {
             for (Map.Entry<Field, Object> entry : snapshot.snapshotFields.entrySet()) {
                 Field field = entry.getKey();
                 Object savedValue = entry.getValue();
+                if (savedValue == null){
+                    continue;
+                }
                 try {
                     field.setAccessible(true);
                     field.set(m, savedValue);
