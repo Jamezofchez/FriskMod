@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.BarricadePower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import friskmod.external.Ruina;
+import friskmod.helper.SharedFunctions;
 import friskmod.patches.InherentPowerTagFields;
 import friskmod.util.Wiz;
 
@@ -34,17 +35,20 @@ public class OnBattleStartAction extends AbstractGameAction {
         publishOnBattleStart();
         isDone = true;
     }
+
     private void publishOnBattleStart() {
         Wiz.att(new ResetDraftAction());
         for (AbstractMonster m : (AbstractDungeon.getMonsters()).monsters) {
-            AbstractPower possPow = m.getPower(BarricadePower.POWER_ID);
-            if (possPow != null && !(possPow instanceof InvisiblePower)){
-                AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[0], true));
+            if (SharedFunctions.isFrisk()) {
+                AbstractPower possPow = m.getPower(BarricadePower.POWER_ID);
+                if (possPow != null && !(possPow instanceof InvisiblePower)) {
+                    AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[0], true));
+                }
+                if (isInvincible(m)) {
+                    AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[1], true));
+                }
             }
-            if (isInvincible(m)){
-                AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, UI_STRINGS.TEXT[1], true));
-            }
-            for (AbstractPower p : m.powers){
+            for (AbstractPower p : m.powers) {
                 InherentPowerTagFields.inherentPowerFields.inherentPower.set(p, true);
                 InherentPowerTagFields.inherentPowerFields.inherentPowerAmount.set(p, p.amount);
             }

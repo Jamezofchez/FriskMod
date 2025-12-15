@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.InvinciblePower;
 import friskmod.actions.GiveRandomCardXP;
+import friskmod.character.Frisk;
 import friskmod.external.Downfall;
 import friskmod.powers.LV_Hero;
 import friskmod.powers.PreventLVLoss;
@@ -66,7 +67,15 @@ public class SharedFunctions {
         return list;
     }
 
-    @SpirePatch2(clz = RemoveSpecificPowerAction.class, method = SpirePatch.CLASS)
+  public static boolean isFrisk() {
+      if (AbstractDungeon.player == null || !AbstractDungeon.player.chosenClass
+              .equals(Frisk.Meta.Enums.THE_FALLEN_HUMAN)){
+        return true;
+      }
+      return false;
+    }
+
+  @SpirePatch2(clz = RemoveSpecificPowerAction.class, method = SpirePatch.CLASS)
     public static class MarkLVConsumedRemoveSpecificPowerActionPatch {
         public static SpireField<Boolean> isLVConsumed = new SpireField<>(() -> false);
     }

@@ -179,7 +179,7 @@ public class PerseverancePatch {
 
     private static void setPerserveable(AbstractCard c, boolean defaultBoolean) {
         if (!defaultBoolean) {
-            if (!PerseveranceFields.isPerseverable.get(c)) {
+            if (!PerseveranceFields.isPerseverable.get(c) && !PerseveranceFields.trapped.get(c)) {
                 AbstractPower posspow = AbstractDungeon.player.getPower(Overcome.POWER_ID);
                 if (posspow != null) {
                     PerseveranceFields.setIsPerseverable(c, true, true);
@@ -427,11 +427,11 @@ public class PerseverancePatch {
             Wiz.att(new CustomSFXAction("mus_sfx_eyeflash"));
             PerseveranceFields.setIsPerseverable(card, false);
             __instance.exhaustCard = true;
-            if (!PerseveranceFields.trapped.get(card)) {
-                Wiz.att(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 1));
-            } else{
-                Wiz.att(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 7));
-            }
+//            if (!PerseveranceFields.trapped.get(card)) {
+            Wiz.att(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 1));
+//            } else{
+//                Wiz.att(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 7));
+//            }
 
             if (PerseveranceFields.insufficientEnergy.get(card)) {
                 int refundEnergy = PerseveranceFields.cardEnergy.get(card);

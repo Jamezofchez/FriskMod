@@ -7,8 +7,8 @@ import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import friskmod.character.Frisk;
 import friskmod.actions.CustomSFXAction;
+import friskmod.helper.SharedFunctions;
 import friskmod.util.Wiz;
 
 public class AudioToActionPatch{
@@ -17,17 +17,15 @@ public class AudioToActionPatch{
         public static SpireField<Boolean> triggeredSFX = new SpireField<>(() -> Boolean.FALSE);
     }
     private static boolean triggerSFX(AbstractGameAction action) {
-        if (AbstractDungeon.player == null || !AbstractDungeon.player.chosenClass
-                .equals(Frisk.Meta.Enums.THE_FALLEN_HUMAN)){
-            return false;
-        }
-        if (!SFXDoneFields.triggeredSFX.get(action)){
+      if (SharedFunctions.isFrisk()) return false;
+      if (!SFXDoneFields.triggeredSFX.get(action)){
             SFXDoneFields.triggeredSFX.set(action, true);
             return true;
         }
         return false;
     }
-    @SpirePatch2(
+
+  @SpirePatch2(
             clz = HealAction.class,
             method = "update"
     )
@@ -69,7 +67,8 @@ public class AudioToActionPatch{
         @SpirePrefixPatch
         public static void Prefix(AbstractMonster __instance) {
             {
-                Wiz.att(new CustomSFXAction("snd_vaporized"));
+              if (SharedFunctions.isFrisk()) return;
+              Wiz.att(new CustomSFXAction("snd_vaporized"));
             }
         }
     }

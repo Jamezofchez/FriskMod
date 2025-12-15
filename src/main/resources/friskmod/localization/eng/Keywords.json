@@ -132,7 +132,7 @@
       "trapped",
       "Trap"
     ],
-    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn. #yTrapped cards cause you to lose 7 HP when #yPersevered."
+    "DESCRIPTION": "#yTrapped cards are Unplayable. NL They cause you to lose 1 energy when drawn."
   },
   {
     "PROPER_NAME": "Monochrome",
@@ -341,7 +341,7 @@
     "NAMES": [
       "Overcome"
     ],
-    "DESCRIPTION": "When a card fails to play, #yPersevere it and reduce by 1. NL Removed on turn end."
+    "DESCRIPTION": "When a card that isn't #Trapped fails to play, #yPersevere it and reduce by 1. NL Removed on turn end."
   },
   {
     "PROPER_NAME": "Unplayable",
